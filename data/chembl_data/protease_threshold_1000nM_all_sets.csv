@@ -1,0 +1,133 @@
+tid+assay,name,class
+11_pic50,CHEMBL204,Thrombin
+11_pki,CHEMBL204,Thrombin
+12_pic50,CHEMBL1801,Plasminogen
+12_pki,CHEMBL1801,Plasminogen
+23_pic50,CHEMBL2000,Plasma kallikrein
+23_pki,CHEMBL2000,Plasma kallikrein
+38_pic50,CHEMBL1968,Epoxide hydrolase 1
+42_pic50,CHEMBL209,Trypsin I
+42_pki,CHEMBL209,Trypsin I
+69_pic50,CHEMBL1808,Angiotensin-converting enzyme
+69_pki,CHEMBL1808,Angiotensin-converting enzyme
+184_pic50,CHEMBL1892,Glutamate carboxypeptidase II
+184_pki,CHEMBL1892,Glutamate carboxypeptidase II
+193_pic50,CHEMBL2016,Coagulation factor IX
+193_pki,CHEMBL2016,Coagulation factor IX
+194_pic50,CHEMBL244,Coagulation factor X
+194_pki,CHEMBL244,Coagulation factor X
+194_pkd,CHEMBL244,Coagulation factor X
+235_pic50,CHEMBL248,Leukocyte elastase
+235_pki,CHEMBL248,Leukocyte elastase
+236_pic50,CHEMBL1944,Neprilysin
+236_pki,CHEMBL1944,Neprilysin
+237_pic50,CHEMBL4618,Leukotriene A4 hydrolase
+243_pic50,CHEMBL1907,Aminopeptidase N
+243_pki,CHEMBL1907,Aminopeptidase N
+10003_pic50,CHEMBL2581,Cathepsin D
+10003_pki,CHEMBL2581,Cathepsin D
+10074_pic50,CHEMBL4068,Chymase
+10074_pki,CHEMBL4068,Chymase
+10131_pic50,CHEMBL2334,Caspase-3
+10131_pki,CHEMBL2334,Caspase-3
+10144_pic50,CHEMBL3898,Bone morphogenetic protein 1
+10144_pki,CHEMBL3898,Bone morphogenetic protein 1
+10244_pic50,CHEMBL3776,Caspase-8
+10244_pki,CHEMBL3776,Caspase-8
+10320_pec50,CHEMBL2474,Methionine aminopeptidase 1
+10323_pic50,CHEMBL3419,Carboxypeptidase B2 isoform A
+10331_pic50,CHEMBL2335,Lysosomal Pro-X carboxypeptidase
+10378_pic50,CHEMBL4072,Cathepsin B
+10378_pki,CHEMBL4072,Cathepsin B
+10495_pic50,CHEMBL268,Cathepsin K
+10495_pki,CHEMBL268,Cathepsin K
+10498_pic50,CHEMBL3837,Cathepsin L
+10498_pki,CHEMBL3837,Cathepsin L
+10674_pic50,CHEMBL2525,Beta secretase 2
+10674_pki,CHEMBL2525,Beta secretase 2
+10684_pki,CHEMBL3913,Complement C1s
+10702_pec50,CHEMBL3922,Methionine aminopeptidase 2
+10702_pic50,CHEMBL3922,Methionine aminopeptidase 2
+10702_pki,CHEMBL3922,Methionine aminopeptidase 2
+11024_pic50,CHEMBL280,Matrix metalloproteinase 13
+11024_pki,CHEMBL280,Matrix metalloproteinase 13
+11109_pic50,CHEMBL283,Matrix metalloproteinase 3
+11109_pki,CHEMBL283,Matrix metalloproteinase 3
+11110_pic50,CHEMBL4588,Matrix metalloproteinase 8
+11110_pki,CHEMBL4588,Matrix metalloproteinase 8
+11140_pic50,CHEMBL284,Dipeptidyl peptidase IV
+11140_pki,CHEMBL284,Dipeptidyl peptidase IV
+11154_pic50,CHEMBL3869,Matrix metalloproteinase 14
+11154_pki,CHEMBL3869,Matrix metalloproteinase 14
+11192_pic50,CHEMBL4791,Endothelin-converting enzyme 1
+11225_pic50,CHEMBL286,Renin
+11225_pki,CHEMBL286,Renin
+11241_pic50,CHEMBL4244,Legumain
+11287_pic50,CHEMBL2820,Coagulation factor XI
+11287_pki,CHEMBL2820,Coagulation factor XI
+11399_pki,CHEMBL1873,Tissue-type plasminogen activator
+11402_pki,CHEMBL2611,Furin
+11473_pic50,CHEMBL3706,ADAM17
+11473_pki,CHEMBL3706,ADAM17
+11534_pic50,CHEMBL2954,Cathepsin S
+11534_pki,CHEMBL2954,Cathepsin S
+11624_pic50,CHEMBL4801,Caspase-1
+11624_pki,CHEMBL4801,Caspase-1
+11694_pki,CHEMBL2382,Calpain 2
+11727_pic50,CHEMBL2409,Epoxide hydratase
+11727_pki,CHEMBL2409,Epoxide hydratase
+11848_pki,CHEMBL3736,Angiotensin-converting enzyme 2
+11871_pic50,CHEMBL4393,Matrix metalloproteinase 12
+11871_pki,CHEMBL4393,Matrix metalloproteinase 12
+11942_pic50,CHEMBL3286,Urokinase-type plasminogen activator
+11942_pki,CHEMBL3286,Urokinase-type plasminogen activator
+11968_pic50,CHEMBL3202,Prolyl endopeptidase
+11968_pki,CHEMBL3202,Prolyl endopeptidase
+12000_pic50,CHEMBL3991,Coagulation factor VII
+12000_pki,CHEMBL3991,Coagulation factor VII
+12013_pic50,CHEMBL3308,Caspase-6
+12013_pki,CHEMBL3308,Caspase-6
+12067_pic50,CHEMBL3468,Caspase-7
+12252_pec50,CHEMBL4822,Beta-secretase 1
+12252_pic50,CHEMBL4822,Beta-secretase 1
+12252_pki,CHEMBL4822,Beta-secretase 1
+12268_pic50,CHEMBL3976,Dipeptidyl peptidase II
+12396_pic50,CHEMBL2252,Dipeptidyl peptidase I
+12587_pic50,CHEMBL3272,Cathepsin L2
+12592_pic50,CHEMBL321,Matrix metalloproteinase 9
+12592_pki,CHEMBL321,Matrix metalloproteinase 9
+12593_pic50,CHEMBL4270,Matrix metalloproteinase 10
+12593_pki,CHEMBL4270,Matrix metalloproteinase 10
+12703_pki,CHEMBL2617,Tryptase beta-1
+12725_pki,CHEMBL3018,Matriptase
+12738_pic50,CHEMBL4073,Matrix metalloproteinase 7
+12738_pki,CHEMBL4073,Matrix metalloproteinase 7
+12861_pic50,CHEMBL2318,ADAMTS4
+12862_pic50,CHEMBL2285,ADAMTS5
+12955_pic50,CHEMBL3891,Calpain 1
+12955_pki,CHEMBL3891,Calpain 1
+13000_pic50,CHEMBL332,Matrix metalloproteinase-1
+13000_pki,CHEMBL332,Matrix metalloproteinase-1
+13001_pic50,CHEMBL333,Matrix metalloproteinase-2
+13001_pki,CHEMBL333,Matrix metalloproteinase-2
+13005_pki,CHEMBL2319,Kallikrein 1
+20151_pic50,CHEMBL4657,Dipeptidyl peptidase VIII
+20151_pki,CHEMBL4657,Dipeptidyl peptidase VIII
+20154_pic50,CHEMBL4793,Dipeptidyl peptidase IX
+20154_pki,CHEMBL4793,Dipeptidyl peptidase IX
+100155_pic50,CHEMBL5028,ADAM10
+100186_pic50,CHEMBL4683,Fibroblast activation protein alpha
+100613_pic50,CHEMBL3492,Proteasome Macropain subunit
+100624_pic50,CHEMBL4662,Proteasome Macropain subunit MB1
+100633_pic50,CHEMBL4208,Proteasome component C5
+101477_pic50,CHEMBL5620,Proteasome subunit beta type-8
+102753_pic50,CHEMBL6115,Lysosomal protective protein
+103991_pki,CHEMBL1741195,Enteropeptidase
+104219_pki,CHEMBL1795139,Transmembrane protease serine 6
+104445_pic50,CHEMBL1944495,Proteasome subunit beta type-9
+104670_pic50,CHEMBL2079849,Serine protease hepsin
+104670_pki,CHEMBL2079849,Serine protease hepsin
+105196_pic50,CHEMBL2157850,Ubiquitin carboxyl-terminal hydrolase 7
+105199_pic50,CHEMBL2157853,Ubiquitin carboxyl-terminal hydrolase 28
+105346_pic50,CHEMBL2176771,Complement factor D
+109455_pic50,CHEMBL3317334,Proteasome subunit beta type-10

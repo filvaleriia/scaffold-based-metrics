@@ -1,0 +1,69 @@
+tid+assay,name,class
+19_pec50,CHEMBL206,Estrogen receptor alpha
+19_pic50,CHEMBL206,Estrogen receptor alpha
+19_pki,CHEMBL206,Estrogen receptor alpha
+25_pec50,CHEMBL2034,Glucocorticoid receptor
+25_pic50,CHEMBL2034,Glucocorticoid receptor
+25_pki,CHEMBL2034,Glucocorticoid receptor
+36_pec50,CHEMBL208,Progesterone receptor
+36_pic50,CHEMBL208,Progesterone receptor
+36_pki,CHEMBL208,Progesterone receptor
+48_pic50,CHEMBL1994,Mineralocorticoid receptor
+48_pki,CHEMBL1994,Mineralocorticoid receptor
+56_pec50,CHEMBL1871,Androgen Receptor
+56_pic50,CHEMBL1871,Androgen Receptor
+56_pki,CHEMBL1871,Androgen Receptor
+57_pec50,CHEMBL2055,Retinoic acid receptor alpha
+57_pkd,CHEMBL2055,Retinoic acid receptor alpha
+59_pic50,CHEMBL1860,Thyroid hormone receptor alpha
+59_pki,CHEMBL1860,Thyroid hormone receptor alpha
+64_pec50,CHEMBL1977,Vitamin D receptor
+64_pic50,CHEMBL1977,Vitamin D receptor
+133_pec50,CHEMBL235,Peroxisome proliferator-activated receptor gamma
+133_pic50,CHEMBL235,Peroxisome proliferator-activated receptor gamma
+133_pki,CHEMBL235,Peroxisome proliferator-activated receptor gamma
+163_pec50,CHEMBL239,Peroxisome proliferator-activated receptor alpha
+163_pic50,CHEMBL239,Peroxisome proliferator-activated receptor alpha
+163_pki,CHEMBL239,Peroxisome proliferator-activated receptor alpha
+174_pec50,CHEMBL242,Estrogen receptor beta
+174_pic50,CHEMBL242,Estrogen receptor beta
+174_pki,CHEMBL242,Estrogen receptor beta
+240_pec50,CHEMBL2003,Retinoic acid receptor gamma
+240_pkd,CHEMBL2003,Retinoic acid receptor gamma
+266_pec50,CHEMBL2004,Retinoid X receptor gamma
+266_pki,CHEMBL2004,Retinoid X receptor gamma
+270_pec50,CHEMBL2008,Retinoic acid receptor beta
+270_pkd,CHEMBL2008,Retinoic acid receptor beta
+271_pec50,CHEMBL1947,Thyroid hormone receptor beta-1
+271_pic50,CHEMBL1947,Thyroid hormone receptor beta-1
+271_pki,CHEMBL1947,Thyroid hormone receptor beta-1
+275_pec50,CHEMBL2061,Retinoid X receptor alpha
+275_pic50,CHEMBL2061,Retinoid X receptor alpha
+275_pki,CHEMBL2061,Retinoid X receptor alpha
+275_pkd,CHEMBL2061,Retinoid X receptor alpha
+277_pec50,CHEMBL1870,Retinoid X receptor beta
+277_pki,CHEMBL1870,Retinoid X receptor beta
+10133_pic50,CHEMBL3429,Estrogen-related receptor alpha
+11180_pec50,CHEMBL2047,Bile acid receptor FXR
+11180_pic50,CHEMBL2047,Bile acid receptor FXR
+11255_pic50,CHEMBL4245,Estrogen-related receptor gamma
+11269_pec50,CHEMBL2808,LXR-alpha
+11269_pic50,CHEMBL2808,LXR-alpha
+11912_pec50,CHEMBL3401,Pregnane X receptor
+11912_pic50,CHEMBL3401,Pregnane X receptor
+12227_pec50,CHEMBL3979,Peroxisome proliferator-activated receptor delta
+12227_pic50,CHEMBL3979,Peroxisome proliferator-activated receptor delta
+12227_pki,CHEMBL3979,Peroxisome proliferator-activated receptor delta
+20113_pec50,CHEMBL4093,LXR-beta
+20113_pic50,CHEMBL4093,LXR-beta
+20113_pki,CHEMBL4093,LXR-beta
+20131_pic50,CHEMBL5023,p53-binding protein Mdm-2
+20131_pki,CHEMBL5023,p53-binding protein Mdm-2
+102694_pic50,CHEMBL5876,Histone H4
+103165_pic50,CHEMBL1075317,WD repeat-containing protein 5
+103165_pkd,CHEMBL1075317,WD repeat-containing protein 5
+103982_pec50,CHEMBL1741186,Nuclear receptor ROR-gamma
+103982_pic50,CHEMBL1741186,Nuclear receptor ROR-gamma
+103982_pkd,CHEMBL1741186,Nuclear receptor ROR-gamma
+104468_pec50,CHEMBL1961783,Nuclear receptor subfamily 1 group D member 1
+107979_pic50,CHEMBL3091268,Nuclear receptor ROR-beta
