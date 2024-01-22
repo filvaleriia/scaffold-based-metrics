@@ -6,6 +6,9 @@
 4. Calculate the avarage value between this 5 calculations (used ***calculation_the_metrics.ipynb***)
 5. Visualization (used ***visualization.ipynb***)
 
+# Data:
+Because all data(cOS) to large, I add to Github compress files.
+
 
 # Content:
 * All Folders are Bold
