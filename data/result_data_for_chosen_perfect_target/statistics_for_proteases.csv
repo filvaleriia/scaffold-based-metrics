@@ -1,0 +1,83 @@
+pref_name,Ki,Kd,IC50,EC50,Kd+Ki,IC50+Ki,EC50+Ki,IC50+Kd,EC50+IC50,IC50+Kd+Ki,EC50+IC50+Ki
+Coagulation factor VII ,239,0,81,0,0,0,0,0,0,0,0
+ADAM10 ,0,0,124,0,0,0,0,0,0,0,0
+Beta secretase 2 ,438,0,482,0,0,5,0,0,0,0,0
+Proteasome subunit beta type-10 ,0,0,53,0,0,0,0,0,0,0,0
+Dipeptidyl peptidase I ,0,0,720,0,0,0,0,0,0,0,0
+Calpain 2 ,122,0,0,0,0,0,0,0,0,0,0
+Matrix metalloproteinase-1 ,350,0,1029,0,0,46,0,0,0,0,0
+Neprilysin ,99,0,289,0,0,3,0,0,0,0,0
+Methionine aminopeptidase 2 ,105,0,501,7,0,7,0,0,50,0,0
+Proteasome subunit beta type-8 ,0,0,189,0,0,0,0,0,0,0,0
+Matriptase ,309,0,0,0,0,0,0,0,0,0,0
+Caspase-7 ,0,0,305,0,0,0,0,0,0,0,0
+Epoxide hydrolase 1 ,0,0,198,0,0,0,0,0,0,0,0
+Cathepsin B ,200,0,332,0,0,11,0,0,0,0,0
+Glutamate carboxypeptidase II ,60,0,112,0,0,2,0,0,0,0,0
+Matrix metalloproteinase 13 ,5577,0,13732,0,0,373,0,0,0,0,0
+Proteasome subunit beta type-9 ,0,0,82,0,0,0,0,0,0,0,0
+Coagulation factor VII ,2524,0,7855,8,0,248,16,0,199,0,9
+ADAMTS5 ,0,0,251,0,0,0,0,0,0,0,0
+Legumain ,0,0,98,0,0,0,0,0,0,0,0
+Prolyl endopeptidase ,51,0,193,0,0,7,0,0,0,0,0
+ADAMTS4 ,0,0,177,0,0,0,0,0,0,0,0
+Matrix metalloproteinase 12 ,188,0,259,0,0,2,0,0,0,0,0
+Matrix metalloproteinase-2 ,615,0,1732,0,0,21,0,0,0,0,0
+Complement factor D ,0,0,907,0,0,0,0,0,0,0,0
+Enteropeptidase ,257,0,0,0,0,0,0,0,0,0,0
+Angiotensin-converting enzyme 2 ,49,0,0,0,0,0,0,0,0,0,0
+Matrix metalloproteinase 10 ,53,0,62,0,0,0,0,0,0,0,0
+Calpain 1 ,228,0,245,0,0,14,0,0,0,0,0
+Proteasome Macropain subunit ,0,0,108,0,0,0,0,0,0,0,0
+Lysosomal protective protein ,0,0,399,0,0,0,0,0,0,0,0
+Matrix metalloproteinase 9 ,514,0,1348,0,0,17,0,0,0,0,0
+Dipeptidyl peptidase VIII ,78,0,183,0,0,7,0,0,0,0,0
+Ubiquitin carboxyl-terminal hydrolase 28 ,0,0,118,0,0,0,0,0,0,0,0
+Transmembrane protease serine 6 ,60,0,0,0,0,0,0,0,0,0,0
+Cathepsin L2 ,0,0,53,0,0,0,0,0,0,0,0
+Kallikrein 1 ,70,0,0,0,0,0,0,0,0,0,0
+Epoxide hydratase ,71,0,1659,0,0,17,0,0,0,0,0
+Methionine aminopeptidase 1 ,0,0,0,54,0,0,0,0,0,0,0
+Chymase ,90,0,259,0,0,4,0,0,0,0,0
+Fibroblast activation protein alpha ,0,0,165,0,0,0,0,0,0,0,0
+Aminopeptidase N ,105,0,47,0,0,1,0,0,0,0,0
+Lysosomal Pro-X carboxypeptidase ,0,0,325,0,0,0,0,0,0,0,0
+Complement C1s ,77,0,0,0,0,0,0,0,0,0,0
+Leukocyte elastase ,1172,0,2259,0,0,27,0,0,0,0,0
+Coagulation factor X ,2361,5,1577,0,2,110,0,38,0,9,0
+Proteasome Macropain subunit MB1 ,0,0,541,0,0,0,0,0,0,0,0
+Tryptase beta-1 ,160,0,0,0,0,0,0,0,0,0,0
+Caspase-8 ,83,0,113,0,0,0,0,0,0,0,0
+Matrix metalloproteinase 7 ,48,0,165,0,0,3,0,0,0,0,0
+Cathepsin L ,449,0,664,0,0,14,0,0,0,0,0
+Leukocyte elastase ,720,0,1046,0,0,22,0,0,0,0,0
+Endothelin-converting enzyme 1 ,0,0,203,0,0,0,0,0,0,0,0
+Cathepsin S ,432,0,1376,0,0,9,0,0,0,0,0
+Beta-secretase 1 ,791,0,4229,8,0,214,16,0,199,0,9
+Proteasome component C5 ,0,0,54,0,0,0,0,0,0,0,0
+Caspase-3 ,135,0,662,0,0,24,0,0,0,0,0
+Dipeptidyl peptidase IV ,432,0,2963,0,0,35,0,0,0,0,0
+Dipeptidyl peptidase II ,0,0,223,0,0,0,0,0,0,0,0
+Caspase-6 ,80,0,54,0,0,0,0,0,0,0,0
+Dipeptidyl peptidase IX ,69,0,127,0,0,5,0,0,0,0,0
+Coagulation factor IX ,382,0,114,0,0,2,0,0,0,0,0
+Ubiquitin carboxyl-terminal hydrolase 7 ,0,0,91,0,0,0,0,0,0,0,0
+Furin ,74,0,0,0,0,0,0,0,0,0,0
+Serine protease hepsin ,65,0,44,0,0,5,0,0,0,0,0
+Bone morphogenetic protein 1 ,50,0,256,0,0,2,0,0,0,0,0
+Leukotriene A4 hydrolase ,0,0,437,0,0,0,0,0,0,0,0
+ADAM17 ,399,0,1083,0,0,28,0,0,0,0,0
+Cathepsin K ,385,0,1015,0,0,18,0,0,0,0,0
+Caspase-1 ,141,0,223,0,0,60,0,0,0,0,0
+Carboxypeptidase B2 isoform A ,0,0,157,0,0,0,0,0,0,0,0
+Cathepsin D ,148,0,550,0,0,3,0,0,0,0,0
+Angiotensin-converting enzyme ,48,0,387,0,0,8,0,0,0,0,0
+Urokinase-type plasminogen activator ,364,0,116,0,0,10,0,0,0,0,0
+Renin ,34,0,2443,0,0,31,0,0,0,0,0
+Matrix metalloproteinase 14 ,97,0,259,0,0,1,0,0,0,0,0
+Coagulation factor XI ,480,0,272,0,0,2,0,0,0,0,0
+Trypsin I ,649,0,272,0,0,0,0,0,0,0,0
+Matrix metalloproteinase 8 ,386,0,528,0,0,7,0,0,0,0,0
+Matrix metalloproteinase 13 ,254,0,1908,0,0,22,0,0,0,0,0
+Tissue-type plasminogen activator ,63,0,0,0,0,0,0,0,0,0,0
+Matrix metalloproteinase 3 ,494,0,821,0,0,18,0,0,0,0,0

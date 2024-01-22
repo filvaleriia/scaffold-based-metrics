@@ -1,0 +1,23 @@
+pref_name,Ki,Kd,IC50,EC50,IC50+Ki,EC50+Kd,EC50+Ki,IC50+Kd,EC50+IC50,EC50+Kd+Ki,EC50+IC50+Ki,EC50+IC50+Kd
+p53-binding protein Mdm-2 ,108,0,1226,0,57,0,0,0,0,0,0,0
+Retinoic acid receptor gamma ,0,39,0,50,0,16,0,0,0,0,0,0
+Glucocorticoid receptor ,384,0,861,52,77,0,179,0,139,0,79,0
+Estrogen receptor alpha ,149,0,1045,294,27,0,8,0,36,0,22,0
+Peroxisome proliferator-activated receptor delta ,42,0,94,427,0,0,10,0,97,0,1,0
+Androgen Receptor ,153,0,347,91,159,0,141,0,93,0,37,0
+Retinoic acid receptor beta ,0,37,0,65,0,17,0,0,0,0,0,0
+Histone H4 ,0,0,59,0,0,0,0,0,0,0,0,0
+Estrogen-related receptor alpha ,0,0,88,0,0,0,0,0,0,0,0,0
+Retinoid X receptor beta ,51,0,0,0,0,0,0,0,0,0,0,0
+Estrogen receptor beta ,138,0,657,176,13,0,11,0,73,0,3,0
+LXR-beta ,29,0,180,71,1,0,18,0,43,0,3,0
+Vitamin D receptor ,0,0,128,82,0,0,0,0,28,0,0,0
+Progesterone receptor ,162,0,428,101,31,0,130,0,101,0,7,0
+Retinoid X receptor alpha ,47,0,0,79,0,0,59,0,0,0,0,0
+Nuclear receptor ROR-gamma ,0,122,763,343,0,2,0,161,122,0,0,24
+Peroxisome proliferator-activated receptor alpha ,0,0,68,562,0,0,0,0,84,0,0,0
+LXR-alpha ,0,0,172,65,0,0,0,0,16,0,0,0
+Peroxisome proliferator-activated receptor gamma ,78,0,371,582,9,0,94,0,198,0,8,0
+Bile acid receptor FXR ,0,0,59,262,0,0,0,0,7,0,0,0
+Thyroid hormone receptor beta-1 ,74,0,126,0,17,0,0,0,0,0,0,0
+Mineralocorticoid receptor ,43,0,211,0,30,0,0,0,0,0,0,0
