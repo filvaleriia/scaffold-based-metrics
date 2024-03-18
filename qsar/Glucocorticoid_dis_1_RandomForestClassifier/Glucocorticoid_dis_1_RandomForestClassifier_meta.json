@@ -4145,7 +4145,7 @@
         "earlyStopping": null,
         "parameters": {
             "random_state": 4078700231,
-            "criterion": "gini",
+            "criterion": "entropy",
             "n_estimators": 50,
             "n_jobs": 1
         },
