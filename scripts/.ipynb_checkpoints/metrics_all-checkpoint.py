@@ -1,7 +1,5 @@
-'''This script contains the count for three important matrics: TUPOR, SASY, ASER'''
-
-
 '''Import necessary libraries'''
+
 import pandas as pd
 import numpy as np
 import lzma
@@ -36,22 +34,14 @@ def convert_to_scaffold_(df, scaffold_type):
     print("Convert_")
     if scaffold_type == 'csk':
         for x in range(len(df)):
-            try:
-                smiles = Chem.MolToSmiles(Chem.MolFromSmiles(df.loc[x][0]))
+            smiles = Chem.MolToSmiles(Chem.MolFromSmiles(df.loc[x][0]))
             
-                try:
-                    if MurckoScaffoldSmiles(Chem.MolToSmiles(MakeScaffoldGeneric(Chem.MolFromSmiles(smiles)))) != '':
-                        a.append(MurckoScaffoldSmiles(\
-                                             Chem.MolToSmiles(MakeScaffoldGeneric\
-                                           (Chem.MolFromSmiles(smiles)))))
-                except:
-                    print("Faild to create scaffold_csk")
-                    print("Index",x)
-                    print(df.loc[x][0])
-                    print(smiles)
-
+            try:
+                a.append(MurckoScaffoldSmiles(\
+                                         Chem.MolToSmiles(MakeScaffoldGeneric\
+                                       (Chem.MolFromSmiles(smiles)))))
             except:
-                print("Faild to create mol")
+                print("Faild to create scaffold_csk")
                 print("Index",x)
                 print(df.loc[x][0])
                 print(smiles)
@@ -88,88 +78,99 @@ def add_columns_same_like_input_function(df_generated, test_set):
 
 
 class Metrics:
-    def __init__(self, type_cluster, scaffold_type, generator_name, number_of_calculation, receptor, save_options):
-        self.output_set = []
-        self.recall_set = []
-        self.output_set_scaffolds = []
-        self.recall_set_scaffolds = []
+    def __init__(self,type_cluster,scaffold_type, generator_name, number_of_calculation, save_options):
+        self.generated_compounds = []
+        self.test_set = []
+        self.generated_compounds_scaffolds = []
+        self.test_set_scaffolds = []
         self.type_cluster = type_cluster
-        self.unique_output_set = []
-        self.unique_recall_set = []
+        self.unique_generated_compounds = []
+        self.unique_test_set = []
         self.count_metrics = []
+        self.count_metrics_repead = []
         self.scaffold_type = scaffold_type
         self.generator_name = generator_name
         self.number_of_calculation = number_of_calculation
         self.save_options = save_options
-        self.receptor = receptor
         self.results = pd.DataFrame()
     
 
-    def load(self,filepath_output_set, filepath_recall_set):
-        '''Load tha main dataset needed for calculation matrics, the first dataset is the Output Set and the second one is the Recall Set. 
-        All datasets add to constructor self.output_set and self.recall_set'''
+    def load(self,filepath_generated_com, filepath_test_set):
+        '''Load tha main dataset needed for calculation matrics, the first dataset is generated compounds and the second one is the test set. All datasets add to constructor self.generated_compounds and self.test_set'''
 
-        output_set = []
-        recall_set = []
-        print(filepath_output_set)
-        with open(filepath_output_set, 'r') as f:
+        generated_compounds = []
+        test_set = []
+    
+        with open(filepath_generated_com, 'r') as f:
             for line in f.readlines():
-                output_set.append(line)
-        self.output_set = pd.DataFrame(output_set)
+                generated_compounds.append(line)
+        self.generated_compounds = pd.DataFrame(generated_compounds)
 
 
-        with open(filepath_recall_set, 'r') as f:
+        with open(filepath_test_set, 'r') as f:
             for line in f.readlines():
-                recall_set.append(line)
-        self.recall_set = pd.DataFrame(recall_set)
+                test_set.append(line)
+        self.test_set = pd.DataFrame(test_set)
 
 
-    def scaffolds_unique(self,output_set,recall_set):
-        '''This function only return unique scaffolds in Output Set and Recall Set'''
-        return output_set[0].unique(), recall_set[0].unique()
+    def scaffolds_unique(self,df_generated,df_test_set):
+        '''This function only return unique scaffolds in generated set and test set'''
+        return df_generated[0].unique(), df_test_set[0].unique()
     
 
-    def main_function_return(self,output_set, recall_set):
+    def main_function_return(self,df_generated, test_set):
         '''The main function for calculation all metrics'''
 
         '''Convert all metrics to scaffold. Possible scaffolds: csk and murcko'''
-        self.recall_set_scaffolds = convert_to_scaffold_(recall_set,self.scaffold_type)
-        self.output_set_scaffolds = convert_to_scaffold_(output_set, self.scaffold_type)
+        self.test_set_scaffolds = convert_to_scaffold_(test_set,self.scaffold_type)
+        self.generated_compounds_scaffolds = convert_to_scaffold_(df_generated, self.scaffold_type)
 
-        '''Create unique dataset and save to constructor like self.unique_output_set and self.unique_recall_set'''
-        self.unique_output_set, self.unique_recall_set = self.scaffolds_unique(self.output_set_scaffolds, self.recall_set_scaffolds)
+        '''Create unique dataset and save to constructor like self.unique_generated_compounds and self.unique_test_set'''
+        self.unique_generated_compounds, self.unique_test_set = self.scaffolds_unique(self.generated_compounds_scaffolds, self.test_set_scaffolds)
 
         '''Calculate the occurance of scaffolds'''
-        df = add_columns_same_like_input_function(self.output_set_scaffolds, self.unique_recall_set)
+        df = add_columns_same_like_input_function(self.generated_compounds_scaffolds, self.unique_test_set)
+
+        df1 = add_columns_same_like_input_function(self.generated_compounds_scaffolds, self.test_set_scaffolds)
 
         '''Calculate the individual metrics'''
-        ns = len(self.unique_output_set)
-        ss = len(self.output_set_scaffolds)
-        sesy = ns/ss
-        aser = df[1].sum()/ss
+        ns = len(self.unique_generated_compounds)
+        ss = len(self.generated_compounds_scaffolds)
+        sescy = ns/ss
+        sescr = df[2].sum()/ns
+        sescry = sescy*sescr
+        asescr = df[1].sum()/ss
 
         self.count_metrics = df.copy()
-        self.count_metrics.columns = ['unique_scaffold_recall','count_of_occurance', 'uniq_occurance']
-
-        '''If generator doesn't generate unique active compounds the number of TUPOR'''
+        self.count_metrics_repead = df1.copy()
+        self.count_metrics.columns = ['scaffold_test_tp','count_of_occurance', 'uniq_occurance']
+        self.count_metrics_repead.columns = ['scaffold_test_tp_with_repeat','count_of_occurance', 'uniq_occurance']
+        
+        '''If generator doesn't generate unique active compounds the number of TPRA and TPRAR is 0'''
         try:
-            tupor = df[2].value_counts()[1]/len(df)
-            tupor_text = f"{df[2].value_counts()[1]}/{len(df)}"
+            tpra = df[2].value_counts()[1]/len(df)
+            tpra_text = f"{df[2].value_counts()[1]}/{len(df)}"
         except:
-            tupor = 0
-            tupor_text = f"{0}/{len(df)}"
+            tpra = 0
+            tpra_text = f"{0}/{len(df)}"
 
+        try:
+            tprar = df1[2].value_counts()[1]/len(df1)
+            tprar_text = f"{df1[2].value_counts()[1]}/{len(df1)}"
+        except:
+            tprar = 0
+            tprar_text = f"{0}/{len(df1)}"
 
         tRS = df[1].sum()
 
         '''Return individual metrics and next add to pandas data frame'''
-        return self.type_cluster , ns,ss,tupor_text,tupor,sesy,aser,tRS
+        return self.type_cluster , ns,ss,tpra_text,tpra, tprar_text,tprar,sescy,sescr, sescry,asescr,tRS
 
 
     def save_function(self):
         '''Save function to folder 'data/results'. If the folder doesn't exist -> the folder will be created'''
         print("Save")
-        path_to_folder = f'data/results_new/{self.receptor}'
+        path_to_folder = 'data/results'
         
         '''Check if folder is existing'''
         if not os.path.exists(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}"):
@@ -177,20 +178,21 @@ class Metrics:
         
         self.count_metrics.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/count_of_occurance_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
 
+        self.count_metrics_repead.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/count_of_occurance_with_repead_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
+
         self.results.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/metrics_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
 
-        self.output_set_scaffolds.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/scaffolds_of_output_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", header=False, index=False)
+        self.generated_compounds_scaffolds.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/scaffolds_of_generated_moleculs_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", header=False, index=False)
 
-        self.recall_set_scaffolds.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/scaffolds_of_recall_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", header=False, index=False)
+        self.test_set_scaffolds.to_csv(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}/scaffolds_of_test_moleculs_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", header=False, index=False)
 
 
     def calculate_metrics_with_return(self):
         '''Calculation all 7 metrics'''
+        res = self.main_function_return(self.generated_compounds, self.test_set)
 
-        res = self.main_function_return(self.output_set, self.recall_set)
-
-        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','TUPOR_','TUPOR',\
-                                 'SESY','ASER', 'tRS'])
+        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','tpra_','tpra','tprar_','tprar',\
+                                 'sescy','sescr','sescry','asescr', 'tRS'])
         results.loc[len(results)] = res
         results.insert(loc=0, column='name', value=[f"{self.generator_name}_{self.number_of_calculation}"])
         results.insert(loc=2, column='scaffold', value=[self.scaffold_type])

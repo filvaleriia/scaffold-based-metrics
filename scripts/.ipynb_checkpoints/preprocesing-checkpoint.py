@@ -49,7 +49,7 @@ class Preprocesing():
             new_value = duplicated_df.pchembl_value.mean() #new value, select all value in duplicates set and then calculate mean value
             inchikey = Chem.inchi.MolToInchiKey(Chem.MolFromSmiles(smiles)) #calculate the inchikey
             leave_id = df[df.stand_inchi==inchikey].index #index wich we leave in dataframe and others duplicqates we deleted
-            df.loc[leave_id, 'pchembl_value'] = new_value #add new value
+            df['pchembl_value'].loc[leave_id] = new_value #add new value
             duplicated_df_index = duplicated_df_index.drop(leave_id) # inbdex wich we need to delete
             for x in duplicated_df_index:
                 df = df.drop([x])  #delete duplicates
@@ -83,8 +83,7 @@ class Preprocesing():
             
             remover = SaltRemover()
             res = remover.StripMol(Chem.MolFromSmiles(dff['canonical_smiles'][x]))
-            #dff['canonical_smiles'][x] = Chem.MolToSmiles(res)
-            dff.loc[x, 'canonical_smiles'] = Chem.MolToSmiles(res)
+            dff['canonical_smiles'][x] = Chem.MolToSmiles(res)
             if NumAromaticRings(Chem.MolFromSmiles(dff['canonical_smiles'][x])) == 0 and\
                 NumAliphaticRings(Chem.MolFromSmiles(dff['canonical_smiles'][x])) == 0:
                 print("Not contain ring")
@@ -94,7 +93,7 @@ class Preprocesing():
                 delete_element = 1
             if delete_element != 1:
                 try:
-                    dff.loc[x, 'scaffolds_csk'] = MurckoScaffoldSmiles(\
+                    dff['scaffolds_csk'].loc[x] = MurckoScaffoldSmiles(\
                                              Chem.MolToSmiles(MakeScaffoldGeneric\
                                            (Chem.MolFromSmiles(dff['canonical_smiles'][x]))))
                 except:
@@ -105,11 +104,12 @@ class Preprocesing():
                     try:
                         mol = self.MakeScaffoldGeneric_fixed(Chem.MolFromSmiles(dff['canonical_smiles'][x]))
                         print(mol)
-                        dff.loc[x, 'scaffolds_csk'] = MurckoScaffoldSmiles(Chem.MolToSmiles(mol))
+                        dff['scaffolds_csk'].loc[x] = MurckoScaffoldSmiles(Chem.MolToSmiles(mol))
                         print(Chem.MolFromSmiles(MurckoScaffoldSmiles(Chem.MolToSmiles(mol))))
                     except:
                         dff = dff.drop([x])
             delete_element = 0
+
         dff['mfp'] = [(AllChem.GetMorganFingerprintAsBitVect\
                     (Chem.MolFromSmiles(i),3, nBits=2048)) for i in dff['scaffolds_csk']]
 
@@ -121,10 +121,10 @@ class Preprocesing():
         
         self.active_compounds = dff.copy()
 
-        #if self.save_options == True:
-        #    if not os.path.exists(f"data/input_data/{self.receptor_name}/"):
-        #        os.makedirs(f"data/input_data/{self.receptor_name}/")
-        #    dff.to_csv(f'data/input_data/{self.receptor_name}/{self.receptor_name}.csv', index_label = False)
+        if self.save_options == True:
+            if not os.path.exists(f"data/input_data/{self.receptor_name}/"):
+                os.makedirs(f"data/input_data/{self.receptor_name}/")
+            dff.to_csv(f'data/input_data/{self.receptor_name}/{self.receptor_name}.csv', index_label = False)
         return dff
     
 
@@ -165,21 +165,8 @@ class Preprocesing():
 
         self.active_compounds_with_clusters = df.copy()
 
-        #print(df)
-        non_active_scaffold = pd.read_csv(f"data/input_recall_sets_new/{self.receptor_name}/df_not_in_new_active_sets_new.csv") #23 scaffoldy
-
-        deleted_index = []
-        for x in range(len(df)):
-
-            if df.loc[x,'scaffolds_csk'] in list(non_active_scaffold.scaffolds_csk):
-                deleted_index.append(x)
-
-        for r in deleted_index:
-            df = df.drop([r])
-        df = df.reset_index(drop=True)
-        #print(df)
         if self.save_options == True:
-            df.to_csv(f'data/input_recall_sets_new/{self.receptor_name}/{self.receptor_name}_split_to_clusters_using_KMedoids.csv', index_label = False)
+            df.to_csv(f'data/input_data/{self.receptor_name}/{self.receptor_name}_split_to_clusters_using_KMedoids.csv', index_label = False)
 
         return df
     
@@ -201,7 +188,7 @@ class Preprocesing():
             for x in a.index:
                 smiles = a['scaffolds_csk'].loc[x]
                 b = data_target[data_target['scaffolds_csk']==smiles]
-                b = b.sort_values(by=['pchembl_value'], ascending=False)    
+                b = b.sort_values(by=['stand_value'])    
                 input_id_Molpher_train_dissimilar.append(b['chembl_id'].iloc[:1].item())
                 for y in b.index:
                     input_id_train_dissimilar.append(b['chembl_id'].loc[y])
@@ -212,7 +199,7 @@ class Preprocesing():
         for x in a.index:
             smiles = a['scaffolds_csk'].loc[x]
             b = data_target[data_target['scaffolds_csk']==smiles]
-            b = b.sort_values(by=['pchembl_value'], ascending=False)    
+            b = b.sort_values(by=['stand_value'])    
             for y in b.index:
                 input_id_test_dissimilar.append(b['chembl_id'].loc[y])
 
@@ -247,7 +234,7 @@ class Preprocesing():
             for x in train_set.index:
                 smiles = a['scaffolds_csk'].loc[x]
                 b = data_target[data_target['scaffolds_csk']==smiles]
-                b = b.sort_values(by=['pchembl_value'], ascending=False)    
+                b = b.sort_values(by=['stand_value'])    
                 input_id_Molpher_train_similar.append(b['chembl_id'].iloc[:1].item())
                 for y in b.index:
                     input_id_train_similar.append(b['chembl_id'].loc[y])
@@ -256,7 +243,7 @@ class Preprocesing():
             for x in test_set.index:
                 smiles = a['scaffolds_csk'].loc[x]
                 b = data_target[data_target['scaffolds_csk']==smiles]
-                b = b.sort_values(by=['pchembl_value'], ascending=False)  
+                b = b.sort_values(by=['stand_value'])  
 
                 for y in b.index:
                     input_id_test_similar.append(b['chembl_id'].loc[y])
@@ -376,9 +363,7 @@ class Preprocesing():
 
     def split_data_to_train_test_dis(self,data_target,data_clusters):
         '''The main function for create sets for dissimilarity type of project, using the previous function'''
-        #data_target = self.duplicate_compounds(data_target)
-        data_target = pd.read_csv(f"data/input_recall_sets_new/{self.receptor_name}/{self.receptor_name}_active_compounds.csv")
-
+        data_target = self.duplicate_compounds(data_target)
         for x in ([[1,2,3,4],0],[[0,2,3,4],1],[[0,1,3,4],2],[[0,1,2,4],3],[[0,1,2,3],4]):
             name = []
             '''Get the Chemble_ID for Molpher, other generators and tests set'''
@@ -406,23 +391,22 @@ class Preprocesing():
             if self.save_options == True:
                 print("Save options")
                 #Input Set Molpher
-                input_Molpher_train.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_dis_{x[1]}.csv", index=False)
+                input_Molpher_train.to_csv(f"data/input_data/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_dis_{x[1]}.csv", index=False)
 
                 #Input Set other generators 
-                input_gener_train.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_{self.receptor_name}_dis_{x[1]}.csv", index=False,header=False)
-                input_gener_train_with_ID.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_dis_{x[1]}.csv", index=False)
-                input_gener_train_with_p_chembl.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv", index=False,header=False)
+                input_gener_train.to_csv(f"data/input_data/{self.receptor_name}/cIS_{self.receptor_name}_dis_{x[1]}.csv", index=False,header=False)
+                input_gener_train_with_ID.to_csv(f"data/input_data/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_dis_{x[1]}.csv", index=False)
+                input_gener_train_with_p_chembl.to_csv(f"data/input_data/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv", index=False,header=False)
                 
                 #Recall Set
-                input_test_with_p_chembl.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv",  index=False,header=False)
-                input_test_with_ID.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_dis_{x[1]}.csv",  index=False)
-                input_test.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cRS_{self.receptor_name}_dis_{x[1]}.csv",  index=False,header=False)
+                input_test_with_p_chembl.to_csv(f"data/input_data/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv",  index=False,header=False)
+                input_test_with_ID.to_csv(f"data/input_data/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_dis_{x[1]}.csv",  index=False)
+                input_test.to_csv(f"data/input_data/{self.receptor_name}/cRS_{self.receptor_name}_dis_{x[1]}.csv",  index=False,header=False)
 
     
     def split_data_to_train_test_sim(self, data_target,data_clusters):
         '''The main function for create sets for similarity type of project, using the previous function'''
-        #data_target = self.duplicate_compounds(data_target)
-        data_target = pd.read_csv(f"data/input_recall_sets_new/{self.receptor_name}/{self.receptor_name}_active_compounds.csv")
+        data_target = self.duplicate_compounds(data_target)
         #similarity:
         for x in ([[0,1,2,3,4],0],[[0,1,2,3,4],1],[[0,1,2,3,4],2],[[0,1,2,3,4],3],[[0,1,2,3,4],4]):
             '''Get the Chemble_ID for Molpher, other generators and tests set'''
@@ -452,14 +436,14 @@ class Preprocesing():
             if self.save_options == True:
                 print("Save options")
                 #Input Set Molpher
-                input_Molpher_train.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_sim_{x[1]}.csv", index=False)
+                input_Molpher_train.to_csv(f"data/input_data/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_sim_{x[1]}.csv", index=False)
 
                 #Input Set other generators
-                input_gener_train.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_{self.receptor_name}_sim_{x[1]}.csv", index=False,header=False)
-                input_gener_train_with_ID.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_sim_{x[1]}.csv", index=False)
-                input_gener_train_with_p_chembl.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv", index=False,header=False)
+                input_gener_train.to_csv(f"data/input_data/{self.receptor_name}/cIS_{self.receptor_name}_sim_{x[1]}.csv", index=False,header=False)
+                input_gener_train_with_ID.to_csv(f"data/input_data/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_sim_{x[1]}.csv", index=False)
+                input_gener_train_with_p_chembl.to_csv(f"data/input_data/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv", index=False,header=False)
                 
                 #Recall Set
-                input_test.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cRS_{self.receptor_name}_sim_{x[1]}.csv",  index=False,header=False)
-                input_test_with_ID.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_sim_{x[1]}.csv",  index=False)
-                input_test_with_p_chembl.to_csv(f"data/input_recall_sets_new/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv",  index=False,header=False)
+                input_test.to_csv(f"data/input_data/{self.receptor_name}/cRS_{self.receptor_name}_sim_{x[1]}.csv",  index=False,header=False)
+                input_test_with_ID.to_csv(f"data/input_data/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_sim_{x[1]}.csv",  index=False)
+                input_test_with_p_chembl.to_csv(f"data/input_data/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv",  index=False,header=False)
