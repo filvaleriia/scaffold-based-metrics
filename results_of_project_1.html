@@ -1,0 +1,3880 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>results_of_project_1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li><a href="#important-informations">Important informations:</a></li>
+<li><a href="#important-shortcuts">Important shortcuts</a></li>
+<li><a href="#metrics">Metrics</a></li>
+<li><a href="#project">Project</a></li>
+<li><a href="#glucocorticoid-receptor">Glucocorticoid receptor</a>
+<ul>
+<li><a href="#dissimilarity-split">Dissimilarity split</a>
+<ul>
+<li><a href="#csk-scaffold">CSK scaffold</a>
+<ul>
+<li><a href="#1-molpher">1. Molpher</a></li>
+<li><a href="#2-drugex">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-csk-scaffold">3. Compare more generators CSK scaffold</a></li>
+</ul>
+</li>
+<li><a href="#murcko-scaffold">Murcko scaffold</a>
+<ul>
+<li><a href="#1-molpher-1">1. Molpher</a></li>
+<li><a href="#2-drugex-1">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-murcko-scaffold">3. Compare more generators Murcko scaffold</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#similarity-split">Similarity split</a>
+<ul>
+<li><a href="#csk-scaffold-1">CSK scaffold</a>
+<ul>
+<li><a href="#1-molpher-2">1. Molpher</a></li>
+<li><a href="#2-drugex-2">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-csk-scaffold-1">3. Compare more generators CSK scaffold</a></li>
+</ul>
+</li>
+<li><a href="#murcko-scaffold-1">Murcko scaffold</a>
+<ul>
+<li><a href="#1-molpher-3">1. Molpher</a></li>
+<li><a href="#2-drugex-3">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-murcko-scaffold-1">3. Compare more generators Murcko scaffold</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#protease-leukocyte-elastase">Protease: Leukocyte elastase</a>
+<ul>
+<li><a href="#dissimilarity-split-1">Dissimilarity split</a>
+<ul>
+<li><a href="#csk-scaffold-2">CSK scaffold</a>
+<ul>
+<li><a href="#1-molpher-4">1. Molpher</a></li>
+<li><a href="#2-drugex-4">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-csk-scaffold-2">3. Compare more generators CSK scaffold</a></li>
+</ul>
+</li>
+<li><a href="#murcko-scaffold-2">Murcko scaffold</a>
+<ul>
+<li><a href="#1-molpher-5">1. Molpher</a></li>
+<li><a href="#2-drugex-5">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-murcko-scaffold-2">3. Compare more generators Murcko scaffold</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#similarity-split-1">Similarity split</a>
+<ul>
+<li><a href="#csk-scaffold-3">CSK scaffold</a>
+<ul>
+<li><a href="#1-molpher-6">1. Molpher</a></li>
+<li><a href="#2-drugex-6">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-csk-scaffold-3">3. Compare more generators CSK scaffold</a></li>
+</ul>
+</li>
+<li><a href="#murcko-scaffold-3">Murcko scaffold</a>
+<ul>
+<li><a href="#1-molpher-7">1. Molpher</a></li>
+<li><a href="#2-drugex-7">2. DrugEx</a></li>
+<li><a href="#3-compare-more-generators-murcko-scaffold-3">3. Compare more generators Murcko scaffold</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="important-informations">Important informations:</h1>
+<ul>
+<li>ChEMBL 31: download 18.1.2023</li>
+<li>conda environment is rdkit-env(conda activate rdkit-env)</li>
+<li>data are download in 22.02.2023</li>
+<li>Used descriptors: Morgan Fingerprint r=3, 2048</li>
+<li>Threshold for nuclear receptor - &lt;0-100&gt; nM</li>
+<li>Threshold for protease - &lt;0-1000&gt; nM</li>
+<li>IC50 - pouzita merena aktivita</li>
+<li>for splitting to 5 clusters used Kmedoids algorithm with Tanimoto distance (because in K-medoids we can change the distance, because in K-means they used Euclidian distance)</li>
+</ul>
+<h1 id="important-shortcuts">Important shortcuts</h1>
+<ul>
+<li>cIS = compound Input Set</li>
+<li>sIS = scaffold Input Set</li>
+<li>cRS = compound Recall Set</li>
+<li>sRS = scaffold Recall Set</li>
+<li>cOS = compound Output Set</li>
+<li>dis = Dissimilarity split</li>
+<li>sim = Similarity split</li>
+</ul>
+<h1 id="metrics">Metrics</h1>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<p>Here we need to add information about metrics and formula</p>
+<p>tRS - count of active compounds which have active scaffold in cOS<br/>
+SS - cOS size <br/>
+NS - unique new scaffolds in cOS<br/>
+NAS - unique active scaffolds in cRS<br/>
+UAS - unique scaffods in cRS <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>▪ True positive recall all (TUPOR) –</td>
+<td>$$TUPOR = {{NAS} \over UAS}$$</td>
+</tr>
+<tr>
+<td>▪ Set scaffold yield (SESY) –</td>
+<td>$$SESY = {{NS} \over SS}$$</td>
+</tr>
+<tr>
+<td>▪ Absolute set scaffold recall (ASER) –</td>
+<td>$$ASER = {{tRS} \over SS}$$</td>
+</tr>
+</tbody>
+</table>
+<h1 id="project">Project</h1>
+<p>The goal of the project is to experimentally test the behavior of metrics I have designed for two different molecular generators and compare them with each other. Within the scope of this project, two molecular generators will be tested: DrugEx, which is based on deep learning, and Molpher, which is based on evolutionary algorithms.</p>
+<img src = "img/main_steps.jpg" width = '30%' height = "20%">
+<p><font size = "3"><strong> Split into Input Set and Recall Set:</strong></font></p>
+<p>For splitting data to clusters we convert data to CSK scaffolds and try to split data based the scaffold similarity(tanimoto distance) using K-medoids algorithm <br/>
+We divided all data for 5 clusters, and then for &quot;dissimilarity&quot; part we selectd four clusters for sIS and another one to sRS. And we done this five times. Than for creating cIS and cRS we found all compound wich have scaffold in sIS and sRS.</br></p>
+<img src = "img/dissimilarity_split.jpg" width = '30%' height = "50%">
+<p>We divided all data for 5 clusters, and then for &quot;similarity&quot; part we select 20% from each clusters for sRS and other 80% from each cluster for sIS.</p>
+<img src = "img/similarity_split.jpg" width = '30%' height = "50%">
+<p>Clusters similarity (morgan fingerprint created by CSK scaffold, for calculation similarity using jaccard coefficient(Tanimoto similarity)):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Cluster_0</th>
+<th>Cluster_1</th>
+<th>Cluster_2</th>
+<th>Cluster_3</th>
+<th>Cluster_4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0</td>
+<td>1.0</td>
+<td>0.292929</td>
+<td>0.27027</td>
+<td>0.220588</td>
+<td>0.411765</td>
+</tr>
+<tr>
+<td>Cluster_1</td>
+<td>0.292929</td>
+<td>1.0</td>
+<td>0.237113</td>
+<td>0.184783</td>
+<td>0.270833</td>
+</tr>
+<tr>
+<td>Cluster_2</td>
+<td>0.27027</td>
+<td>0.237113</td>
+<td>1.0</td>
+<td>0.315789</td>
+<td>0.239437</td>
+</tr>
+<tr>
+<td>Cluster_3</td>
+<td>0.220588</td>
+<td>0.184783</td>
+<td>0.315789</td>
+<td>1.0</td>
+<td>0.184615</td>
+</tr>
+<tr>
+<td>Cluster_4</td>
+<td>0.411765</td>
+<td>0.270833</td>
+<td>0.239437</td>
+<td>0.184615</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<details>
+  <summary><font size = "3"><strong> For see scaffolds in each cluster click to expand!</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/scaffolds_in_cluster_0.png" width = '90%' height = "50%"></td>
+<td><img src = "img/clusters/scaffolds_in_cluster_1.png" width = '90%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/scaffolds_in_cluster_2.png" width = '80%' height = "50%"></td>
+<td><img src = "img/clusters/scaffolds_in_cluster_3.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/scaffolds_in_cluster_4.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<details>
+  <summary><font size = "3"><strong> For see statistic inside each cluster and Maximal and minimal tanimoto similarity in compounds click to expand!</strong></font></summary>
+<details>
+  <summary>
+<font size = "4"><strong> Cluster_0:</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>Statistics:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_0/describe.png" width = '100%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Max_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_0/max_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Min_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_0/min_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary><font size = "4"><strong> Cluster_1:</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>Statistics:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_1/describe.png" width = '100%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Max_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_1/max_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Min_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_1/min_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary><font size = "4"><strong> Cluster_2:</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>Statistics:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_2/describe.png" width = '100%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Max_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_2/max_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Min_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_2/min_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary><font size = "4"><strong> Cluster_3:</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>Statistics:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_3/describe.png" width = '100%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Max_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_3/max_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Min_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_3/min_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary><font size = "4"><strong> Cluster_4:</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>Statistics:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_4/describe.png" width = '100%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Max_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_4/max_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Min_tanimoto:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_4/min_tanimoto.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary><font size = "4"><strong> All statistics:</strong></font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/clusters/cluster_0/describe.png" width = '90%' height = "50%"></td>
+<td><img src = "img/clusters/cluster_1/describe.png" width = '90%' height = "50%"></td>
+<td><img src = "img/clusters/cluster_2/describe.png" width = '90%' height = "50%"></td>
+<td><img src = "img/clusters/cluster_3/describe.png" width = '90%' height = "50%"></td>
+<td><img src = "img/clusters/cluster_4/describe.png" width = '90%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<h1 id="glucocorticoid-receptor">Glucocorticoid receptor</h1>
+<details>
+  <summary>Click to expand!</summary>
+<h2 id="dissimilarity-split">Dissimilarity split</h2>
+<details>
+  <summary></summary>
+<h3 id="csk-scaffold">CSK scaffold</h3>
+<h4 id="1-molpher">1. Molpher</h4>
+<p>I ran 135 022 jobs in the cluster.</p>
+<details>
+  <summary>For information about runs click to expand!</summary>
+<p><font size = "2"><strong> Percentage Table for completed/good runs:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Ended runs</th>
+<th>Percentage</th>
+<th>All running runs</th>
+<th>Not good runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>11 039</td>
+<td>41.3%</td>
+<td>26 732</td>
+<td>15693</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>11 013</td>
+<td>38.3%</td>
+<td>28 730</td>
+<td>17717</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>11 093</td>
+<td>41.5%</td>
+<td>26 732</td>
+<td>15639</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>7 755</td>
+<td>28.3%</td>
+<td>27 389</td>
+<td>19634</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>5 814</td>
+<td>22.8%</td>
+<td>25 439</td>
+<td>19625</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary>For information about time click to expand!</summary>
+<font size = "2"><strong> Table for time for each cluster:</strong></font>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour for good runs</th>
+<th>Times for bad runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>140.3</td>
+<td>5230</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>92.74</td>
+<td>5905</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>95.14</td>
+<td>5213</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>100</td>
+<td>6544</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>103</td>
+<td>6541</td>
+</tr>
+</tbody>
+</table>
+<p><font size = "2"><strong></p>
+<ul>
+<li>Avarage time: 106.236</li>
+<li>Avarage time for bad runs:  20 min</li>
+<li>Avarage time for Molpher running: 5993 hours
+</strong></font></li>
+</ul>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and CSK scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/csk_scaffolds/dis/Molpher/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_0</td>
+<td>dis</td>
+<td>csk</td>
+<td>135,545.0</td>
+<td>1,187,859.0</td>
+<td>16/42</td>
+<td>0.3809524</td>
+<td>0.1141087</td>
+<td>0.0033868</td>
+<td>4,023.0</td>
+</tr>
+<tr>
+<td>Molpher_1</td>
+<td>dis</td>
+<td>csk</td>
+<td>132,077.0</td>
+<td>1,211,203.0</td>
+<td>18/36</td>
+<td>0.5</td>
+<td>0.1090461</td>
+<td>0.0013293</td>
+<td>1,610.0</td>
+</tr>
+<tr>
+<td>Molpher_2</td>
+<td>dis</td>
+<td>csk</td>
+<td>137,303.0</td>
+<td>1,178,785.0</td>
+<td>12/42</td>
+<td>0.2857143</td>
+<td>0.1164784</td>
+<td>0.0002333</td>
+<td>275.0</td>
+</tr>
+<tr>
+<td>Molpher_3</td>
+<td>dis</td>
+<td>csk</td>
+<td>116,723.0</td>
+<td>891,650.0</td>
+<td>23/40</td>
+<td>0.575</td>
+<td>0.1309067</td>
+<td>0.0077059</td>
+<td>6,871.0</td>
+</tr>
+<tr>
+<td>Molpher_4</td>
+<td>dis</td>
+<td>csk</td>
+<td>106,618.0</td>
+<td>707,678.0</td>
+<td>38/46</td>
+<td>0.826087</td>
+<td>0.1506589</td>
+<td>0.0107182</td>
+<td>7,585.0</td>
+</tr>
+<tr>
+<td>Molpher_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>125,653.2</td>
+<td>1,035,435.0</td>
+<td>-</td>
+<td>0.5135507</td>
+<td>0.1242398</td>
+<td>0.0046747</td>
+<td>4,072.8</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<details>
+  <summary><font size = "2"> The most common scaffolds (calculation using active and non-active scaffolds):</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_0.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_1.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_2.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_3.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_4.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary>For information about time click to expand!</summary>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>32.16</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>34.11</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>35.48</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>30.7</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>32.86</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<font size = "2"><strong> Avarage time: 33.062 </strong></font>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and CSK scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/csk_scaffolds/dis/DrugEx/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DrugEx_0</td>
+<td>dis</td>
+<td>csk</td>
+<td>135,545.0</td>
+<td>1,187,859.0</td>
+<td>16/42</td>
+<td>0.3809524</td>
+<td>0.1141087</td>
+<td>0.0033868</td>
+<td>4,023.0</td>
+</tr>
+<tr>
+<td>DrugEx_1</td>
+<td>dis</td>
+<td>csk</td>
+<td>132,077.0</td>
+<td>1,211,203.0</td>
+<td>18/36</td>
+<td>0.5</td>
+<td>0.1090461</td>
+<td>0.0013293</td>
+<td>1,610.0</td>
+</tr>
+<tr>
+<td>DrugEx_2</td>
+<td>dis</td>
+<td>csk</td>
+<td>137,303.0</td>
+<td>1,178,785.0</td>
+<td>12/42</td>
+<td>0.2857143</td>
+<td>0.1164784</td>
+<td>0.0002333</td>
+<td>275.0</td>
+</tr>
+<tr>
+<td>DrugEx_3</td>
+<td>dis</td>
+<td>csk</td>
+<td>116,723.0</td>
+<td>891,650.0</td>
+<td>23/40</td>
+<td>0.575</td>
+<td>0.1309067</td>
+<td>0.0077059</td>
+<td>6,871.0</td>
+</tr>
+<tr>
+<td>DrugEx_4</td>
+<td>dis</td>
+<td>csk</td>
+<td>106,618.0</td>
+<td>707,678.0</td>
+<td>38/46</td>
+<td>0.826087</td>
+<td>0.1506589</td>
+<td>0.0107182</td>
+<td>7,585.0</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>125,653.2</td>
+<td>1,035,435.0</td>
+<td>-</td>
+<td>0.5135507</td>
+<td>0.1242398</td>
+<td>0.0046747</td>
+<td>4,072.8</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<h4 id="3-compare-more-generators-csk-scaffold">3. Compare more generators CSK scaffold</h4>
+<p><font size = "3"><strong> The resulting table displays calculated all metrics CSK type, type of split data is dis:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>125,653.2</td>
+<td>1,035,435.0</td>
+<td>-</td>
+<td>0.5135507</td>
+<td>0.1242398</td>
+<td>0.0046747</td>
+<td>4,072.8</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>322,088.0</td>
+<td>999,912.0</td>
+<td>-</td>
+<td>0.5554555</td>
+<td>0.3221176</td>
+<td>0.0127084</td>
+<td>12,707.4</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<p><font size = "3"><strong> Analyasis KL divergence hits</strong></font></p>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "data/results/Glucocorticoid_receptor/csk_scaffolds/KL_divergence_Recall_set_vs_Molpher_DrugEx_compounds.png" width = '80%' height = "50%"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="murcko-scaffold">Murcko scaffold</h3>
+<details>
+  <summary></summary>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary>For information about runs click to expand!</summary>
+<p><font size = "2"><strong> Percentage Table for completed/good runs:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Ended runs</th>
+<th>Percentage</th>
+<th>All running runs</th>
+<th>Not good runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>11 039</td>
+<td>41.3%</td>
+<td>26 732</td>
+<td>15693</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>11 013</td>
+<td>38.3%</td>
+<td>28 730</td>
+<td>17717</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>11 093</td>
+<td>41.5%</td>
+<td>26 732</td>
+<td>15639</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>7 755</td>
+<td>28.3%</td>
+<td>27 389</td>
+<td>19634</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>5 814</td>
+<td>22.8%</td>
+<td>25 439</td>
+<td>19625</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary>For information about time click to expand!</summary>
+<font size = "2"><strong> Table for time for each cluster:</strong></font>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour for good runs</th>
+<th>Times for bad runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>140.3</td>
+<td>5230</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>92.74</td>
+<td>5905</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>95.14</td>
+<td>5213</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>100</td>
+<td>6544</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>103</td>
+<td>6541</td>
+</tr>
+</tbody>
+</table>
+<p><font size = "2"><strong></p>
+<ul>
+<li>Avarage time: 106.236</li>
+<li>Avarage time for bad runs:  20 min</li>
+<li>Avarage time for Molpher running: 5993 hours
+</strong></font></li>
+</ul>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and Murcko scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/murcko_scaffolds/dis/Molpher/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_0</td>
+<td>dis</td>
+<td>murcko</td>
+<td>294,677.0</td>
+<td>1,187,870.0</td>
+<td>10/101</td>
+<td>0.0990099</td>
+<td>0.2480718</td>
+<td>0.0014143</td>
+<td>1,680.0</td>
+</tr>
+<tr>
+<td>Molpher_1</td>
+<td>dis</td>
+<td>murcko</td>
+<td>292,568.0</td>
+<td>1,211,203.0</td>
+<td>11/49</td>
+<td>0.2244898</td>
+<td>0.2415516</td>
+<td>3.3e-05</td>
+<td>40.0</td>
+</tr>
+<tr>
+<td>Molpher_2</td>
+<td>dis</td>
+<td>murcko</td>
+<td>298,912.0</td>
+<td>1,178,796.0</td>
+<td>4/67</td>
+<td>0.0597015</td>
+<td>0.253574</td>
+<td>0.0001383</td>
+<td>163.0</td>
+</tr>
+<tr>
+<td>Molpher_3</td>
+<td>dis</td>
+<td>murcko</td>
+<td>236,433.0</td>
+<td>891,658.0</td>
+<td>21/83</td>
+<td>0.253012</td>
+<td>0.2651611</td>
+<td>0.0048752</td>
+<td>4,347.0</td>
+</tr>
+<tr>
+<td>Molpher_4</td>
+<td>dis</td>
+<td>murcko</td>
+<td>201,025.0</td>
+<td>707,678.0</td>
+<td>21/108</td>
+<td>0.1944444</td>
+<td>0.2840628</td>
+<td>0.0014385</td>
+<td>1,018.0</td>
+</tr>
+<tr>
+<td>Molpher_mean</td>
+<td>dis</td>
+<td>murcko</td>
+<td>264,723.0</td>
+<td>1,035,441.0</td>
+<td>-</td>
+<td>0.1661315</td>
+<td>0.2584842</td>
+<td>0.0015799</td>
+<td>1,449.6</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/Molpher/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<details>
+  <summary><font size = "2"> The most common scaffolds (calculation using active and non-active scaffolds):</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko/Molpher/the_most_common_within_every_clusters_0.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko/Molpher/the_most_common_within_every_clusters_1.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko/Molpher/the_most_common_within_every_clusters_2.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko/Molpher/the_most_common_within_every_clusters_3.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko/Molpher/the_most_common_within_every_clusters_4.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary>For information about time click to expand!</summary>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>32.16</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>34.11</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>35.48</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>30.7</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>32.86</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<font size = "2"><strong> Avarage time: 33.062 </strong></font>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and Murcko scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/murcko_scaffolds/dis/DrugEx/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>type_cluster</td>
+<td>scaffold</td>
+<td>uniq_scaffolds</td>
+<td>set_size</td>
+<td>TUPOR_</td>
+<td>TUPOR</td>
+<td>SESY</td>
+<td>ASER</td>
+<td>tRS</td>
+</tr>
+<tr>
+<td>DrugEx_0</td>
+<td>dis</td>
+<td>murcko</td>
+<td>693,078.0</td>
+<td>1,000,000.0</td>
+<td>14/101</td>
+<td>0.1386139</td>
+<td>0.693078</td>
+<td>0.003156</td>
+<td>3,156.0</td>
+</tr>
+<tr>
+<td>DrugEx_1</td>
+<td>dis</td>
+<td>murcko</td>
+<td>680,537.0</td>
+<td>1,000,000.0</td>
+<td>4/49</td>
+<td>0.0816327</td>
+<td>0.680537</td>
+<td>2.9e-05</td>
+<td>29.0</td>
+</tr>
+<tr>
+<td>DrugEx_2</td>
+<td>dis</td>
+<td>murcko</td>
+<td>780,801.0</td>
+<td>1,000,000.0</td>
+<td>8/67</td>
+<td>0.119403</td>
+<td>0.780801</td>
+<td>0.000216</td>
+<td>216.0</td>
+</tr>
+<tr>
+<td>DrugEx_3</td>
+<td>dis</td>
+<td>murcko</td>
+<td>704,301.0</td>
+<td>1,000,000.0</td>
+<td>14/83</td>
+<td>0.1686747</td>
+<td>0.704301</td>
+<td>0.000588</td>
+<td>588.0</td>
+</tr>
+<tr>
+<td>DrugEx_4</td>
+<td>dis</td>
+<td>murcko</td>
+<td>685,372.0</td>
+<td>1,000,000.0</td>
+<td>33/108</td>
+<td>0.3055556</td>
+<td>0.685372</td>
+<td>0.002277</td>
+<td>2,277.0</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>dis</td>
+<td>murcko</td>
+<td>708,817.8</td>
+<td>1,000,000.0</td>
+<td>-</td>
+<td>0.162776</td>
+<td>0.7088178</td>
+<td>0.0012532</td>
+<td>1,253.2</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/murcko_scaffolds/DrugEx/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<h4 id="3-compare-more-generators-murcko-scaffold">3. Compare more generators Murcko scaffold</h4>
+<p><font size = "3"><strong> The resulting table displays calculated all metrics Murcko type, type of split data is dis:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_mean</td>
+<td>dis</td>
+<td>murcko</td>
+<td>264,723.0</td>
+<td>1,035,441.0</td>
+<td>-</td>
+<td>0.1661315</td>
+<td>0.2584842</td>
+<td>0.0015799</td>
+<td>1,449.6</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>dis</td>
+<td>murcko</td>
+<td>708,817.8</td>
+<td>1,000,000.0</td>
+<td>-</td>
+<td>0.162776</td>
+<td>0.7088178</td>
+<td>0.0012532</td>
+<td>1,253.2</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/murcko_scaffolds/compare/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<h2 id="similarity-split">Similarity split</h2>
+<details>
+  <summary></summary>
+<h3 id="csk-scaffold">CSK scaffold</h3>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary>For information about runs click to expand!</summary>
+<p><font size = "2"><strong> Percentage Table for completed/good runs:</strong></font>
+Change!</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Ended runs</th>
+<th>Percentage</th>
+<th>All running runs</th>
+<th>Not good runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>11 039</td>
+<td>41.3%</td>
+<td>26 732</td>
+<td>15693</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>11 013</td>
+<td>38.3%</td>
+<td>28 730</td>
+<td>17717</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>11 093</td>
+<td>41.5%</td>
+<td>26 732</td>
+<td>15639</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>7 755</td>
+<td>28.3%</td>
+<td>27 389</td>
+<td>19634</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>5 814</td>
+<td>22.8%</td>
+<td>25 439</td>
+<td>19625</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary>For information about time click to expand!</summary>
+<font size = "2"><strong> Table for time for each cluster:</strong></font>
+Change!!!
+| Name | Times in hour for good runs| Times for bad runs| 
+|-------------|-------|---|
+|Cluster_0_dis| 140.3|5230|
+|Cluster_1_dis| 92.74|5905|
+|Cluster_2_dis| 95.14|5213|
+|Cluster_3_dis| 100 |6544|
+|Cluster_4_dis| 103 |6541|
+<p><font size = "2"><strong></p>
+<ul>
+<li>Avarage time: 106.236</li>
+<li>Avarage time for bad runs:  20 min</li>
+<li>Avarage time for Molpher running: 5993 hours
+</strong></font></li>
+</ul>
+</details>
+<p><font size = "3"><strong> Resulting table for similarity split and CSK scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/csk_scaffolds/sim/Molpher/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_0</td>
+<td>sim</td>
+<td>csk</td>
+<td>140,008.0</td>
+<td>1,107,575.0</td>
+<td>32/44</td>
+<td>0.7272727</td>
+<td>0.1264095</td>
+<td>0.0149994</td>
+<td>16,613.0</td>
+</tr>
+<tr>
+<td>Molpher_1</td>
+<td>sim</td>
+<td>csk</td>
+<td>129,729.0</td>
+<td>1,037,819.0</td>
+<td>29/42</td>
+<td>0.6904762</td>
+<td>0.1250016</td>
+<td>0.016657</td>
+<td>17,287.0</td>
+</tr>
+<tr>
+<td>Molpher_2</td>
+<td>sim</td>
+<td>csk</td>
+<td>124,844.0</td>
+<td>989,110.0</td>
+<td>25/40</td>
+<td>0.625</td>
+<td>0.1262185</td>
+<td>0.0113102</td>
+<td>11,187.0</td>
+</tr>
+<tr>
+<td>Molpher_3</td>
+<td>sim</td>
+<td>csk</td>
+<td>118,527.0</td>
+<td>981,771.0</td>
+<td>31/40</td>
+<td>0.775</td>
+<td>0.1207277</td>
+<td>0.0118011</td>
+<td>11,586.0</td>
+</tr>
+<tr>
+<td>Molpher_4</td>
+<td>sim</td>
+<td>csk</td>
+<td>132,680.0</td>
+<td>1,123,432.0</td>
+<td>23/40</td>
+<td>0.575</td>
+<td>0.1181024</td>
+<td>0.0021648</td>
+<td>2,432.0</td>
+</tr>
+<tr>
+<td>Molpher_mean</td>
+<td>sim</td>
+<td>csk</td>
+<td>129,157.6</td>
+<td>1,047,941.4</td>
+<td>-</td>
+<td>0.6785498</td>
+<td>0.1232919</td>
+<td>0.0113865</td>
+<td>11,821.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/Molpher/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<details>
+  <summary><font size = "2"> The most common scaffolds (calculation using active and non-active scaffolds):</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk/Molpher/the_most_common_within_every_clusters_0.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk/Molpher/the_most_common_within_every_clusters_1.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk/Molpher/the_most_common_within_every_clusters_2.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk/Molpher/the_most_common_within_every_clusters_3.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk/Molpher/the_most_common_within_every_clusters_4.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary>For information about time click to expand!</summary>
+Changeee!
+| Name | Times in hour|
+|-------------|-------|
+|Cluster_0_dis| 32.16|
+|Cluster_1_dis| 34.11|
+|Cluster_2_dis| 35.48|
+|Cluster_3_dis| 30.7|
+|Cluster_4_dis| 32.86|
+<br/>
+<font size = "2"><strong> Avarage time: 33.062 </strong></font>
+</details>
+<p><font size = "3"><strong> Resulting table for similarity split and CSK scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/csk_scaffolds/sim/DrugEx/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DrugEx_0</td>
+<td>sim</td>
+<td>csk</td>
+<td>278,465.0</td>
+<td>999,918.0</td>
+<td>33/44</td>
+<td>0.75</td>
+<td>0.2784878</td>
+<td>0.0339388</td>
+<td>33,936.0</td>
+</tr>
+<tr>
+<td>DrugEx_1</td>
+<td>sim</td>
+<td>csk</td>
+<td>320,097.0</td>
+<td>999,891.0</td>
+<td>25/42</td>
+<td>0.5952381</td>
+<td>0.3201319</td>
+<td>0.0227915</td>
+<td>22,789.0</td>
+</tr>
+<tr>
+<td>DrugEx_2</td>
+<td>sim</td>
+<td>csk</td>
+<td>284,268.0</td>
+<td>999,921.0</td>
+<td>23/40</td>
+<td>0.575</td>
+<td>0.2842905</td>
+<td>0.0140661</td>
+<td>14,065.0</td>
+</tr>
+<tr>
+<td>DrugEx_3</td>
+<td>sim</td>
+<td>csk</td>
+<td>411,654.0</td>
+<td>999,865.0</td>
+<td>29/40</td>
+<td>0.725</td>
+<td>0.4117096</td>
+<td>0.0176494</td>
+<td>17,647.0</td>
+</tr>
+<tr>
+<td>DrugEx_4</td>
+<td>sim</td>
+<td>csk</td>
+<td>399,490.0</td>
+<td>999,837.0</td>
+<td>22/40</td>
+<td>0.55</td>
+<td>0.3995551</td>
+<td>0.0015653</td>
+<td>1,565.0</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>sim</td>
+<td>csk</td>
+<td>338,794.8</td>
+<td>999,886.4</td>
+<td>-</td>
+<td>0.6390476</td>
+<td>0.338835</td>
+<td>0.0180022</td>
+<td>18,000.4</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/csk_scaffolds/DrugEx/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<h4 id="3-compare-more-generators-csk-scaffold">3. Compare more generators CSK scaffold</h4>
+<p><font size = "3"><strong> The resulting table displays calculated all metrics CSK type, type of split data is sim:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_mean</td>
+<td>sim</td>
+<td>csk</td>
+<td>129,157.6</td>
+<td>1,047,941.4</td>
+<td>-</td>
+<td>0.6785498</td>
+<td>0.1232919</td>
+<td>0.0113865</td>
+<td>11,821.0</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>sim</td>
+<td>csk</td>
+<td>338,794.8</td>
+<td>999,886.4</td>
+<td>-</td>
+<td>0.6390476</td>
+<td>0.338835</td>
+<td>0.0180022</td>
+<td>18,000.4</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/csk_scaffolds/compare/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="murcko-scaffold">Murcko scaffold</h3>
+<details>
+  <summary></summary>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary>For information about runs click to expand!</summary>
+<p><font size = "2"><strong> Percentage Table for completed/good runs:</strong></font>
+Changeee!</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Ended runs</th>
+<th>Percentage</th>
+<th>All running runs</th>
+<th>Not good runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>11 039</td>
+<td>41.3%</td>
+<td>26 732</td>
+<td>15693</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>11 013</td>
+<td>38.3%</td>
+<td>28 730</td>
+<td>17717</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>11 093</td>
+<td>41.5%</td>
+<td>26 732</td>
+<td>15639</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>7 755</td>
+<td>28.3%</td>
+<td>27 389</td>
+<td>19634</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>5 814</td>
+<td>22.8%</td>
+<td>25 439</td>
+<td>19625</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary>For information about time click to expand!</summary>
+<font size = "2"><strong> Table for time for each cluster:</strong></font>
+Chage!!!!
+| Name | Times in hour for good runs| Times for bad runs| 
+|-------------|-------|---|
+|Cluster_0_dis| 140.3|5230|
+|Cluster_1_dis| 92.74|5905|
+|Cluster_2_dis| 95.14|5213|
+|Cluster_3_dis| 100 |6544|
+|Cluster_4_dis| 103 |6541|
+<p><font size = "2"><strong></p>
+<ul>
+<li>Avarage time: 106.236</li>
+<li>Avarage time for bad runs:  20 min</li>
+<li>Avarage time for Molpher running: 5993 hours
+</strong></font></li>
+</ul>
+</details>
+<p><font size = "3"><strong> Resulting table for similarity split and Murcko scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/murcko_scaffolds/sim/Molpher/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_0</td>
+<td>sim</td>
+<td>murcko</td>
+<td>291,949.0</td>
+<td>1,107,575.0</td>
+<td>48/132</td>
+<td>0.3636364</td>
+<td>0.263593</td>
+<td>0.0052457</td>
+<td>5,810.0</td>
+</tr>
+<tr>
+<td>Molpher_1</td>
+<td>sim</td>
+<td>murcko</td>
+<td>269,063.0</td>
+<td>1,037,830.0</td>
+<td>30/116</td>
+<td>0.2586207</td>
+<td>0.2592554</td>
+<td>0.0083482</td>
+<td>8,664.0</td>
+</tr>
+<tr>
+<td>Molpher_2</td>
+<td>sim</td>
+<td>murcko</td>
+<td>260,028.0</td>
+<td>989,126.0</td>
+<td>14/62</td>
+<td>0.2258065</td>
+<td>0.2628866</td>
+<td>0.0005025</td>
+<td>497.0</td>
+</tr>
+<tr>
+<td>Molpher_3</td>
+<td>sim</td>
+<td>murcko</td>
+<td>249,748.0</td>
+<td>981,771.0</td>
+<td>18/53</td>
+<td>0.3396226</td>
+<td>0.2543852</td>
+<td>0.0024222</td>
+<td>2,378.0</td>
+</tr>
+<tr>
+<td>Molpher_4</td>
+<td>sim</td>
+<td>murcko</td>
+<td>281,697.0</td>
+<td>1,123,493.0</td>
+<td>13/45</td>
+<td>0.2888889</td>
+<td>0.2507332</td>
+<td>0.0003222</td>
+<td>362.0</td>
+</tr>
+<tr>
+<td>Molpher_mean</td>
+<td>sim</td>
+<td>murcko</td>
+<td>270,497.0</td>
+<td>1,047,959.0</td>
+<td>-</td>
+<td>0.295315</td>
+<td>0.2581707</td>
+<td>0.0033681</td>
+<td>3,542.2</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/Molpher/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<details>
+  <summary><font size = "2"> The most common scaffolds (calculation using active and non-active scaffolds):</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko/Molpher/the_most_common_within_every_clusters_0.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko/Molpher/the_most_common_within_every_clusters_1.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko/Molpher/the_most_common_within_every_clusters_2.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko/Molpher/the_most_common_within_every_clusters_3.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko/Molpher/the_most_common_within_every_clusters_4.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary>For information about time click to expand!</summary>
+Change!!!
+| Name | Times in hour|
+|-------------|-------|
+|Cluster_0_dis| 32.16|
+|Cluster_1_dis| 34.11|
+|Cluster_2_dis| 35.48|
+|Cluster_3_dis| 30.7|
+|Cluster_4_dis| 32.86|
+<br/>
+<font size = "2"><strong> Avarage time: 33.062 </strong></font>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and Murcko scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/murcko_scaffolds/sim/DrugEx/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DrugEx_0</td>
+<td>sim</td>
+<td>murcko</td>
+<td>680,845.0</td>
+<td>1,000,000.0</td>
+<td>45/132</td>
+<td>0.3409091</td>
+<td>0.680845</td>
+<td>0.013406</td>
+<td>13,406.0</td>
+</tr>
+<tr>
+<td>DrugEx_1</td>
+<td>sim</td>
+<td>murcko</td>
+<td>703,603.0</td>
+<td>1,000,000.0</td>
+<td>30/116</td>
+<td>0.2586207</td>
+<td>0.703603</td>
+<td>0.003556</td>
+<td>3,556.0</td>
+</tr>
+<tr>
+<td>DrugEx_2</td>
+<td>sim</td>
+<td>murcko</td>
+<td>686,350.0</td>
+<td>1,000,000.0</td>
+<td>14/62</td>
+<td>0.2258065</td>
+<td>0.68635</td>
+<td>0.000338</td>
+<td>338.0</td>
+</tr>
+<tr>
+<td>DrugEx_3</td>
+<td>sim</td>
+<td>murcko</td>
+<td>773,246.0</td>
+<td>1,000,000.0</td>
+<td>20/53</td>
+<td>0.3773585</td>
+<td>0.773246</td>
+<td>0.00068</td>
+<td>680.0</td>
+</tr>
+<tr>
+<td>DrugEx_4</td>
+<td>sim</td>
+<td>murcko</td>
+<td>747,767.0</td>
+<td>1,000,000.0</td>
+<td>7/45</td>
+<td>0.1555556</td>
+<td>0.747767</td>
+<td>4.5e-05</td>
+<td>45.0</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>sim</td>
+<td>murcko</td>
+<td>718,362.2</td>
+<td>1,000,000.0</td>
+<td>-</td>
+<td>0.2716501</td>
+<td>0.7183622</td>
+<td>0.003605</td>
+<td>3,605.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/sim/murcko_scaffolds/DrugEx/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<h4 id="3-compare-more-generators-murcko-scaffold">3. Compare more generators Murcko scaffold</h4>
+<p><font size = "3"><strong> The resulting table displays calculated all metrics Murcko type, type of split data is dis:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_mean</td>
+<td>sim</td>
+<td>murcko</td>
+<td>270,497.0</td>
+<td>1,047,959.0</td>
+<td>-</td>
+<td>0.295315</td>
+<td>0.2581707</td>
+<td>0.0033681</td>
+<td>3,542.2</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>sim</td>
+<td>murcko</td>
+<td>718,362.2</td>
+<td>1,000,000.0</td>
+<td>-</td>
+<td>0.2716501</td>
+<td>0.7183622</td>
+<td>0.003605</td>
+<td>3,605.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/sim/murcko_scaffolds/compare/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<h1 id="protease-leukocyte-elastase">Protease: Leukocyte elastase</h1>
+<details>
+  <summary>Click to expand!</summary>
+<h2 id="dissimilarity-split">Dissimilarity split</h2>
+<details>
+  <summary></summary>
+<h3 id="csk-scaffold">CSK scaffold</h3>
+<details>
+  <summary></summary>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary></summary>
+<p>I ran 135 022 jobs in the cluster.</p>
+<details>
+  <summary>For information about runs click to expand!</summary>
+<p><font size = "2"><strong> Percentage Table for completed/good runs:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Ended runs</th>
+<th>Percentage</th>
+<th>All running runs</th>
+<th>Not good runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>13,170</td>
+<td>43.2%</td>
+<td>30,500</td>
+<td>17,330</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>13,743</td>
+<td>44.6%</td>
+<td>30,800</td>
+<td>17,057</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>12,304</td>
+<td>41.8%</td>
+<td>29,412</td>
+<td>17,107</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary>For information about time click to expand!</summary>
+<font size = "2"><strong> Table for time for each cluster:</strong></font>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour for good runs</th>
+<th>Times for bad runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>140.3</td>
+<td>5230</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>92.74</td>
+<td>5905</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>95.14</td>
+<td>5213</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>100</td>
+<td>6544</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>103</td>
+<td>6541</td>
+</tr>
+</tbody>
+</table>
+<p><font size = "2"><strong></p>
+<ul>
+<li>Avarage time: 106.236</li>
+<li>Avarage time for bad runs:  20 min</li>
+<li>Avarage time for Molpher running: 5993 hours
+</strong></font></li>
+</ul>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and CSK scaffolds:</strong></font></p>
+<p><a href="data/results/Leukocyte_elastase/csk_scaffolds/dis/Molpher/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_0</td>
+<td>dis</td>
+<td>csk</td>
+<td>135,545.0</td>
+<td>1,187,859.0</td>
+<td>16/42</td>
+<td>0.3809524</td>
+<td>0.1141087</td>
+<td>0.0033868</td>
+<td>4,023.0</td>
+</tr>
+<tr>
+<td>Molpher_1</td>
+<td>dis</td>
+<td>csk</td>
+<td>132,077.0</td>
+<td>1,211,203.0</td>
+<td>18/36</td>
+<td>0.5</td>
+<td>0.1090461</td>
+<td>0.0013293</td>
+<td>1,610.0</td>
+</tr>
+<tr>
+<td>Molpher_2</td>
+<td>dis</td>
+<td>csk</td>
+<td>137,303.0</td>
+<td>1,178,785.0</td>
+<td>12/42</td>
+<td>0.2857143</td>
+<td>0.1164784</td>
+<td>0.0002333</td>
+<td>275.0</td>
+</tr>
+<tr>
+<td>Molpher_3</td>
+<td>dis</td>
+<td>csk</td>
+<td>116,723.0</td>
+<td>891,650.0</td>
+<td>23/40</td>
+<td>0.575</td>
+<td>0.1309067</td>
+<td>0.0077059</td>
+<td>6,871.0</td>
+</tr>
+<tr>
+<td>Molpher_4</td>
+<td>dis</td>
+<td>csk</td>
+<td>106,618.0</td>
+<td>707,678.0</td>
+<td>38/46</td>
+<td>0.826087</td>
+<td>0.1506589</td>
+<td>0.0107182</td>
+<td>7,585.0</td>
+</tr>
+<tr>
+<td>Molpher_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>125,653.2</td>
+<td>1,035,435.0</td>
+<td>-</td>
+<td>0.5135507</td>
+<td>0.1242398</td>
+<td>0.0046747</td>
+<td>4,072.8</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/Molpher/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+<details>
+  <summary><font size = "2"> The most common scaffolds (calculation using active and non-active scaffolds):</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_0.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_1.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_2.png" width = '120%' height = "120%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_3.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk/Molpher/the_most_common_within_every_clusters_4.png" width = '120%' height = "120%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary></summary>
+<details>
+  <summary>For information about time click to expand!</summary>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>32.16</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>34.11</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>35.48</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>30.7</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>32.86</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<font size = "2"><strong> Avarage time: 33.062 </strong></font>
+</details>
+<p><font size = "3"><strong> Resulting table for dissimilarity split and CSK scaffolds:</strong></font></p>
+<p><a href="data/results/Glucocorticoid_receptor/csk_scaffolds/dis/DrugEx/df_all_clusters_with_mean.html">HTML file with results</a></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DrugEx_0</td>
+<td>dis</td>
+<td>csk</td>
+<td>135,545.0</td>
+<td>1,187,859.0</td>
+<td>16/42</td>
+<td>0.3809524</td>
+<td>0.1141087</td>
+<td>0.0033868</td>
+<td>4,023.0</td>
+</tr>
+<tr>
+<td>DrugEx_1</td>
+<td>dis</td>
+<td>csk</td>
+<td>132,077.0</td>
+<td>1,211,203.0</td>
+<td>18/36</td>
+<td>0.5</td>
+<td>0.1090461</td>
+<td>0.0013293</td>
+<td>1,610.0</td>
+</tr>
+<tr>
+<td>DrugEx_2</td>
+<td>dis</td>
+<td>csk</td>
+<td>137,303.0</td>
+<td>1,178,785.0</td>
+<td>12/42</td>
+<td>0.2857143</td>
+<td>0.1164784</td>
+<td>0.0002333</td>
+<td>275.0</td>
+</tr>
+<tr>
+<td>DrugEx_3</td>
+<td>dis</td>
+<td>csk</td>
+<td>116,723.0</td>
+<td>891,650.0</td>
+<td>23/40</td>
+<td>0.575</td>
+<td>0.1309067</td>
+<td>0.0077059</td>
+<td>6,871.0</td>
+</tr>
+<tr>
+<td>DrugEx_4</td>
+<td>dis</td>
+<td>csk</td>
+<td>106,618.0</td>
+<td>707,678.0</td>
+<td>38/46</td>
+<td>0.826087</td>
+<td>0.1506589</td>
+<td>0.0107182</td>
+<td>7,585.0</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>125,653.2</td>
+<td>1,035,435.0</td>
+<td>-</td>
+<td>0.5135507</td>
+<td>0.1242398</td>
+<td>0.0046747</td>
+<td>4,072.8</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/scatter_plot_metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+<details>
+  <summary><font size = "2"> Two the most common active scaffolds with count:</font></summary>
+<table>
+<thead>
+<tr>
+<th>cluster 0:</th>
+<th>cluster 1:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_0.png" width = '500%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_1.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 2:</th>
+<th>cluster 3:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_2.png" width = '150%' height = "80%"></td>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_3.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>cluster 4:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/the_most_common_scaffolds/Glucocorticoid_receptor/dis/csk_scaffolds/DrugEx/the_most_common_4.png" width = '150%' height = "80%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+<br/>
+</details>
+<h4 id="3-compare-more-generators-csk-scaffold">3. Compare more generators CSK scaffold</h4>
+<details>
+  <summary></summary>
+<p><font size = "3"><strong> The resulting table displays calculated all metrics CSK type, type of split data is dis:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type_cluster</th>
+<th>scaffold</th>
+<th>uniq_scaffolds</th>
+<th>set_size</th>
+<th>TUPOR_</th>
+<th>TUPOR</th>
+<th>SESY</th>
+<th>ASER</th>
+<th>tRS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molpher_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>125,653.2</td>
+<td>1,035,435.0</td>
+<td>-</td>
+<td>0.5135507</td>
+<td>0.1242398</td>
+<td>0.0046747</td>
+<td>4,072.8</td>
+</tr>
+<tr>
+<td>DrugEx_mean</td>
+<td>dis</td>
+<td>csk</td>
+<td>322,088.0</td>
+<td>999,912.0</td>
+<td>-</td>
+<td>0.5554555</td>
+<td>0.3221176</td>
+<td>0.0127084</td>
+<td>12,707.4</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_TUPOR_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_SESY_to_ASER.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_TUPOR_to_SESY.png" width = '80%' height = "50%"></td>
+</tr>
+<tr>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+<td><img src = "img/plots/Glucocorticoid_receptor/dis/csk_scaffolds/compare/metrics_compare_dual_uniq_scaffolds_to_tRS.png" width = '80%' height = "50%"></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<h3 id="murcko-scaffold">Murcko scaffold</h3>
+<details>
+  <summary></summary>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary></summary>
+<details>
+  <summary>For information about runs click to expand!</summary>
+<p><font size = "2"><strong> Percentage Table for completed/good runs:</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Ended runs</th>
+<th>Percentage</th>
+<th>All running runs</th>
+<th>Not good runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>13,169</td>
+<td>43.3%</td>
+<td>30,450</td>
+<td>17,281</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>13,743</td>
+<td>44.6%</td>
+<td>30,800</td>
+<td>17,057</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>12,305</td>
+<td>41.8%</td>
+<td>29,412</td>
+<td>17,107</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>14,113</td>
+<td>49.7%</td>
+<td>28,392</td>
+<td>14,279</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+  <summary>For information about time click to expand!</summary>
+<font size = "2"><strong> Table for time for each cluster:</strong></font>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Times in hour for good runs</th>
+<th>Times for bad runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster_0_dis</td>
+<td>140.3</td>
+<td>5230</td>
+</tr>
+<tr>
+<td>Cluster_1_dis</td>
+<td>92.74</td>
+<td>5905</td>
+</tr>
+<tr>
+<td>Cluster_2_dis</td>
+<td>95.14</td>
+<td>5213</td>
+</tr>
+<tr>
+<td>Cluster_3_dis</td>
+<td>100</td>
+<td>6544</td>
+</tr>
+<tr>
+<td>Cluster_4_dis</td>
+<td>103</td>
+<td>6541</td>
+</tr>
+</tbody>
+</table>
+<p><font size = "2"><strong></p>
+<ul>
+<li>Avarage time: 106.236</li>
+<li>Avarage time for bad runs:  20 min</li>
+<li>Avarage time for Molpher running: 5993 hours
+</strong></font></li>
+</ul>
+</details>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary></summary>
+</details>
+<h4 id="3-compare-more-generators-murcko-scaffold">3. Compare more generators Murcko scaffold</h4>
+<details>
+  <summary></summary>
+</details>
+</details>
+</details>
+<h2 id="similarity-split">Similarity split</h2>
+<details>
+  <summary></summary>
+<h3 id="csk-scaffold">CSK scaffold</h3>
+<details>
+  <summary></summary>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary></summary>
+</details>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary></summary>
+</details>
+<h4 id="3-compare-more-generators-csk-scaffold">3. Compare more generators CSK scaffold</h4>
+<details>
+  <summary></summary>
+</details>
+</details>
+<h3 id="murcko-scaffold">Murcko scaffold</h3>
+<details>
+  <summary></summary>
+<h4 id="1-molpher">1. Molpher</h4>
+<details>
+  <summary></summary>
+</details>
+<h4 id="2-drugex">2. DrugEx</h4>
+<details>
+  <summary></summary>
+</details>
+<h4 id="3-compare-more-generators-murcko-scaffold">3. Compare more generators Murcko scaffold</h4>
+<details>
+  <summary></summary>
+</details>
+</details>
+</details>
+</details>
+</body>
+</html>
