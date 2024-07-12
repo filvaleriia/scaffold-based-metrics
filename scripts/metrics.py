@@ -155,15 +155,17 @@ class Metrics:
         try:
             tupor = df[2].value_counts()[1]/len(df)
             tupor_text = f"{df[2].value_counts()[1]}/{len(df)}"
+            tupor_new = tupor/ss
         except:
             tupor = 0
             tupor_text = f"{0}/{len(df)}"
+            tupor_new = 0
 
 
         tRS = df[1].sum()
 
         '''Return individual metrics and next add to pandas data frame'''
-        return self.type_cluster , ns,ss,tupor_text,tupor,sesy,aser,tRS
+        return self.type_cluster , ns,ss,tupor_text,tupor,tupor_new,sesy,aser,tRS
 
 
     def save_function(self):
@@ -189,7 +191,7 @@ class Metrics:
 
         res = self.main_function_return(self.output_set, self.recall_set)
 
-        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','TUPOR_','TUPOR',\
+        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','TUPOR_','TUPOR','TUPOR_new',\
                                  'SESY','ASER', 'tRS'])
         results.loc[len(results)] = res
         results.insert(loc=0, column='name', value=[f"{self.generator_name}_{self.number_of_calculation}"])
