@@ -8,6 +8,9 @@ import lzma
 import csv
 import sys
 import os
+from multiprocessing import Process
+from multiprocessing import Pool
+from itertools import product
 
 from rdkit import Chem
 from rdkit.Chem.Draw import IPythonConsole
@@ -30,44 +33,7 @@ import matplotlib.pyplot as plt
 
 
 
-def convert_to_scaffold_(df, scaffold_type):
-    '''Function wich is convert compounds to scaffold, two options of scaffold is SCK scaffold and Murcko scaffold'''
-    a = []
-    print("Convert_")
-    if scaffold_type == 'csk':
-        for x in range(len(df)):
-            try:
-                smiles = Chem.MolToSmiles(Chem.MolFromSmiles(df.loc[x][0]))
-            
-                try:
-                    if MurckoScaffoldSmiles(Chem.MolToSmiles(MakeScaffoldGeneric(Chem.MolFromSmiles(smiles)))) != '':
-                        a.append(MurckoScaffoldSmiles(\
-                                             Chem.MolToSmiles(MakeScaffoldGeneric\
-                                           (Chem.MolFromSmiles(smiles)))))
-                except:
-                    print("Faild to create scaffold_csk")
-                    print("Index",x)
-                    print(df.loc[x][0])
-                    print(smiles)
 
-            except:
-                print("Faild to create mol")
-                print("Index",x)
-                print(df.loc[x][0])
-                print(smiles)
-    elif scaffold_type == 'murcko':
-        for x in range(len(df)):
-            smiles = Chem.MolToSmiles(Chem.MolFromSmiles(df.loc[x][0]))
-            try:
-                a.append(MurckoScaffoldSmiles(Chem.MolToSmiles(Chem.MolFromSmiles(smiles))))
-                
-            except:
-                print("Faild to create scaffold_csk")
-                print("Index",x)
-                print(smiles)
-
-    dff = pd.DataFrame(data = a)
-    return dff
 
 
 def add_columns_same_like_input_function(df_generated, test_set):
@@ -103,6 +69,38 @@ class Metrics:
         self.save_options = save_options
         self.receptor = receptor
         self.results = pd.DataFrame()
+
+    def convert_to_scaffold_(self, x):
+
+        '''Function wich is convert compounds to scaffold, two options of scaffold is SCK scaffold and Murcko scaffold'''
+
+        #print("Convert_")
+        if self.scaffold_type == 'csk':
+
+            try:
+                smiles = Chem.MolToSmiles(Chem.MolFromSmiles(x))
+
+                try:
+                    if MurckoScaffoldSmiles(Chem.MolToSmiles(MakeScaffoldGeneric(Chem.MolFromSmiles(smiles)))) != '':
+                        return MurckoScaffoldSmiles(\
+                                             Chem.MolToSmiles(MakeScaffoldGeneric\
+                                           (Chem.MolFromSmiles(smiles))))
+                except:
+                    pass
+            except:
+                pass
+
+        elif self.scaffold_type == 'murcko':
+            try:
+                smiles = Chem.MolToSmiles(Chem.MolFromSmiles(x))
+                try:
+                    if MurckoScaffoldSmiles(Chem.MolToSmiles(Chem.MolFromSmiles(smiles))) != '':
+                            return MurckoScaffoldSmiles(Chem.MolToSmiles(Chem.MolFromSmiles(smiles)))
+
+                except:
+                    pass
+            except:
+                pass
     
 
     def load(self,filepath_output_set, filepath_recall_set):
@@ -133,8 +131,20 @@ class Metrics:
         '''The main function for calculation all metrics'''
 
         '''Convert all metrics to scaffold. Possible scaffolds: csk and murcko'''
-        self.recall_set_scaffolds = convert_to_scaffold_(recall_set,self.scaffold_type)
-        self.output_set_scaffolds = convert_to_scaffold_(output_set, self.scaffold_type)
+
+        with Pool() as pool:
+            results = pool.map(self.convert_to_scaffold_, recall_set[0])
+        
+        self.recall_set_scaffolds = pd.DataFrame(data = results)
+        self.recall_set_scaffolds = self.recall_set_scaffolds.dropna()
+        print("Len recall: ", len(self.recall_set_scaffolds))
+
+        with Pool() as pool:
+            results_output = pool.map(self.convert_to_scaffold_,output_set[0])
+        
+        self.output_set_scaffolds = pd.DataFrame(data = results_output)
+        self.output_set_scaffolds = self.output_set_scaffolds.dropna()
+        print("Len outoput: ", len(self.output_set_scaffolds))
 
         '''Create unique dataset and save to constructor like self.unique_output_set and self.unique_recall_set'''
         self.unique_output_set, self.unique_recall_set = self.scaffolds_unique(self.output_set_scaffolds, self.recall_set_scaffolds)
@@ -155,23 +165,25 @@ class Metrics:
         try:
             tupor = df[2].value_counts()[1]/len(df)
             tupor_text = f"{df[2].value_counts()[1]}/{len(df)}"
-            tupor_new = tupor/ss
+            tupor_unique = (df[2].value_counts()[1]/ns)/(len(df)/len(recall_set))
+            tupor_set = (df[2].value_counts()[1]/ss)/(len(df)/len(recall_set))
         except:
             tupor = 0
             tupor_text = f"{0}/{len(df)}"
-            tupor_new = 0
+            tupor_unique = 0
+            tupor_set = 0
 
 
         tRS = df[1].sum()
 
         '''Return individual metrics and next add to pandas data frame'''
-        return self.type_cluster , ns,ss,tupor_text,tupor,tupor_new,sesy,aser,tRS
+        return self.type_cluster , ns,ss,tupor_text,tupor,tupor_unique,tupor_set, sesy,aser,tRS
 
 
     def save_function(self):
         '''Save function to folder 'data/results'. If the folder doesn't exist -> the folder will be created'''
         print("Save")
-        path_to_folder = f'data/results_new/{self.receptor}'
+        path_to_folder = f'data/results/{self.receptor}'
         
         '''Check if folder is existing'''
         if not os.path.exists(f"{path_to_folder}/{self.scaffold_type}_scaffolds/{self.type_cluster}/{self.generator_name}"):
@@ -191,7 +203,7 @@ class Metrics:
 
         res = self.main_function_return(self.output_set, self.recall_set)
 
-        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','TUPOR_','TUPOR','TUPOR_new',\
+        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','TUPOR_','TUPOR','TUPOR_unique', 'TUPOR_set',\
                                  'SESY','ASER', 'tRS'])
         results.loc[len(results)] = res
         results.insert(loc=0, column='name', value=[f"{self.generator_name}_{self.number_of_calculation}"])
