@@ -1,3 +1,4 @@
-name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR_,TUPOR,SESY,ASER,tRS
-Molpher_mean,dis,csk,125653.2,1035435.0,-,0.5135507,0.1242398,0.0046747,4072.8
-DrugEx_mean,dis,csk,322088.0,999912.0,-,0.5554555,0.3221176,0.0127084,12707.4
+name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,tRS
+Molpher_mean,dis,csk,100068.0,823977.8,0.5166824,0.0011424,0.0001575,0.1248147,0.0045887,3041.2
+addcarbon_mean,dis,csk,856.8,1000000.0,0.0334034,0.0073645,6.4e-06,0.0008568,0.001827,1827.0
+GB_GA_mean,dis,csk,2710.0,9998.0,0.197592,0.0152328,0.0040486,0.2710566,0.0108207,108.2

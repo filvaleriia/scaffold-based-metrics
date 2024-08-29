@@ -1,3 +1,4 @@
-name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR_,TUPOR,SESY,ASER,tRS
-Molpher_mean,sim,murcko,270497.0,1047959.0,-,0.295315,0.2581707,0.0033681,3542.2
-DrugEx_mean,sim,murcko,718362.2,1000000.0,-,0.2716501,0.7183622,0.003605,3605.0
+name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,tRS
+Molpher_mean,sim,murcko,215633.0,836455.8,0.3211869,0.0002755,7.18e-05,0.2578516,0.004712,3916.6
+addcarbon_mean,sim,murcko,2971.2,1000000.0,0.0502969,0.0020476,6e-06,0.0029712,0.0033116,3311.6
+GB_GA_mean,sim,murcko,4382.0,10000.0,0.0887923,0.0038982,0.0016638,0.4382,0.0088,88.0

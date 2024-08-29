@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR_,TUPOR,SESY,ASER,tRS
-Molpher_mean,sim,csk,129157.6,1047941.4,-,0.6785498,0.1232919,0.0113865,11821.0
+name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR_,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,tRS
+Molpher_mean,sim,csk,103807.6,836443.4,-,0.69861,0.0013302,0.0001676,0.1241568,0.0130255,10759.2
