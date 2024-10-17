@@ -24,16 +24,18 @@ st.markdown(
 
     |             | |
     |-------------|-|
-    |▪ True positive recall all (TUPOR) – | $$TUPOR = {{NAS} \over UAS}$$ |
-    |▪ Set scaffold yield (SESY) –| $$SESY = {{NS} \over SS}$$ |
-    |▪ Absolute set scaffold recall (ASER) –| $$ASER = {{tRS} \over SS}$$ |
+    |▪ True positive recall all (TUPOR) – | $$TUPOR = {{UASo} \over UASr}$$ |
+    |▪ True positive recall all (TUPORunique) – | $$TUPORunique = {{UASo} \over (USo * UASr)}$$ |
+    |▪ Set scaffold yield (SESY) –| $$SESY = {{USo} \over SSo}$$ |
+    |▪ Absolute set scaffold recall (ASER) –| $$ASER = {{CwASo} \over SSo}$$ |
 
 
-    * tRS - count of active compounds which have active scaffold in cOS
-    * SS - cOS size 
-    * NS - unique new scaffolds in cOS
-    * NAS - unique active scaffolds in cRS
-    * UAS - unique scaffods in cRS 
+    * UASo - unique active scaffolds in cOS
+    * USo - unique scaffolds in cOS (all unique scaffold = unique active scaffolds + unique other scaffolds)
+    * UASr - unique active scaffolds in cRS
+    * SSo - cOS size 
+    * CwASo - Compounds with Active Scaffol in cOS 
+
 
  
 """

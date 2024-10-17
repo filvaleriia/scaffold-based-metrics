@@ -16,6 +16,8 @@ st.sidebar.markdown('**GB_GA**')
 st.sidebar.markdown('**Add carbone**')
 st.sidebar.markdown('**VAE generator**')
 
+pd.options.display.float_format = '{:12.5e}'.format
+
 for type_scaffold in ['csk', 'murcko']:
 
     st.header(f'Results for Glucocorticoid receptor used {type_scaffold} scaffold')
@@ -31,7 +33,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator} ")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     if type_scaffold == 'csk': #showing only once
@@ -45,13 +47,38 @@ for type_scaffold in ['csk', 'murcko']:
             df = pd.read_csv(f"../data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
             st.dataframe(data = df)
 
+    #DrugEx_GT-----------------------------------------------------------
+    generator = 'DrugEx_GT'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    st.dataframe(data = df)
+
+    #DrugEx_GT_1-----------------------------------------------------------
+    generator = 'DrugEx_GT_1'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    st.dataframe(data = df)
+
+    #DrugEx_RNN-----------------------------------------------------------
+    generator = 'DrugEx_RNN'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    st.dataframe(data = df)
+
+
 
     #GB_GA-----------------------------------------------------------
     generator = 'GB_GA'
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -60,7 +87,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -69,7 +96,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### Compare mean of metrics value between different generators")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
     st.dataframe(data = df)
 
 
@@ -85,7 +112,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator} ")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     if type_scaffold == 'csk': #showing only once
@@ -98,13 +125,37 @@ for type_scaffold in ['csk', 'murcko']:
             df = pd.read_csv(f"../data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
             st.dataframe(data = df)
 
+    #DrugEx_GT-----------------------------------------------------------
+    generator = 'DrugEx_GT'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    st.dataframe(data = df)
+
+    #DrugEx_GT_1-----------------------------------------------------------
+    generator = 'DrugEx_GT_1'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    st.dataframe(data = df)
+
+    #DrugEx_RNN-----------------------------------------------------------
+    generator = 'DrugEx_RNN'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    st.dataframe(data = df)
+
 
     #GB_GA-----------------------------------------------------------
     generator = 'GB_GA'
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -113,7 +164,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     #compare_differen_results-----------------------------------------------------------
@@ -121,6 +172,6 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### Compare mean of metrics value between different generators")
 
-    df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
+    df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
     st.dataframe(data = df)
 

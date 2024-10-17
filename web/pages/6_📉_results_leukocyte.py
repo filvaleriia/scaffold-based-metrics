@@ -28,7 +28,7 @@ receptor = 'Leukocyte_elastase'
 type_scaffold = 'csk'
 type_split = 'dis'
 
-df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
 st.dataframe(data = df)
 
 st.markdown(
@@ -52,7 +52,7 @@ if st.checkbox('Show statistics about runs for dissimilarity split'):
 # SIMILARITY SPLIT
 type_split = 'sim'
 
-df = pd.read_csv(f"../data/results_new/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
 st.dataframe(data = df)
 
 if st.checkbox('Show statistics about runs for similarity split'):
