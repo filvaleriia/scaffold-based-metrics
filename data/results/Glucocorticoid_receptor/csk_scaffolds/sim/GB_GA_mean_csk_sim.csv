@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR_,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,tRS
-GB_GA_mean,sim,csk,2704.6,9999.6,-,0.3933103,0.0312394,0.0080288,0.270471,0.0220802,220.8
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,CwASo
+GB_GA_mean,sim,csk,2704.6,9999.6,-,0.3933103,1.481861,0.3933229,0.270471,0.0220802,220.8

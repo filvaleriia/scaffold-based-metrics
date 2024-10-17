@@ -8509,7 +8509,6 @@ C1=CCC(n2ncc3c2C=C2CCCC(C(Cc4ccccc4)c4ccccc4)C2C3)=C1
 c1ccc(C(Cc2cnoc2)Oc2ccc3c(cnn3-c3ccccc3)c2)cc1
 O=C1OCc2cc(Nc3cc(-c4ccc5c(c4)CCN=N5)c4[nH]ccc4c3)ccc21
 c1ccc(CCCCc2ccccc2)cc1
-""
 C1=C(n2ncc3cc(-c4ccccc4Cc4ccccc4)ccc32)CCCC1
 C1=CCCC(c2ccc3c(cnn3C(CNc3ccc4ccccc4n3)Oc3ccccc3)c2)=C1
 c1cc(-c2ccc3c(c2)CCCN3)c2[nH]ccc2c1

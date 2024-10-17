@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,uniq_scaffolds,set_size,TUPOR_,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,tRS
-addcarbon_4,sim,murcko,3270,1000000,3/40,0.075,0.0009633027522935781,3.1500000000000003e-06,0.00327,0.003239,3239
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,TUPOR_unique,TUPOR_set,SESY,ASER,CwASo
+addcarbon_4,sim,murcko,3270,1000000,3/40,0.075,0.22935779816513763,0.00075,0.00327,0.003239,3239
