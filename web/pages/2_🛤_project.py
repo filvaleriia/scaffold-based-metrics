@@ -19,7 +19,7 @@ st.markdown(
 )
 
 
-st.image('/workspaces/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
+st.image('/Portfolio/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
 
 st.subheader('Split into Input Set and Recall Set:')
 st.markdown(
