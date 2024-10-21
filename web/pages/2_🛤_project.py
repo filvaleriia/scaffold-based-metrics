@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from PIL import Image
 
 st.set_page_config(
     page_title="Project",
@@ -17,6 +18,11 @@ st.markdown(
 """
 )
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6a73c7b (Commit a web page changes)
 st.image('/workspaces/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
 
 st.subheader('Split into Input Set and Recall Set:')
@@ -27,7 +33,7 @@ st.markdown(
 """
 )
 
-st.image('../img/dissimilarity_split.jpg', caption='Dissimilarity split')
+st.image('/workspaces/recall_metrics/img/dissimilarity_split.jpg', caption='Dissimilarity split')
 
 st.markdown(
     """
@@ -35,5 +41,5 @@ We divided all data for 5 clusters, and then for "similarity" part we select 20%
 """
 )
 
-st.image('../img/similarity_split.jpg', caption='Similarity split')
+st.image('/workspaces/recall_metrics/img/similarity_split.jpg', caption='Similarity split')
 

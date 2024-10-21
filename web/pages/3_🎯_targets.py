@@ -18,30 +18,30 @@ st.markdown(
     The glucocorticoid receptor (GR) is a type of nuclear receptor that binds glucocorticoids, which are a class of steroid hormones. This receptor plays a critical role in regulating a wide range of physiological processes, including metabolism, immune response, and stress response
 """
 )
-st.image('../img/glucocorticoid_receptor.png', caption='Glucocorticoid_receptor')
+st.image('/workspaces/recall_metrics/img/glucocorticoid_receptor.png', caption='Glucocorticoid_receptor')
 
 
 if st.checkbox('Show unique scaffolds in each cluster for Glucocorticoid receptor'):
     st.subheader('Unique CSK scaffolds for each cluster')
     for x in range(5):
-        st.image(f'../img/clusters/scaffolds_in_cluster_{x}_Glucocorticoid_receptor.png', caption=f'CSK scaffolds for cluster {x}')
+        st.image(f'/workspaces/recall_metrics/img/clusters/scaffolds_in_cluster_{x}_Glucocorticoid_receptor.png', caption=f'CSK scaffolds for cluster {x}')
 
 if st.checkbox('Show statistics about clusters for Glucocorticoid_receptor'):
     st.subheader('Mean value between clusters')
     st.markdown("This statistic created in the follow step: create all combinations between one csk in one cluster and another csk in the second clusters, then I calculated Morgan Fingerprints with R=10, nBits = 2048, beacuse this statistics based on CSK scaffolds, so for better representation bits")
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/mean_value_between_clusters.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/mean_value_between_clusters.csv")
     st.dataframe(data = df)
 
     st.subheader('Min value between clusters')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/min_value_between_clusters.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/min_value_between_clusters.csv")
     st.dataframe(data = df)
 
     st.subheader('Max value between clusters')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/max_value_between_clusters.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/max_value_between_clusters.csv")
     st.dataframe(data = df)
 
     st.subheader('Statistic inside clusters: mean, min, max values')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/statistic_incide_cluster.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/statistic_incide_cluster.csv")
     st.dataframe(data = df)
 
 #Leukocyte_elastase-----------------------------------------------------------------------------------------------
@@ -53,30 +53,30 @@ st.markdown(
 """
 )
 
-st.image('../img/leukocyte_elastase.png', caption='Dissimilarity split')
+st.image('/workspaces/recall_metrics/img/leukocyte_elastase.png', caption='Dissimilarity split')
 
 
 if st.checkbox('Show unique scaffolds in each cluster for Leukocute elastase'):
     st.subheader('Unique CSK scaffolds for each cluster')
     for x in range(5):
-        st.image(f'../img/clusters/scaffolds_in_cluster_{x}_Leukocyte_elastase.png', caption=f'CSK scaffolds for cluster {x}')
+        st.image(f'/workspaces/recall_metrics/img/clusters/scaffolds_in_cluster_{x}_Leukocyte_elastase.png', caption=f'CSK scaffolds for cluster {x}')
 
 if st.checkbox('Show statistics about clusters for Lukocyte elastase'):
 
     st.markdown("This statistic created in the follow step: create all combinations between one csk in one cluster and another csk in the second clusters, then I calculated Morgan Fingerprints with R=10, nBits = 2048, beacuse this statistics based on CSK scaffolds, so for better representation bits")
 
     st.subheader('Mean value between clusters')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/mean_value_between_clusters.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/mean_value_between_clusters.csv")
     st.dataframe(data = df)
 
     st.subheader('Min value between clusters')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/min_value_between_clusters.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/min_value_between_clusters.csv")
     st.dataframe(data = df)
 
     st.subheader('Max value between clusters')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/max_value_between_clusters.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/max_value_between_clusters.csv")
     st.dataframe(data = df)
 
     st.subheader('Statistic inside clusters: mean, min, max values')
-    df = pd.read_csv(f"../data/information_about_clusters/{receptor}/statistic_incide_cluster.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_clusters/{receptor}/statistic_incide_cluster.csv")
     st.dataframe(data = df)

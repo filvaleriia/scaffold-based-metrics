@@ -24,4 +24,4 @@ st.markdown(
 """
 )
 
-st.image('../img/generators/Molpher.png', caption='Glucocorticoid_receptor')
+st.image('/workspaces/recall_metrics/img/generators/Molpher.png', caption='Glucocorticoid_receptor')
