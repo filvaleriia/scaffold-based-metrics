@@ -18,6 +18,12 @@ st.sidebar.markdown('**VAE generator**')
 
 pd.options.display.float_format = '{:12.5e}'.format
 
+web = True
+if web == True:
+    current_directory = '/mount/src'
+else:
+    current_directory = '/workspaces'
+
 for type_scaffold in ['csk', 'murcko']:
 
     st.header(f'Results for Glucocorticoid receptor used {type_scaffold} scaffold')
@@ -33,7 +39,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator} ")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     if type_scaffold == 'csk': #showing only once
@@ -44,7 +50,7 @@ for type_scaffold in ['csk', 'murcko']:
             Statistic about good runs for informations, but because I made one mistakes with input data I did some Ad hoc changes. So this statistic it's only for showing how many runs is ended for GLucocorticoid receptor
             """
             )
-            df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
+            df = pd.read_csv(f"{current_directory}/recall_metrics/data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
             st.dataframe(data = df)
 
     #DrugEx_GT-----------------------------------------------------------
@@ -52,7 +58,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     #DrugEx_GT_1-----------------------------------------------------------
@@ -60,7 +66,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     #DrugEx_RNN-----------------------------------------------------------
@@ -68,7 +74,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -78,7 +84,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -87,7 +93,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -96,7 +102,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### Compare mean of metrics value between different generators")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
     st.dataframe(data = df)
 
 
@@ -112,7 +118,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator} ")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     if type_scaffold == 'csk': #showing only once
@@ -122,7 +128,7 @@ for type_scaffold in ['csk', 'murcko']:
             Statistic about good runs for informations, but because I made one mistakes with input data I did some Ad hoc changes. So this statistic it's only for showing how many runs is ended for GLucocorticoid receptor
             """
             )
-            df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
+            df = pd.read_csv(f"{current_directory}/recall_metrics/data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
             st.dataframe(data = df)
 
     #DrugEx_GT-----------------------------------------------------------
@@ -130,7 +136,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     #DrugEx_GT_1-----------------------------------------------------------
@@ -138,7 +144,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     #DrugEx_RNN-----------------------------------------------------------
@@ -146,7 +152,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -155,7 +161,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
 
@@ -164,7 +170,7 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### {generator}")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
     st.dataframe(data = df)
 
     #compare_differen_results-----------------------------------------------------------
@@ -172,6 +178,6 @@ for type_scaffold in ['csk', 'murcko']:
 
     st.markdown(f"#### Compare mean of metrics value between different generators")
 
-    df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
     st.dataframe(data = df)
 

@@ -10,10 +10,12 @@ st.set_page_config(
 )
 st.sidebar.header("Project")
 
-current_directory = os.getcwd()
 
-# Zobrazení aktuálního adresáře ve Streamlit aplikaci
-st.write(f"Current working directory: {current_directory}")
+web = True
+if web == True:
+    current_directory = '/mount/src'
+else:
+    current_directory = '/workspaces'
 
 
 st.title('Project')
@@ -24,14 +26,8 @@ st.markdown(
 """
 )
 
-uploaded_file = st.file_uploader(
-    "../img/main_steps.jpg", accept_multiple_files=False)
-if uploaded_file is not None:
-    file_name = uploaded_file
-else:
-    file_name = "DatabaseSample.xlsx"
 
-st.image('/mount/src/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
+st.image(f'{current_directory}/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
 
 st.subheader('Split into Input Set and Recall Set:')
 st.markdown(
@@ -41,7 +37,7 @@ st.markdown(
 """
 )
 
-st.image('/workspaces/recall_metrics/img/dissimilarity_split.jpg', caption='Dissimilarity split')
+st.image(f'{current_directory}/recall_metrics/img/dissimilarity_split.jpg', caption='Dissimilarity split')
 
 st.markdown(
     """
@@ -49,5 +45,5 @@ We divided all data for 5 clusters, and then for "similarity" part we select 20%
 """
 )
 
-st.image('/workspaces/recall_metrics/img/similarity_split.jpg', caption='Similarity split')
+st.image(f'{current_directory}/recall_metrics/img/similarity_split.jpg', caption='Similarity split')
 

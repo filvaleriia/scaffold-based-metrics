@@ -8,6 +8,12 @@ st.set_page_config(
 )
 st.sidebar.header("Molecular generators:")
 
+web = True
+if web == True:
+    current_directory = '/mount/src'
+else:
+    current_directory = '/workspaces'
+
 st.sidebar.markdown('**Molpher**')
 st.sidebar.markdown('**DrugEx GT**')
 st.sidebar.markdown('**DrugEx RNN**')
@@ -24,4 +30,4 @@ st.markdown(
 """
 )
 
-st.image('/workspaces/recall_metrics/img/generators/Molpher.png', caption='Glucocorticoid_receptor')
+st.image(f'{current_directory}recall_metrics/img/generators/Molpher.png', caption='Glucocorticoid_receptor')
