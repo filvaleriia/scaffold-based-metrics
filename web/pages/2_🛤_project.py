@@ -1,12 +1,21 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from PIL import Image
+import os
 
 st.set_page_config(
     page_title="Project",
     page_icon="🛤",
 )
 st.sidebar.header("Project")
+
+
+web = True
+if web == True:
+    current_directory = '/mount/src'
+else:
+    current_directory = '/workspaces'
 
 
 st.title('Project')
@@ -17,7 +26,8 @@ st.markdown(
 """
 )
 
-st.image('/workspaces/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
+
+st.image(f'{current_directory}/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
 
 st.subheader('Split into Input Set and Recall Set:')
 st.markdown(
@@ -27,7 +37,7 @@ st.markdown(
 """
 )
 
-st.image('../img/dissimilarity_split.jpg', caption='Dissimilarity split')
+st.image(f'{current_directory}/recall_metrics/img/dissimilarity_split.jpg', caption='Dissimilarity split')
 
 st.markdown(
     """
@@ -35,5 +45,5 @@ We divided all data for 5 clusters, and then for "similarity" part we select 20%
 """
 )
 
-st.image('../img/similarity_split.jpg', caption='Similarity split')
+st.image(f'{current_directory}/recall_metrics/img/similarity_split.jpg', caption='Similarity split')
 
