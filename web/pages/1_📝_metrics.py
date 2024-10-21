@@ -24,8 +24,8 @@ st.markdown(
 
     |             | |
     |-------------|-|
-    |▪ True positive recall all (TUPOR) – | $$TUPOR = {{UASo} \over UASr}$$ |
-    |▪ True positive recall all (TUPORunique) – | $$TUPORunique = {{UASo} \over (USo * UASr)}$$ |
+    |▪ True positive recall all (TUPOR_old) – | $$TUPOR_old = {{UASo} \over UASr}$$ |
+    |▪ True positive recall all (TUPOR) – | $$TUPOR = {{UASo*10000} \over (USo * UASr)}$$ |
     |▪ Set scaffold yield (SESY) –| $$SESY = {{USo} \over SSo}$$ |
     |▪ Absolute set scaffold recall (ASER) –| $$ASER = {{CwASo} \over SSo}$$ |
 
