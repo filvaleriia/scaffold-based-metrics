@@ -30,4 +30,4 @@ st.markdown(
 """
 )
 
-st.image(f'{current_directory}recall_metrics/img/generators/Molpher.png', caption='Glucocorticoid_receptor')
+st.image(f'{current_directory}/recall_metrics/img/generators/Molpher.png', caption='Glucocorticoid_receptor')
