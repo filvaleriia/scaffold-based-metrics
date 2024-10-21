@@ -2,12 +2,18 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from PIL import Image
+import os
 
 st.set_page_config(
     page_title="Project",
     page_icon="🛤",
 )
 st.sidebar.header("Project")
+
+current_directory = os.getcwd()
+
+# Zobrazení aktuálního adresáře ve Streamlit aplikaci
+st.write(f"Current working directory: {current_directory}")
 
 
 st.title('Project')
@@ -18,6 +24,12 @@ st.markdown(
 """
 )
 
+uploaded_file = st.file_uploader(
+    "../img/main_steps.jpg", accept_multiple_files=False)
+if uploaded_file is not None:
+    file_name = uploaded_file
+else:
+    file_name = "DatabaseSample.xlsx"
 
 st.image('/mount/src/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
 
