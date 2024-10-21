@@ -28,7 +28,7 @@ receptor = 'Leukocyte_elastase'
 type_scaffold = 'csk'
 type_split = 'dis'
 
-df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
 st.dataframe(data = df)
 
 st.markdown(
@@ -43,7 +43,7 @@ if st.checkbox('Show statistics about runs for dissimilarity split'):
     Statistic about good runs for informations, but because I made one mistakes with input data I did some Ad hoc changes. So this statistic it's only for showing how many runs is ended for GLucocorticoid receptor
     """
     )
-    df = pd.read_csv(f"../data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
     st.dataframe(data = df)
 
 
@@ -52,7 +52,7 @@ if st.checkbox('Show statistics about runs for dissimilarity split'):
 # SIMILARITY SPLIT
 type_split = 'sim'
 
-df = pd.read_csv(f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+df = pd.read_csv(f"/workspaces/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
 st.dataframe(data = df)
 
 if st.checkbox('Show statistics about runs for similarity split'):
@@ -61,5 +61,5 @@ if st.checkbox('Show statistics about runs for similarity split'):
     Statistic about good runs for informations, but because I made one mistakes with input data I did some Ad hoc changes. So this statistic it's only for showing how many runs is ended for GLucocorticoid receptor
     """
     )
-    df = pd.read_csv(f"../data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
+    df = pd.read_csv(f"/workspaces/recall_metrics/data/information_about_runs/{receptor}/{type_split}/information_about_runs.csv")
     st.dataframe(data = df)
