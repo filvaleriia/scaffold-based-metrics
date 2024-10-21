@@ -132,19 +132,19 @@ class Metrics:
 
         '''Convert all metrics to scaffold. Possible scaffolds: csk and murcko'''
 
-        with Pool() as pool:
+        with Pool(processes=16) as pool:
             results = pool.map(self.convert_to_scaffold_, recall_set[0])
         
         self.recall_set_scaffolds = pd.DataFrame(data = results)
         self.recall_set_scaffolds = self.recall_set_scaffolds.dropna()
-        print("Len recall: ", len(self.recall_set_scaffolds))
+        #print("Len recall: ", len(self.recall_set_scaffolds))
 
-        with Pool() as pool:
+        with Pool(processes=16) as pool:
             results_output = pool.map(self.convert_to_scaffold_,output_set[0])
         
         self.output_set_scaffolds = pd.DataFrame(data = results_output)
         self.output_set_scaffolds = self.output_set_scaffolds.dropna()
-        print("Len outoput: ", len(self.output_set_scaffolds))
+        #print("Len outoput: ", len(self.output_set_scaffolds))
 
         '''Create unique dataset and save to constructor like self.unique_output_set and self.unique_recall_set'''
         self.unique_output_set, self.unique_recall_set = self.scaffolds_unique(self.output_set_scaffolds, self.recall_set_scaffolds)
@@ -153,20 +153,28 @@ class Metrics:
         df = add_columns_same_like_input_function(self.output_set_scaffolds, self.unique_recall_set)
 
         '''Calculate the individual metrics'''
-        ns = len(self.unique_output_set)
-        ss = len(self.output_set_scaffolds)
-        sesy = ns/ss
-        aser = df[1].sum()/ss
+        USo = len(self.unique_output_set)
+        SSo = len(self.output_set_scaffolds)
+        SESY = USo/SSo
+        CwASo = df[1].sum()
+        ASER = CwASo/SSo
+
+        try:
+            UASo = df[2].value_counts()[1]
+        except:
+            UASo = 0
+        
+        UASr = len(df)
 
         self.count_metrics = df.copy()
         self.count_metrics.columns = ['unique_scaffold_recall','count_of_occurance', 'uniq_occurance']
 
         '''If generator doesn't generate unique active compounds the number of TUPOR'''
         try:
-            tupor = df[2].value_counts()[1]/len(df)
-            tupor_text = f"{df[2].value_counts()[1]}/{len(df)}"
-            tupor_unique = (df[2].value_counts()[1]/ns)/(len(df)/len(recall_set))
-            tupor_set = (df[2].value_counts()[1]/ss)/(len(df)/len(recall_set))
+            tupor = UASo/UASr
+            tupor_text = f"{UASo}/{UASr}"
+            tupor_unique = UASo*10000/(UASr*USo)          
+            tupor_set = UASo*10000/(UASr*SSo)
         except:
             tupor = 0
             tupor_text = f"{0}/{len(df)}"
@@ -174,10 +182,8 @@ class Metrics:
             tupor_set = 0
 
 
-        tRS = df[1].sum()
-
         '''Return individual metrics and next add to pandas data frame'''
-        return self.type_cluster , ns,ss,tupor_text,tupor,tupor_unique,tupor_set, sesy,aser,tRS
+        return self.type_cluster , USo, SSo,tupor_text,tupor,tupor_unique,tupor_set, SESY,ASER,CwASo
 
 
     def save_function(self):
@@ -203,8 +209,8 @@ class Metrics:
 
         res = self.main_function_return(self.output_set, self.recall_set)
 
-        results = pd.DataFrame(columns = ['type_cluster','uniq_scaffolds','set_size','TUPOR_','TUPOR','TUPOR_unique', 'TUPOR_set',\
-                                 'SESY','ASER', 'tRS'])
+        results = pd.DataFrame(columns = ['type_cluster','USo','SSo','TUPOR_','TUPOR','TUPOR_unique', 'TUPOR_set',\
+                                 'SESY','ASER', 'CwASo'])
         results.loc[len(results)] = res
         results.insert(loc=0, column='name', value=[f"{self.generator_name}_{self.number_of_calculation}"])
         results.insert(loc=2, column='scaffold', value=[self.scaffold_type])
