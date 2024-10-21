@@ -18,11 +18,7 @@ st.markdown(
 """
 )
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 6a73c7b (Commit a web page changes)
 st.image('/workspaces/recall_metrics/img/main_steps.jpg', caption='Main steps of this project')
 
 st.subheader('Split into Input Set and Recall Set:')
