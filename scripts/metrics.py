@@ -158,6 +158,7 @@ class Metrics:
         SESY = USo/SSo
         CwASo = df[1].sum()
         ASER = CwASo/SSo
+        SSr = len(recall_set)
 
         try:
             UASo = df[2].value_counts()[1]
@@ -165,6 +166,11 @@ class Metrics:
             UASo = 0
         
         UASr = len(df)
+
+        print("UASo: ", UASo)
+        print("SSr: ", SSr)
+        print("SSo: ", SSo)
+        print("UASr: ", UASr)
 
         self.count_metrics = df.copy()
         self.count_metrics.columns = ['unique_scaffold_recall','count_of_occurance', 'uniq_occurance']
@@ -174,16 +180,26 @@ class Metrics:
             tupor = UASo/UASr
             tupor_text = f"{UASo}/{UASr}"
             tupor_unique = UASo*10000/(UASr*USo)          
-            tupor_set = UASo*10000/(UASr*SSo)
+            #tupor_set = UASo*10000/(UASr*SSo)
+            
+            #tupor_set = UASo*SSo/(UASr*USo)
+            tupor_1 = (UASo/SSo) / (UASr/SSr)
+            tupor_2 = (UASo*(USo/SSo)) / (UASr*(UASr/SSr))
+            print("TUPOR_1: ", tupor_1)
+            print("TUPOR_2: ", tupor_2)
+            
         except:
             tupor = 0
             tupor_text = f"{0}/{len(df)}"
             tupor_unique = 0
             tupor_set = 0
 
+            tupor_1 = 0
+            tupor_2 = 0
+
 
         '''Return individual metrics and next add to pandas data frame'''
-        return self.type_cluster , USo, SSo,tupor_text,tupor,tupor_unique,tupor_set, SESY,ASER,CwASo
+        return self.type_cluster , USo, SSo,tupor_text,tupor,tupor_unique,tupor_1, tupor_2, SESY,ASER,CwASo
 
 
     def save_function(self):
@@ -209,7 +225,7 @@ class Metrics:
 
         res = self.main_function_return(self.output_set, self.recall_set)
 
-        results = pd.DataFrame(columns = ['type_cluster','USo','SSo','TUPOR_','TUPOR','TUPOR_unique', 'TUPOR_set',\
+        results = pd.DataFrame(columns = ['type_cluster','USo','SSo','TUPOR_','TUPOR','TUPOR_unique', 'TUPOR_1', 'TUPOR_2',\
                                  'SESY','ASER', 'CwASo'])
         results.loc[len(results)] = res
         results.insert(loc=0, column='name', value=[f"{self.generator_name}_{self.number_of_calculation}"])
