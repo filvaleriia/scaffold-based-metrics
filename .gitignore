@@ -1,2 +1,5 @@
+
+data/output_sets/*
+
 scripts/__pycache__/
 /__pycache__/
