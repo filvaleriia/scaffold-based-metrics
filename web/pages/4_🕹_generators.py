@@ -19,7 +19,7 @@ st.sidebar.markdown('**DrugEx GT**')
 st.sidebar.markdown('**DrugEx RNN**')
 st.sidebar.markdown('**REINVENT**')
 st.sidebar.markdown('**GB_GA**')
-st.sidebar.markdown('**Add carbone**')
+st.sidebar.markdown('**Add carbon**')
 st.sidebar.markdown('**VAE generator**')
 
 st.subheader('Molpher:')

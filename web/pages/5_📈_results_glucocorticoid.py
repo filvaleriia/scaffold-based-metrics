@@ -181,3 +181,10 @@ for type_scaffold in ['csk', 'murcko']:
     df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
     st.dataframe(data = df)
 
+
+st.markdown(
+    """
+    t-SNE for dis 0
+"""
+)
+st.image(f'{current_directory}/recall_metrics/hist_all_dis_0.png', caption='Glucocorticoid_receptor')
