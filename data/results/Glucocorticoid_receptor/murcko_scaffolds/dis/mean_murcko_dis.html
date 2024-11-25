@@ -8,7 +8,8 @@
       <th>SSo</th>
       <th>TUPOR</th>
       <th>TUPOR_unique</th>
-      <th>TUPOR_set</th>
+      <th>TUPOR_1</th>
+      <th>TUPOR_2</th>
       <th>SESY</th>
       <th>ASER</th>
       <th>CwASo</th>
@@ -23,49 +24,11 @@
       <td>823,982.2</td>
       <td>0.156880</td>
       <td>0.007940</td>
-      <td>0.002091</td>
+      <td>0.000045</td>
+      <td>0.105255</td>
       <td>0.258177</td>
       <td>0.001551</td>
       <td>1,085.6</td>
-    </tr>
-    <tr>
-      <td>DrugEx_GT_mean</td>
-      <td>dis</td>
-      <td>murcko</td>
-      <td>532,549.2</td>
-      <td>891,966.0</td>
-      <td>0.387182</td>
-      <td>0.007231</td>
-      <td>0.004338</td>
-      <td>0.597031</td>
-      <td>0.002124</td>
-      <td>1,890.0</td>
-    </tr>
-    <tr>
-      <td>DrugEx_GT_1_mean</td>
-      <td>dis</td>
-      <td>murcko</td>
-      <td>554,504.8</td>
-      <td>908,333.0</td>
-      <td>0.333769</td>
-      <td>0.006043</td>
-      <td>0.003681</td>
-      <td>0.610324</td>
-      <td>0.002054</td>
-      <td>1,851.2</td>
-    </tr>
-    <tr>
-      <td>DrugEx_RNN_mean</td>
-      <td>dis</td>
-      <td>murcko</td>
-      <td>432,204.4</td>
-      <td>869,210.0</td>
-      <td>0.326728</td>
-      <td>0.007511</td>
-      <td>0.003764</td>
-      <td>0.496892</td>
-      <td>0.000954</td>
-      <td>827.6</td>
     </tr>
     <tr>
       <td>REINVENT_mean</td>
@@ -75,23 +38,151 @@
       <td>964,674.4</td>
       <td>0.108451</td>
       <td>0.001758</td>
-      <td>0.001124</td>
+      <td>0.000024</td>
+      <td>0.184892</td>
       <td>0.643241</td>
       <td>0.000209</td>
       <td>202.2</td>
     </tr>
     <tr>
-      <td>addcarbon_mean</td>
+      <td>DrugEx_GT_mean</td>
       <td>dis</td>
       <td>murcko</td>
-      <td>2,969.0</td>
-      <td>1,000,000.0</td>
-      <td>0.015227</td>
-      <td>0.047313</td>
-      <td>0.000152</td>
-      <td>0.002969</td>
-      <td>0.000724</td>
-      <td>724.0</td>
+      <td>532,549.2</td>
+      <td>891,966.0</td>
+      <td>0.387182</td>
+      <td>0.007231</td>
+      <td>0.000085</td>
+      <td>0.595785</td>
+      <td>0.597031</td>
+      <td>0.002124</td>
+      <td>1,890.0</td>
+    </tr>
+    <tr>
+      <td>DrugEx_GT_epsilon_0.1_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>385,041.6</td>
+      <td>809,261.8</td>
+      <td>0.158625</td>
+      <td>0.004260</td>
+      <td>0.000037</td>
+      <td>0.193795</td>
+      <td>0.474578</td>
+      <td>0.001079</td>
+      <td>878.8</td>
+    </tr>
+    <tr>
+      <td>DrugEx_GT_epsilon_0.6_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>557,492.4</td>
+      <td>907,555.6</td>
+      <td>0.296619</td>
+      <td>0.005280</td>
+      <td>0.000061</td>
+      <td>0.469091</td>
+      <td>0.614171</td>
+      <td>0.001839</td>
+      <td>1,675.8</td>
+    </tr>
+    <tr>
+      <td>DrugEx_RNN_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>432,258.8</td>
+      <td>869,407.2</td>
+      <td>0.326728</td>
+      <td>0.007510</td>
+      <td>0.000070</td>
+      <td>0.421991</td>
+      <td>0.496844</td>
+      <td>0.000954</td>
+      <td>828.0</td>
+    </tr>
+    <tr>
+      <td>DrugEx_RNN_epsilon_0.1_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>311,659.6</td>
+      <td>797,900.0</td>
+      <td>0.034344</td>
+      <td>0.001122</td>
+      <td>0.000008</td>
+      <td>0.033618</td>
+      <td>0.391444</td>
+      <td>0.000623</td>
+      <td>483.2</td>
+    </tr>
+    <tr>
+      <td>DrugEx_RNN_epsilon_0.6_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>379,205.6</td>
+      <td>891,538.6</td>
+      <td>0.293510</td>
+      <td>0.007909</td>
+      <td>0.000060</td>
+      <td>0.325242</td>
+      <td>0.425100</td>
+      <td>0.001479</td>
+      <td>1,313.4</td>
+    </tr>
+    <tr>
+      <td>DrugEx_epsilon_0.1_short_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>6,521.0</td>
+      <td>9,987.0</td>
+      <td>0.023037</td>
+      <td>0.035676</td>
+      <td>0.000568</td>
+      <td>0.042852</td>
+      <td>0.652974</td>
+      <td>0.000981</td>
+      <td>9.8</td>
+    </tr>
+    <tr>
+      <td>DrugEx_epsilon_0.2_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>7,028.2</td>
+      <td>9,990.8</td>
+      <td>0.068120</td>
+      <td>0.099989</td>
+      <td>0.001255</td>
+      <td>0.120406</td>
+      <td>0.703452</td>
+      <td>0.013768</td>
+      <td>137.6</td>
+    </tr>
+    <tr>
+      <td>DrugEx_epsilon_0.4_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>7,537.6</td>
+      <td>9,988.2</td>
+      <td>0.068823</td>
+      <td>0.093036</td>
+      <td>0.001474</td>
+      <td>0.139429</td>
+      <td>0.754670</td>
+      <td>0.002244</td>
+      <td>22.4</td>
+    </tr>
+    <tr>
+      <td>DrugEx_epsilon_0.6_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>7,211.2</td>
+      <td>9,994.2</td>
+      <td>0.071424</td>
+      <td>0.098789</td>
+      <td>0.001438</td>
+      <td>0.139325</td>
+      <td>0.721535</td>
+      <td>0.001941</td>
+      <td>19.4</td>
     </tr>
     <tr>
       <td>GB_GA_mean</td>
@@ -101,10 +192,25 @@
       <td>9,998.0</td>
       <td>0.039801</td>
       <td>0.089322</td>
-      <td>0.039808</td>
+      <td>0.000820</td>
+      <td>0.050558</td>
       <td>0.441652</td>
       <td>0.003020</td>
       <td>30.2</td>
+    </tr>
+    <tr>
+      <td>addcarbon_mean</td>
+      <td>dis</td>
+      <td>murcko</td>
+      <td>2,969.0</td>
+      <td>1,000,000.0</td>
+      <td>0.015227</td>
+      <td>0.047313</td>
+      <td>0.000003</td>
+      <td>0.000126</td>
+      <td>0.002969</td>
+      <td>0.000724</td>
+      <td>724.0</td>
     </tr>
   </tbody>
 </table>

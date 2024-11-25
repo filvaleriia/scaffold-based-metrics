@@ -44,7 +44,7 @@ O=C1CNc2c(cc(-c3cccc4nccn34)c3c2CCC3)C1,0,0
 O=C1CNc2c(cc(-c3cccn4nccc34)c3c2CCC3)C1,0,0
 O=C1CNc2c(cc(-c3cccc4nncn34)c3c2CCC3)C1,0,0
 O=C1CNc2c(cc(-c3cncc4nccn34)c3c2CCC3)C1,0,0
-O=C1C=C2CCC3C(=C2CC1)C(c1ccccc1)CC1CCCC13,806,1
+O=C1C=C2CCC3C(=C2CC1)C(c1ccccc1)CC1CCCC13,807,1
 O=C1CCC2=C3C(c4ccccc4)CC4CCCC4C3CCC2C1,1,1
 O=C1C=C2CCC3C4CCCC4CC(c4ccccc4)C3C2CC1,21,1
 O=C1C=C2CCC3C(=C2CC1)C(C1CCCCC1)CC1CCCC13,0,0
@@ -70,7 +70,7 @@ c1cc(-c2ccc3c(c2)CCCN3)c2[nH]ccc2c1,9,1
 c1cc(-c2ccc3c(c2)CCCN3)c2cc[nH]c2c1,1,1
 N=C1CCNc2ccc(-c3cccc4cc[nH]c34)cc21,0,0
 O=C1CNc2ccc(-c3cccc4cc[nH]c34)cc2C1,2,1
-c1ccc(COc2ccc3c(cnn3-c3ccccc3)c2)cc1,904,1
+c1ccc(COc2ccc3c(cnn3-c3ccccc3)c2)cc1,906,1
 O=c1ccc(-n2ncc3cc(OCc4ccccc4)ccc32)c[nH]1,7,1
 O=c1[nH]cccc1-n1ncc2cc(OCc3ccccc3)ccc21,0,0
 c1ccc(-n2ncc3cc(OCc4cccnc4)ccc32)cc1,69,1
@@ -97,10 +97,10 @@ O=C(CCC1CCOc2ccccc21)Nc1ccc2c(=O)oncc2c1,1,1
 O=C(NCCCNC(=O)c1cnn(-c2ccccc2)c1)c1ccccc1,36,1
 O=C(NCCCNS(=O)(=O)c1ccccc1)c1cnn(-c2ccccc2)c1,0,0
 O=C(NCCCNC(=O)c1cnn(-c2ccccc2)c1)c1cccnc1,0,0
-c1ccc(CCCCc2cc3ccccc3[nH]2)cc1,112,1
+c1ccc(CCCCc2cc3ccccc3[nH]2)cc1,113,1
 c1ccc(CCCCc2cc3cnncc3[nH]2)cc1,5,1
 c1ccc(CCCCc2cc3cnccc3[nH]2)cc1,30,1
-c1ccc(CCCCc2cc3ccncc3[nH]2)cc1,184,1
+c1ccc(CCCCc2cc3ccncc3[nH]2)cc1,186,1
 c1ccc(CCCCc2cc3cncnc3[nH]2)cc1,7,1
 c1ccc(CCCCc2cc3ncncc3[nH]2)cc1,24,1
 c1ccc(CCCCc2cc3nnccc3[nH]2)cc1,2,1

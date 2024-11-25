@@ -23,7 +23,7 @@ O=C(NCCCC1(c2ccccc2)CCC1)c1cnn(-c2ccccc2)c1,0,0
 C1=C2CCCCC2Cc2cnn(-c3ccccc3)c21,20,1
 c1ccc(-c2c[nH]c3ccccc23)cc1,237,1
 c1ccc(-n2ncc3ccccc32)cc1,819,1
-C1=C2CCCC(Cc3ccccc3)C2Cc2cnn(-c3ccccc3)c21,20,1
+C1=C2CCCC(Cc3ccccc3)C2Cc2cnn(-c3ccccc3)c21,21,1
 C1=C2CCCC(Cc3cccnc3)C2Cc2cnn(-c3ccccc3)c21,1,1
 C1=C2CCCC(Cc3ccncc3)C2Cc2cnn(-c3ccccc3)c21,1,1
 O=C(NC1CCOC1)c1cccc(-n2ncc3cc(OCc4ccc5c(c4)OCCO5)ccc32)c1,1,1

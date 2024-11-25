@@ -18,7 +18,7 @@ O=C(Nc1ccc2c(=O)oncc2c1)C(CCc1ccccc1)Cc1ccccc1,2,1
 O=C1CC(C(=O)N2CCCC(OC(=O)c3ccc(OC(CNC(=O)C4CCCO4)c4ccc(C5CC5)cc4)cc3)C2)CO1,0,0
 O=C(NCC(Oc1ccc2c(cnn2-c2ccccc2)c1)c1ccccc1)c1ncon1,0,0
 O=C(NCC(Oc1ccc2c(cnn2-c2ccccc2)c1)c1ccccc1)c1nnco1,0,0
-O=C(Nc1cccnc1)c1ccc2c(c1)CCC1C2CCC2CCCC21,32,1
+O=C(Nc1cccnc1)c1ccc2c(c1)CCC1C2CCC2CCCC21,33,1
 O=C(c1cccc(-n2ncc3cc(OCc4ccc5c(c4)OCCO5)ccc32)c1)N1CCCC1,3,1
 O=C(c1cccc(-n2ncc3cc(OCc4ccc5c(c4)OCOC5)ccc32)c1)N1CCCC1,4,1
 O=C(NCCCNC(=O)c1cnn(-c2ccccc2)c1)c1ccc2[nH]ccc2c1,0,0
