@@ -43,6 +43,10 @@ for type_scaffold in ['csk', 'murcko']:
     df = df[['name','scaffold', 'USo', 'SSo', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
     st.dataframe(data = df)
 
+    if st.checkbox(f'Show vizualization of results dissimilarity split {type_scaffold} scaffold'):
+                
+        st.image(f'{current_directory}/recall_metrics/img/results/radar_results_{type_scaffold}_{type_split}.png')
+
 
     #MOLPHER--------------------------------------------------------
     generator = 'Molpher'
@@ -73,8 +77,17 @@ for type_scaffold in ['csk', 'murcko']:
     df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
     st.dataframe(data = df)
 
-    #DrugEx_GT_1-----------------------------------------------------------
-    generator = 'DrugEx_GT_1'
+    #DrugEx_GT_epsilon_0.1-----------------------------------------------------------
+    generator = 'DrugEx_GT_epsilon_0.1'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    st.dataframe(data = df)
+
+    #DrugEx_GT_epsilon_0.6-----------------------------------------------------------
+    generator = 'DrugEx_GT_epsilon_0.6'
 
     st.markdown(f"#### {generator}")
 
@@ -84,6 +97,24 @@ for type_scaffold in ['csk', 'murcko']:
 
     #DrugEx_RNN-----------------------------------------------------------
     generator = 'DrugEx_RNN'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    st.dataframe(data = df)
+
+    #DrugEx_RNN_epsilon_0.1-----------------------------------------------------------
+    generator = 'DrugEx_RNN_epsilon_0.1'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    st.dataframe(data = df)
+
+    #DrugEx_RNN_epsilon_0.6-----------------------------------------------------------
+    generator = 'DrugEx_RNN_epsilon_0.6'
 
     st.markdown(f"#### {generator}")
 
@@ -123,13 +154,17 @@ for type_scaffold in ['csk', 'murcko']:
     type_split = 'sim'
 
     #compare_differen_results-----------------------------------------------------------
-    #pustit vsehcny metriky na similarity!
 
     st.markdown(f"#### Compare mean of metrics value between different generators")
 
     df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/mean_{type_scaffold}_{type_split}.csv")
-    #df = df[['name','scaffold', 'USo', 'SSo', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    df = df[['name','scaffold', 'USo', 'SSo', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
     st.dataframe(data = df)
+
+    if st.checkbox(f'Show vizualization of results similarity split {type_scaffold} scaffold'):
+                
+        st.image(f'{current_directory}/recall_metrics/img/results/radar_results_{type_scaffold}_{type_split}.png')
+
 
     #MOLPHER
     generator = 'Molpher'
@@ -159,8 +194,17 @@ for type_scaffold in ['csk', 'murcko']:
     df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
     st.dataframe(data = df)
 
-    #DrugEx_GT_1-----------------------------------------------------------
-    generator = 'DrugEx_GT_1'
+    #DrugEx_GT_epsilon_0.1-----------------------------------------------------------
+    generator = 'DrugEx_GT_epsilon_0.1'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    st.dataframe(data = df)
+
+    #DrugEx_GT_epsilon_0.6-----------------------------------------------------------
+    generator = 'DrugEx_GT_epsilon_0.6'
 
     st.markdown(f"#### {generator}")
 
@@ -170,6 +214,24 @@ for type_scaffold in ['csk', 'murcko']:
 
     #DrugEx_RNN-----------------------------------------------------------
     generator = 'DrugEx_RNN'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    st.dataframe(data = df)
+
+    #DrugEx_RNN_epsilon_0.1-----------------------------------------------------------
+    generator = 'DrugEx_RNN_epsilon_0.1'
+
+    st.markdown(f"#### {generator}")
+
+    df = pd.read_csv(f"{current_directory}/recall_metrics/data/results/{receptor}/{type_scaffold}_scaffolds/{type_split}/{generator}/df_all_clusters_with_mean.csv")
+    df = df[['name','scaffold', 'USo', 'SSo','TUPOR_', 'TUPOR', 'TUPOR_2', 'SESY', 'ASER', 'CwASo']]
+    st.dataframe(data = df)
+
+    #DrugEx_RNN_epsilon_0.6-----------------------------------------------------------
+    generator = 'DrugEx_RNN_epsilon_0.6'
 
     st.markdown(f"#### {generator}")
 
@@ -199,10 +261,44 @@ for type_scaffold in ['csk', 'murcko']:
 
     
 
-st.markdown(f"##t-SNE vizualization for each generator")
-st.markdown(
-    """
-    t-SNE for dis 0
-"""
-)
-st.image(f'{current_directory}/recall_metrics/hist_all_dis_0.png', caption='Glucocorticoid_receptor')
+st.markdown(f"## t-SNE vizualization for each generator")
+for number in [0,1,2,3,4]:
+    if st.checkbox(f'Show t-SNE vizualization for dissimilarity split {number}'):
+        type_cluster = 'dis'
+        
+        for generator in ['addcarbon', 'Molpher', 'REINVENT', 'GB_GA', 'DrugEx_GT',
+                          'DrugEx_GT_epsilon_0.1', 'DrugEx_GT_epsilon_0.6', 'DrugEx_RNN',
+                          'DrugEx_RNN_epsilon_0.1', 'DrugEx_RNN_epsilon_0.6']:
+            st.image(f'{current_directory}/recall_metrics/img/t-SNE/{generator}/t_sne_gen_is_rs_{type_cluster}_{number}.png')
+
+for number in [0,1,2,3,4]:
+    if st.checkbox(f'Show t-SNE vizualization for similarity split {number}'):
+        type_cluster = 'sim'
+        
+        for generator in ['addcarbon', 'Molpher', 'REINVENT', 'GB_GA', 'DrugEx_GT',
+                          'DrugEx_GT_epsilon_0.1', 'DrugEx_GT_epsilon_0.6', 'DrugEx_RNN',
+                          'DrugEx_RNN_epsilon_0.1', 'DrugEx_RNN_epsilon_0.6']:
+            st.image(f'{current_directory}/recall_metrics/img/t-SNE/{generator}/t_sne_gen_is_rs_{type_cluster}_{number}.png')
+
+st.markdown(f"## t-SNE vizualization for DrugEx with different epsilon")
+for number in [0,1,2,3,4]:
+    if st.checkbox(f'Show t-SNE vizualization DrugEx for dissimilarity split {number}'):
+        type_cluster = 'dis'
+        
+        for generator in ['DrugEx_epsilon_0.01', 'DrugEx_epsilon_0.1', 'DrugEx_epsilon_0.2',
+                            'DrugEx_epsilon_0.4', 'DrugEx_epsilon_0.6']:
+            st.image(f'{current_directory}/recall_metrics/img/t-SNE/DrugEx/{generator}_{type_cluster}_{number}.png')
+
+for number in [0,1,2,3,4]:
+    if st.checkbox(f'Show t-SNE vizualization DrugEx for similarity split {number}'):
+        type_cluster = 'sim'
+        
+        for generator in ['DrugEx_epsilon_0.01', 'DrugEx_epsilon_0.1', 'DrugEx_epsilon_0.2',
+                            'DrugEx_epsilon_0.4', 'DrugEx_epsilon_0.6']:
+            st.image(f'{current_directory}/recall_metrics/img/t-SNE/DrugEx/{generator}_{type_cluster}_{number}.png')
+
+st.markdown(f"## Percentage statistics of compounds with desirable properties")
+if st.checkbox(f'Show statistics'):
+    st.image(f'{current_directory}/recall_metrics/img/sa_qsprpred/QSPRPRED_SA_1.png', caption='Molpher,REINVENT,addcarbon')
+    st.image(f'{current_directory}/recall_metrics/img/sa_qsprpred/QSPRPRED_SA_2.png', caption='DrugEx_GT')
+    st.image(f'{current_directory}/recall_metrics/img/sa_qsprpred/QSPRPRED_SA_3.png', caption='DrugEx_RNN')
