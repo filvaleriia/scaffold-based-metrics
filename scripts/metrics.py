@@ -171,6 +171,8 @@ class Metrics:
         print("SSr: ", SSr)
         print("SSo: ", SSo)
         print("UASr: ", UASr)
+        print("USo:", USo)
+        print("CwASo: ", CwASo)
 
         self.count_metrics = df.copy()
         self.count_metrics.columns = ['unique_scaffold_recall','count_of_occurance', 'uniq_occurance']
@@ -198,8 +200,22 @@ class Metrics:
             tupor_2 = 0
 
 
+        other_scaffolds = [scf for scf in self.unique_output_set if scf not in self.recall_set_scaffolds[0].tolist()]
+        print("----------")
+        print(len(other_scaffolds))
+        metric_1 = UASo/len(other_scaffolds)
+
+        #print(UASo/len(other_scaffolds))
+
+        other_scaffolds = [scf for scf in self.output_set_scaffolds[0].tolist() if scf not in self.recall_set_scaffolds[0].tolist()]
+        print("----------")
+        print(len(other_scaffolds))
+
+        metric_2 =CwASo/len(other_scaffolds)
+
+
         '''Return individual metrics and next add to pandas data frame'''
-        return self.type_cluster , USo, SSo,tupor_text,tupor,tupor_unique,tupor_1, tupor_2, SESY,ASER,CwASo
+        return self.type_cluster , USo, SSo,tupor_text,tupor,tupor_unique,tupor_1, tupor_2, SESY,ASER,CwASo, metric_1, metric_2
 
 
     def save_function(self):
@@ -226,7 +242,7 @@ class Metrics:
         res = self.main_function_return(self.output_set, self.recall_set)
 
         results = pd.DataFrame(columns = ['type_cluster','USo','SSo','TUPOR_','TUPOR','TUPOR_unique', 'TUPOR_1', 'TUPOR_2',\
-                                 'SESY','ASER', 'CwASo'])
+                                 'SESY','ASER', 'CwASo', 'metric_1', 'metric_2'])
         results.loc[len(results)] = res
         results.insert(loc=0, column='name', value=[f"{self.generator_name}_{self.number_of_calculation}"])
         results.insert(loc=2, column='scaffold', value=[self.scaffold_type])
