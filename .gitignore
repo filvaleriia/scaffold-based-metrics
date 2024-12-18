@@ -1,4 +1,4 @@
-
+cluster/
 data/output_sets/*
 
 scripts/__pycache__/
