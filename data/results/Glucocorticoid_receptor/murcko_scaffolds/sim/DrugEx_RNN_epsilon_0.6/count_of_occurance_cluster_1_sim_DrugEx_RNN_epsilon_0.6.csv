@@ -1,5 +1,5 @@
 unique_scaffold_recall,count_of_occurance,uniq_occurance
-c1ccc(CN2Cc3ccccc3-c3ccccc32)cc1,8,1
+c1ccc(CN2Cc3ccccc3-c3ccccc32)cc1,9,1
 O=C1C=CC2C(=C1)CCC1C2CCC2C(C(=O)CSCCNC(=S)NCCCNCCCNC(=O)CCNC(=O)c3cc(NC(=O)c4ncc[nH]4)c[nH]3)CCC21,0,0
 O=C(Nc1cnccn1)c1ccc2c(c1)CCC1CCCCC21Cc1ccccc1,0,0
 O=C(Nc1cccnc1)c1ccc2c(c1)C(=O)CC1CCCCC21Cc1ccccc1,0,0
@@ -41,7 +41,7 @@ O=C1C=C2CCC3C(=C2CC1)C(c1ccc2ocnc2c1)CC1CCCC13,0,0
 C1=Cc2c(ccc3c2C(=Cc2cccc(-c4cccnc4)c2)Oc2ccccc2-3)NC1,9,1
 C1=Cc2c(ccc3c2C(=Cc2cccc(-c4ccccc4)c2)Oc2ccccc2-3)NC1,117,1
 c1ccc(-c2c[nH]c3ccccc23)cc1,580,1
-c1ccc(-n2ncc3ccccc32)cc1,1937,1
+c1ccc(-n2ncc3ccccc32)cc1,1938,1
 C1=C2CCCC(Cc3ccccc3)C2Cc2cnn(-c3ccccc3)c21,222,1
 C1=C2CCCC(Cc3cccnc3)C2Cc2cnn(-c3ccccc3)c21,13,1
 C1=C2CCCC(Cc3ccncc3)C2Cc2cnn(-c3ccccc3)c21,4,1
