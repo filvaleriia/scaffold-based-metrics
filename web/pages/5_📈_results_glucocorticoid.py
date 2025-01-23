@@ -16,7 +16,7 @@ for generator in generators:
 
 pd.options.display.float_format = '{:12.5e}'.format
 
-web = False
+web = True
 if web == True:
     current_directory = '/mount/src'
 else:
@@ -227,7 +227,42 @@ if st.checkbox(f'Show mean results for individual to compare between generators'
 #ZOBRAZOVANI OVERLAPU:
 st.markdown(f"## Overlaps plots ")
 if st.checkbox(f'Overplaps plots all'):
-    st.image(img1_path)
+    st.image(f"{current_directory}/recall_metrics/img/overlaps/triples/combined_overlaps_csk.png")
+
+
+#ZOBRAZOVANI OVERLAPU:
+st.markdown(f"## Box plots ")
+
+for type_scaf in ['csk', 'murcko']:
+    if st.checkbox(f'Box plots for {type_scaf}'):
+        for type_split in ['dis','sim']:
+            st.image(f"{current_directory}/recall_metrics/img/box_plots/{type_scaf}/combined_box_plot_{type_split}.png")
+
+
+#ZOBRAZOVANI TRENDU:
+st.markdown(f"## Trends plot ")
+if st.checkbox(f'Trends_plot'):
+    if st.checkbox(f'Show subsets comparison'):
+        for type_scaf in ['csk', 'murcko']:
+            for type_split in ['dis','sim']:
+                st.image(f"{current_directory}/recall_metrics/img/trands/{type_scaf}/trends_combined_all_subsets_{type_split}.png")
+                st.image(f"{current_directory}/recall_metrics/img/trands/{type_scaf}/trends_combined_adjusted_subsets_{type_split}.png")
+    if st.checkbox(f'Show split/scaf comparison'):
+        st.image(f"{current_directory}/recall_metrics/img/trands/trends_combined_TUPOR_SESY.png")
+        st.image(f"{current_directory}/recall_metrics/img/trands/trends_combined_ASER_ASR.png")
+
+#ZOBRAZOVANI Heat mapa:
+st.markdown(f"## Heat map ")
+if st.checkbox(f'Heat maps 1x5'):
+    
+    for type_scaf in ['csk', 'murcko']:
+        for type_split in ['dis','sim']:
+            st.image(f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_{type_split}_{type_scaf}_1x5.png")
+
+if st.checkbox(f'Heat map for base subset'):
+    st.image(f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_base_all.png")
+
+
 
 
 #ZOBRAZOVANI T-SNE
