@@ -16,7 +16,7 @@ for generator in generators:
 
 pd.options.display.float_format = '{:12.5e}'.format
 
-web = True
+web = False
 if web == True:
     current_directory = '/mount/src'
 else:
@@ -39,9 +39,9 @@ def display_data_and_images(type_split, scaffold_type, subset, display_images=Tr
     if display_images:
         col1, col2 = st.columns(2)
         with col1:
-            st.image(img1_path, use_column_width=True)
+            st.image(img1_path)
         with col2:
-            st.image(img2_path, use_column_width=True)
+            st.image(img2_path)
 
 
 #Hlavi telo
@@ -226,8 +226,8 @@ if st.checkbox(f'Show mean results for individual to compare between generators'
 
 #ZOBRAZOVANI OVERLAPU:
 st.markdown(f"## Overlaps plots ")
-if st.checkbox(f't-SNE vizualization for each generator'):
-    pass
+if st.checkbox(f'Overplaps plots all'):
+    st.image(img1_path)
 
 
 #ZOBRAZOVANI T-SNE
