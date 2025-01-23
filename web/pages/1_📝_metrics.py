@@ -23,11 +23,11 @@ st.markdown(
     > this metric is about how diverse our virtual library is. It is important for showing which generator has more different compounds in the output.
 
     | NAME | FORMULA | LIMITATIONS |
-    |-------------|-|-|
-    |▪ True positive recall all (TUPOR) – | $$TUPOR = {{UASo} \over UASr}$$ | [0 ; 1] |
-    |▪ True positive recall all (TUPOR_2) – | $$TUPOR_2 = {{{UASo}*{USo} \over {SSo}} \over {UASr * USr \over SSr}}$$ | [0 ; ] |
-    |▪ Set scaffold yield (SESY) –| $$SESY = {{USo} \over SSo}$$ | [0 ; 1] |
-    |▪ Absolute set scaffold recall (ASER) –| $$ASER = {{CwASo} \over SSo}$$ |[0 ; 1] |
+    |-----------------|-|-|
+    |▪ True positive recall all (TUPOR)| $$TUPOR = {{UASo} \over UASr}$$ | [0 ; 1] |
+    |▪ Set scaffold yield (SESY)| $$SESY = {{USo} \over SSo}$$ | [0 ; 1] |
+    |▪ Absolute set scaffold recall (ASER)| $$ASER = {{CwASo} \over SSo}$$ |[0 ; 1] |
+    |▪ Active scaffold ratio (ASR)| $$ASR = {{UASo} \over {{USo} - {UASo}}}$$ | [0 ; 1] |
  
 
     * UASo - unique active scaffolds in cOS
