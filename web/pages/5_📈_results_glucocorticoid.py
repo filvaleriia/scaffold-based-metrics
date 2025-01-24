@@ -16,7 +16,7 @@ for generator in generators:
 
 pd.options.display.float_format = '{:12.5e}'.format
 
-web = True
+web = False
 if web == True:
     current_directory = '/mount/src'
 else:
@@ -227,7 +227,8 @@ if st.checkbox(f'Show mean results for individual to compare between generators'
 #ZOBRAZOVANI OVERLAPU:
 st.markdown(f"## Overlaps plots ")
 if st.checkbox(f'Overplaps plots all'):
-    st.image(f"{current_directory}/recall_metrics/img/overlaps/triples/combined_overlaps_csk.png")
+    for type_scaf in ['csk', 'murcko']:
+        st.image(f"{current_directory}/recall_metrics/img/overlaps/triples/combined_overlaps_{type_scaf}.png", width=1000)
 
 
 #ZOBRAZOVANI OVERLAPU:
