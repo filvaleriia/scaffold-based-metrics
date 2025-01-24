@@ -6,6 +6,7 @@ import os
 st.set_page_config(
     page_title="Results for Glucocorticoid receptor",
     page_icon="📈",
+    layout="wide"
 )
 st.sidebar.header("Results for Glucocorticoid Receptor:")
 generators = [
@@ -41,16 +42,16 @@ def display_data_and_images(type_split, scaffold_type, subset, display_images=Tr
     if display_table:
         df = pd.read_csv(file_path)
         df = df[columns]
-        st.dataframe(df)
+        st.dataframe(df, width=800)
 
     
     # Zobrazení obrázků (pokud je potřeba)
     if display_images:
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([7, 7])
         with col1:
-            st.image(img1_path, width=358)
+            st.image(img1_path, width=600)
         with col2:
-            st.image(img2_path, width=500)
+            st.image(img2_path, width=700)
 
 
 #Hlavi telo
