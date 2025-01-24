@@ -228,7 +228,7 @@ if st.checkbox(f'Show mean results for individual to compare between generators'
 st.markdown(f"## Overlaps plots ")
 if st.checkbox(f'Overplaps plots all'):
     for type_scaf in ['csk', 'murcko']:
-        st.image(f"{current_directory}/recall_metrics/img/overlaps/triples/combined_overlaps_{type_scaf}.png", width=1000)
+        st.image(f"{current_directory}/recall_metrics/img/overlaps/triples/combined_overlaps_{type_scaf}.svg")
 
 
 #ZOBRAZOVANI OVERLAPU:
