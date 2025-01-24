@@ -26,7 +26,7 @@ else:
 def display_data_and_images(type_split, scaffold_type, subset, display_images=True, display_table = True):
     file_path = f"{current_directory}/recall_metrics/data/results/{receptor}/{scaffold_type}_scaffolds/{type_split}/mean_{scaffold_type}_{type_split}{subset}.csv"
     img1_path = f"{current_directory}/recall_metrics/img/results/new_plots/radar_results_all_{scaffold_type}_{type_split}_{subset}.png"
-    img2_path = f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_{type_split}_{scaffold_type}_{subset}.png"
+    img2_path = f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_{type_split}_{scaffold_type}_{subset}.svg"
     
     # Zobrazeni tabulek
     if display_table:
@@ -39,9 +39,9 @@ def display_data_and_images(type_split, scaffold_type, subset, display_images=Tr
     if display_images:
         col1, col2 = st.columns(2)
         with col1:
-            st.image(img1_path)
+            st.image(img1_path, width=358)
         with col2:
-            st.image(img2_path)
+            st.image(img2_path, width=500)
 
 
 #Hlavi telo
@@ -231,7 +231,7 @@ if st.checkbox(f'Overplaps plots all'):
         st.image(f"{current_directory}/recall_metrics/img/overlaps/triples/combined_overlaps_{type_scaf}.svg")
 
 
-#ZOBRAZOVANI OVERLAPU:
+#ZOBRAZOVANI BOXPLOT:
 st.markdown(f"## Box plots ")
 
 for type_scaf in ['csk', 'murcko']:
