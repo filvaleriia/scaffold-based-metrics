@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 
 st.set_page_config(
     page_title="Results for Glucocorticoid receptor",
@@ -24,14 +25,22 @@ else:
 
 #POMOCNE FUNKCE
 def display_data_and_images(type_split, scaffold_type, subset, display_images=True, display_table = True):
-    file_path = f"{current_directory}/recall_metrics/data/results/{receptor}/{scaffold_type}_scaffolds/{type_split}/mean_{scaffold_type}_{type_split}{subset}.csv"
-    img1_path = f"{current_directory}/recall_metrics/img/results/new_plots/radar_results_all_{scaffold_type}_{type_split}_{subset}.png"
+    
+    file_path = f"{current_directory}/recall_metrics/data/results/{receptor}/{scaffold_type}_scaffolds/{type_split}/mean_with_med_{scaffold_type}_{type_split}{subset}.csv"
+
+    if os.path.exists(file_path):
+        file_path = f"{current_directory}/recall_metrics/data/results/{receptor}/{scaffold_type}_scaffolds/{type_split}/mean_with_med_{scaffold_type}_{type_split}{subset}.csv"
+        columns = ["name", "type_cluster", "scaffold", "TUPOR", "SESY", "ASER", "ASR", "median_OS_IS"]
+    else:
+        file_path = f"{current_directory}/recall_metrics/data/results/{receptor}/{scaffold_type}_scaffolds/{type_split}/mean_{scaffold_type}_{type_split}{subset}.csv"
+        columns = ["name", "type_cluster", "scaffold", "TUPOR", "SESY", "ASER", "ASR"]
+    img1_path = f"{current_directory}/recall_metrics/img/results/new_plots/radar_results_all_{scaffold_type}_{type_split}_{subset}.svg"
     img2_path = f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_{type_split}_{scaffold_type}_{subset}.svg"
     
     # Zobrazeni tabulek
     if display_table:
         df = pd.read_csv(file_path)
-        df = df[["name", "type_cluster", "scaffold", "TUPOR", "SESY", "ASER", "ASR"]]
+        df = df[columns]
         st.dataframe(df)
 
     
@@ -237,7 +246,7 @@ st.markdown(f"## Box plots ")
 for type_scaf in ['csk', 'murcko']:
     if st.checkbox(f'Box plots for {type_scaf}'):
         for type_split in ['dis','sim']:
-            st.image(f"{current_directory}/recall_metrics/img/box_plots/{type_scaf}/combined_box_plot_{type_split}.png")
+            st.image(f"{current_directory}/recall_metrics/img/box_plots/{type_scaf}/combined_box_plot_{type_split}.svg", width=1200)
 
 
 #ZOBRAZOVANI TRENDU:
@@ -246,11 +255,11 @@ if st.checkbox(f'Trends_plot'):
     if st.checkbox(f'Show subsets comparison'):
         for type_scaf in ['csk', 'murcko']:
             for type_split in ['dis','sim']:
-                st.image(f"{current_directory}/recall_metrics/img/trands/{type_scaf}/trends_combined_all_subsets_{type_split}.png")
-                st.image(f"{current_directory}/recall_metrics/img/trands/{type_scaf}/trends_combined_adjusted_subsets_{type_split}.png")
+                st.image(f"{current_directory}/recall_metrics/img/trands/{type_scaf}/trends_combined_all_subsets_{type_split}.svg", width=1200)
+                st.image(f"{current_directory}/recall_metrics/img/trands/{type_scaf}/trends_combined_adjusted_subsets_{type_split}.svg", width=1200)
     if st.checkbox(f'Show split/scaf comparison'):
-        st.image(f"{current_directory}/recall_metrics/img/trands/trends_combined_TUPOR_SESY.png")
-        st.image(f"{current_directory}/recall_metrics/img/trands/trends_combined_ASER_ASR.png")
+        st.image(f"{current_directory}/recall_metrics/img/trands/trends_combined_TUPOR_SESY.svg", width=1200)
+        st.image(f"{current_directory}/recall_metrics/img/trands/trends_combined_ASER_ASR.svg", width=1200)
 
 #ZOBRAZOVANI Heat mapa:
 st.markdown(f"## Heat map ")
@@ -258,10 +267,10 @@ if st.checkbox(f'Heat maps 1x5'):
     
     for type_scaf in ['csk', 'murcko']:
         for type_split in ['dis','sim']:
-            st.image(f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_{type_split}_{type_scaf}_1x5.png")
+            st.image(f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_{type_split}_{type_scaf}_1x5.svg", width=1200)
 
 if st.checkbox(f'Heat map for base subset'):
-    st.image(f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_base_all.png")
+    st.image(f"{current_directory}/recall_metrics/img/heat_mapa/heat_mapa_base_all.svg", width=1200)
 
 
 
