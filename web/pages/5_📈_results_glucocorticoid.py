@@ -18,7 +18,7 @@ for generator in generators:
 
 pd.options.display.float_format = '{:12.5e}'.format
 
-web = False
+web = True
 if web == True:
     current_directory = '/mount/src'
 else:
