@@ -65043,7 +65043,7 @@ C1=Cc2c(ccc3c2C(=Cc2ccccc2-c2ccccc2)Oc2ccccc2-3)NC1
 c1ccc(COc2ccccc2)cc1
 c1ccc2ccccc2c1
 O=C1NCCN1
-c1ccc(-c2ncc3c4c(nnc2-c2ccccc2)n3-n=4)cc1
+C1=C2C3=NN2C3=NN=C(c2ccccc2)C(c2ccccc2)=N1
 c1ccc(NC2CCCCC2)cc1
 O=C(CCCc1ccccc1)c1ccccc1
 O=C(c1ccccc1)c1ccccc1OCc1ccsc1
@@ -91695,7 +91695,7 @@ c1ccc(NCCCNc2cccc3ccccc23)cc1
 c1ccc(CCCC2CCCc3cc(COc4cccc5[nH]ccc45)ccc32)cc1
 c1ccc(OCCCN2CCCCC2c2ccccc2)cc1
 c1ccc(-c2cnccc2Cc2ccc3c(cnn3-c3ccccc3)c2)cc1
-C1=CC2C3=C1C2=C(Cc1ccccc1)C(c1cnoc1)=C3
+C1=CC2c3cc(-c4cnoc4)c(Cc4ccccc4)c2c31
 c1ccc(C2=NCCN=C2c2cccnc2)cc1
 O=C(NCCCCc1cccc2ccccc12)c1cccnc1
 O=C(CCCc1ccc(CCc2ccccc2)cc1)c1ccccc1

@@ -1837,7 +1837,7 @@ O=C(OOc1ccc2c(c1)OCCO2)c1cccc(Nc2ccc3c(cnn3-c3ccccc3)c2)c1
 c1ccc(CCCCc2ccccc2)cc1
 O=C(Nc1cccnc1)c1ccc2c(c1)CC1NN=CNc3cccc(c3)CC23CCCCC13
 c1ccc(CCCCCNc2cccc3c2cnn3-c2ccccc2)cc1
-O=C1C=C2CCC3C(=C2CC1)CCC1C(C#CCc2c4ccc5cc4c25)CCC31
+O=C1C=C2CCC3C(=C2CC1)CCC1C(C#CCc2c4c5ccc2c=4c5)CCC31
 c1ccc(CCCC(Cc2ccccc2)N2CCOCC2)cc1
 c1ccc(Nc2ccc3c(cnn3-c3ccccc3)c2)cc1
 O=C(Nc1ccccc1)Nc1ccccc1Nc1ccccc1S(=O)(=O)Cc1ccccc1

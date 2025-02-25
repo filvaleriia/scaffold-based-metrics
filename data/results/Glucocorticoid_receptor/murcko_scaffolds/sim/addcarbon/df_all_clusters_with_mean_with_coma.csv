@@ -1,4 +1,4 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ASR,CwASo
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
 addcarbon_0,sim,murcko,"2,583.0","1,000,000.0",1/115,0.0086957,0.002583,0.000165,0.0003873,165.0
 addcarbon_1,sim,murcko,"2,744.0","1,000,000.0",4/100,0.04,0.002744,0.0064108,0.0014599,"6,370.0"
 addcarbon_2,sim,murcko,"3,064.0","1,000,000.0",4/58,0.0689655,0.003064,0.0019277,0.0013072,"1,924.0"

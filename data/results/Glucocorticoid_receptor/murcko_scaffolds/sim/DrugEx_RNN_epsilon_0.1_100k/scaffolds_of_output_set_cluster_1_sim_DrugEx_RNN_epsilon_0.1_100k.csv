@@ -11370,7 +11370,7 @@ O=C1CCC2CC(c3ccccc3)C(c3ccccc3)C12
 O=C(CN1CCC(NCc2cccc(Nc3nccc(Nc4ccccc4)n3)c2)CC1)NCCc1ccccc1
 c1ccc(NCc2cnn(-c3ccccc3)c2)cc1
 c1ccc(CCNc2nccc3c2cnn3-c2ccccc2)cc1
-O=c1c2c3nc(CN4CCC(c5ccccc5)CC4)n1C(=CC=CC=C3)CC2
+O=c1c2c3cccccc(n1c(CN1CCC(c4ccccc4)CC1)n3)CC2
 c1ccc(Nc2cc(C3CCCCC3)ccc2CNCCc2cnn(-c3ccccc3)c2)cc1
 c1ccc(CNC2CCN(Cc3ccccc3)CC2)cc1
 O=C(NCC1CCN(Cc2cccc(Nc3nccc(Nc4ccc5c(cnn5-c5ccccc5)c4)n3)c2)CC1)c1ccc2c(c1)CCC2
