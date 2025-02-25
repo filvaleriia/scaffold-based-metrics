@@ -1,4 +1,4 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ASR,CwASo
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
 DrugEx_GT_epsilon_0.1_10k_0,sim,csk,"5,214.0","9,990.0",13/38,0.3421053,0.5219219,0.009907,0.0024995,98.0
 DrugEx_GT_epsilon_0.1_10k_1,sim,csk,"4,840.0","9,984.0",13/38,0.3421053,0.4847756,0.0452261,0.0026932,432.0
 DrugEx_GT_epsilon_0.1_10k_2,sim,csk,"4,727.0","9,990.0",3/37,0.0810811,0.4731732,0.00271,0.0006351,27.0

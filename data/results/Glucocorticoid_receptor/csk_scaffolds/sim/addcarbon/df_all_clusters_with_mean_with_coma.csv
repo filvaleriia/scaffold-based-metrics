@@ -1,4 +1,4 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ASR,CwASo
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
 addcarbon_0,sim,csk,866.0,"1,000,000.0",3/38,0.0789474,0.000866,0.0031076,0.0034762,"3,098.0"
 addcarbon_1,sim,csk,846.0,"1,000,000.0",10/38,0.2631579,0.000846,0.0301091,0.0119617,"29,229.0"
 addcarbon_2,sim,csk,861.0,"1,000,000.0",13/37,0.3513514,0.000861,0.0103214,0.0153302,"10,216.0"
