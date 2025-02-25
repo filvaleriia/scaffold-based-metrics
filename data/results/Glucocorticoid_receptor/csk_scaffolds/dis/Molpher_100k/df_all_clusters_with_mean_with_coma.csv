@@ -1,4 +1,4 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ASR,CwASo
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
 Molpher_100k_0,dis,csk,"16,541.0","100,069.0",10/40,0.25,0.1652959,0.0029969,0.0006049,299.0
 Molpher_100k_1,dis,csk,"19,176.0","113,908.0",7/23,0.3043478,0.1683464,0.001213,0.0003652,138.0
 Molpher_100k_2,dis,csk,"17,633.0","100,078.0",3/40,0.075,0.1761926,7.99e-05,0.0001702,8.0
