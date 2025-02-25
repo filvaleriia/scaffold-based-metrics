@@ -1,9 +1,0 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR,SESY,ASER,ASR,CwASo
-Molpher_1k_mean,sim,murcko,382.8,"1,141.8",0.0197447,0.3340165,0.0046462,0.0039756,5.0
-REINVENT_1k_mean,sim,murcko,959.0,994.4,0.0017391,0.9643963,0.0002014,0.0002107,0.2
-DrugEx_GT_epsilon_0.1_1k_mean,sim,murcko,900.0,999.2,0.0079216,0.9007189,0.00741,0.0006739,7.2
-DrugEx_GT_epsilon_0.6_1k_mean,sim,murcko,937.6,999.4,0.051992,0.9381568,0.0058576,0.0042531,5.8
-DrugEx_RNN_epsilon_0.1_1k_mean,sim,murcko,902.4,999.2,0.0054783,0.9030987,0.0022171,0.0006606,2.2
-DrugEx_RNN_epsilon_0.6_1k_mean,sim,murcko,851.4,993.4,0.0380861,0.8570459,0.0040587,0.0030755,4.0
-GB_GA_mut_r_0.01_1k_mean,sim,murcko,931.6,"1,000.0",0.0229521,0.9316,0.0026102,0.001721,2.6
-addcarbon_1k_mean,sim,murcko,533.8,"1,000.0",0.0232914,0.5338,0.0034199,0.0022668,3.4

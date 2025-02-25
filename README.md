@@ -1,3 +1,56 @@
+# RECALL Benchmarks
+
+This benchmarks based on scaffold recall analyses. This repository consist of four different benchmarks to compare, to evaluate molecular generator.
+
+
+### ▪ True positive recall all (TUPOR): 
+the number of unique active scaffolds generated for the entire OS (UASo) in the ration to the total number of unique active scaffolds in RS (UASr). Quantifies the recall number of the unique active scaffolds for the entire structure generation process. TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique scaffolds from RS were found in the OS).  
+   $$TUPOR = {{UASo} \over UASr}$$ 
+   
+* **Use case** : A high TUPOR value suggests that the model successfully recalls biologically active scaffolds, making it useful for generating molecules with pharmaceutical potential. Users can evaluate the model's accuracy in generating relevant scaffolds for drug discovery. 
+### ▪ Set scaffold yield (SESY): 
+value for the whole generated set, expressing how many different unique scaffolds (USo) are within their OS size (SSo). This metric reflects the diversity of the generated set by calculating how many different scaffolds are present in the OS. A value of 1 indicates that every scaffold in the OS is unique, while 0 means no valid scaffolds were generated. 
+
+   $$SESY = {{USo} \over SSo}$$ 
+
+* **Use case**: SESY is valuable for users aiming to strike a balance between exploration and exploitation. A high SESY value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SESY value suggests a focus on exploiting known scaffolds, refining existing chemical structures. By adjusting the SESY, users can fine-tune the generator's ability to either discover new molecular structures (exploration) or optimize known scaffolds (exploitation), depending on the needs of their project. 
+
+### ▪ Absolute set scaffold recall (ASER): 
+Absolute set scaffold recall (ASER) – value for the generated dataset expressing the total number of virtual compounds with active scaffold in the OS (CwASo) in relation to other scaffolds in OS (SSo - CwASo). It tells us how effectively the generator is exploring the desired region of chemical space, with higher values reflecting better alignment with biologically relevant scaffolds. 
+
+   $$ASER = {{CwASo} \over SSo}$$ 
+
+* **Use case**: A high ASER value indicates that the generator is targeting the most relevant chemical space for drug discovery, creating compounds that are more likely to exhibit biological activity. Users can rely on this metric to assess how well the generator is focusing on biologically active areas of molecular space. 
+
+### ▪ Active scaffold ratio (ACR): 
+Active scaffold ratio (ACR) – the number of unique active scaffolds generated for the entire OS (UASo) in the ration to other unique scaffolds in OS (USo - UASo). This metric calculates the ratio of active scaffolds to total scaffolds in the OS. A higher ASR value suggests that the model is generating a larger proportion of biologically active scaffolds compared to other types of scaffolds. 
+
+   $$ACR = {{UASo} \over {{USo} - {UASo}}}$$ 
+
+* **Use case**: ASR is useful for users prioritizing the biological relevance of generated compounds. A high ASR value means that the generator is more likely to produce active scaffolds, which is essential for applications that focus on optimizing lead compounds with desired biological properties. 
+
+
+## Installation
+
+
+# Example
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$\frac{1}{2}$
+
+
 
 # My calculation procedure:
 1. Take the cIS and run the generator, 10 times because 5 times for Dissimilarity split and 5 times fo Similarity split
