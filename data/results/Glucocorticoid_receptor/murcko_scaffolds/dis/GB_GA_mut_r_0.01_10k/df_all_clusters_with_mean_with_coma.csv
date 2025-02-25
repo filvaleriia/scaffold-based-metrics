@@ -1,4 +1,4 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ASR,CwASo
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
 GB_GA_mut_r_0.01_10k_0,dis,murcko,"7,888.0","10,000.0",0/92,0.0,0.7888,0.0,0.0,0.0
 GB_GA_mut_r_0.01_10k_1,dis,murcko,"7,921.0","9,999.0",0/34,0.0,0.7921792,0.0,0.0,0.0
 GB_GA_mut_r_0.01_10k_2,dis,murcko,"8,204.0","9,999.0",1/64,0.015625,0.820482,0.0004002,0.0001219,4.0

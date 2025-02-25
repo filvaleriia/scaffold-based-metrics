@@ -2303,7 +2303,7 @@ c1ccc(CCCCCC(c2ccccc2)c2ccccc2)cc1
 c1cc2c(c(OCC3CCNc4ccc(-c5cccc6cc[nH]c56)cc43)c1)OCO2
 c1ccc(Oc2cccc(OC3CCCN(c4ccccc4)C3)c2)cc1
 c1ccc(COc2ccccc2)cc1
-O=C(Nc1ccccc1)C1C=CC=C(N2CCOC(CNCCCOc3c4cccc3C4)C2)C=C1
+O=C(Nc1ccccc1)C1C=CC=C(N2CCOC(CNCCCOC3=C4C=CC=C3C4)C2)C=C1
 O=S1(=O)CC(NCC(OC2C=C3C=NN(c4ccccc4)C32)c2cc3ccccc3s2)C1
 O=C1CCCCO1
 O=C(Cc1ccccc1)NCC(Oc1ccc2c(cnn2-c2ccccc2)c1)c1ccc2[nH]ccc2c1

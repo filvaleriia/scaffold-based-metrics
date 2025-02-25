@@ -7151,7 +7151,7 @@ O=C1CNc2c(cc(NC(=O)COCc3ccccc3CCCCc3ccon3)c3c2CCC3)C1
 c1ccc(COCc2cccnc2)cc1
 C(=Cc1ccccc1)NCCCCc1ccc2c(cnn2-c2ccccc2)c1
 O=C1CC(COc2ccccc2OCCCOc2ccc3c(cnn3-c3ccccc3)c2)CO1
-c1ccc(CCC2c3ccc(OCc4cccc5ccnn45)c2c3)cc1
+C1=C(OCc2cccc3ccnn23)C2=CC(=C1)C2CCc1ccccc1
 c1ccc(-n2ncc3cc(OCOCc4cc5cc(c4)C4CC4CN5)ccc32)cc1
 c1ccc(CC2COCCN2c2ccccc2)cc1
 c1ccc(CCCC2CCC3c4ccccc4CCC3C2)cc1

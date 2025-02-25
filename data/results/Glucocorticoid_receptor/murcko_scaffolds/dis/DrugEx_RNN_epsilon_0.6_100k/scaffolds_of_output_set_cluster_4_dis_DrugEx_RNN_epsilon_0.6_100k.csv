@@ -6224,7 +6224,7 @@ O=C(NCCc1ccc2c(c1)OCCO2)C1CCCN(S(=O)(=O)c2ccc3c(c2)CCNC3)CC1
 O=C(Nc1ccccc1)c1ccc2c(c1)CCCN(c1ccccc1)C2
 c1ccc(CC(C(Oc2ccc3c(cnn3-c3ccccc3)c2)c2cccnc2)n2cncn2)cc1
 c1ccc(CCCCCNCc2ccccc2)cc1
-O=c1c2[nH][nH]c3ccccc3c3nc2c-3cn1-c1ccccc1
+O=c1c2[nH][nH]c3ccccc3c3nc2c3cn1-c1ccccc1
 c1ccc(-n2ncc3cc(-c4cccnc4)ccc32)cc1
 c1ccc(-c2ccc(C3CCCC3)cc2)cc1
 O=C(Nc1ccccc1-c1ccccc1)c1n[nH]c2[nH]ccc12
@@ -8963,7 +8963,7 @@ O=C1c2ccccc2C2CCC1CC2
 O=C(NN=CC1=C(Oc2ccccc2)CCCC1)c1ccccc1
 O=C1CCc2c(cnn2-c2ccccc2)N1
 c1ccc(-c2ccccc2)cc1
-C1=Cc2c(ccc3c2-c2cc4ccccc4c4cc(ccccc(o2)o4)-c2ccccc2-3)NC1
+C1=Cc2c(ccc3c4ccccc4c4ccccc5oc(c4)c4ccccc4cc(o5)c23)NC1
 c1ccccc1
 C1=C(c2ccccc2)c2ccccc2C(c2ncc[nH]2)C1
 C1=Cc2cc(-c3cncs3)ccc2CC1
