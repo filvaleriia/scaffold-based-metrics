@@ -71,7 +71,7 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
     num_subsets = len(subset_dict)
     
     # Create a subplot for each subset (1 row, num_subsets columns)
-    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 6, 6))
+    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 12, 12))
     
     # If there is only one subset, axes will not be iterable, so convert it to a list
     if num_subsets == 1:
@@ -86,21 +86,28 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
         df.index = data.name.tolist()  # Using names as index
         
         # Plot the heatmap for the current subset
-        sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax)
+        sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax,  annot_kws={"size": 30})
+
         
         # If the subset name is empty, label it as 'base'
         if subset_name == '':
-            subset_name = 'base'
+            subset_name = 'BASELINE'
+        else:
+            subset_name = subset_name.replace('_', '')
         
         # Modify the y-axis labels for better readability by replacing certain substrings
         new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mean', '\n mean') for label in ax.get_yticklabels()]
-        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=11)
+        new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
+        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=25)
+        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=25)
+
         
         # Set the title for the current subplot to indicate the subset name
-        ax.set_title(f"{subset_name} subset")
+        ax.set_title(f"{subset_name} subset",  fontsize=28, wrap=True)
+
     
     # Set the overall title for the figure
-    fig.suptitle(f'{title}', fontsize=16)
+    fig.suptitle(f'{title}', fontsize=30)
     
     # Adjust layout to ensure titles and labels are well placed
     plt.tight_layout()
@@ -178,7 +185,7 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
     """
 
     num_subsets = len(data_dict)
-    fig, axes = plt.subplots(1, num_subsets, figsize=(8 * num_subsets, 8))  # 1 row, 4 columns for subsets
+    fig, axes = plt.subplots(1, num_subsets, figsize=(12 * num_subsets, 12))  # 1 row, 4 columns for subsets
 
     baseline_df = baseline_df_all[['TUPOR', 'SESY', 'ASER']]  
     baseline_df.index = baseline_df_all.name.tolist()
@@ -198,17 +205,20 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
             mask = (diff_df.abs() <= 0.1)  # Mask values in the range [-0.1, 0.1]
             diff_df[mask] = np.nan  # Hide values close to zero
         
-        sns.heatmap(diff_df, annot=True, cmap='coolwarm', cbar_kws={'label': 'Difference from Baseline'}, ax=ax, annot_kws={"size": 14})
+        sns.heatmap(diff_df, annot=True, cmap='coolwarm', cbar_kws={'label': 'Difference from Baseline'}, ax=ax, annot_kws={"size": 30})
+        ax.figure.axes[-1].yaxis.label.set_size(20)
 
-        ax.set_title(f'{scaf} - {subset if subset else "BASELINE"}', fontsize=15, wrap=True)
+
+        ax.set_title(f'{subset.replace("_", "") if subset else "BASELINE"} subset', fontsize=28, wrap=True)
 
         new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r') for label in ax.get_yticklabels()]
-        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=14)
-        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=14)
+        new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
+        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=25)
+        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=25)
         ax.set_facecolor('white')
 
 
-    fig.suptitle(f'Heatmaps with Differences from Baseline > 0.1 or < -0.1 ({scaf}, {type_split}) for {receptor}', fontsize=18)
+    fig.suptitle(f'Heatmaps with Differences from Baseline > 0.1 or < -0.1 ({scaf}, {type_split}) for {receptor}', fontsize=30)
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")

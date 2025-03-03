@@ -32,7 +32,7 @@ def add_columns_same_like_input_function(df_generated, test_set):
 
 
 class Metrics:
-    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str, recall_set_path : str, output_set_path: str ,save_options: bool, num_cpus: int = 1):
+    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str, recall_set_path : str, output_set_path: str , num_cpus: int = 1):
         self.type_cluster = type_cluster
         self.type_scaffold = type_scaffold
         self.generator_name = generator_name
@@ -40,7 +40,6 @@ class Metrics:
         self.receptor = receptor
         self.recall_set_path = recall_set_path
         self.output_set_path = output_set_path
-        self.save_options = save_options
         self.num_cpus = num_cpus
 
         self.number_of_calculation = None
@@ -254,8 +253,7 @@ class Metrics:
 
                 self.results = results
 
-                if self.save_options:
-                    self.save_function()
+                self.save_function()
                 numbers_of_calcs.append(self.number_of_calculation)
             else:
                 print(f"Path for cluster {self.number_of_calculation} doesn't exists")
@@ -278,21 +276,13 @@ def main():
     parser.add_argument('--output_set_path', type=str, required=True, help='Path to Output Set')
 
     # Optional arguments with default values
-    parser.add_argument('--save_option', type=str, default=True, required=False, help='If set, results will be saved')
     parser.add_argument('--ncpus', type=int, default=1, required=False, help='Number of CPUs to use for parallel processing')
 
     
     args = parser.parse_args()
     print(args)
-    if args.save_option == 'False':
-        args.save_option = False
-    elif args.save_option == 'True':
-        args.save_option = True
-    else:
-        args.save_option = True
 
-
-    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.recall_set_path, args.output_set_path, args.save_option, args.ncpus)     
+    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.recall_set_path, args.output_set_path, args.ncpus)     
     result = mt.calculate_metrics()
 
     print("RESULTS:")

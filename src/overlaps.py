@@ -91,7 +91,7 @@ def plot_overlaps(receptor, generators, num_graphs):
 
         # Adjust layout
         plt.tight_layout()
-
+        fig.suptitle(f'Overlaps Visualizations for {receptor} ({type_scaf})', fontsize=20)
         # Save the figure with a name based on the scaffold type
         output_folder = f'{main_dir}/img/overlaps/{receptor}'
         os.makedirs(output_folder, exist_ok=True)  # Ensure the folder exists

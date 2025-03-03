@@ -50,7 +50,7 @@ class Umap_class:
         datasets = []
         for i, generator in enumerate(self.generators):
             df = pd.read_csv(f"data/{generator}", header=None)
-            data = df.sample(n=5000, random_state=42)[0].tolist() if i > 1 else df[0].tolist()
+            data = df.sample(n=2500, random_state=42)[0].tolist() if i > 1 else df[0].tolist()
             datasets.append(data)
 
         # Prepare SMILES and labels
@@ -165,3 +165,74 @@ def plot_umap_results(type_cluster, number, receptor, unique_labels, name_save):
     plt.savefig(f'{folder}/{name_save}.png', format="png")
     # Display the plot
     plt.show()
+
+
+def plot_umap_single_results(type_cluster, number, receptor, unique_labels, name_save):
+    """
+    Function to visualize UMAP single results for a given cluster type and dataset number.
+    
+    Arguments:
+    type_cluster -- Type of clustering (default is 'sim').
+    number -- Dataset number to process (default is 0).
+    """
+    # Load the UMAP results
+    umap_df = pd.read_csv(f"data/results/{receptor}/UMAP/umap_results_{type_cluster}_{number}.csv")
+
+    # Define color map
+    colors = plt.get_cmap('tab10')
+
+    # Create a plot with subplots
+    fig, ax = plt.subplots( 1, 1, figsize=(12,8))
+
+    # Loop over each axis and the corresponding labels
+    
+    # Loop over each axis and the corresponding labels
+    for labels in unique_labels:
+        alpha = 1
+        for i, label in enumerate(labels):
+            # Adjust color and alpha for 'IS' and 'RS' labels
+            if label == 'IS':
+                alpha = 1
+                colors_ = 'gray'
+            elif label == 'RS':
+                alpha = 1
+                colors_ = 'black'
+            else:
+                colors_ = colors(i)
+            
+            # Filter data for the current label
+            subset = umap_df[umap_df['set_label'] == label]
+            
+            # Plot the scatter plot for each label
+            ax.scatter(subset['UMAP1'], subset['UMAP2'], 
+                       label=label, 
+                       color=colors_, 
+                       alpha=alpha) 
+
+            # Adjust alpha based on the number of labels
+            if len(labels) == 2:
+                alpha -= 0.3
+            else:
+                alpha -= 0.15
+
+        # Add title and axis labels
+        title = ' vs. '.join(labels)
+        ax.set_title(f'{title}', fontsize=18)  # Set larger title font size
+        ax.set_xlabel('UMAP Component 1', fontsize=16)  # Set larger x-axis label font size
+        ax.set_ylabel('UMAP Component 2', fontsize=16)  # Set larger y-axis label font size
+        ax.legend(fontsize=12)
+        ax.grid(True)
+    
+    fig.suptitle(f'UMAP Visualizations for {type_cluster}_{number} for {receptor}', fontsize=20)
+    fig.subplots_adjust(top=0.90)  # Můžeš experimentovat s hodnotou (např. 0.9, 0.95)
+    
+    # Save the plot as an image
+    #plt.subplots_adjust(top=0.85) 
+    plt.tight_layout()
+    folder = f"img/UMAP/{receptor}"
+    os.makedirs(folder, exist_ok=True)
+    
+    plt.savefig(f'{folder}/{name_save}.png', format="png")
+    # Display the plot
+    plt.show()
+

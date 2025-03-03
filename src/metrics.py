@@ -33,14 +33,12 @@ def add_columns_same_like_input_function(df_generated, test_set):
 
 
 class Metrics:
-    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str, 
-                 save_options: bool, num_cpus: int = 1):
+    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str,  num_cpus: int = 1):
         self.type_cluster = type_cluster
         self.type_scaffold = type_scaffold
         self.generator_name = generator_name
         
         self.receptor = receptor
-        self.save_options = save_options
         self.num_cpus = num_cpus
 
         self.number_of_calculation = None
@@ -245,11 +243,8 @@ class Metrics:
                 results.insert(0, 'name', f"{self.generator_name}_{self.number_of_calculation}")
                 results.insert(2, 'scaffold', self.type_scaffold)
 
-
                 self.results = results
-
-                if self.save_options:
-                    self.save_function()
+                self.save_function()
                 numbers_of_calcs.append(self.number_of_calculation)
             else:
                 print(f"Path for cluster {self.number_of_calculation} doesn't exists")
@@ -270,14 +265,13 @@ def main():
     parser.add_argument('--receptor', type=str, required=True, help='Receptor name')
 
     # Optional arguments with default values
-    parser.add_argument('--save_option', type=bool, default=True, required=False, help='If set, results will be saved')
     parser.add_argument('--ncpus', type=bool, default=1, required=False, help='Number of CPUs to use for parallel processing')
 
     
     args = parser.parse_args()
     print(args)
     
-    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.save_option, args.ncpus)     
+    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.ncpus)     
     result = mt.calculate_metrics()
 
 
