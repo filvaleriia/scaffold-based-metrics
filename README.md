@@ -11,6 +11,7 @@
 
 ### ▪ True positive recall all (TUPOR): 
 the number of unique active scaffolds generated for the entire OS (UASo) in the ration to the total number of unique active scaffolds in RS (UASr). Quantifies the recall number of the unique active scaffolds for the entire structure generation process. TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique scaffolds from RS were found in the OS).  
+
    $$TUPOR = {{UASo} \over UASr}$$ 
    
 * **Use case** : A high TUPOR value suggests that the model successfully recalls biologically active scaffolds, making it useful for generating molecules with pharmaceutical potential. Users can evaluate the model's accuracy in generating relevant scaffolds for drug discovery. 
@@ -80,16 +81,15 @@ type_cluster = 'dis' #options: 'dis'|'sim'
 scaffold_type = 'csk' #options: 'csk'|'murcko'
 generator = 'Molpher' #options: 'Molpher'|'DrugEx'|'REINVENT'|'addcarbon' etc.
 receptor = 'Glucocorticoid_receptor' #options: 'Glucocorticoid_receptor'|'Leukocyte_elastase'
-save_options = False
-cal_median = False
+ncpus = 4
 
-mt = metrics.Metrics(type_cluster, scaffold_type, generator, receptor, save, cal_median)
+mt = metrics.Metrics(type_cluster, scaffold_type, generator, receptor,  ncpus)
 result = mt.calculate_metrics()
 ```
 
 Example usage in bash or you can look for examples run_calculation_metrics.sh:
 ```bash
-python3 src/metrics.py --type_cluster dis --scaffold_type csk --generator Molpher --receptor Glucocorticoid_receptor --save_options True --cal_median False --num_cpu 3 
+python3 src/metrics.py --type_cluster dis --scaffold_type csk --generator Molpher --receptor Glucocorticoid_receptor  --num_cpu 3 
 
 ```
 
@@ -103,7 +103,6 @@ python3 ../src/metrics_define_path.py \
     --receptor Glucocorticoid_receptor \
     --recall_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/input_recall_sets/Glucocorticoid_receptor \
     --output_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_125k \
-    --save_option False \
     --ncpus 1
 ```
 
