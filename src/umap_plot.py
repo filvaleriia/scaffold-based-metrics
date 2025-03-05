@@ -159,7 +159,7 @@ def plot_umap_results(type_cluster, number, receptor, unique_labels, name_save):
     # Save the plot as an image
     #plt.subplots_adjust(top=0.85) 
 
-    folder = f"img/UMAP/{receptor}"
+    folder = f"img/UMAP/{receptor}/double_plots/"
     os.makedirs(folder, exist_ok=True)
 
     plt.savefig(f'{folder}/{name_save}.png', format="png")
@@ -229,7 +229,7 @@ def plot_umap_single_results(type_cluster, number, receptor, unique_labels, name
     # Save the plot as an image
     #plt.subplots_adjust(top=0.85) 
     plt.tight_layout()
-    folder = f"img/UMAP/{receptor}"
+    folder = f"img/UMAP/{receptor}/single_plot/"
     os.makedirs(folder, exist_ok=True)
     
     plt.savefig(f'{folder}/{name_save}.png', format="png")
