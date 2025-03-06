@@ -36,7 +36,7 @@ O=C(NC12CC(C1)C2)c1ccccc1C1C=CN(c2ccccc2)C(=O)N1,0,0
 O=C(NCC(=O)N1CCC2CCCCC21)c1ccc(C(=O)NS(=O)(=O)c2ccccc2)cc1,0,0
 O=C(NCC(=O)N1CCC2CCCCC21)c1ccc(S(=O)(=O)NC(=O)c2ccccc2)cc1,0,0
 O=c1ccn(-c2ccccc2)c(CSc2nc3ccccc3o2)c1,0,0
-O=c1ccn(-c2ccccc2)c(CSc2nc3ccccc3s2)c1,16,1
+O=c1ccn(-c2ccccc2)c(CSc2nc3ccccc3s2)c1,2,1
 O=C1CCC2=C1C(c1ccccc1C(=O)NCCN1CCOCC1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NCC(=O)N1CCOCC1)NC(=O)N2c1ccccc1,0,0
 O=C1NC(c2ccccc2C(=O)N2CC3CC2CN3)C=CN1c1ccccc1,0,0
@@ -44,14 +44,14 @@ O=C1CCC2=C1C(c1ccccc1CNC1CCOCC1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NC1CCNCC1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NC1CCOCC1)NC(=O)N2c1ccccc1,0,0
 O=C(OCc1ccccc1)C1CS(=O)(=O)C2CC(=O)N12,0,0
-O=C(OCc1ccccc1)C1=CSC2CC(=O)N12,1,1
+O=C(OCc1ccccc1)C1=CSC2CC(=O)N12,0,0
 O=C(NCC(=O)N1CCOCC1)c1ccccc1C1C=CN(c2ccccc2)C(=O)N1,0,0
 O=C1CCC2=C1C(c1ccccc1)N(CC(=O)N1CCN(C3CC3)CC1)C(=O)N2c1ccccc1,0,0
 O=C(NCc1cn[nH]c1)c1ccccc1C1C=CN(c2ccccc2)C(=O)N1,0,0
 O=C(NCc1ccco1)c1ccccc1C1C=CN(c2ccccc2)C(=O)N1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NCc1ccncc1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NCc1cccnn1)NC(=O)N2c1ccccc1,0,0
-O=C1CCC2=C1C(c1ccccc1C(=O)NCc1cccnc1)NC(=O)N2c1ccccc1,1,1
+O=C1CCC2=C1C(c1ccccc1C(=O)NCc1cccnc1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NCc1ccccn1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NCc1ccnnc1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)NCc1ccccc1)NC(=O)N2c1ccccc1,0,0
