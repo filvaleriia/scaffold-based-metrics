@@ -28,14 +28,7 @@ Absolute set scaffold recall (ASER) – value for the generated dataset expressi
    $$ASER = {{CwASo} \over SSo}$$ 
 
 * **Use case**: A high ASER value indicates that the generator is targeting the most relevant chemical space for drug discovery, creating compounds that are more likely to exhibit biological activity. Users can rely on this metric to assess how well the generator is focusing on biologically active areas of molecular space. 
-
-### ▪ Active scaffold ratio (ACR): 
-Active scaffold ratio (ACR) – the number of unique active scaffolds generated for the entire OS (UASo) in the ration to other unique scaffolds in OS (USo - UASo). This metric calculates the ratio of active scaffolds to total scaffolds in the OS. A higher ASR value suggests that the model is generating a larger proportion of biologically active scaffolds compared to other types of scaffolds. 
-
-   $$ACR = {{UASo} \over {{USo} - {UASo}}}$$ 
-
-* **Use case**: ASR is useful for users prioritizing the biological relevance of generated compounds. A high ASR value means that the generator is more likely to produce active scaffolds, which is essential for applications that focus on optimizing lead compounds with desired biological properties. 
-s 
+ 
 
 ✔ Supports multiple molecular generators: **Molpher, REINVENT, DrugEx, GB_GA, and more**.  
 ✔ Works with **Murcko and CSK scaffold analysis**.  
@@ -108,5 +101,10 @@ python3 ../src/metrics_define_path.py \
 
 The last options how it run, you can use your own data, for this purpose existing script src/metrics_own_data.py or you can loock for examples run_own_single_metrics_calculation.sh, the results will be in results folder in main folder:
 ```bash
-
+python3 ../src/metrics_own_data.py \
+    --type_scaffold csk \
+    --generator Molpher_125k \
+    --recall_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cIS_Glucocorticoid_receptor_dis_0.csv \
+    --output_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_1_one_column.csv \
+    --ncpus 1
 ```
