@@ -10,7 +10,7 @@ The AddCarbon molecular generator introduces random modifications by replacing a
 ## ⚙️ Installation
 
 To run this generator, you need the following packages:  
-`rdkit`, `numpy`, and `python-Levenshtein`.
+`rdkit`, `numpy`, `sklearn` and `python-Levenshtein`.
 
 You can either install them into your existing environment or use the `requirements.txt`:
 

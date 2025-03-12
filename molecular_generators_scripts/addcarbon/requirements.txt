@@ -1,0 +1,31 @@
+chardet @ file:///home/conda/feedstock_root/build_artifacts/chardet_1724954800692/work
+contourpy @ file:///home/conda/feedstock_root/build_artifacts/contourpy_1731428302318/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1733332471406/work
+fonttools @ file:///home/conda/feedstock_root/build_artifacts/fonttools_1738940303262/work
+freetype-py @ file:///home/conda/feedstock_root/build_artifacts/freetype-py_1650983368720/work
+greenlet @ file:///home/conda/feedstock_root/build_artifacts/greenlet_1734532774375/work
+joblib==1.4.2
+kiwisolver @ file:///home/conda/feedstock_root/build_artifacts/kiwisolver_1725459255340/work
+Levenshtein @ file:///home/conda/feedstock_root/build_artifacts/levenshtein_1741007167487/work
+matplotlib==3.10.1
+munkres==1.1.4
+numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1739425582012/work/dist/numpy-2.2.3-cp313-cp313-linux_x86_64.whl#sha256=554cd4f0a07dab06413547bc6579bac9be0b9c5f5bb952191ad69f390fabdf07
+packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1733203243479/work
+pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1726878403859/work
+pillow @ file:///home/conda/feedstock_root/build_artifacts/pillow_1735929688808/work
+pycairo==1.27.0
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1735698276679/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1733215673016/work
+python-Levenshtein @ file:///home/conda/feedstock_root/build_artifacts/python-levenshtein_1741044520443/work
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1706886791323/work
+RapidFuzz @ file:///home/conda/feedstock_root/build_artifacts/rapidfuzz_1740954203506/work
+rdkit @ file:///home/conda/feedstock_root/build_artifacts/rdkit-meta_1740757838294/work
+reportlab @ file:///home/conda/feedstock_root/build_artifacts/reportlab_1739375699174/work
+rlPyCairo @ file:///home/conda/feedstock_root/build_artifacts/rlpycairo_1687519531733/work
+scikit-learn==1.6.1
+scipy==1.15.2
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1733380938961/work
+SQLAlchemy @ file:///home/conda/feedstock_root/build_artifacts/sqlalchemy_1741770844264/work
+threadpoolctl==3.5.0
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1733188668063/work
+tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1737541069190/work
