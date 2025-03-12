@@ -1,0 +1,24 @@
+# REINVENT4 TOML input example for transfer learning
+
+
+run_type = "transfer_learning"
+device = "cuda:0" # run on the GPU if true, on the CPU if false
+tb_logdir = "tb_TL" # name of the TensorBoard logging directory
+json_out_config = "TL.json" # write this TOML to JSON
+
+[parameters]
+num_epochs = 200 # number of steps to run
+save_every_n_epochs = 1 # save checkpoint model file very N steps
+batch_size = 512
+sample_batch_size = 200 # number of sampled molecules chosen for similarity
+
+
+## Reinvent
+input_model_file = "reinvent.prior"
+smiles_file = "cIS_GR_sim_4.smi"
+output_model_file = "TL_GR_sim_4.model"
+validation_smiles_file = "cIS_GR_sim_4_valid.smi"
+standardize_smiles = true
+randomize_smiles = true
+randomize_all_smiles = false
+internal_diversity = true
