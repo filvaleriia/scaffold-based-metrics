@@ -188,12 +188,15 @@ class Metrics_phfp:
         print("MAIN FUNCTION")
 
         # Convert compounds in recall set to scaffolds using multiprocessing.
-
+        main_dir = Path(__file__).resolve().parents[1]
+        folder = f"{main_dir}/data/results_phram_fp/{self.receptor}/{self.type_phfp}/{self.type_cluster}/{self.generator_name}"
+        if not os.path.exists(folder):
+            os.makedirs(folder)
         
         #RECALLL
         reader = CDPLChem.MoleculeReader(recall_set_path)
         mol = CDPLChem.BasicMolecule()
-        out_file = open(f'phfp_of_recall_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.smi', 'w')
+        out_file = open(f'{folder}/phfp_of_recall_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.smi', 'w')
         while reader.read(mol):
             fp = self.convert_to_phfp_cdpkit(mol, 4096, 1)
             out_file.write(str(fp))
@@ -202,7 +205,7 @@ class Metrics_phfp:
         #OUTPUT
         reader = CDPLChem.MoleculeReader(output_set_path)
         mol = CDPLChem.BasicMolecule()
-        out_file = open(f'phfp_of_output_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.smi', 'w')
+        out_file = open(f'{folder}/phfp_of_output_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.smi', 'w')
         while reader.read(mol):
             fp = self.convert_to_phfp_cdpkit(mol, 4096, 1)
             out_file.write(str(fp))
