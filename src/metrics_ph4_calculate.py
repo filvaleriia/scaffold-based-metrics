@@ -33,7 +33,7 @@ def create_matching_dataframe(recall_fps, output_fps):
     data_fp = []
     # Převedeme recall_fps a output_fps na numpy array pro efektivní operace
 
-    print(recall_fps)
+    #print(recall_fps)
 
     recall_fps = [np.array([int(bit) for bit in fp]) for fp in recall_fps[0].tolist()]
     output_fps = [np.array([int(bit) for bit in fp]) for fp in output_fps[0].tolist()]
@@ -42,8 +42,6 @@ def create_matching_dataframe(recall_fps, output_fps):
     print("RECAL FP LEN: ", len(recall_fps))
     num = 0
     for recall_fp in recall_fps:
-        print(recall_fp)
-
 
         # Počítání podobnosti Tanimoto pro všechny output_fps
         match_count = np.sum([tanimoto_similarity(recall_fp, output_fp) == 1.0 for output_fp in output_fps])
@@ -60,27 +58,42 @@ def create_matching_dataframe(recall_fps, output_fps):
 
         })
         num += 1
-    print(data)
+    #print(data)
 
     return data
 
 
-def average_tanimoto_diversity(fingerprints):
-    print('START CALCULATE DIVERSITY')
-    num_pairs = 0
-    similarity_sum = 0
-    for fp1, fp2 in combinations(fingerprints, 2):
-        similarity_sum += DataStructs.FingerprintSimilarity(fp1, fp2)
-        num_pairs += 1
+def compute_tanimoto_pair(pair):
+    """ Vypočítá Tanimoto podobnost pro daný pár fingerprintů """
+    fp1, fp2 = pair
+    return tanimoto_similarity(fp1, fp2)
+
+
+def average_tanimoto_diversity(fingerprints, num_processes=1):
+    """ Vypočítá průměrnou Tanimotovu diverzitu pomocí multiprocessing """
+    
+    print('START CALCULATING DIVERSITY')
+
+    # Vytvoření seznamu všech kombinací fingerprintů
+    fingerprint_pairs = list(combinations(fingerprints, 2))
+
+
+    with Pool(processes=num_processes) as pool:
+        similarity_values = pool.map(compute_tanimoto_pair, fingerprint_pairs)
+
+    # Výpočet průměrné diverzity
+    similarity_sum = sum(similarity_values)
+    num_pairs = len(fingerprint_pairs)
+    
     return similarity_sum / num_pairs if num_pairs > 0 else 0.0
 
 
 class Metrics_phfp:
-    def __init__(self, type_cluster: str, type_phfp: str, generator_name: str, receptor: str):
+    def __init__(self, type_cluster: str, type_phfp: str, generator_name: str, receptor: str, ncpus = 1):
         self.type_cluster = type_cluster
         self.type_phfp = type_phfp
         self.generator_name = generator_name
-        
+        self.ncpus = ncpus
         self.receptor = receptor
         self.number_of_calculation = None
         self.output_set = None
@@ -94,8 +107,8 @@ class Metrics_phfp:
 
 
     def load(self, filepath_output_set, filepath_recall_set):
-        self.output_set_phfp = pd.read_csv(filepath_output_set, header = None)[:10]
-        self.recall_set_phfp = pd.read_csv(filepath_recall_set, header = None)[:10]
+        self.output_set_phfp = pd.read_csv(filepath_output_set, header = None)
+        self.recall_set_phfp = pd.read_csv(filepath_recall_set, header = None)
         print('ORIGINAL RECALL LEN: ', len(self.recall_set_phfp))
         self.recall_set_phfp = self.recall_set_phfp.drop_duplicates(keep='first').reset_index(drop=True)
         print('UNIQUE RECALL LEN: ', len(self.recall_set_phfp))
@@ -107,7 +120,7 @@ class Metrics_phfp:
         self.count_metrics = pd.DataFrame(df)
         print("END CREATE MATCHING")
         # Calculate metrics.
-        print(self.count_metrics['CwAFo'])
+        #print(self.count_metrics['CwAFo'])
         UFo =  len(list({tuple(arr): arr for arr in self.output_set_phfp[0].tolist()}.values()))
         SSo = len(self.output_set_phfp)
         CwAFo = self.count_metrics['CwAFo'].sum()
@@ -125,7 +138,7 @@ class Metrics_phfp:
         ACR = UAFo/(UFo-UAFo)
         print("END CALCULATE METRICS")
 
-        #diversity = average_tanimoto_diversity(self.output_set_phfp)
+        #diversity = average_tanimoto_diversity(self.output_set_phfp[0].tolist(), self.ncpus)
         diversity = 0
         print('DIVERSITY END')
 
@@ -230,9 +243,10 @@ def main():
     parser.add_argument('--type_phfp', type=str, required=True, help='Type of scaffold')
     parser.add_argument('--generator', type=str, required=True, help='Generator name')
     parser.add_argument('--receptor', type=str, required=True, help='Receptor name')
+    parser.add_argument('--ncpus', type=str, required=False, help='Number of CPU')
 
     args = parser.parse_args()
-    mt = Metrics_phfp(args.type_cluster, args.type_phfp, args.generator, args.receptor)
+    mt = Metrics_phfp(args.type_cluster, args.type_phfp, args.generator, args.receptor, args.ncpus)
     mt.calculate()
 
 

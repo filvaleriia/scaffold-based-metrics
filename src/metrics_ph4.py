@@ -3,6 +3,7 @@ This script calculates key metrics (TUPOR, SESY, ASER) for molecular scaffold an
 """
 
 import os
+import subprocess
 import pandas as pd
 import numpy as np
 from multiprocessing import Pool
@@ -193,23 +194,50 @@ class Metrics_phfp:
         if not os.path.exists(folder):
             os.makedirs(folder)
         
+
+        smi_recall_file = recall_set_path.replace('.csv', '.smi')
+        subprocess.run(['cp', recall_set_path, smi_recall_file])
         #RECALLL
-        reader = CDPLChem.MoleculeReader(recall_set_path)
+        reader = CDPLChem.MoleculeReader(smi_recall_file)
         mol = CDPLChem.BasicMolecule()
-        out_file = open(f'{folder}/phfp_of_recall_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.smi', 'w')
+        out_file = open(f'{folder}/phfp_of_recall_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv', 'w')
         while reader.read(mol):
-            fp = self.convert_to_phfp_cdpkit(mol, 4096, 1)
-            out_file.write(str(fp))
-            out_file.write('\n')
+            try:
+                fp = self.convert_to_phfp_cdpkit(mol, 4096, 1)
+                out_file.write(str(fp))
+                out_file.write('\n')
+            except:
+                pass
 
         #OUTPUT
-        reader = CDPLChem.MoleculeReader(output_set_path)
+        input_file = output_set_path
+        temp_file = output_set_path.replace('column.', 'column_temp.')
+
+        
+        with open(input_file, 'r') as infile, open(temp_file, 'w') as outfile:
+            for line in infile:
+                # Nahradí 'si' správným 'Si' pouze jako prvek (ne součást slova)
+                corrected_line = line.replace('si', 'Si')
+                outfile.write(corrected_line)
+
+        # Nahradíme původní soubor opraveným
+        os.replace(temp_file, input_file)
+
+        smi_output_file = output_set_path.replace('.csv', '.smi')
+        subprocess.run(['cp', output_set_path, smi_output_file])
+        reader = CDPLChem.MoleculeReader(smi_output_file)
         mol = CDPLChem.BasicMolecule()
-        out_file = open(f'{folder}/phfp_of_output_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.smi', 'w')
-        while reader.read(mol):
-            fp = self.convert_to_phfp_cdpkit(mol, 4096, 1)
-            out_file.write(str(fp))
-            out_file.write('\n')
+        out_file = open(f'{folder}/phfp_of_output_set_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv', 'w')
+
+        try: 
+            while reader.read(mol):
+                fp = self.convert_to_phfp_cdpkit(mol, 4096, 1)
+                out_file.write(str(fp))
+                out_file.write('\n')
+        except (ValueError, TypeError) as e:
+            print(f'Nepovedlo nacist vstup: {e}')
+            print(f'pro output: {smi_output_file}')
+
 
 
 
@@ -406,8 +434,9 @@ class Metrics_phfp:
         self.number_of_calculation = self.number
         output_file_path = f"{main_dir}/data/output_sets/{self.receptor}/{self.generator_name}/cOS_{self.generator_name}_{self.type_cluster}_{self.number_of_calculation}_one_column.csv"
         recall_file_path = f"{main_dir}/data/input_recall_sets/{self.receptor}/cRS_{self.receptor}_{self.type_cluster}_{self.number_of_calculation}.csv"
+        print(output_file_path)
         if os.path.exists(output_file_path):
-            
+            print('EXIST')
             if self.type_phfp == 'rdkit':
                 self.load(output_file_path, recall_file_path)
                 self.calculate_phfp(self.output_set, self.recall_set)
