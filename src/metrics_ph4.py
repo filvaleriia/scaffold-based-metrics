@@ -218,7 +218,10 @@ class Metrics_phfp:
             for line in infile:
                 # Nahradí 'si' správným 'Si' pouze jako prvek (ne součást slova)
                 corrected_line = line.replace('si', 'Si')
-                outfile.write(corrected_line)
+                #outfile.write(corrected_line)
+                mol = Chem.MolFromSmiles(corrected_line)
+                if mol:  # Pokud je validní, zapíšeme do výstupu
+                    outfile.write(corrected_line)
 
         # Nahradíme původní soubor opraveným
         os.replace(temp_file, input_file)

@@ -1,0 +1,7 @@
+name,type_cluster,phfp,UFo,SSo,TUPOR_,TUPOR,SESY,ASER,CwAFo,ACR,DIV
+DrugEx_RNN_epsilon_0.1_250k_0,dis,cdpkit,239973.0,250000.0,1/149,0.0067114,0.959892,8e-06,2.0,4.2e-06,0.0
+DrugEx_RNN_epsilon_0.1_250k_1,dis,cdpkit,242139.0,250000.0,1/53,0.0188679,0.968556,4e-06,1.0,4.1e-06,0.0
+DrugEx_RNN_epsilon_0.1_250k_2,dis,cdpkit,242691.0,250000.0,0/154,0.0,0.970764,0.0,0.0,0.0,0.0
+DrugEx_RNN_epsilon_0.1_250k_3,dis,cdpkit,239776.0,250000.0,0/196,0.0,0.959104,0.0,0.0,0.0,0.0
+DrugEx_RNN_epsilon_0.1_250k_4,dis,cdpkit,229879.0,250000.0,3/279,0.0107527,0.919516,4.4e-05,11.0,1.31e-05,0.0
+DrugEx_RNN_epsilon_0.1_250k_mean,dis,cdpkit,238891.6,250000.0,-,0.0072664,0.9555664,1.12e-05,2.8,4.3e-06,0.0
