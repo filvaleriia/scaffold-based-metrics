@@ -10,7 +10,7 @@ babel==2.17.0
 beautifulsoup4==4.13.3
 bleach==6.2.0
 blinker==1.9.0
-certifi==2022.9.24
+certifi==2025.4.26
 cffi==1.17.1
 charset-normalizer==3.4.1
 click==8.1.8
@@ -122,7 +122,7 @@ threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_
 tinycss2==1.4.0
 tomli==2.2.1
 tornado==6.4.2
-tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1662214488106/work
+tqdm==4.67.1
 traitlets==5.14.3
 types-python-dateutil==2.9.0.20241206
 typing_extensions==4.12.2
