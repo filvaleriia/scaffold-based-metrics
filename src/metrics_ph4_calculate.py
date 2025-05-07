@@ -42,7 +42,13 @@ def create_matching_dataframe(recall_fps, output_fps):
     print("RECAL FP LEN: ", len(recall_fps))
     num = 0
     for recall_fp in recall_fps:
-
+        #for output_fp in output_fps:
+            #if tanimoto_similarity(recall_fp, output_fp) > 0.9:
+            #    print("Tanimoto: ", tanimoto_similarity(recall_fp, output_fp))
+            #    print(tanimoto_similarity(output_fp, output_fp))
+            #elif tanimoto_similarity(recall_fp, output_fp) > 0.8:
+            #    print("Tanimoto: ", tanimoto_similarity(recall_fp, output_fp))
+            #    print(tanimoto_similarity(output_fp, output_fp))
         # Počítání podobnosti Tanimoto pro všechny output_fps
         match_count = np.sum([tanimoto_similarity(recall_fp, output_fp) == 1.0 for output_fp in output_fps])
         
@@ -116,6 +122,7 @@ class Metrics_phfp:
 
         
     def calculate_metrics(self):
+        print('Calculate')
         df = create_matching_dataframe(self.recall_set_phfp, self.output_set_phfp)
         self.count_metrics = pd.DataFrame(df)
         print("END CREATE MATCHING")

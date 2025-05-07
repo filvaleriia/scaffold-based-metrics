@@ -5,9 +5,12 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 
-def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
+def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, ph4 = False):
     # Define path to data
-    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    if ph4 == False:
+        link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    else:
+        link = f"data/results_phram_fp/{receptor}/{type_scaffold}/{type_cluster}"
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
     # Load data
@@ -23,7 +26,7 @@ def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
     return df
 
 
-def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True):
+def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True, ph4 = False):
     ''' 
     Plots a single heatmap for the given data split.
     
@@ -36,7 +39,6 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
 
     # Extract relevant columns (TUPOR, SESY, ASER, ASR) for visualization
     df = data[['TUPOR', 'SESY', 'ASER']]
-    
     # Set the index of the dataframe to the 'name' attribute of the data
     df.index = data.name.tolist()
 
@@ -50,7 +52,12 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
     plt.title(title)
     plt.tight_layout()
     # Save the plot as an SVG file
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+    if ph4:
+        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
     # Display the heatmap
     plt.show()
 
@@ -118,7 +125,7 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
 
 
 
-def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True):
+def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, ph4 = False):
     '''
     Plots heatmaps for different subsets in a 2x2 grid, with each subset visualized in a separate subplot.
     
@@ -152,7 +159,8 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
         # Modify the y-axis labels for better readability by inserting line breaks
         new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mean', '\n mean') for label in ax.get_yticklabels()]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=11)
-        
+        if ph4:
+            ax.set_xticklabels(labels=['TUPOR_pharm', 'SESY_pharm', 'ASER_pharm'], fontsize=11)
         # Set the title for the current subplot to indicate the subset
         ax.set_title(f"{subset_dict_data[axses]}")
     
@@ -161,9 +169,14 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
     
     # Adjust layout to ensure titles and labels are well placed
     plt.tight_layout()
-    # Save the plot as an SVG file
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
+
+
+    if ph4:
+        #plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
     # Display the heatmap figure
     plt.show()
 
