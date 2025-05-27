@@ -12,3 +12,5 @@ data/input_recall_sets/Leukocyte_elastase/*.smi
 data/results_phram_fp/*/*/*/*/phfp_of_output_set*
 
 data/results_phram_fp/*/*/*/*/phfp_of_recall_set*
+
+data/results_phram_fp/*/rdkit/*
