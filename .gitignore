@@ -4,3 +4,7 @@ data/output_sets/*
 
 src/__pycache__/
 /__pycache__/
+
+
+data/results_phram_fp/
+
