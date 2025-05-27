@@ -9,7 +9,7 @@ This repository contains the code and configuration used for running the REINVEN
 
 ## 🛠️ Requirements
 
-Before running the generator, make sure to install all required dependencies and clone REINVENT from GitHub. You can find my environment listed in the requirements.txt file.
+Before running the generator, make sure to install all required dependencies and clone REINVENT from GitHub.
 
 
 ## 🧪 Workflow Overview
