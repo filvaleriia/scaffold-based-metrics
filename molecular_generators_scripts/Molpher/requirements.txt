@@ -6,7 +6,7 @@ Babel @ file:///home/conda/feedstock_root/build_artifacts/babel_1619719576210/wo
 backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
 bleach @ file:///home/conda/feedstock_root/build_artifacts/bleach_1629908509068/work
 brotlipy==0.7.0
-certifi==2021.10.8
+certifi==2025.4.26
 cffi @ file:///home/conda/feedstock_root/build_artifacts/cffi_1631636268373/work
 chardet @ file:///home/conda/feedstock_root/build_artifacts/chardet_1610093490430/work
 cryptography @ file:///home/conda/feedstock_root/build_artifacts/cryptography_1634230276575/work
@@ -52,7 +52,7 @@ parso @ file:///tmp/build/80754af9/parso_1617223946239/work
 patsy @ file:///home/conda/feedstock_root/build_artifacts/patsy_1632667180946/work
 pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work
 pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
-Pillow @ file:///home/conda/feedstock_root/build_artifacts/pillow_1630696607296/work
+pillow==10.4.0
 prometheus-client @ file:///home/conda/feedstock_root/build_artifacts/prometheus_client_1622586138406/work
 prompt-toolkit @ file:///tmp/build/80754af9/prompt-toolkit_1633440160888/work
 ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
@@ -66,7 +66,7 @@ PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_161029144790
 python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
 pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1633452062248/work
 pyzmq @ file:///home/conda/feedstock_root/build_artifacts/pyzmq_1631793296765/work
-reportlab==3.5.68
+reportlab==4.4.1
 requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1608156231189/work
 requests-unixsocket==0.2.0
 scipy @ file:///home/conda/feedstock_root/build_artifacts/scipy_1637806659039/work
