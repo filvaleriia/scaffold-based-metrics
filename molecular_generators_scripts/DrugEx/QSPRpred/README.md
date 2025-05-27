@@ -11,12 +11,7 @@ For the DrugEx generator and REINVENT, we created QSAR models using the QSPRpred
 
 To run QSPRpred, follow these steps:
 
-1. Install the required dependencies. I used the same environment as for running the DrugEx scripts.
-
-```bash
-pip install -r requirements.txt
-```
-
+1. Install all required dependencies and clone QSPRpred from GitHub.
 2. Specify the input data in the script.
 3. Run the Python script to train the model.
 

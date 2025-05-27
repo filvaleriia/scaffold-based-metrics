@@ -9,11 +9,7 @@ Molecular generator DrugEx with Graph Transformer
 
 ## 🛠️ Installation
 
-To install the required dependencies, use the following command:
-
-```bash
-pip install -r requirements.txt
-```
+Before running the generator, make sure to install all required dependencies and clone DrugEx from GitHub.
 
 ## 🔄 DrugEx Steps
 
