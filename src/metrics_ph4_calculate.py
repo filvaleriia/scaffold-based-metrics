@@ -28,15 +28,18 @@ def tanimoto_similarity(vec1, vec2):
     else:
         return intersection / union
 
-def create_matching_dataframe(recall_fps, output_fps):
+def create_matching_dataframe(recall_fps, output_fps, threhsold):
     data = []
     data_fp = []
     # Převedeme recall_fps a output_fps na numpy array pro efektivní operace
 
-    #print(recall_fps)
+    print('Created mathicg pool')
 
     recall_fps = [np.array([int(bit) for bit in fp]) for fp in recall_fps[0].tolist()]
+    print('Recall fps done')
     output_fps = [np.array([int(bit) for bit in fp]) for fp in output_fps[0].tolist()]
+
+    print('Output fp done')
 
     # Urychlení pomocí vektorových operací
     print("RECAL FP LEN: ", len(recall_fps))
@@ -50,7 +53,7 @@ def create_matching_dataframe(recall_fps, output_fps):
             #    print("Tanimoto: ", tanimoto_similarity(recall_fp, output_fp))
             #    print(tanimoto_similarity(output_fp, output_fp))
         # Počítání podobnosti Tanimoto pro všechny output_fps
-        match_count = np.sum([tanimoto_similarity(recall_fp, output_fp) == 1.0 for output_fp in output_fps])
+        match_count = np.sum([tanimoto_similarity(recall_fp, output_fp) >= threhsold for output_fp in output_fps])
         
         # Pokud je počet shod > 0, přidáme řádek do seznamu
         data.append({
@@ -95,7 +98,7 @@ def average_tanimoto_diversity(fingerprints, num_processes=1):
 
 
 class Metrics_phfp:
-    def __init__(self, type_cluster: str, type_phfp: str, generator_name: str, receptor: str, ncpus = 1):
+    def __init__(self, type_cluster: str, type_phfp: str, generator_name: str, receptor: str, threshold = 1, ncpus = 1):
         self.type_cluster = type_cluster
         self.type_phfp = type_phfp
         self.generator_name = generator_name
@@ -109,12 +112,14 @@ class Metrics_phfp:
         self.unique_output_set = None
         self.unique_recall_set = None
         self.count_metrics = None
+        self.threshold = threshold
         self.results = pd.DataFrame()
 
 
     def load(self, filepath_output_set, filepath_recall_set):
         self.output_set_phfp = pd.read_csv(filepath_output_set, header = None)
         self.recall_set_phfp = pd.read_csv(filepath_recall_set, header = None)
+        print('ORIGINAL OUTPUT LEN: ', len(self.output_set_phfp))
         print('ORIGINAL RECALL LEN: ', len(self.recall_set_phfp))
         self.recall_set_phfp = self.recall_set_phfp.drop_duplicates(keep='first').reset_index(drop=True)
         print('UNIQUE RECALL LEN: ', len(self.recall_set_phfp))
@@ -123,7 +128,7 @@ class Metrics_phfp:
         
     def calculate_metrics(self):
         print('Calculate')
-        df = create_matching_dataframe(self.recall_set_phfp, self.output_set_phfp)
+        df = create_matching_dataframe(self.recall_set_phfp, self.output_set_phfp, self.threshold)
         self.count_metrics = pd.DataFrame(df)
         print("END CREATE MATCHING")
         # Calculate metrics.
@@ -154,10 +159,16 @@ class Metrics_phfp:
         results.insert(0, 'name', f"{self.generator_name}_{self.number_of_calculation}")
         results.insert(2, 'phfp', self.type_phfp)
 
-        main_dir = Path(__file__).resolve().parents[1]
-        folder = f"{main_dir}/data/results_phram_fp/{self.receptor}/{self.type_phfp}/{self.type_cluster}/{self.generator_name}/"
-        self.count_metrics.to_csv(f"{folder}/count_of_occurrence_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
-        results.to_csv(f"{folder}/metrics_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
+        if self.threshold != 1:
+            main_dir = Path(__file__).resolve().parents[1]
+            folder = f"{main_dir}/data/results_phram_fp/{self.receptor}/{self.type_phfp}/{self.type_cluster}/{self.generator_name}/"
+            self.count_metrics.to_csv(f"{folder}/count_of_occurrence_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}_threshold_{self.threshold}.csv", index=False)
+            results.to_csv(f"{folder}/metrics_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}_threshold_{self.threshold}.csv", index=False)
+        else:
+            main_dir = Path(__file__).resolve().parents[1]
+            folder = f"{main_dir}/data/results_phram_fp/{self.receptor}/{self.type_phfp}/{self.type_cluster}/{self.generator_name}/"
+            self.count_metrics.to_csv(f"{folder}/count_of_occurrence_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
+            results.to_csv(f"{folder}/metrics_cluster_{self.number_of_calculation}_{self.type_cluster}_{self.generator_name}.csv", index=False)
 
         print(results)
 
@@ -213,11 +224,15 @@ class Metrics_phfp:
 
         mean_df = combined_df.tail(1)
 
-
-        # Save the DataFrames.
-        formatted_df.to_csv(f"{base_path}df_all_clusters_with_mean_with_coma.csv", index=False)
-        combined_df.to_csv(f"{base_path}df_all_clusters_with_mean.csv", index=False)
-        mean_df.to_csv(f"{base_path}{self.generator_name}_mean_{self.type_phfp}_{self.type_cluster}.csv", index=False)
+        if self.threshold != 1:
+            formatted_df.to_csv(f"{base_path}df_all_clusters_with_mean_with_coma_threshold_{self.threshold}.csv", index=False)
+            combined_df.to_csv(f"{base_path}df_all_clusters_with_mean_threshold_{self.threshold}.csv", index=False)
+            mean_df.to_csv(f"{base_path}{self.generator_name}_mean_{self.type_phfp}_{self.type_cluster}_threshold_{self.threshold}.csv", index=False)
+        else:
+            # Save the DataFrames.
+            formatted_df.to_csv(f"{base_path}df_all_clusters_with_mean_with_coma.csv", index=False)
+            combined_df.to_csv(f"{base_path}df_all_clusters_with_mean.csv", index=False)
+            mean_df.to_csv(f"{base_path}{self.generator_name}_mean_{self.type_phfp}_{self.type_cluster}.csv", index=False)
 
         return combined_df
 
