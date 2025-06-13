@@ -86,10 +86,10 @@ python3 src/metrics.py --type_cluster dis --scaffold_type csk --generator Molphe
 
 ```
 
-The second options how use generator it define the path to folder where Recall Set and Output Set or you can look for examples run_calculation_metrics_define_path.sh. The results can be found in the folder /data/results/{receptor_name}/{generator_name}/ 
+The second options how use generator it define the path to folder where Recall Set and Output Set or you can look for examples run_calculation_metrics_define_path.sh. The results can be found in the folder */data/results/{receptor_name}/{generator_name}/*
 
 ```bash
-python3 ../src/metrics_define_path.py \
+python3 src/metrics_define_path.py \
     --type_cluster sim \
     --type_scaffold csk \
     --generator Molpher_125k \
@@ -101,7 +101,7 @@ python3 ../src/metrics_define_path.py \
 
 The last options how it run, you can use your own data, for this purpose existing script src/metrics_own_data.py or you can loock for examples run_own_single_metrics_calculation.sh, the results will be in results folder in main folder:
 ```bash
-python3 ../src/metrics_own_data.py \
+python3 src/metrics_own_data.py \
     --type_scaffold csk \
     --generator Molpher_125k \
     --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cIS_Glucocorticoid_receptor_dis_0.csv \
