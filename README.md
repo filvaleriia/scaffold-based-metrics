@@ -61,6 +61,7 @@ Modify the `calculate_metrics` function in your notebook or script to specify:
 
 To use these metrics as explained below, you need to save your OutputSet to the folder. The Output must have only one column with smiles, without header.
 */data/output_sets/{receptor_name}/{generator_name}/cOS_{generator_name}_{type_cluster}_{number_of_cluster}_one_column.csv.*
+
 After that, you can simply use the generator name.
 The results can be found in the folder /data/results/{receptor_name}/{generator_name}/
 
