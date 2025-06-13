@@ -94,8 +94,8 @@ python3 ../src/metrics_define_path.py \
     --type_scaffold csk \
     --generator Molpher_125k \
     --receptor Glucocorticoid_receptor \
-    --recall_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/input_recall_sets/Glucocorticoid_receptor \
-    --output_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_125k \
+    --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor \
+    --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_125k \
     --ncpus 1
 ```
 
@@ -104,7 +104,7 @@ The last options how it run, you can use your own data, for this purpose existin
 python3 ../src/metrics_own_data.py \
     --type_scaffold csk \
     --generator Molpher_125k \
-    --recall_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cIS_Glucocorticoid_receptor_dis_0.csv \
-    --output_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_1_one_column.csv \
+    --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cIS_Glucocorticoid_receptor_dis_0.csv \
+    --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_1_one_column.csv \
     --ncpus 1
 ```
