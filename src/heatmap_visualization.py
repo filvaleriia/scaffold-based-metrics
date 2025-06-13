@@ -42,14 +42,28 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
     # Set the index of the dataframe to the 'name' attribute of the data
     df.index = data.name.tolist()
 
+    y_labels = {
+
+    "Molpher": "Molpher",
+    "REINVENT": "REINVENT",
+    "DrugEx_GT_epsilon_0.6" : "DrugEx_GT",
+    "DrugEx_RNN_epsilon_0.6": "DrugEx_RNN",
+    "GB_GA_mut_r_0.5": "GB_GA",
+    "addcarbon": "AddCarbon"
+    }
+    df.rename(index=y_labels, inplace=True)
+
     # Create a figure for the heatmap with a specific size
     plt.figure(figsize=(10, 6))
     
     # Plot the heatmap using seaborn with optional annotations and custom color map
-    sns.heatmap(df, annot=annotate, cmap=cmap)
+    sns.heatmap(df, annot=annotate, cmap=cmap,   annot_kws={"size": 17})
     
     # Set the title for the heatmap
-    plt.title(title)
+    plt.title(title, fontsize=17 , pad=10)
+
+    plt.xticks(fontsize=17)
+    plt.yticks(fontsize=17)
     plt.tight_layout()
     # Save the plot as an SVG file
     if ph4:
@@ -164,7 +178,7 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
         sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax)
 
         # Modify the y-axis labels for better readability by inserting line breaks
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mean', '\n mean') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r') for label in ax.get_yticklabels()]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=11)
         if ph4:
             ax.set_xticklabels(labels=['TUPOR_pharm', 'SESY_pharm', 'ASER_pharm'], fontsize=11)
