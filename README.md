@@ -1,9 +1,8 @@
 # 📊 Recall Metrics for Molecular Generators
 
  
-**Purpose**: This repository provides an implementation of recall-based metrics—TUPOR, SESY and ASER — for evaluating molecular generators. These metrics help assess the diversity, novelty, and structural relevance of generated compounds.
+**Purpose**: This repository provides an implementation of recall-based metrics — **TUPOR**, **SESY** and **ASER** — for evaluating molecular generators. These metrics help assess the diversity, novelty, and structural relevance of generated compounds.
 
----
 
 ## 🚀 Features  
 
