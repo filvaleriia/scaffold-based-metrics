@@ -112,21 +112,24 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
         
         # If the subset name is empty, label it as 'base'
         if subset_name == '':
-            subset_name = 'BASELINE'
+            subset_name = 'Full OS'
         elif subset_name == '_62.5k':
             subset_name = '62,500'
         else:
             subset_name = subset_name.replace('_', '').replace('k', ',000')
         
         # Modify the y-axis labels for better readability by replacing certain substrings
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
         ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
 
         
         # Set the title for the current subplot to indicate the subset name
-        ax.set_title(f"{subset_name} subset",  fontsize=35, wrap=True)
+        if subset_name == 'Full OS':
+            ax.set_title(f"{subset_name}",  fontsize=35, wrap=True)
+        else:
+            ax.set_title(f"{subset_name} subset",  fontsize=35, wrap=True)
 
     fig.text(
     0.005, 0.97, poradi,
@@ -178,7 +181,7 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
         sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax)
 
         # Modify the y-axis labels for better readability by inserting line breaks
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=11)
         if ph4:
             ax.set_xticklabels(labels=['TUPOR_pharm', 'SESY_pharm', 'ASER_pharm'], fontsize=11)
@@ -243,15 +246,18 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         ax.figure.axes[-1].yaxis.label.set_size(20)
 
         if subset == '':
-            subset = 'BASELINE'
+            subset = 'Full OS'
         elif subset == '_62.5k':
             subset = '62,500'
         else:
             subset = subset.replace('_', '').replace('k', ',000')
 
-        ax.set_title(f"{subset} subset",  fontsize=35, wrap=True)
+        if subset == 'Full OS':
+            ax.set_title(f"{subset}",  fontsize=35, wrap=True)
+        else:
+            ax.set_title(f"{subset} subset",  fontsize=35, wrap=True)
 
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
         ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
@@ -268,7 +274,7 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
     fontsize=40
     )
 
-    fig.suptitle(f'Heatmaps with Differences from Baseline by more than ±0.1 for {scaf_str} scaffolds and {type_split} split for {receptor.replace("_", " ")}', fontsize=40)
+    #fig.suptitle(f'Heatmaps with Differences from Baseline by more than ±0.1 for {scaf_str} scaffolds and {type_split} split for {receptor.replace("_", " ")}', fontsize=40)
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
