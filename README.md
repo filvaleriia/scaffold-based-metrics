@@ -29,9 +29,9 @@ Absolute set scaffold recall (ASER) – value for the generated dataset expressi
 * **Use case**: A high ASER value indicates that the generator is targeting the most relevant chemical space for drug discovery, creating compounds that are more likely to exhibit biological activity. Users can rely on this metric to assess how well the generator is focusing on biologically active areas of molecular space. 
  
 
-* Supports multiple molecular generators: **Molpher, REINVENT, DrugEx, GB_GA, and AddCarbon**.  
-* Works with **Murcko and CSK scaffold analysis**.  
-* Normalization and visualization tools for result interpretation.  
+✔ Supports multiple molecular generators: **Molpher, REINVENT, DrugEx, GB_GA, and AddCarbon**.  
+✔ Works with **Murcko and CSK scaffold analysis**.  
+✔ Normalization and visualization tools for result interpretation.  
 
 In this analyze we prepare data for two different receptors (Glucocorticoid receptor, Leukocyte elastase) and two different split (dissimilarity split and similalrity split)
 
