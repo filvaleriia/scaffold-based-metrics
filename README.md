@@ -108,3 +108,38 @@ python3 src/metrics_own_data.py \
     --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_1_one_column.csv \
     --ncpus 1
 ```
+
+##  🔬⚙️ Project overview  
+In this project, we applied three metrics to compare different molecular generators as well as different generator settings in the optimization process.  
+To demonstrate the target independence of these metrics, we selected two pharmacological targets and evaluated five molecular generators:
+
+1. **Molpher** – atom-based molecular generator using an evolutionary strategy  
+2. **DrugEx** – neural network–based generator. Two architectures and two different epsilon parameter settings (affecting exploration vs. exploitation) were applied:  
+   - DrugEx RNN  
+   - DrugEx GT  
+3. **REINVENT** – neural network–based generator using a pretrained model  
+4. **GB_GA** – atom-based generator using a genetic algorithm. Two different mutation_rate parameters were tested (1% and 50%)  
+5. **AddCarbon** – baseline generator for result verification  
+
+To cover different structural aspects, we employed two scaffold definitions: **CSKs** and **Murcko scaffolds** (RDKit definition).
+
+For data preparation, we retrieved compounds from **ChEMBL31** for the *Glucocorticoid receptor (GR)* and *Leukocyte elastase (LE)*, selecting only active molecules using activity thresholds (<=100 nM for GR, <=1000 nM for LE).  
+The compounds were converted to CSKs and clustered into five groups. From these clusters, we constructed an **Input Set (IS)** and a **Recall Set (RS)** using two approaches:  
+- *dissimilarity split (a)*  
+- *similarity split (b)*  
+
+![a. Dissimilarity split; b. Similarity split](img/split_strategy.jpg)
+
+The rationale was to explore metric limitations:  
+- **Similarity split** → IS and RS are structurally close (upper limit of the metric).  
+- **Dissimilarity split** → IS and RS are structurally distant (lower limit of the metric).  
+
+In total, we created **10 different sets** (5 for dissimilarity and 5 for similarity). Each generator was run with the IS to produce corresponding **Output Sets (OS)**.  
+Metrics were calculated for each OS using the RS. To avoid bias from outliers or unusual generator behavior, the results were averaged across the five runs.  
+
+Finally, we compared the average metric values across the two split strategies, the two targets, and the two scaffold definitions. For visualization, we prepared normalized heatmaps.  
+
+
+## 📊 Results  
+
+Here we summarize the main outcomes of our study...
