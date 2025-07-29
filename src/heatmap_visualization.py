@@ -5,9 +5,12 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 
-def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
+def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, ph4 = False):
     # Define path to data
-    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    if ph4 == False:
+        link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    else:
+        link = f"data/results_phram_fp/{receptor}/{type_scaffold}/{type_cluster}"
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
     # Load data
@@ -23,7 +26,7 @@ def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
     return df
 
 
-def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True):
+def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True, ph4 = False):
     ''' 
     Plots a single heatmap for the given data split.
     
@@ -36,27 +39,45 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
 
     # Extract relevant columns (TUPOR, SESY, ASER, ASR) for visualization
     df = data[['TUPOR', 'SESY', 'ASER']]
-    
     # Set the index of the dataframe to the 'name' attribute of the data
     df.index = data.name.tolist()
+
+    y_labels = {
+
+    "Molpher": "Molpher",
+    "REINVENT": "REINVENT",
+    "DrugEx_GT_epsilon_0.6" : "DrugEx_GT",
+    "DrugEx_RNN_epsilon_0.6": "DrugEx_RNN",
+    "GB_GA_mut_r_0.5": "GB_GA",
+    "addcarbon": "AddCarbon"
+    }
+    df.rename(index=y_labels, inplace=True)
 
     # Create a figure for the heatmap with a specific size
     plt.figure(figsize=(10, 6))
     
     # Plot the heatmap using seaborn with optional annotations and custom color map
-    sns.heatmap(df, annot=annotate, cmap=cmap)
+    sns.heatmap(df, annot=annotate, cmap=cmap,   annot_kws={"size": 17})
     
     # Set the title for the heatmap
-    plt.title(title)
+    plt.title(title, fontsize=17 , pad=10)
+
+    plt.xticks(fontsize=17)
+    plt.yticks(fontsize=17)
     plt.tight_layout()
     # Save the plot as an SVG file
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+    if ph4:
+        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
     # Display the heatmap
     plt.show()
 
 
 
-def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap='viridis', annotate=True):
+def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, poradi = ''):
     '''
     Plots heatmaps for multiple subsets in a single figure.
     
@@ -91,23 +112,33 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
         
         # If the subset name is empty, label it as 'base'
         if subset_name == '':
-            subset_name = 'BASELINE'
+            subset_name = 'Full OS'
+        elif subset_name == '_62.5k':
+            subset_name = '62,500'
         else:
-            subset_name = subset_name.replace('_', '')
+            subset_name = subset_name.replace('_', '').replace('k', ',000')
         
         # Modify the y-axis labels for better readability by replacing certain substrings
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mean', '\n mean') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
-        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=25)
-        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=25)
+        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
+        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
 
         
         # Set the title for the current subplot to indicate the subset name
-        ax.set_title(f"{subset_name} subset",  fontsize=28, wrap=True)
+        if subset_name == 'Full OS':
+            ax.set_title(f"{subset_name}",  fontsize=35, wrap=True)
+        else:
+            ax.set_title(f"{subset_name} subset",  fontsize=35, wrap=True)
 
+    fig.text(
+    0.005, 0.97, poradi,
+    ha='left', va='top',
+    fontsize=40
+    )
     
     # Set the overall title for the figure
-    fig.suptitle(f'{title}', fontsize=30)
+    fig.suptitle(f'{title}', fontsize=40)
     
     # Adjust layout to ensure titles and labels are well placed
     plt.tight_layout()
@@ -118,7 +149,7 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
 
 
 
-def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True):
+def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, ph4 = False):
     '''
     Plots heatmaps for different subsets in a 2x2 grid, with each subset visualized in a separate subplot.
     
@@ -150,9 +181,10 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
         sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax)
 
         # Modify the y-axis labels for better readability by inserting line breaks
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mean', '\n mean') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=11)
-        
+        if ph4:
+            ax.set_xticklabels(labels=['TUPOR_pharm', 'SESY_pharm', 'ASER_pharm'], fontsize=11)
         # Set the title for the current subplot to indicate the subset
         ax.set_title(f"{subset_dict_data[axses]}")
     
@@ -161,15 +193,20 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
     
     # Adjust layout to ensure titles and labels are well placed
     plt.tight_layout()
-    # Save the plot as an SVG file
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
+
+
+    if ph4:
+        #plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
     # Display the heatmap figure
     plt.show()
 
 
 
-def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save=''):
+def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', poradi = ''):
     """
     Generates heatmaps comparing subsets of data against a baseline.
     The heatmaps highlight the differences from the baseline for values greater than 0.1 or smaller than -0.1.
@@ -208,17 +245,36 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         sns.heatmap(diff_df, annot=True, cmap='coolwarm', cbar_kws={'label': 'Difference from Baseline'}, ax=ax, annot_kws={"size": 30})
         ax.figure.axes[-1].yaxis.label.set_size(20)
 
+        if subset == '':
+            subset = 'Full OS'
+        elif subset == '_62.5k':
+            subset = '62,500'
+        else:
+            subset = subset.replace('_', '').replace('k', ',000')
 
-        ax.set_title(f'{subset.replace("_", "") if subset else "BASELINE"} subset', fontsize=28, wrap=True)
+        if subset == 'Full OS':
+            ax.set_title(f"{subset}",  fontsize=35, wrap=True)
+        else:
+            ax.set_title(f"{subset} subset",  fontsize=35, wrap=True)
 
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r') for label in ax.get_yticklabels()]
+        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
-        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=25)
-        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=25)
+        ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
+        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
         ax.set_facecolor('white')
 
+    if scaf == 'csk':
+        scaf_str = 'CSK'
+    else:
+        scaf_str = scaf
 
-    fig.suptitle(f'Heatmaps with Differences from Baseline > 0.1 or < -0.1 ({scaf}, {type_split}) for {receptor}', fontsize=30)
+    fig.text(
+    0.005, 0.97, poradi,
+    ha='left', va='top',
+    fontsize=40
+    )
+
+    #fig.suptitle(f'Heatmaps with Differences from Baseline by more than ±0.1 for {scaf_str} scaffolds and {type_split} split for {receptor.replace("_", " ")}', fontsize=40)
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
