@@ -6,7 +6,7 @@
 
 ## 🚀 Features  
 
-✔ Implementation of three key recall metrics:  
+Implementation of three key recall metrics:  
 
 ### ▪ True positive recall all (TUPOR): 
 The number of unique active scaffolds generated for the entire OS (UASo) in the ration to the total number of unique active scaffolds in RS (UASr). Quantifies the recall number of the unique active scaffolds for the entire structure generation process. TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique scaffolds from RS were found in the OS).  
@@ -22,16 +22,16 @@ value for the whole generated set, expressing how many different unique scaffold
 * **Use case**: SESY is valuable for users aiming to strike a balance between exploration and exploitation. A high SESY value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SESY value suggests a focus on exploiting known scaffolds, refining existing chemical structures. By adjusting the SESY, users can fine-tune the generator's ability to either discover new molecular structures (exploration) or optimize known scaffolds (exploitation), depending on the needs of their project. 
 
 ### ▪ Absolute set scaffold recall (ASER): 
-Absolute set scaffold recall (ASER) – value for the generated dataset expressing the total number of virtual compounds with active scaffold in the OS (CwASo) in relation to other scaffolds in OS (SSo). It tells us how effectively the generator is exploring the desired region of chemical space, with higher values reflecting better alignment with biologically relevant scaffolds. 
+Absolute set scaffold recall (ASER) – value for the generated dataset expressing the total number of virtual compounds with active scaffold in the OS (cASo) in relation to other scaffolds in OS (SSo). It tells us how effectively the generator is exploring the desired region of chemical space, with higher values reflecting better alignment with biologically relevant scaffolds. 
 
-   $$ASER = {{CwASo} \over SSo}$$ 
+   $$ASER = {{cASo} \over SSo}$$ 
 
 * **Use case**: A high ASER value indicates that the generator is targeting the most relevant chemical space for drug discovery, creating compounds that are more likely to exhibit biological activity. Users can rely on this metric to assess how well the generator is focusing on biologically active areas of molecular space. 
  
 
-✔ Supports multiple molecular generators: **Molpher, REINVENT, DrugEx, GB_GA, and AddCarbon**.  
-✔ Works with **Murcko and CSK scaffold analysis**.  
-✔ Normalization and visualization tools for result interpretation.  
+* Supports multiple molecular generators: **Molpher, REINVENT, DrugEx, GB_GA, and AddCarbon**.  
+* Works with **Murcko and CSK scaffold analysis**.  
+* Normalization and visualization tools for result interpretation.  
 
 In this analyze we prepare data for two different receptors (Glucocorticoid receptor, Leukocyte elastase) and two different split (dissimilarity split and similalrity split)
 
