@@ -5,12 +5,11 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 
-def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, ph4 = False):
+def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
     # Define path to data
-    if ph4 == False:
-        link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
-    else:
-        link = f"data/results_phram_fp/{receptor}/{type_scaffold}/{type_cluster}"
+
+    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
     # Load data
@@ -26,7 +25,7 @@ def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, ph
     return df
 
 
-def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True, ph4 = False):
+def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True):
     ''' 
     Plots a single heatmap for the given data split.
     
@@ -66,12 +65,9 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
     plt.yticks(fontsize=17)
     plt.tight_layout()
     # Save the plot as an SVG file
-    if ph4:
-        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.png', format="png")
-    else:
-        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
+
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     # Display the heatmap
     plt.show()
 
@@ -142,14 +138,14 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
     
     # Adjust layout to ensure titles and labels are well placed
     plt.tight_layout()
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     # Display the heatmap figure
     plt.show()
 
 
 
-def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, ph4 = False):
+def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True):
     '''
     Plots heatmaps for different subsets in a 2x2 grid, with each subset visualized in a separate subplot.
     
@@ -183,8 +179,7 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
         # Modify the y-axis labels for better readability by inserting line breaks
         new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=11)
-        if ph4:
-            ax.set_xticklabels(labels=['TUPOR_pharm', 'SESY_pharm', 'ASER_pharm'], fontsize=11)
+
         # Set the title for the current subplot to indicate the subset
         ax.set_title(f"{subset_dict_data[axses]}")
     
@@ -195,12 +190,9 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
     plt.tight_layout()
 
 
-    if ph4:
-        #plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-        plt.savefig(f'img_pharm/heat_mapa/{receptor}/{name_save}.png', format="png")
-    else:
-        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-        plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
+
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     # Display the heatmap figure
     plt.show()
 
@@ -277,6 +269,105 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
     #fig.suptitle(f'Heatmaps with Differences from Baseline by more than ±0.1 for {scaf_str} scaffolds and {type_split} split for {receptor.replace("_", " ")}', fontsize=40)
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_mapa/{receptor}/{name_save}.png', format="png")
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
+    plt.show()
+
+
+def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cmap="viridis", title=None, save_name="heatmap"):
+    """
+    Create and save combined heatmap for given generators, receptors, scaffolds, and metrics.
+
+    Parameters
+    ----------
+    hv : object
+        Your preprocessing module with hv.preprocesing function
+    generators : list
+        List of generator names
+    receptors : list
+        List of receptors
+    scaffolds : list
+        List of scaffold types
+    splits : list
+        List of split types (e.g. ['dis', 'sim'])
+    metrics : list
+        List of metric names
+    cmap : str
+        Colormap for heatmap (default "viridis")
+    title : str
+        Title for the heatmap
+    save_name : str
+        Base name for saving the figure (no extension)
+    """
+
+    # Build dataframe with all values
+    data = []
+    for gen in generators:
+        for receptor in receptors:
+            for type_scaffold in scaffolds:
+                for type_cluster in splits:
+                    df = preprocesing(type_cluster, type_scaffold, generators, receptor)
+                    for met in metrics:
+                        value = df[df.name.str.startswith(gen)][met].iloc[0]
+                        data.append([gen, receptor, type_scaffold, type_cluster, met, value])
+
+    df = pd.DataFrame(data, columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value'])
+    
+    # Build heatmap data
+    heatmap_data = []
+    for generator in df.Generator.unique():
+        df_sub = df[df.Generator == generator]
+        matrix = []
+        for receptor in df_sub.Receptor.unique():
+            df_sub_r = df_sub[df_sub.Receptor == receptor]
+            for scaffold in df_sub_r.Scaffold.unique():
+                df_sub_r_s = df_sub_r[df_sub_r.Scaffold == scaffold]
+                for split in splits:
+                    df_sub_r_s_s = df_sub_r_s[df_sub_r_s.Split == split]
+                    for met in metrics:
+                        matrix.append(df_sub_r_s_s[df_sub_r_s_s.Metric == met]['Value'].values[0])
+        heatmap_data.append(matrix)
+
+    heatmap_data = np.array(heatmap_data)
+
+    # Plot heatmap
+    fig, ax = plt.subplots(figsize=(20, 10))
+    sns.heatmap(heatmap_data, annot=True, fmt=".2f", cmap=cmap, ax=ax,
+                cbar_kws={'label': 'Metric Value'}, annot_kws={"size": 12})
+
+    if title:
+        ax.set_title(title, fontsize=20)
+    ax.set_ylabel('Generators', fontsize=15)
+
+    new_labels = [label.replace('_epsilon', '\n epsilon')
+                        .replace('_mut_r', '\n mut_r')
+                        .replace('addcarbon', 'AddCarbon')
+                  for label in generators]
+    ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=15)
+    ax.tick_params(axis='y', pad=15)
+
+    # Add rectangles to highlight blocks
+    for i in range(len(heatmap_data)):
+        for k in [0,3,6,9,12,15,18,21]:
+            ax.add_patch(plt.Rectangle((k, i), 3, 1, fill=False, edgecolor='black', lw=1))
+    ax.vlines(x=12, ymin=0, ymax=len(generators) * 2, colors='red', linewidth=5)  
+
+    custom_xticklabels = ["CSK-DIS",  "CSK-SIM", "MURCKO-DIS",  "MURCKO-SIM",  "CSK-DIS",  "CSK-SIM", "MURCKO-DIS",  "MURCKO-SIM"]
+
+    x = -1.5
+    tick_positions = []
+    for i in range(len(custom_xticklabels)):
+        x += 3
+        tick_positions.append(x)
+
+
+    ax.set_xticks(tick_positions)
+    ax.set_xticklabels(custom_xticklabels, rotation=45, ha="right", fontsize=15)
+
+    ax.text(2, 11, "Glucocorticoid receptor", fontsize=17, color='black')
+    ax.text(17, 11, "Leukocyte elastase", fontsize=17, color='black')
+
+    plt.tight_layout()
+    plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
+    plt.savefig(f'img/heat_map/{save_name}.png', format="png")
     plt.show()
