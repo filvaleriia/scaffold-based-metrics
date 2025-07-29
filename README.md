@@ -142,4 +142,16 @@ Finally, we compared the average metric values across the two split strategies, 
 
 ## 📊 Results  
 
-Here we summarize the main outcomes of our study...
+Here we summarize the main outcomes of our study.  
+
+**Normalized heatmaps for Glucocorticoid receptor**  
+![Normalized heatmaps for Glucocorticoid receptor](img/heat_mapa/Glucocorticoid_receptor/heat_map_comparison_base_all_splits_paper.png)
+
+**Normalized heatmaps for Leukocyte elastase**  
+![Normalized heatmaps for Leukocyte elastase](img/heat_mapa/Leukocyte_elastase/heat_map_comparison_base_all_splits_paper.png)
+
+**Combined normalized results in a single overview plot**  
+![Normalized heatmaps](img/heat_mapa/all_res_norm.png)
+
+Based on these results, the best performance of our metrics was achieved by **DrugEx Graph Transformer** with *epsilon = 0.6*.  
+The weakest performance was observed for the **AddCarbon** generator.
