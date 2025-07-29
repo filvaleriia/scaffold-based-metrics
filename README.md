@@ -150,7 +150,7 @@ Here we summarize the main outcomes of our study.
 
 | **Normalized heatmaps for Glucocorticoid receptor** | **Normalized heatmaps for Leukocyte elastase** |
 |:--------------------------------------------------:|:---------------------------------------------:|
-| ![Glucocorticoid receptor](img/heat_map/Glucocorticoid_receptor/heat_map_comparison_base_all_splits_paper.png) | ![Leukocyte elastase](img/heat_map/Leukocyte_elastase/heat_map_comparison_base_all_splits_paper.png) |
+| <img src="img/heat_map/Glucocorticoid_receptor/heat_map_comparison_base_all_splits_paper.png" width="400"/> | <img src="img/heat_map/Leukocyte_elastase/heat_map_comparison_base_all_splits_paper.png" width="400"/> |
 
 
 **Combined normalized results in a single overview plot**  
