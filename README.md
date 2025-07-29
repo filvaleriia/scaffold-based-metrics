@@ -137,7 +137,10 @@ The rationale was to explore metric limitations:
 In total, we created **10 different sets** (5 for dissimilarity and 5 for similarity). Each generator was run with the IS to produce corresponding **Output Sets (OS)**.  
 Metrics were calculated for each OS using the RS. To avoid bias from outliers or unusual generator behavior, the results were averaged across the five runs.  
 
-Finally, we compared the average metric values across the two split strategies, the two targets, and the two scaffold definitions. For visualization, we prepared normalized heatmaps.  
+Finally, we compared the average metric values across the two split strategies, the two targets, and the two scaffold definitions. For visualization, we prepared normalized heatmaps.
+
+![Project workflow](img/project_workflow.jpg)
+
 
 
 ## 📊 Results  
@@ -145,13 +148,13 @@ Finally, we compared the average metric values across the two split strategies, 
 Here we summarize the main outcomes of our study.  
 
 **Normalized heatmaps for Glucocorticoid receptor**  
-![Normalized heatmaps for Glucocorticoid receptor](img/heat_mapa/Glucocorticoid_receptor/heat_map_comparison_base_all_splits_paper.png)
+![Normalized heatmaps for Glucocorticoid receptor](img/heat_map/Glucocorticoid_receptor/heat_map_comparison_base_all_splits_paper.png)
 
 **Normalized heatmaps for Leukocyte elastase**  
-![Normalized heatmaps for Leukocyte elastase](img/heat_mapa/Leukocyte_elastase/heat_map_comparison_base_all_splits_paper.png)
+![Normalized heatmaps for Leukocyte elastase](img/heat_map/Leukocyte_elastase/heat_map_comparison_base_all_splits_paper.png)
 
 **Combined normalized results in a single overview plot**  
-![Normalized heatmaps](img/heat_mapa/all_res_norm.png)
+![Normalized heatmaps](img/heat_map/all_res_norm.png)
 
 Based on these results, the best performance of our metrics was achieved by **DrugEx Graph Transformer** with *epsilon = 0.6*.  
 The weakest performance was observed for the **AddCarbon** generator.
