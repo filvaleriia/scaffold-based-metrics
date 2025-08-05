@@ -119,7 +119,7 @@ class Metrics:
         # Calculate metrics.
         USo = len(self.unique_output_set)
         SSo = len(self.output_set_scaffolds)
-        CwASo = self.count_metrics['count_of_occurrence'].sum()
+        cASo = self.count_metrics['count_of_occurrence'].sum()
         try:
             UASo = self.count_metrics['unique_indicator'].value_counts()[1]
         except Exception:
@@ -135,14 +135,13 @@ class Metrics:
             tupor = 0
             tupor_text = f"0/{len(df)}"
 
-        # Calculate additional metrics.
-        other_scaffolds_unique = [scf for scf in self.unique_output_set if scf not in self.recall_set_scaffolds[0].tolist()]
+        # Calculate additional metrics.s
         other_scaffolds = [scf for scf in self.output_set_scaffolds[0].tolist() if scf not in self.recall_set_scaffolds[0].tolist()]
 
         SESY = USo / SSo if SSo > 0 else 0
-        ASER = CwASo / len(other_scaffolds) if len(other_scaffolds) > 0 else 0
+        ASER = cASo / len(other_scaffolds) if len(other_scaffolds) > 0 else 0
 
-        return self.type_cluster, USo, SSo, tupor_text, tupor, SESY, ASER, CwASo
+        return self.type_cluster, SSo, tupor_text, tupor, SESY, ASER
 
 
     def save_function(self):
@@ -172,7 +171,6 @@ class Metrics:
         # Build file paths for each cluster number.
         file_paths = {x: f"{base_path}metrics_cluster_{x}_{self.type_cluster}_{self.generator_name}.csv" for x in numbers}
 
-
         # Load all CSV files and combine them.
         combined_df = pd.concat([pd.read_csv(path) for path in file_paths.values()], ignore_index=True)
 
@@ -186,13 +184,11 @@ class Metrics:
                 f"{self.generator_name}_mean",         # Name
                 self.type_cluster,                # Type cluster
                 self.type_scaffold,               # Scaffold type
-                mean_values.get('USo', np.nan),
                 mean_values.get('SSo', np.nan),
                 '-',                         # Placeholder column
                 mean_values.get('TUPOR', np.nan),
                 mean_values.get('SESY', np.nan),
-                mean_values.get('ASER', np.nan),
-                mean_values.get('CwASo', np.nan),
+                mean_values.get('ASER', np.nan)
             ]
 
         # Append the mean row to the combined DataFrame.
@@ -203,13 +199,12 @@ class Metrics:
 
         # Create a formatted copy for specific columns.
         formatted_df = combined_df.copy()
-        for col in ['SSo', 'USo', 'CwASo']:
+        for col in ['SSo']:
             formatted_df[col] = formatted_df[col].apply(lambda x: "{:,}".format(x) if pd.notnull(x) else x)
 
         # Display the complete DataFrame and the mean row.
 
         mean_df = combined_df.tail(1)
-
 
         # Save the DataFrames.
         formatted_df.to_csv(f"{base_path}df_all_clusters_with_mean_with_coma.csv", index=False)
@@ -219,9 +214,6 @@ class Metrics:
 
         return combined_df
     
-
-
-
 
     def calculate_metrics(self):
         """
@@ -238,7 +230,7 @@ class Metrics:
             if os.path.exists(output_file_path):
                 self.load(output_file_path, recall_file_path)
                 res = self.main_function_return(self.output_set, self.recall_set)
-                results = pd.DataFrame(columns=['type_cluster', 'USo', 'SSo', 'TUPOR_', 'TUPOR', 'SESY', 'ASER', 'CwASo'])
+                results = pd.DataFrame(columns=['type_cluster', 'SSo', 'TUPOR_', 'TUPOR', 'SESY', 'ASER'])
                 results.loc[len(results)] = res
                 results.insert(0, 'name', f"{self.generator_name}_{self.number_of_calculation}")
                 results.insert(2, 'scaffold', self.type_scaffold)
@@ -248,10 +240,8 @@ class Metrics:
                 numbers_of_calcs.append(self.number_of_calculation)
             else:
                 print(f"Path for cluster {self.number_of_calculation} doesn't exists")
-        
-        
+
         result = self.average_value(numbers_of_calcs)
-        
         
         return result
     
