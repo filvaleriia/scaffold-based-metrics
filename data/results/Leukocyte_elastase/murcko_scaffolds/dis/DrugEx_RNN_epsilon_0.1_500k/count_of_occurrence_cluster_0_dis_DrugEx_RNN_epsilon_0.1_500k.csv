@@ -13,7 +13,7 @@ O=C1NC(c2ccccc2-c2ccncc2)C=CN1c1ccccc1,5,1
 O=C1NC(c2ccccc2-c2ccc(=O)[nH]c2)C=CN1c1ccccc1,0,0
 O=C1NC(c2ccccc2-c2cccnc2)C=CN1c1ccccc1,8,1
 O=C1NC(c2ccccc2C2=CCNCC2)C=CN1c1ccccc1,0,0
-O=C1NC(c2ccccc2)C=CN1c1ccccc1,5363,1
+O=C1NC(c2ccccc2)C=CN1c1ccccc1,5360,1
 O=C1NC(c2cccnc2)C=CN1c1ccccc1,272,1
 O=C1CCC2=C1C(c1ccccc1-c1cnco1)NC(=O)N2c1ccccc1,1,1
 O=C1CCC2=C1C(c1ccccc1-c1cncs1)NC(=O)N2c1ccccc1,0,0

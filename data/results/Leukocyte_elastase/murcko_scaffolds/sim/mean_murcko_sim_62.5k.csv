@@ -1,0 +1,10 @@
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+Molpher_62.5k_mean,sim,murcko,62641.2,-,0.196671,0.3587394,0.0044706
+REINVENT_62.5k_mean,sim,murcko,61846.0,-,0.1016509,0.8147649,0.001225
+DrugEx_GT_epsilon_0.1_62.5k_mean,sim,murcko,62440.2,-,0.2360297,0.7408153,0.005546
+DrugEx_GT_epsilon_0.6_62.5k_mean,sim,murcko,62215.4,-,0.4098634,0.7552044,0.0084698
+DrugEx_RNN_epsilon_0.1_62.5k_mean,sim,murcko,61114.2,-,0.0625645,0.582847,0.0194494
+DrugEx_RNN_epsilon_0.6_62.5k_mean,sim,murcko,61618.6,-,0.303905,0.6618597,0.0121363
+GB_GA_mut_r_0.01_62.5k_mean,sim,murcko,57020.8,-,0.0421377,0.4088301,0.0034658
+GB_GA_mut_r_0.5_62.5k_mean,sim,murcko,51823.4,-,0.0432801,0.388567,0.0050381
+addcarbon_62.5k_mean,sim,murcko,62500.0,-,0.1147636,0.07552,0.0017801

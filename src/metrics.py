@@ -135,11 +135,8 @@ class Metrics:
             tupor = 0
             tupor_text = f"0/{len(df)}"
 
-        # Calculate additional metrics.s
-        other_scaffolds = [scf for scf in self.output_set_scaffolds[0].tolist() if scf not in self.recall_set_scaffolds[0].tolist()]
-
         SESY = USo / SSo if SSo > 0 else 0
-        ASER = cASo / len(other_scaffolds) if len(other_scaffolds) > 0 else 0
+        ASER = cASo / SSo if SSo > 0 else 0
 
         return self.type_cluster, SSo, tupor_text, tupor, SESY, ASER
 
@@ -242,7 +239,6 @@ class Metrics:
                 print(f"Path for cluster {self.number_of_calculation} doesn't exists")
 
         result = self.average_value(numbers_of_calcs)
-        
         return result
     
 
@@ -257,7 +253,6 @@ def main():
     # Optional arguments with default values
     parser.add_argument('--ncpus', type=bool, default=1, required=False, help='Number of CPUs to use for parallel processing')
 
-    
     args = parser.parse_args()
     print(args)
     

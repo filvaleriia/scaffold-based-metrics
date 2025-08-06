@@ -1,8 +1,8 @@
 unique_scaffold_recall,count_of_occurrence,unique_indicator
-O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccccc1,2537,1
+O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccccc1,2534,1
 O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1cccnc1,40,1
 O=C1NCC2=C1C(c1ccccc1)NC(=O)N2c1ccccc1,13,1
-O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccncc1,134,1
+O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccncc1,132,1
 O=C1CCC2=C1C(c1ccccn1)NC(=O)N2c1ccccc1,41,1
 C1=CN(c2ccccc2)c2nccn2C1c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccccn1,4,1
@@ -57,7 +57,7 @@ O=C1CCC2=C1C(c1ccccc1C(=O)N1CCn3cncc3C1)NC(=O)N2c1ccccc1,4,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CCN3CCCC3C1)NC(=O)N2c1ccccc1,2,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CCc3nocc3C1)NC(=O)N2c1ccccc1,16,1
 O=c1ocnc2ccccc12,22,1
-c1ccc2ccccc2c1,986,1
+c1ccc2ccccc2c1,985,1
 O=C1CCC2=C1C(c1ccccc1-c1ccncc1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1-c1cc[nH]c(=O)c1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1-c1cncnc1)NC(=O)N2c1ccccc1,0,0
@@ -88,7 +88,7 @@ O=C1CC2N1C=CC(=C1SCCS1)S2(=O)=O,0,0
 O=C1CCC2=C1C(c1ccccc1)N(CC(=O)N1CCN3CCCC3C1)C(=O)N2c1ccccc1,5,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CCN3CCOCC3C1)NC(=O)N2c1ccccc1,12,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CC3CC1C[NH2+]3)NC(=O)N2c1ccccc1,0,0
-O=C1CCC2=C1C(c1ccccc1C(=O)N1CC3CC1CN3)NC(=O)N2c1ccccc1,44,1
+O=C1CCC2=C1C(c1ccccc1C(=O)N1CC3CC1CN3)NC(=O)N2c1ccccc1,43,1
 O=C1CCC2=C1C(c1ccccc1-c1ccc3[nH]ccc3c1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1-c1ccc3[nH]ncc3c1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1-c1ccc3occc3c1)NC(=O)N2c1ccccc1,0,0

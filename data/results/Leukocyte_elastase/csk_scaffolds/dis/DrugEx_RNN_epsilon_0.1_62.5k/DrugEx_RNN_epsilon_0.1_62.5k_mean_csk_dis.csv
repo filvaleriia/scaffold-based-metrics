@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,CwASo
-DrugEx_RNN_epsilon_0.1_62.5k_mean,dis,csk,9527.8,61608.4,-,0.4325231,0.1544874,0.0493737,2765.8
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+DrugEx_RNN_epsilon_0.1_62.5k_mean,dis,csk,61608.4,-,0.4325231,0.1544874,0.0493737

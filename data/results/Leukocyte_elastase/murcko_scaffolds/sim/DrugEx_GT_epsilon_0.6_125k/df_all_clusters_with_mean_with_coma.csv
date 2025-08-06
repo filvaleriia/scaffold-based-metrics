@@ -1,7 +1,7 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,CwASo
-DrugEx_GT_epsilon_0.6_125k_0,sim,murcko,"100,293.0","124,565.0",98/172,0.5697674,0.8051459,0.0296926,"3,592.0"
-DrugEx_GT_epsilon_0.6_125k_1,sim,murcko,"84,438.0","124,549.0",50/93,0.5376344,0.67795,0.0055059,682.0
-DrugEx_GT_epsilon_0.6_125k_2,sim,murcko,"86,129.0","123,691.0",39/65,0.6,0.6963239,0.0044501,548.0
-DrugEx_GT_epsilon_0.6_125k_3,sim,murcko,"91,502.0","124,736.0",26/57,0.4561404,0.7335653,0.0023948,298.0
-DrugEx_GT_epsilon_0.6_125k_4,sim,murcko,"85,483.0","124,689.0",16/50,0.32,0.6855697,0.0004734,59.0
-DrugEx_GT_epsilon_0.6_125k_mean,sim,murcko,"89,569.0","124,446.0",-,0.4967084,0.719711,0.0085034,"1,035.8"
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+DrugEx_GT_epsilon_0.6_125k_0,sim,murcko,"124,565.0",98/172,0.5697674,0.8051459,0.0296926
+DrugEx_GT_epsilon_0.6_125k_1,sim,murcko,"124,549.0",50/93,0.5376344,0.67795,0.0055059
+DrugEx_GT_epsilon_0.6_125k_2,sim,murcko,"123,691.0",39/65,0.6,0.6963239,0.0044501
+DrugEx_GT_epsilon_0.6_125k_3,sim,murcko,"124,736.0",26/57,0.4561404,0.7335653,0.0023948
+DrugEx_GT_epsilon_0.6_125k_4,sim,murcko,"124,689.0",16/50,0.32,0.6855697,0.0004734
+DrugEx_GT_epsilon_0.6_125k_mean,sim,murcko,"124,446.0",-,0.4967084,0.719711,0.0085034

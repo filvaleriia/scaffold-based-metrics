@@ -4,9 +4,9 @@ O=C(CN1CCNC(=O)C1=O)NCC(=O)N1CCCC1,0,0
 O=C(NCC(=O)N1CC2CCC1CC2)c1ccc(C(=O)NS(=O)(=O)c2ccccc2)cc1,0,0
 O=C(NCC(=O)N1CC2CCC1CC2)c1ccc(CCSc2ccccc2)cc1,0,0
 O=C(NCC(=O)N1CC2CCC1CC2)c1ccc(S(=O)(=O)NC(=O)c2ccccc2)cc1,0,0
-O=S(=O)(Nc1ccccc1)c1ccccc1,286,1
+O=S(=O)(Nc1ccccc1)c1ccccc1,285,1
 c1ccc(N=Nc2ccccc2)cc1,2,1
-O=C(Nc1ccccc1)c1ccccc1,5047,1
+O=C(Nc1ccccc1)c1ccccc1,5045,1
 O=C(CNC(=O)c1ccc(C(=O)NS(=O)(=O)c2ccccc2)cc1)NC1Cc2ccccc2C1,0,0
 O=C(CNC(=O)OCc1ccccc1)NC1CCNCC1,0,0
 O=C(CN1CCNC1=O)NCC(=O)N1CCCC1,0,0

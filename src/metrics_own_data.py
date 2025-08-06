@@ -1,7 +1,6 @@
 """
 This script calculates key metrics (TUPOR, SESY, ASER) for molecular scaffold analysis.
 """
-
 import os
 import pandas as pd
 import numpy as np
@@ -75,7 +74,6 @@ class Metrics:
         """
         Load the output and recall sets from the given file paths.
         """
-        
         with open(filepath_output_set, 'r') as f:
             output_set = f.read().splitlines()
         self.output_set = pd.DataFrame(output_set)
@@ -117,7 +115,7 @@ class Metrics:
         # Calculate metrics.
         USo = len(self.unique_output_set)
         SSo = len(self.output_set_scaffolds)
-        CwASo = self.count_metrics['count_of_occurrence'].sum()
+        cASo = self.count_metrics['count_of_occurrence'].sum()
         try:
             UASo = self.count_metrics['unique_indicator'].value_counts()[1]
         except Exception:
@@ -133,12 +131,8 @@ class Metrics:
             tupor = 0
             tupor_text = f"0/{len(df)}"
 
-        # Calculate additional metrics.
-        other_scaffolds_unique = [scf for scf in self.unique_output_set if scf not in self.recall_set_scaffolds[0].tolist()]
-        other_scaffolds = [scf for scf in self.output_set_scaffolds[0].tolist() if scf not in self.recall_set_scaffolds[0].tolist()]
-
         SESY = USo / SSo if SSo > 0 else 0
-        ASER = CwASo / len(other_scaffolds) if len(other_scaffolds) > 0 else 0
+        ASER = cASo / SSo if SSo > 0 else 0
 
         return  SSo, tupor_text, tupor, SESY, ASER
 
@@ -158,15 +152,11 @@ class Metrics:
         self.recall_set_scaffolds.to_csv(f"{folder}/scaffolds_of_recall_set_cluster_{self.generator_name}.csv", header=False, index=False)
 
 
-
     def calculate_metrics(self):
         """
         Calculate all metrics and return a DataFrame with the results.
         """
-
-
         output_file_path = f"{self.output_set_path}"
-
         recall_file_path = f"{self.recall_set_path}"
 
         if os.path.exists(output_file_path):
@@ -178,7 +168,6 @@ class Metrics:
             results.insert(2, 'scaffold', self.type_scaffold)
 
             self.results = results
-
             self.save_function()
 
             return results
@@ -192,17 +181,12 @@ def main():
 
     parser.add_argument('--type_scaffold', type=str, required=True, help='Type of scaffold')
     parser.add_argument('--generator_name', type=str, required=True, help='Name of generator')
-
     parser.add_argument('--recall_set_path', type=str, required=True, help='Path to Recall Set')
     parser.add_argument('--output_set_path', type=str, required=True, help='Path to Output Set')
 
     # Optional arguments with default values
-
     parser.add_argument('--ncpus', type=int, default=1, required=False, help='Number of CPUs to use for parallel processing')
-
-    
     args = parser.parse_args()
-
 
     mt = Metrics(args.type_scaffold, args.generator_name, args.recall_set_path, args.output_set_path, args.ncpus)     
     result = mt.calculate_metrics()

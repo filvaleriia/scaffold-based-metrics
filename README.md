@@ -71,18 +71,18 @@ Example usage in a jupyter notebook:
 from src import metrics
 
 type_cluster = 'dis' #options: 'dis'|'sim' 
-scaffold_type = 'csk' #options: 'csk'|'murcko'
+type_scaffold = 'csk' #options: 'csk'|'murcko'
 generator = 'Molpher' #options: 'Molpher'|'DrugEx'|'REINVENT'|'addcarbon' etc.
 receptor = 'Glucocorticoid_receptor' #options: 'Glucocorticoid_receptor'|'Leukocyte_elastase'
 ncpus = 4
 
-mt = metrics.Metrics(type_cluster, scaffold_type, generator, receptor,  ncpus)
+mt = metrics.Metrics(type_cluster, type_scaffold, generator, receptor,  ncpus)
 result = mt.calculate_metrics()
 ```
 
 Example usage in bash or you can look for examples run_calculation_metrics.sh:
 ```bash
-python3 src/metrics.py --type_cluster dis --scaffold_type csk --generator Molpher --receptor Glucocorticoid_receptor  --num_cpu 3 
+python3 src/metrics.py --type_cluster dis --type_scaffold csk --generator Molpher --receptor Glucocorticoid_receptor  --num_cpu 3 
 
 ```
 
@@ -104,8 +104,8 @@ The last options how it run, you can use your own data, for this purpose existin
 python3 src/metrics_own_data.py \
     --type_scaffold csk \
     --generator Molpher_125k \
-    --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cIS_Glucocorticoid_receptor_dis_0.csv \
-    --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_1_one_column.csv \
+    --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cRS_Glucocorticoid_receptor_dis_0.csv \
+    --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_0_one_column.csv \
     --ncpus 1
 ```
 

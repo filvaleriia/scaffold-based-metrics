@@ -20,19 +20,19 @@ def connect_mean_value(type_cluster, type_scaffold, generators_name_list, recept
     """
     
     # Define path to data
-    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}/"
+    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
     
     # List to store paths of mean value files
     link_mean = []
     for generator in generators_name_list:
-        link_mean.append(f"{link}/{generator}/mean_{type_scaffold}_{type_cluster}.csv")
+        link_mean.append(f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv")
 
     # Load data and merge into a single DataFrame
     df_list = [pd.read_csv(f) for f in link_mean]
-    df = pd.concat(df_list, axis=1, ignore_index=True)
+    df = pd.concat(df_list, ignore_index=True)
 
     # Save results to CSV files
-    df.to_csv(f"df/mean_{type_scaffold}_{type_cluster}{subset}.csv", index=False)
+    df.to_csv(f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}/mean_{type_scaffold}_{type_cluster}{subset}.csv", index=False)
 
     return df
 
@@ -53,14 +53,14 @@ def connect_mean_value_normalized(type_cluster, type_scaffold, generators_name_l
     """
 
     # Define path to data
-    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}/"
+    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
 
     # List to store paths of mean value files
-    link_mean = [f"{link}/{generator}/mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
+    link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
 
     # Load data
     df_list = [pd.read_csv(f) for f in link_mean]
-    df = pd.concat(df_list, axis=1, ignore_index=True)
+    df = pd.concat(df_list, ignore_index=True)
 
     # Normalize using Min-Max scaling
     scaler = MinMaxScaler()
@@ -68,10 +68,9 @@ def connect_mean_value_normalized(type_cluster, type_scaffold, generators_name_l
     df[numeric_columns] = scaler.fit_transform(df[numeric_columns])  # Apply normalization
 
     # Save normalized results
-    df.to_csv(f"df/mean_{type_scaffold}_{type_cluster}{subset}_norm_min_max.csv", index=False)
+    df.to_csv(f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}/mean_{type_scaffold}_{type_cluster}{subset}_norm_min_max.csv", index=False)
 
     return df
-
 
 
 def main():
@@ -86,7 +85,6 @@ def main():
     args = parser.parse_args()
     
     connect_mean_value(args.type_cluster, args.type_scaffold, args.generator_list, args.receptor, args.subset)
-
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 unique_scaffold_recall,count_of_occurrence,unique_indicator
-O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccccc1,1428,1
+O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccccc1,1426,1
 O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1cccnc1,22,1
 O=C1NCC2=C1C(c1ccccc1)NC(=O)N2c1ccccc1,8,1
 O=C1CCC2=C1C(c1ccccc1)NC(=O)N2c1ccncc1,67,1
@@ -88,7 +88,7 @@ O=C1CC2N1C=CC(=C1SCCS1)S2(=O)=O,0,0
 O=C1CCC2=C1C(c1ccccc1)N(CC(=O)N1CCN3CCCC3C1)C(=O)N2c1ccccc1,4,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CCN3CCOCC3C1)NC(=O)N2c1ccccc1,7,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CC3CC1C[NH2+]3)NC(=O)N2c1ccccc1,0,0
-O=C1CCC2=C1C(c1ccccc1C(=O)N1CC3CC1CN3)NC(=O)N2c1ccccc1,21,1
+O=C1CCC2=C1C(c1ccccc1C(=O)N1CC3CC1CN3)NC(=O)N2c1ccccc1,20,1
 O=C1CCC2=C1C(c1ccccc1-c1ccc3[nH]ccc3c1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1-c1ccc3[nH]ncc3c1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1-c1ccc3occc3c1)NC(=O)N2c1ccccc1,0,0

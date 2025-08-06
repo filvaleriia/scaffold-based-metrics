@@ -15,7 +15,7 @@ O=C1CCC2=C1C(c1ccccc1C(=O)N1CCn3cncc3C1)NC(=O)N2c1ccccc1,0,0
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CCN3CCCC3C1)NC(=O)N2c1ccccc1,50,1
 O=C1CCC2=C1C(c1ccccc1C(=O)N1CCc3nocc3C1)NC(=O)N2c1ccccc1,0,0
 O=c1ocnc2ccccc12,50,1
-c1ccc2ccccc2c1,2300,1
+c1ccc2ccccc2c1,2298,1
 O=C1CCC2=C1C(c1ccccc1-c1ccncc1)NC(=O)N2c1ccccc1,85,1
 O=C1CCC2=C1C(c1ccccc1-c1cc[nH]c(=O)c1)NC(=O)N2c1ccccc1,41,1
 O=C1CCC2=C1C(c1ccccc1-c1cncnc1)NC(=O)N2c1ccccc1,11,1

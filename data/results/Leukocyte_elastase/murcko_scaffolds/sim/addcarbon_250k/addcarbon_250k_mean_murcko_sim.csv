@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,CwASo
-addcarbon_250k_mean,sim,murcko,5143.6,250000.0,-,0.1182724,0.0205744,0.0017273,430.8
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+addcarbon_250k_mean,sim,murcko,250000.0,-,0.1182724,0.0205744,0.0017273

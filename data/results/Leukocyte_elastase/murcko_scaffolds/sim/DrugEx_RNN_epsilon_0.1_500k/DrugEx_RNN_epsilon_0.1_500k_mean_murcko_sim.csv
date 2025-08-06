@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
-DrugEx_RNN_epsilon_0.1_500k_mean,sim,murcko,223237.8,489755.2,-,0.0916139,0.4554001,0.0196737,4.1e-05,8934.6
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+DrugEx_RNN_epsilon_0.1_500k_mean,sim,murcko,488940.4,-,0.0916139,0.4555461,0.0196274
