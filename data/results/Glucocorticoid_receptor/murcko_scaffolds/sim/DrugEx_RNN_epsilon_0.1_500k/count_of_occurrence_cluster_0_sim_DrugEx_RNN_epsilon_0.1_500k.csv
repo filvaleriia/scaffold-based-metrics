@@ -70,7 +70,7 @@ c1cc(-c2ccc3c(c2)CCCN3)c2[nH]ccc2c1,0,0
 c1cc(-c2ccc3c(c2)CCCN3)c2cc[nH]c2c1,0,0
 N=C1CCNc2ccc(-c3cccc4cc[nH]c34)cc21,0,0
 O=C1CNc2ccc(-c3cccc4cc[nH]c34)cc2C1,0,0
-c1ccc(COc2ccc3c(cnn3-c3ccccc3)c2)cc1,3764,1
+c1ccc(COc2ccc3c(cnn3-c3ccccc3)c2)cc1,3763,1
 O=c1ccc(-n2ncc3cc(OCc4ccccc4)ccc32)c[nH]1,0,0
 O=c1[nH]cccc1-n1ncc2cc(OCc3ccccc3)ccc21,0,0
 c1ccc(-n2ncc3cc(OCc4cccnc4)ccc32)cc1,103,1
