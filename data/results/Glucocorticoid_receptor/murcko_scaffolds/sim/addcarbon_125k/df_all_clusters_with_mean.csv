@@ -1,7 +1,7 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,CwASo
-addcarbon_125k_0,sim,murcko,2583.0,125000.0,1/115,0.0086957,0.020664,0.000184,23.0
-addcarbon_125k_1,sim,murcko,2736.0,125000.0,4/100,0.04,0.021888,0.0064655,803.0
-addcarbon_125k_2,sim,murcko,3050.0,125000.0,4/58,0.0689655,0.0244,0.0017872,223.0
-addcarbon_125k_3,sim,murcko,3169.0,125000.0,3/51,0.0588235,0.025352,0.0047989,597.0
-addcarbon_125k_4,sim,murcko,3247.0,125000.0,3/40,0.075,0.025976,0.0033874,422.0
-addcarbon_125k_mean,sim,murcko,2957.0,125000.0,-,0.0502969,0.023656,0.0033246,413.6
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+addcarbon_125k_0,sim,murcko,125000.0,1/115,0.0086957,0.020664,0.000184
+addcarbon_125k_1,sim,murcko,125000.0,4/100,0.04,0.021888,0.006424
+addcarbon_125k_2,sim,murcko,125000.0,4/58,0.0689655,0.0244,0.001784
+addcarbon_125k_3,sim,murcko,125000.0,3/51,0.0588235,0.025352,0.004776
+addcarbon_125k_4,sim,murcko,125000.0,3/40,0.075,0.025976,0.003376
+addcarbon_125k_mean,sim,murcko,125000.0,-,0.0502969,0.023656,0.0033088
