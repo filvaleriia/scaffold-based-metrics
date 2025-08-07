@@ -1,2 +1,2 @@
-name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,CwASo
-addcarbon_125k_mean,sim,csk,861.8,125000.0,-,0.2015485,0.0068944,0.0146145,1788.0
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+addcarbon_125k_mean,sim,csk,125000.0,-,0.2015485,0.0068944,0.014304
