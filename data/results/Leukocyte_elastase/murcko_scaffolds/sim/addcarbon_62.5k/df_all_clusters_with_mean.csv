@@ -1,7 +1,7 @@
 name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-addcarbon_62.5k_0,sim,murcko,62500.0,8/172,0.0465116,0.062112,0.003613
-addcarbon_62.5k_1,sim,murcko,62500.0,7/93,0.0752688,0.074192,0.0011854
-addcarbon_62.5k_2,sim,murcko,62500.0,11/65,0.1692308,0.080992,0.0019719
-addcarbon_62.5k_3,sim,murcko,62500.0,7/57,0.122807,0.0784,0.0012977
-addcarbon_62.5k_4,sim,murcko,62500.0,8/50,0.16,0.081904,0.0008327
-addcarbon_62.5k_mean,sim,murcko,62500.0,-,0.1147636,0.07552,0.0017801
+addcarbon_62.5k_0,sim,murcko,62500.0,8/172,0.0465116,0.062112,0.0036
+addcarbon_62.5k_1,sim,murcko,62500.0,7/93,0.0752688,0.074192,0.001184
+addcarbon_62.5k_2,sim,murcko,62500.0,11/65,0.1692308,0.080992,0.001968
+addcarbon_62.5k_3,sim,murcko,62500.0,7/57,0.122807,0.0784,0.001296
+addcarbon_62.5k_4,sim,murcko,62500.0,8/50,0.16,0.081904,0.000832
+addcarbon_62.5k_mean,sim,murcko,62500.0,-,0.1147636,0.07552,0.001776

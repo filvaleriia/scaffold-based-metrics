@@ -1,7 +1,7 @@
 name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-DrugEx_GT_epsilon_0.6_62.5k_0,sim,murcko,62277.0,83/172,0.4825581,0.8336786,0.0293379
-DrugEx_GT_epsilon_0.6_62.5k_1,sim,murcko,62288.0,45/93,0.483871,0.7136206,0.0057482
-DrugEx_GT_epsilon_0.6_62.5k_2,sim,murcko,61819.0,31/65,0.4769231,0.7311991,0.0043541
-DrugEx_GT_epsilon_0.6_62.5k_3,sim,murcko,62361.0,22/57,0.3859649,0.7704495,0.0024756
-DrugEx_GT_epsilon_0.6_62.5k_4,sim,murcko,62332.0,11/50,0.22,0.7270744,0.0004334
-DrugEx_GT_epsilon_0.6_62.5k_mean,sim,murcko,62215.4,-,0.4098634,0.7552044,0.0084698
+DrugEx_GT_epsilon_0.6_62.5k_0,sim,murcko,62277.0,83/172,0.4825581,0.8336786,0.0285017
+DrugEx_GT_epsilon_0.6_62.5k_1,sim,murcko,62288.0,45/93,0.483871,0.7136206,0.0057154
+DrugEx_GT_epsilon_0.6_62.5k_2,sim,murcko,61819.0,31/65,0.4769231,0.7311991,0.0043352
+DrugEx_GT_epsilon_0.6_62.5k_3,sim,murcko,62361.0,22/57,0.3859649,0.7704495,0.0024695
+DrugEx_GT_epsilon_0.6_62.5k_4,sim,murcko,62332.0,11/50,0.22,0.7270744,0.0004332
+DrugEx_GT_epsilon_0.6_62.5k_mean,sim,murcko,62215.4,-,0.4098634,0.7552044,0.008291

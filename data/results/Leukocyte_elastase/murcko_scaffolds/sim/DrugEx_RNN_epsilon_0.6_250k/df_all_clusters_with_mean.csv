@@ -1,7 +1,7 @@
 name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-DrugEx_RNN_epsilon_0.6_250k_0,sim,murcko,247380.0,104/172,0.6046512,0.6447571,0.0478074
-DrugEx_RNN_epsilon_0.6_250k_1,sim,murcko,246790.0,48/93,0.516129,0.5679485,0.0043382
-DrugEx_RNN_epsilon_0.6_250k_2,sim,murcko,247775.0,26/65,0.4,0.5967834,0.0029224
-DrugEx_RNN_epsilon_0.6_250k_3,sim,murcko,245190.0,23/57,0.4035088,0.5393695,0.0042844
-DrugEx_RNN_epsilon_0.6_250k_4,sim,murcko,245232.0,11/50,0.22,0.5446108,0.0004283
-DrugEx_RNN_epsilon_0.6_250k_mean,sim,murcko,246473.4,-,0.4288578,0.5786938,0.0119562
+DrugEx_RNN_epsilon_0.6_250k_0,sim,murcko,247380.0,104/172,0.6046512,0.6447571,0.0456262
+DrugEx_RNN_epsilon_0.6_250k_1,sim,murcko,246790.0,48/93,0.516129,0.5679485,0.0043195
+DrugEx_RNN_epsilon_0.6_250k_2,sim,murcko,247775.0,26/65,0.4,0.5967834,0.0029139
+DrugEx_RNN_epsilon_0.6_250k_3,sim,murcko,245190.0,23/57,0.4035088,0.5393695,0.0042661
+DrugEx_RNN_epsilon_0.6_250k_4,sim,murcko,245232.0,11/50,0.22,0.5446108,0.0004282
+DrugEx_RNN_epsilon_0.6_250k_mean,sim,murcko,246473.4,-,0.4288578,0.5786938,0.0115108
