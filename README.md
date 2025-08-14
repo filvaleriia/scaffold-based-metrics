@@ -1,4 +1,4 @@
-# 📊 Recall Metrics for Molecular Generators
+# 📊 Scaffold-based Metrics for Molecular Generators
 
  
 **Purpose**: This repository provides an implementation of recall-based metrics — **TUPOR**, **SESY** and **ASER** — for evaluating molecular generators. These metrics help assess the diversity, novelty, and structural relevance of generated compounds.
@@ -8,13 +8,13 @@
 
 Implementation of three key recall metrics:  
 
-### ▪ True positive recall all (TUPOR): 
+### ▪ TrUe POsitive Recall all (TUPOR): 
 The number of unique active scaffolds generated for the entire OS (UASo) in the ration to the total number of unique active scaffolds in RS (UASr). Quantifies the recall number of the unique active scaffolds for the entire structure generation process. TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique scaffolds from RS were found in the OS).  
 
    $$TUPOR = {{UASo} \over UASr}$$ 
    
 * **Use case** : A high TUPOR value suggests that the model successfully recalls biologically active scaffolds, making it useful for generating molecules with pharmaceutical potential. Users can evaluate the model's accuracy in generating relevant scaffolds for drug discovery. 
-### ▪ Set scaffold yield (SESY): 
+### ▪ SEt Scaffold yield (SESY): 
 value for the whole generated set, expressing how many different unique scaffolds (USo) are within their OS size (SSo). This metric reflects the diversity of the generated set by calculating how many different scaffolds are present in the OS. A value of 1 indicates that every scaffold in the OS is unique, while 0 means no valid scaffolds were generated. 
 
    $$SESY = {{USo} \over SSo}$$ 
@@ -39,13 +39,23 @@ In this analyze we prepare data for two different receptors (Glucocorticoid rece
 
 ## 📥 Installation  
 
-To use the recall metrics, clone this repository and install the required dependencies:  
+To use the scaffold-based metrics, clone this repository and install the required dependencies:  
 
 ```bash
-git clone https://github.com/filvaleriia/recall_metrics.git
-cd recall_metrics
-pip install -r requirements.txt
+git clone https://github.com/filvaleriia/scaffold-based-metrics.git
+cd scaffold-based-metrics
+conda env create -f environment.yml
+conda activate scaffold-based-metrics-env
 ```
+OR packages what you need to install:
+- rdkit
+- pandas
+- jupyter lab
+- scikit-learn
+- scikit-learn-extra
+- seaborn
+- matplotlib
+
 
 
 ## 🛠 Usage  
