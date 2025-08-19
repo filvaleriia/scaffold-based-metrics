@@ -140,7 +140,7 @@ The compounds were converted to CSKs and clustered into five groups. From these 
 - *dissimilarity split (a)*  
 - *similarity split (b)*  
 
-![a. Dissimilarity split; b. Similarity split](img/split_strategy.jpg)
+![a. Dissimilarity split; b. Similarity split](img/set_composition.png)
 
 The rationale was to explore metric limitations:  
 - **Similarity split** → IS and RS are structurally close (upper limit of the metric).  
