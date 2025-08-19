@@ -140,7 +140,7 @@ The compounds were converted to CSKs and clustered into five groups. From these 
 - *dissimilarity split (a)*  
 - *similarity split (b)*  
 
-<img src="img/sim-dis.png" alt="a. Dissimilarity split; b. Similarity split" style="background-color:white; padding:10px;">
+![a. Dissimilarity split; b. Similarity split](img/sim-dis-with-background.png)
 
 
 The rationale was to explore metric limitations:  
