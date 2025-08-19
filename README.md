@@ -9,24 +9,25 @@
 Implementation of three key recall metrics:  
 
 ### ▪ TrUe POsitive Recall all (TUPOR): 
-The number of unique active scaffolds generated for the entire OS (UASo) in the ration to the total number of unique active scaffolds in RS (UASr). Quantifies the recall number of the unique active scaffolds for the entire structure generation process. TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique scaffolds from RS were found in the OS).  
+quantifies the ability of the generator to produce molecules containing scaffolds that occur in biologically active compounds. It is calculated as the ratio of the number of unique active scaffolds in the Output Set (OS) (UAs<sub>OS</sub>) to the number of unique active scaffolds in the Recall Set (RS)  (UAS<sub>RS</sub>). TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique active scaffolds from RS were found in the OS).
 
-   $$TUPOR = {{UASo} \over UASr}$$ 
+   $$TUPOR = {{UAs_{OS}} \over UAs_{RS}}$$ 
    
-* **Use case** : A high TUPOR value suggests that the model successfully recalls biologically active scaffolds, making it useful for generating molecules with pharmaceutical potential. Users can evaluate the model's accuracy in generating relevant scaffolds for drug discovery. 
-### ▪ SEt Scaffold yield (SESY): 
-value for the whole generated set, expressing how many different unique scaffolds (USo) are within their OS size (SSo). This metric reflects the diversity of the generated set by calculating how many different scaffolds are present in the OS. A value of 1 indicates that every scaffold in the OS is unique, while 0 means no valid scaffolds were generated. 
+* The TUPOR metric is a key measure that quantifies the ability of a molecular generator to reproduce biologically active scaffolds. As such TUPOR is analogous to the recall metric used to evaluate classification tasks in machine learning.
 
-   $$SESY = {{USo} \over SSo}$$ 
+### ▪ SEt Scaffold Yield (SESY): 
+reflects the structural diversity of the generated set. It is calculated as the percentage of unique scaffolds (Us<sub>OS</sub>) in the Output Set relative to the total number of compounds in the output set (c<sub>OS</sub>) in the output set. A value of 1 indicates that every scaffold in the OS is unique, while 0 means no valid scaffolds were generated. 
 
-* **Use case**: SESY is valuable for users aiming to strike a balance between exploration and exploitation. A high SESY value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SESY value suggests a focus on exploiting known scaffolds, refining existing chemical structures. By adjusting the SESY, users can fine-tune the generator's ability to either discover new molecular structures (exploration) or optimize known scaffolds (exploitation), depending on the needs of their project. 
+   $$SESY = {{Us_{OS}} \over c_{OS}}$$ 
 
-### ▪ Absolute set scaffold recall (ASER): 
-Absolute set scaffold recall (ASER) – value for the generated dataset expressing the total number of virtual compounds with active scaffold in the OS (cASo) in relation to other scaffolds in OS (SSo). It tells us how effectively the generator is exploring the desired region of chemical space, with higher values reflecting better alignment with biologically relevant scaffolds. 
+* SESY enables striking a balance between exploration and exploitation. A high SESY value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SESY value suggests a focus on exploiting similar scaffolds, refining specific chemical structures. Adjusting the generator parameters based on the SESY value enables fine-tuning the balance between exploring diverse molecular structures and exploiting specific scaffolds. 
 
-   $$ASER = {{cASo} \over SSo}$$ 
+### ▪ Absolute SEt Scaffold Recall (ASER): 
+indicates how effectively the generator explores the target region of chemical space. It is calculated as the ratio of the number of virtual compounds in the OS that contain an active scaffold (cAs<sub>OS</sub>) to the total number of compounds in the Output Set (c<sub>OS</sub>).The ASER metric starts at 0, indicating that no generated compounds in the output set (OS) contain an active scaffold. Higher ASER values reflect an increasing frequency of active scaffolds within the generated compounds. Importantly, the metric can exceed 1 because some compounds may contain multiple active scaffolds. In this sense, it is akin to the precision metric that is used to evaluate classification tasks in machine learning. 
 
-* **Use case**: A high ASER value indicates that the generator is targeting the most relevant chemical space for drug discovery, creating compounds that are more likely to exhibit biological activity. Users can rely on this metric to assess how well the generator is focusing on biologically active areas of molecular space. 
+   $$ASER = {{cAS_{OS}} \over c_{OS}}$$ 
+
+* A higher ASER value means the generator is better at making molecules similar to those known to be biologically active. This suggests that the generator is exploring the right chemical space for drug discovery—outside of what it already is trained upon. 
  
 
 ✔ Supports multiple molecular generators: **Molpher, REINVENT, DrugEx, GB_GA, and AddCarbon**.  
@@ -158,14 +159,8 @@ Finally, we compared the average metric values across the two split strategies, 
 
 Here we summarize the main outcomes of our study.  
 
-
-| **Normalized heatmaps for Glucocorticoid receptor** | **Normalized heatmaps for Leukocyte elastase** |
-|:--------------------------------------------------:|:---------------------------------------------:|
-| <img src="img/heat_map/Glucocorticoid_receptor/heat_map_comparison_base_all_splits_paper.png" width="400"/> | <img src="img/heat_map/Leukocyte_elastase/heat_map_comparison_base_all_splits_paper.png" width="400"/> |
-
-
-**Combined normalized results in a single overview plot**  
-![Normalized heatmaps](img/heat_map/all_res_norm.png)
+**Combined normilazid results in a single overview plot**  
+![Normalized heatmaps](img/heat_map/all_res_metrics_norm_per_column.png)
 
 Based on these results, the best performance of our metrics was achieved by **DrugEx Graph Transformer** with *epsilon = 0.6*.  
 The weakest performance was observed for the **AddCarbon** generator.
