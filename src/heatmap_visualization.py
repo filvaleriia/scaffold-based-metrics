@@ -3,9 +3,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+from matplotlib.colors import LinearSegmentedColormap, to_rgb
+from matplotlib.colors import ListedColormap
+
 
 
 def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
+    '''
+    Function for connection all data set with normalization
+    '''
     # Define path to data
 
     link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
@@ -25,7 +31,29 @@ def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
     return df
 
 
-def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', annotate=True):
+
+def preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor):
+    '''
+    Function for connection all data set without normalization
+    '''
+    # Define path to data
+
+    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+
+    link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
+    
+    # Load data
+    df_list = [pd.read_csv(f) for f in link_mean]
+    df = pd.concat(df_list, axis=0, ignore_index=True)
+
+    df["name"] = df["name"].str.replace("_mean", "", regex=False)
+
+    
+    return df
+
+
+
+def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, title='', name_save='', cmap='viridis', annotate=True, using_norm_values = True):
     ''' 
     Plots a single heatmap for the given data split.
     
@@ -34,9 +62,15 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
     - title (str): The title of the heatmap (default is empty).
     - cmap (str): The color map to be used for the heatmap (default is 'viridis').
     - annotate (bool): Whether to annotate the cells with their values (default is True).
+    - using_norm_values: whether to use normalized values
     '''
 
     # Extract relevant columns (TUPOR, SESY, ASER, ASR) for visualization
+    if using_norm_values:
+        data = preprocesing(type_cluster, type_scaffold, generators_name_list, receptor)
+    else:
+        data = preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor)
+
     df = data[['TUPOR', 'SESY', 'ASER']]
     # Set the index of the dataframe to the 'name' attribute of the data
     df.index = data.name.tolist()
@@ -73,7 +107,7 @@ def plot_heatmap(data, title='', name_save='',receptor = '', cmap='viridis', ann
 
 
 
-def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, poradi = ''):
+def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, numering = ''):
     '''
     Plots heatmaps for multiple subsets in a single figure.
     
@@ -128,7 +162,7 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
             ax.set_title(f"{subset_name} subset",  fontsize=35, wrap=True)
 
     fig.text(
-    0.005, 0.97, poradi,
+    0.005, 0.97, numering,
     ha='left', va='top',
     fontsize=40
     )
@@ -198,7 +232,7 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
 
 
 
-def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', poradi = ''):
+def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', numering = ''):
     """
     Generates heatmaps comparing subsets of data against a baseline.
     The heatmaps highlight the differences from the baseline for values greater than 0.1 or smaller than -0.1.
@@ -261,7 +295,7 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         scaf_str = scaf
 
     fig.text(
-    0.005, 0.97, poradi,
+    0.005, 0.97, numering,
     ha='left', va='top',
     fontsize=40
     )
@@ -274,7 +308,8 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
     plt.show()
 
 
-def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cmap="viridis", title=None, save_name="heatmap"):
+
+def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cmap="viridis", title=None, save_name="heamps",  using_norm_values=False):
     """
     Create and save combined heatmap for given generators, receptors, scaffolds, and metrics.
 
@@ -298,6 +333,8 @@ def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cma
         Title for the heatmap
     save_name : str
         Base name for saving the figure (no extension)
+    - using_norm_values:  bool
+        whether to use normalized valuess
     """
 
     # Build dataframe with all values
@@ -306,7 +343,10 @@ def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cma
         for receptor in receptors:
             for type_scaffold in scaffolds:
                 for type_cluster in splits:
-                    df = preprocesing(type_cluster, type_scaffold, generators, receptor)
+                    if using_norm_values:
+                        df = preprocesing(type_cluster, type_scaffold, generators, receptor)
+                    else:
+                        df = preprocesing_org(type_cluster, type_scaffold, generators, receptor)
                     for met in metrics:
                         value = df[df.name.str.startswith(gen)][met].iloc[0]
                         data.append([gen, receptor, type_scaffold, type_cluster, met, value])
@@ -371,3 +411,322 @@ def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cma
     plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
     plt.savefig(f'img/heat_map/{save_name}.png', format="png")
     plt.show()
+
+
+
+def make_cmap_to_white(base_hex_color):
+    # Convert a base hex color to RGB
+    base_rgb = to_rgb(base_hex_color)
+    # Define white color in RGB
+    white_rgb = to_rgb('#f0f0f0')
+    # Create a gradient from white to the base color
+    colors = [white_rgb, base_rgb]
+    cmap = LinearSegmentedColormap.from_list("custom_cmap", colors)
+    return cmap
+
+
+
+def plot_combined_heatmap_variable_cmaps(
+        generators, receptors, scaffolds, splits,
+        metrics=['TUPOR', 'SESY', 'ASER'], 
+        title=None, save_name=None, using_norm_values=False):
+    """
+    Plot combined heatmaps for multiple generators, receptors, scaffolds, and metrics.
+    
+    Parameters:
+    - generators: list of generator names
+    - receptors: list of receptor names
+    - scaffolds: list of scaffold types
+    - splits: list of data splits
+    - metrics: list of metrics to plot
+    - title: figure title
+    - save_name: name for saving the figure
+    - using_norm_values: whether to use normalized values
+    """
+    
+    # Define base colors for each metric
+    metric_base_colors = {
+        'TUPOR': "#e97b32",
+        'SESY': "#97C2F0",  
+        'ASER': "#71ad48"
+    }
+
+    # Collect all metric values into a single DataFrame
+    data = []
+    for gen in generators:
+        for receptor in receptors:
+            for type_scaffold in scaffolds:
+                for type_cluster in splits:
+                    if using_norm_values:
+                        df = preprocesing(type_cluster, type_scaffold, generators, receptor)
+                    else:
+                        df = preprocesing_org(type_cluster, type_scaffold, generators, receptor)
+                    for met in metrics:
+                        value = df[df.name.str.startswith(gen)][met].iloc[0]
+                        data.append([gen, receptor, type_scaffold, type_cluster, met, value])
+
+    df = pd.DataFrame(data, columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value'])
+
+    # Create subplots dynamically based on number of receptors
+    nrows = len(receptors)
+    ncols = len(metrics)
+    fig_width = max(5*ncols, 8)
+    fig_height = max(5*nrows, 3*nrows + 1)
+    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(fig_width, fig_height))
+
+    # Ensure axes is always 2D array for consistent indexing
+    if nrows == 1 and ncols == 1:
+        axes = np.array([[axes]])
+    elif nrows == 1:
+        axes = np.array([axes])
+    elif ncols == 1:
+        axes = np.array([[ax] for ax in axes])
+
+    # Loop through metrics and receptors
+    for col_idx, metric in enumerate(metrics):
+        metric_df = df[df['Metric'] == metric].copy()
+
+        for row_idx, receptor in enumerate(receptors):
+            ax = axes[row_idx, col_idx]
+
+            # Prepare heatmap data
+            heatmap_data = []
+            for gen in generators:
+                row = []
+                for scaffold in scaffolds:
+                    for split in splits:
+                        mask = (
+                            (metric_df['Generator'] == gen) &
+                            (metric_df['Receptor'] == receptor) &
+                            (metric_df['Scaffold'] == scaffold) &
+                            (metric_df['Split'] == split)
+                        )
+                        value = metric_df[mask]['Value'].values[0]
+                        row.append(value)
+                heatmap_data.append(row)
+
+            heatmap_array = np.array(heatmap_data)
+            cmap_custom = make_cmap_to_white(metric_base_colors[metric])
+
+            # Plot heatmap with custom colors and annotation
+            if using_norm_values:
+                sns.heatmap(
+                    heatmap_array, annot=True, cmap=cmap_custom, ax=ax,
+                    cbar_kws={'label': metric}, annot_kws={"size": 11, "color": "black"},
+                    vmin=metric_df['Value'].min(), vmax=metric_df['Value'].max()
+                )
+            else:
+                sns.heatmap(
+                    heatmap_array, annot=True, fmt=".4f", cmap=cmap_custom, ax=ax,
+                    cbar_kws={'label': metric}, annot_kws={"size": 11, "color": "black"},
+                    vmin=metric_df['Value'].min(), vmax=metric_df['Value'].max()
+                )
+
+            # Set titles and y-axis labels
+            if row_idx == 0:
+                ax.set_title(metric, fontsize=16)
+            if col_idx == 0:
+                ax.set_ylabel(receptor.replace("_", " "), fontsize=14)
+                ax.set_yticks(np.arange(len(generators)) + 0.5)
+                new_labels = [label.replace('_epsilon', '\n epsilon')
+                                   .replace('_mut_r', '\n mut_r')
+                                   .replace('addcarbon', 'AddCarbon')
+                              for label in generators]
+                ax.set_yticklabels(new_labels, rotation=0, fontsize=10)
+            else:
+                ax.set_ylabel("")
+                ax.set_yticks([])
+                ax.set_yticklabels([])
+
+            # X-axis labels for bottom row only
+            if row_idx == nrows-1:
+                xticklabels = [f"{sc}-{split}" for sc in scaffolds for split in splits]
+                ax.set_xticks(np.arange(len(xticklabels)) + 0.5)
+                ax.set_xticklabels(xticklabels, rotation=45, ha="right", fontsize=10)
+            else:
+                ax.set_xticks(np.arange(len(scaffolds)*len(splits)) + 0.5)
+                ax.set_xticklabels([])
+
+    # Set overall figure title
+    if title:
+        fig.suptitle(title, fontsize=18)
+
+    # Adjust layout and save
+    plt.tight_layout(rect=[0, 0, 1, 0.97])
+    if save_name:
+        plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{save_name}.png', format="png")
+
+    plt.show()
+
+
+
+def plot_combined_heatmap_with_single_column_for_each_metric(
+        generators, receptors, scaffolds, splits,
+        metrics=['TUPOR', 'SESY', 'ASER'], 
+        title=None, save_name=None, using_norm_values=False,
+        inter_metric_wspace=0.15,   # Larger spacing between metrics
+        intra_metric_wspace=0.05    # Smaller spacing within a metric block
+    ):
+
+    """
+    Plot combined heatmaps for multiple generators, receptors, scaffolds, and metrics.
+    
+    Parameters:
+    - generators: list of generator names
+    - receptors: list of receptor names
+    - scaffolds: list of scaffold types
+    - splits: list of data splits
+    - metrics: list of metrics to plot
+    - title: figure title
+    - save_name: name for saving the figure
+    - using_norm_values: whether to use normalized values
+    - inter_metric_wspace: space between different metrics
+    - intra_metric_wspace: space between individuals scaffolds and split in one Metric
+    """
+
+    # Base colors for each metric
+    metric_base_colors = {
+        'TUPOR': "#e97b32",
+        'SESY': "#97C2F0",
+        'ASER': "#71ad48"
+    }
+
+    # --- Build a DataFrame with all values ---
+    data = []
+    for gen in generators:
+        for receptor in receptors:
+            for type_scaffold in scaffolds:
+                for type_cluster in splits:
+                    # Select preprocessed data, normalized or original
+                    df = (preprocesing_org if not using_norm_values else preprocesing)(
+                        type_cluster, type_scaffold, generators, receptor
+                    )
+                    # Extract values for each metric
+                    for met in metrics:
+                        value = df[df.name.str.startswith(gen)][met].iloc[0]
+                        data.append([gen, receptor, type_scaffold, type_cluster, met, value])
+
+    # Convert the collected data into a pandas DataFrame
+    df = pd.DataFrame(
+        data, columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value']
+    )
+
+    nrows = len(receptors)
+    nmetrics = len(metrics)
+
+    # Figure size: wider figure depending on number of metrics + spacing
+    fig_width = 1.7 * 4 * nmetrics + 2
+    fig_height = 6 * nrows
+    fig = plt.figure(figsize=(fig_width, fig_height))
+
+    # Outer grid for arranging metrics per receptor row
+    outer_gs = fig.add_gridspec(
+        nrows=nrows, ncols=nmetrics,
+        wspace=inter_metric_wspace, hspace=0.1
+    )
+
+    for met_idx, metric in enumerate(metrics):
+        # Filter data for the current metric
+        metric_df = df[df['Metric'] == metric].copy()
+        cmap_custom = make_cmap_to_white(metric_base_colors[metric])
+
+        for rec_idx, receptor in enumerate(receptors):
+            # Inner sub-grid for each metric and receptor
+            inner = outer_gs[rec_idx, met_idx].subgridspec(
+                nrows=1, ncols=4, wspace=intra_metric_wspace, hspace=0.0
+            )
+
+            group_axes = []  # store 4 axes for top labels
+            # Plot 4 heatmaps: csk-[dis,sim], murcko-[dis,sim]
+            for sc_idx, scaffold_type in enumerate(["csk", "murcko"]):
+                # Extract block data for this scaffold type
+                block_df = metric_df[
+                    (metric_df['Receptor'] == receptor) &
+                    (metric_df['Scaffold'] == scaffold_type)
+                ]
+                
+                for split_idx, split in enumerate(["dis", "sim"]):
+                    col = sc_idx * 2 + split_idx
+                    ax = fig.add_subplot(inner[0, col])
+                    group_axes.append(ax)
+
+                    # Prepare heatmap array
+                    sub_df = block_df[block_df['Split'] == split].copy()
+                    sub_df = sub_df.set_index('Generator').reindex(generators)
+                    heatmap_array = sub_df['Value'].to_numpy().reshape(-1, 1)
+
+                    vmin = heatmap_array.min()
+                    vmax = heatmap_array.max()
+
+                    # Show colorbar only on the last subplot of the group
+                    show_colorbar = (sc_idx == 1 and split_idx == 1)
+
+                    if using_norm_values:
+                        sns.heatmap(
+                            heatmap_array,
+                            annot=True,
+                            cmap=cmap_custom, ax=ax,
+                            cbar=show_colorbar,
+                            cbar_kws={'label': metric} if show_colorbar else None,
+                            annot_kws={"size": 13, "color": "black"},
+                            vmin=vmin, vmax=vmax
+                        )
+                    else:
+                        sns.heatmap(
+                            heatmap_array,
+                            annot=True, fmt=".4f",
+                            cmap=cmap_custom, ax=ax,
+                            cbar=show_colorbar,
+                            cbar_kws={'label': metric} if show_colorbar else None,
+                            annot_kws={"size": 13, "color": "black"},
+                            vmin=vmin, vmax=vmax
+                        )
+                    ax.set_aspect("auto")
+
+                    # X-axis = split
+                    ax.set_xticks([0.5])
+                    ax.set_xticklabels([split], rotation=0, ha="center", fontsize=12)
+
+                    # Y-axis only for the first metric and first scaffold (leftmost)
+                    if met_idx == 0 and sc_idx == 0 and split_idx == 0:
+                        ax.set_ylabel(receptor.replace('_', ' '), fontsize=13)
+                        ax.set_yticks(np.arange(len(generators)) + 0.5)
+                        new_labels = [g.replace('_epsilon', '\n epsilon')
+                                        .replace('_mut_r', '\n mut_r')
+                                        .replace('addcarbon', 'AddCarbon')
+                                      for g in generators]
+                        ax.set_yticklabels(new_labels, rotation=0, fontsize=13)
+                    else:
+                        ax.set_ylabel("")
+                        ax.set_yticks([])
+                        ax.set_yticklabels([])
+
+            # Top labels above each scaffold pair (only for top receptor row)
+            if rec_idx == 0:
+                # CSK (columns 0 and 1)
+                p0 = group_axes[0].get_position()
+                p1 = group_axes[1].get_position()
+                x_mid_csk = (p0.x0 + p1.x1) / 2
+                y_top_csk = max(p0.y1, p1.y1) + 0.012
+                fig.text(x_mid_csk, y_top_csk, f"{metric} - CSK", ha="center", va="bottom", fontsize=13)
+
+                # MURCKO (columns 2 and 3)
+                p2 = group_axes[2].get_position()
+                p3 = group_axes[3].get_position()
+                x_mid_mur = (p2.x0 + p3.x1) / 2
+                y_top_mur = max(p2.y1, p3.y1) + 0.012
+                fig.text(x_mid_mur, y_top_mur, f"{metric} - MURCKO", ha="center", va="bottom", fontsize=13)
+
+    # Add a global title if specified
+    if title:
+        fig.suptitle(title, fontsize=14, y=0.995)
+
+    # Adjust layout and save the figure
+    plt.tight_layout(rect=[0, 0, 1, 0.965])
+    if save_name:
+        plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
+        plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=200, bbox_inches='tight')
+    plt.show()
+
+
