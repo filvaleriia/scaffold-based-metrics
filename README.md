@@ -47,10 +47,11 @@ cd scaffold-based-metrics
 conda env create -f environment.yml
 conda activate scaffold-based-metrics-env
 ```
+
 OR packages what you need to install:
 - rdkit
 - pandas
-- jupyter lab
+- JupyterLab
 - scikit-learn
 - scikit-learn-extra
 - seaborn
