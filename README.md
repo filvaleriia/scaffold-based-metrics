@@ -152,7 +152,7 @@ Metrics were calculated for each OS using the RS. To avoid bias from outliers or
 
 Finally, we compared the average metric values across the two split strategies, the two targets, and the two scaffold definitions. For visualization, we prepared normalized heatmaps.
 
-![Project workflow](img/project_workflow.jpg)
+![Project workflow](img/project_workflow_.png)
 
 
 
