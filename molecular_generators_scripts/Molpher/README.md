@@ -5,13 +5,9 @@
 
 ---
 
-## 🛠️ Installation Requirements
+## 🛠️ Installation
 
-To install the required dependencies, run:
-
-```bash
-pip install -r requirements.txt
-```
+Before running the generator, make sure to install all required dependencies and clone Molpher from GitHub.
 
 ## 📥 Input Data
 

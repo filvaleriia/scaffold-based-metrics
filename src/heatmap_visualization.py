@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
 from matplotlib.colors import ListedColormap
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 
@@ -661,6 +662,11 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
 
                     # Show colorbar only on the last subplot of the group
                     show_colorbar = (sc_idx == 1 and split_idx == 1)
+                    if show_colorbar:
+                        divider = make_axes_locatable(ax)
+                        cax = divider.append_axes("right", size="5%", pad=0.05)
+                    else:
+                        cax = None
 
                     if using_norm_values:
                         sns.heatmap(
@@ -668,6 +674,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
                             annot=True,
                             cmap=cmap_custom, ax=ax,
                             cbar=show_colorbar,
+                            cbar_ax=cax,
                             cbar_kws={'label': metric} if show_colorbar else None,
                             annot_kws={"size": 13, "color": "black"},
                             vmin=vmin, vmax=vmax
@@ -678,6 +685,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
                             annot=True, fmt=".4f",
                             cmap=cmap_custom, ax=ax,
                             cbar=show_colorbar,
+                            cbar_ax=cax,
                             cbar_kws={'label': metric} if show_colorbar else None,
                             annot_kws={"size": 13, "color": "black"},
                             vmin=vmin, vmax=vmax
@@ -723,7 +731,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
         fig.suptitle(title, fontsize=14, y=0.995)
 
     # Adjust layout and save the figure
-    plt.tight_layout(rect=[0, 0, 1, 0.965])
+    plt.tight_layout(rect=[0, 0, 1, 0.99])
     if save_name:
         plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=200, bbox_inches='tight')

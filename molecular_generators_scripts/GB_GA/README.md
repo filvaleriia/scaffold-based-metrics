@@ -14,10 +14,11 @@ Before running the generator, please install the required packages. You will nee
 - `numpy`
 - `pandas`
 
-You can install all dependencies using:
+You can either create a new one using the provided `environment.yml`:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate gb_ga_env
 ```
 
 ---

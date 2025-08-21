@@ -1,0 +1,9 @@
+name: addcarbon_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - python-levenshtein
+  - rdkit
+  - scikit-learn

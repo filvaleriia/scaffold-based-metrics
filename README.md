@@ -34,7 +34,7 @@ indicates how effectively the generator explores the target region of chemical s
 ✔ Works with **Murcko and CSK scaffold analysis**.  
 ✔ Normalization and visualization tools for result interpretation.  
 
-In this analyze we prepare data for two different receptors (Glucocorticoid receptor, Leukocyte elastase) and two different split (dissimilarity split and similalrity split)
+In this analyze we prepare data for two different receptors (Glucocorticoid receptor, Leukocyte elastase) and two different split (dissimilarity split and similarity split)
 
 ---
 
@@ -98,7 +98,7 @@ python3 src/metrics.py --type_cluster dis --type_scaffold csk --generator Molphe
 
 ```
 
-The second options how use generator it define the path to folder where Recall Set and Output Set or you can look for examples run_calculation_metrics_define_path.sh. The results can be found in the folder */data/results/{receptor_name}/{generator_name}/*
+The second option how use generator it define the path to folder where Recall Set and Output Set or you can look for examples run_calculation_metrics_define_path.sh. The results can be found in the folder */data/results/{receptor_name}/{generator_name}/*
 
 ```bash
 python3 src/metrics_define_path.py \
@@ -111,7 +111,7 @@ python3 src/metrics_define_path.py \
     --ncpus 1
 ```
 
-The last options how it run, you can use your own data, for this purpose existing script src/metrics_own_data.py or you can loock for examples run_own_single_metrics_calculation.sh, the results will be in results folder in main folder:
+The last option how to run it, you can use your own data, for this purpose existing script src/metrics_own_data.py or you can look for examples run_own_single_metrics_calculation.sh, the results will be in results folder in main folder:
 ```bash
 python3 src/metrics_own_data.py \
     --type_scaffold csk \
@@ -155,12 +155,11 @@ Finally, we compared the average metric values across the two split strategies, 
 ![Project workflow](img/project_workflow_.png)
 
 
-
 ## 📊 Results  
 
 Here we summarize the main outcomes of our study.  
 
-**Combined normilazid results in a single overview plot**  
+**Combined normalized results in a single overview plot**  
 ![Normalized heatmaps](img/heat_map/all_res_metrics_norm_per_column.png)
 
 Based on these results, the best performance of our metrics was achieved by **DrugEx Graph Transformer** with *epsilon = 0.6*.  

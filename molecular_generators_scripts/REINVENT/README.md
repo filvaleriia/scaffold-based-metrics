@@ -51,13 +51,6 @@ reinvent transfer_learning.toml
 
 - The model is saved after each epoch.
 - After training, examine the logs and choose the best-performing epoch for each receptor and cluster combination.
-- Selected best models are stored in: `best_epochs_TL/{receptor}/models/`
-
-### 📷 Example log output (Glucocorticoid receptor, dis_0):
-
-
-![the output log to Glucocorticoid dis_0](best_epochs_TL/Glucocorticoid_receptor/logs/dis_0/best_epoch_dis_0.png)
-
 ---
 
 ## 🧠 Step 2: Staged Learning
