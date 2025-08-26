@@ -1,3 +1,12 @@
 name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-GB_GA_mut_r_0.5_mean,sim,csk,829321.2,-,0.5144739,0.0621033,0.0270593
-GB_GA_new_mut_r_0.5_mean,sim,csk,929513.6,-,0.8311124,0.0348669,0.0643061
+Molpher_mean,sim,csk,1661166.8,-,0.8358743,0.127299,0.0125832
+REINVENT_mean,sim,csk,723961.0,-,0.645464,0.1095898,0.0105013
+DrugEx_GT_epsilon_0.1_mean,sim,csk,888053.6,-,0.799473,0.1946213,0.0203648
+DrugEx_GT_epsilon_0.6_mean,sim,csk,908235.8,-,0.896518,0.262326,0.026153
+DrugEx_RNN_epsilon_0.1_mean,sim,csk,942638.6,-,0.6587615,0.0763069,0.0581896
+DrugEx_RNN_epsilon_0.6_mean,sim,csk,898509.8,-,0.8594673,0.1134054,0.0445525
+GB_GA_mut_r_0.01_mean,sim,csk,959197.8,-,0.8354602,0.0515619,0.0514223
+GB_GA_mut_r_0.5_mean,sim,csk,929513.6,-,0.8311124,0.0348669,0.0643061
+GB_GA_log_p_mut_r_0.01_mean,sim,csk,913169.2,-,0.4741013,0.0767063,0.0170946
+GB_GA_log_p_mut_r_0.5_mean,sim,csk,829321.2,-,0.5144739,0.0621033,0.0270593
+addcarbon_mean,sim,csk,1000000.0,-,0.3497459,0.0009408,0.0127474

@@ -1,3 +1,12 @@
-name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-GB_GA_mut_r_0.01_mean,sim,murcko,999971.6,-,0.1575446,0.4060211,0.001954
-GB_GA_new_mut_r_0.01_mean,sim,murcko,970580.6,-,0.4601308,0.2481883,0.0090933
+name,type_cluster,scaffold,USo,SSo,TUPOR_,TUPOR,SESY,ASER,ACR,CwASo
+Molpher_mean,sim,murcko,215633.0,836455.8,-,0.3211869,0.2578516,0.0047471,0.0001063,3916.6
+REINVENT_mean,sim,murcko,491769.4,814194.8,-,0.1507425,0.6012093,0.0021144,2.2e-05,1607.2
+DrugEx_GT_epsilon_0.1_mean,sim,murcko,410774.2,829714.2,-,0.2022694,0.4958919,0.0084476,3.95e-05,6545.2
+DrugEx_GT_epsilon_0.6_mean,sim,murcko,556595.4,909782.8,-,0.5691019,0.6117602,0.0047266,7.43e-05,4258.2
+DrugEx_RNN_epsilon_0.1_mean,sim,murcko,351180.4,847988.2,-,0.0927738,0.4132002,0.0023457,2.2e-05,1933.4
+DrugEx_RNN_epsilon_0.6_mean,sim,murcko,,892363.2,-,0.5123332,0.4294106,0.0036451,,
+GB_GA_mut_r_0.01_mean,sim,murcko,,970580.6,-,0.4601308,0.2481883,0.0090933,,
+GB_GA_mut_r_0.5_mean,sim,murcko,,952957.0,-,0.4815661,0.2355365,0.009002,,
+GB_GA_log_p_mut_r_0.01_mean,sim,murcko,,999971.6,-,0.1575446,0.4060211,0.001954,,
+GB_GA_log_p_mut_r_0.5_mean,sim,murcko,,999950.4,-,0.1390658,0.3304573,0.0031776,,
+addcarbon_mean,sim,murcko,,1000000.0,-,0.0502969,0.0029712,0.0033116,,

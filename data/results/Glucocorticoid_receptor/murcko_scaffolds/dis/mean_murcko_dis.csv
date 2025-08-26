@@ -1,3 +1,12 @@
 name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-GB_GA_mut_r_0.01_mean,dis,murcko,999951.8,-,0.0970652,0.40087,0.0003578
-GB_GA_new_mut_r_0.01_mean,dis,murcko,969946.6,-,0.2816138,0.2437187,0.0063918
+Molpher_mean,dis,murcko,823982.2,-,0.1568798,0.2581766,0.0015506
+REINVENT_mean,dis,murcko,820136.6,-,0.1082259,0.5558138,0.0005523
+DrugEx_GT_epsilon_0.1_mean,dis,murcko,809261.8,-,0.1586254,0.4745781,0.001079
+DrugEx_GT_epsilon_0.6_mean,dis,murcko,907555.6,-,0.2966192,0.614171,0.0018386
+DrugEx_RNN_epsilon_0.1_mean,dis,murcko,797900.0,-,0.0343444,0.3914436,0.0006234
+DrugEx_RNN_epsilon_0.6_mean,dis,murcko,891538.6,-,0.2935096,0.4251,0.0014787
+GB_GA_mut_r_0.01_mean,dis,murcko,969946.6,-,0.2816138,0.2437187,0.0063918
+GB_GA_mut_r_0.5_mean,dis,murcko,952599.2,-,0.287256,0.2336452,0.0060639
+GB_GA_log_p_mut_r_0.01_mean,dis,murcko,999951.8,-,0.0970652,0.40087,0.0003578
+GB_GA_log_p_mut_r_0.5_mean,dis,murcko,999973.4,-,0.0949004,0.3329211,0.0003278
+addcarbon_mean,dis,murcko,1000000.0,-,0.0152271,0.002969,0.000724

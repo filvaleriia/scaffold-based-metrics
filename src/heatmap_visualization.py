@@ -76,19 +76,8 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
     # Set the index of the dataframe to the 'name' attribute of the data
     df.index = data.name.tolist()
 
-    y_labels = {
-
-    "Molpher": "Molpher",
-    "REINVENT": "REINVENT",
-    "DrugEx_GT_epsilon_0.6" : "DrugEx_GT",
-    "DrugEx_RNN_epsilon_0.6": "DrugEx_RNN",
-    "GB_GA_mut_r_0.5": "GB_GA",
-    "addcarbon": "AddCarbon"
-    }
-    df.rename(index=y_labels, inplace=True)
-
     # Create a figure for the heatmap with a specific size
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 0.7 * len(generators_name_list)))
     
     # Plot the heatmap using seaborn with optional annotations and custom color map
     sns.heatmap(df, annot=annotate, cmap=cmap,   annot_kws={"size": 17})
@@ -96,8 +85,10 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
     # Set the title for the heatmap
     plt.title(title, fontsize=17 , pad=10)
 
+    new_labels = [label.replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in df.index]
+    #new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
     plt.xticks(fontsize=17)
-    plt.yticks(fontsize=17)
+    plt.yticks(ticks=np.arange(len(df.index)) + 0.5,labels=new_labels,fontsize=17)
     plt.tight_layout()
     # Save the plot as an SVG file
 
@@ -121,9 +112,10 @@ def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap=
     '''
     # Get the number of subsets in the dictionary
     num_subsets = len(subset_dict)
-    
+
+    num_gen = len(subset_dict[next(iter(subset_dict))])
     # Create a subplot for each subset (1 row, num_subsets columns)
-    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 12, 12))
+    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 12, num_gen * 1.3))
     
     # If there is only one subset, axes will not be iterable, so convert it to a list
     if num_subsets == 1:
@@ -193,7 +185,7 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
     '''
     
     # Create a 2x2 grid of subplots with a specified figure size
-    fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+    fig, axes = plt.subplots(2, 2, figsize=(14, 1.3 * len((subset_dict[next(iter(subset_dict))]))))
    
     # Iterate through the subset dictionary to plot each subset
     for axses, data in subset_dict.items():
@@ -249,7 +241,9 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
     """
 
     num_subsets = len(data_dict)
-    fig, axes = plt.subplots(1, num_subsets, figsize=(12 * num_subsets, 12))  # 1 row, 4 columns for subsets
+    num_gen = len(data_dict[next(iter(data_dict))])
+    # Create a subplot for each subset (1 row, num_subsets columns)
+    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 12, num_gen * 1.3))
 
     baseline_df = baseline_df_all[['TUPOR', 'SESY', 'ASER']]  
     baseline_df.index = baseline_df_all.name.tolist()
@@ -619,6 +613,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
     # Figure size: wider figure depending on number of metrics + spacing
     fig_width = 1.7 * 4 * nmetrics + 2
     fig_height = 6 * nrows
+
     fig = plt.figure(figsize=(fig_width, fig_height))
 
     # Outer grid for arranging metrics per receptor row

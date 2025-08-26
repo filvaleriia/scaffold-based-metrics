@@ -1,0 +1,7 @@
+name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
+GB_GA_log_p_mut_r_0.5_500k_0,sim,murcko,"499,962.0",22/172,0.127907,0.4782243,0.0172113
+GB_GA_log_p_mut_r_0.5_500k_1,sim,murcko,"380,569.0",6/93,0.0645161,0.2194057,0.0041701
+GB_GA_log_p_mut_r_0.5_500k_2,sim,murcko,"391,105.0",4/65,0.0615385,0.2350648,0.0035131
+GB_GA_log_p_mut_r_0.5_500k_3,sim,murcko,"406,640.0",3/57,0.0526316,0.2517436,0.0004156
+GB_GA_log_p_mut_r_0.5_500k_4,sim,murcko,"395,229.0",0/50,0.0,0.2427099,0.0
+GB_GA_log_p_mut_r_0.5_500k_mean,sim,murcko,"414,701.0",-,0.0613186,0.2854297,0.005062
