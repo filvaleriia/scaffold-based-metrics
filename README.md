@@ -13,7 +13,7 @@ quantifies the ability of the generator to produce molecules containing scaffold
 
    $$TUPOR = {{UAs_{OS}} \over UAs_{RS}}$$ 
    
-* The TUPOR metric is a key measure that quantifies the ability of a molecular generator to reproduce biologically active scaffolds. As such, TUPOR is analogous to the recall metric used to evaluate classification tasks in machine learning.
+* The TUPOR metric is a key measure that quantifies the ability of a molecular generator to reproduce biologically active scaffolds. As such, TUPOR is analogous to the recall metric used to evaluate classification tasks in machine learning. TUPOR is effective for a generate-then-select methodology. Selecting the bioactive compounds out of a large set of generated molecules is hard, but if they are not generated at all, this is impossible.
 
 ### ▪ SEt Scaffold Yield (SESY): 
 reflects the structural diversity of the generated set. It is calculated as the percentage of unique scaffolds (Us<sub>OS</sub>) in the Output Set relative to the total number of compounds in the Output Set (c<sub>OS</sub>). A value of 1 indicates that every scaffold in the OS is unique, while 0 means no valid scaffolds were generated. 
