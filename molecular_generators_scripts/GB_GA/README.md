@@ -31,7 +31,7 @@ You can modify several parameters directly in the script to control the behavior
 - **Population size**
 - **Number of generations**
 - **Mating pool size**
-- **Scoring function**
+- **Scoring function** (It is possible to use either your own scoring function or a predefined one)
 - **Size of molecules**
 
 To adjust them, open `GB_GA.py` and modify the corresponding variables in the configuration section.
