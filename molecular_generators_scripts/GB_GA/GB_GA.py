@@ -125,7 +125,7 @@ if __name__ == "__main__":
     
     file_name = f'cIS_Glucocorticoid_receptor_{type_split}_{number}.smi'
     population_size = 1000000
-    scoring_function = sc.logP_max
+    scoring_function = sc.logP_max # OR sc.own_calculation
     generations = 10
     mating_pool_size = 5000
     mutation_rate = 0.5

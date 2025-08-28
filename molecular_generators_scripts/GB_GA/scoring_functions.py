@@ -58,6 +58,14 @@ def calculate_scores(population,function,scoring_args):
 
   return scores 
 
+def own_calculation(m,dummy):
+  SA_score = sascorer.calculateScore(m)
+  if SA_score <= 6:
+     return 1.0
+  else:
+     return 0.0
+  
+  
 def logP_max(m, dummy):
   score = logP_score(m)
   return max(0.0, score)
