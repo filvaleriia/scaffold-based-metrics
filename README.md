@@ -126,11 +126,13 @@ In this project, we applied three metrics to compare different molecular generat
 To demonstrate the target-independence of these metrics, we evaluated five molecular generators on two pharmacological targets:
 
 1. **Molpher** – atom-based molecular generator using an evolutionary strategy  
-2. **DrugEx** – neural network–based generator. Two architectures and two different `epsilon` parameter settings (affecting exploration vs. exploitation) were applied:  
-   - DrugEx RNN  
-   - DrugEx GT  
+2. **DrugEx** – neural network–based generator. Two architectures and two different `epsilon` parameter settings (balancing exploration and exploitation) were applied:  
+   - **DrugEx RNN** – recurrent neural network–based generator  
+   - **DrugEx GT** – graph transformer–based generator  
 3. **REINVENT** – neural network–based generator using a pretrained model  
-4. **GB_GA** – atom-based generator using a genetic algorithm. Two different `mutation_rate` parameters were tested (1% and 50%)  
+4. **GB_GA** – atom-based generator using a genetic algorithm. Two different `mutation_rate` parameters were tested (1% and 50%).  
+   - **GB_GA** – generator with a custom scoring function, checking only molecules with an SA score lower than 6.  
+   - **GB_GA_log_p** – generator with the logP scoring function, based on the original paper.  
 5. **AddCarbon** – baseline generator for result verification  
 
 To cover different structural aspects, we employed two scaffold definitions: **CSKs** and **Murcko scaffolds** (RDKit definition).
@@ -162,5 +164,5 @@ Here we summarize the main outcomes of our study.
 **Combined normalized results in a single overview plot**  
 ![Normalized heatmaps](img/heat_map/all_res_metrics_norm_per_column.png)
 
-Based on these results, the best performance across our metrics was achieved by the **DrugEx Graph Transformer** with *epsilon = 0.6*.  
+Based on these results, the **best-performing generators** across receptors, scaffold types, and splits were **DrugEx Graph Transformer** (*ε = 0.6*), closely followed by **GB_GA** (*mutation rate = 50%*) and **DrugEx RNN** (*ε = 0.6*).  
 The weakest performance was observed for the **AddCarbon** generator.
