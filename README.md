@@ -67,8 +67,9 @@ Or install the following packages manually:
 Modify the `calculate_metrics` function in your notebook or script to specify:  
 
 - **Scaffold type**: `csk` or `murcko`  
-- **Target receptor**  
-- **Molecular generator**  
+- **Cluster type**: `dis` or `sim`
+- **Target receptor**: `Glucocorticoid_receptor` or `Leukocyte_elastase`
+- **Molecular generator**: `Molpher`, `REINVENT`, `DrugEx_GT_epsilon_0.1`, `DrugEx_GT_epsilon_0.6`, `DrugEx_RNN_epsilon_0.1`, `DrugEx_RNN_epsilon_0.6`,`GB_GA_mut_r_0.01`, `GB_GA_mut_r_0.5`, `GB_GA_log_p_mut_r_0.01`,`GB_GA_log_p_mut_r_0.5`, `addcarbon`.  
 
 
 To use these metrics as explained below, you need to save your OutputSet to the folder. The Output must have only one column with smiles, without header.
@@ -84,7 +85,7 @@ from src import metrics
 
 type_cluster = 'dis' #options: 'dis'|'sim' 
 type_scaffold = 'csk' #options: 'csk'|'murcko'
-generator = 'Molpher' #options: 'Molpher'|'DrugEx'|'REINVENT'|'addcarbon' etc.
+generator = 'Molpher' #options: 'Molpher' | 'REINVENT' | 'DrugEx_GT_epsilon_0.1' | 'DrugEx_GT_epsilon_0.6' | 'DrugEx_RNN_epsilon_0.1' | 'DrugEx_RNN_epsilon_0.6' | 'GB_GA_mut_r_0.01' | 'GB_GA_mut_r_0.5' | 'GB_GA_log_p_mut_r_0.01' |'GB_GA_log_p_mut_r_0.5' | 'addcarbon'
 receptor = 'Glucocorticoid_receptor' #options: 'Glucocorticoid_receptor'|'Leukocyte_elastase'
 ncpus = 4
 
