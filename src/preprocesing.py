@@ -140,7 +140,6 @@ class Preprocesing():
         #for leukocyte elastase random_state = 366
         try_random_state = [random_state_number]
         for x in try_random_state: 
-            #print("AAAAA")
             kmedoids = KMedoids(n_clusters=5,metric="jaccard", random_state = x, \
                                 init='k-medoids++').fit(fps)
             labels = kmedoids.labels_
@@ -150,19 +149,10 @@ class Preprocesing():
                   "Number in 2 cluster: ",len(labels[labels==2]),"Number in 3 cluster: ",len(labels[labels==3]),"Number in 4 cluster: ",len(labels[labels==4]))
             random_state.append(x)
     
-            dff = pd.DataFrame(index=np.arange(5), columns=np.arange(5))
-            for x in range(5):
-                for y in range(5):
-                    dff[x][y] = jaccard_score(kmedoids.cluster_centers_[x],kmedoids.cluster_centers_[y])
-
-            print("Matrix of similarity of each clusters:")
-            print(dff)        
-
         df['clusters'] = labels
 
         self.active_compounds_with_clusters = df.copy()
 
-        #print(df)
         non_active_scaffold = pd.read_csv(f"data/input_recall_sets/{self.receptor_name}/df_not_in_new_active_sets_new.csv")
         deleted_index = []
         for x in range(len(df)):
@@ -173,7 +163,6 @@ class Preprocesing():
         for r in deleted_index:
             df = df.drop([r])
         df = df.reset_index(drop=True)
-        #print(df)
         if self.save_options == True:
             df.to_csv(f'data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_split_to_clusters_using_KMedoids.csv', index_label = False)
 
@@ -188,8 +177,6 @@ class Preprocesing():
         input_id_Molpher_train_dissimilar = []
         input_id_train_dissimilar = []
         input_id_test_dissimilar = []
-        print('Traine index of cluster', train)
-        print('Test index of cluster', test)
         count = 0
         for r in train:
             nazev = "clusters"
@@ -227,18 +214,15 @@ class Preprocesing():
         input_id_test_similar = []
         count = 0
         for r in train:
-            print("R",r)
             train_set = pd.DataFrame()
             nazev = "clusters"
             a = data_cluters[data_cluters[nazev]==r]
             df_split = np.array_split(a, 5)
             test_set = df_split[perc_test]
-            print("Len_test",len(test_set))
 
             for x in range(5):
                 if x!=perc_test:
                     train_set = train_set.append(df_split[x])
-            print("Train_set",len(train_set))
 
             for x in train_set.index:
                 smiles = a['scaffolds_csk'].loc[x]
