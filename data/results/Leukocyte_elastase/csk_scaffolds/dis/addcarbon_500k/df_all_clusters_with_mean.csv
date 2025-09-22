@@ -1,7 +1,0 @@
-name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-addcarbon_500k_0,dis,csk,500000.0,3/42,0.0714286,0.001838,0.0007
-addcarbon_500k_1,dis,csk,500000.0,3/41,0.0731707,0.001936,0.001142
-addcarbon_500k_2,dis,csk,500000.0,10/45,0.2222222,0.001718,0.005922
-addcarbon_500k_3,dis,csk,500000.0,6/47,0.1276596,0.001956,0.006014
-addcarbon_500k_4,dis,csk,500000.0,8/41,0.195122,0.001852,0.006248
-addcarbon_500k_mean,dis,csk,500000.0,-,0.1379206,0.00186,0.0040052

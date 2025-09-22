@@ -1,7 +1,0 @@
-name,type_cluster,scaffold,SSo,TUPOR_,TUPOR,SESY,ASER
-DrugEx_RNN_epsilon_0.1_0,sim,csk,"908,759.0",40/46,0.8695652,0.0848377,0.1753886
-DrugEx_RNN_epsilon_0.1_1,sim,csk,"932,005.0",26/44,0.5909091,0.0707185,0.040062
-DrugEx_RNN_epsilon_0.1_2,sim,csk,"1,084,518.0",32/42,0.7619048,0.0962086,0.0244035
-DrugEx_RNN_epsilon_0.1_3,sim,csk,"906,701.0",23/42,0.547619,0.0682904,0.047718
-DrugEx_RNN_epsilon_0.1_4,sim,csk,"881,210.0",22/42,0.5238095,0.0614791,0.003376
-DrugEx_RNN_epsilon_0.1_mean,sim,csk,"942,638.6",-,0.6587615,0.0763069,0.0581896
