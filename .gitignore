@@ -1,6 +1,8 @@
 cluster/
 data/output_sets/*
 data/results/*
+data/*
+
 .ipynb_checkpoints/
 
 src/__pycache__/*
