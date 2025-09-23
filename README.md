@@ -58,7 +58,33 @@ Or install the following packages manually:
 - seaborn
 - matplotlib
 
+## 📂 Data Requirements  
 
+All required data are available on **Zenodo**:  
+After download, place the entire `data/` folder into the root directory of this repository.  
+
+> ⚠️ The folder has a size of ~12.2 GB.  
+All scripts are configured to work with this folder automatically.  
+
+### Folder structure  
+
+- *`data/input_recall_sets/`* – Input Sets and Recall Sets for *Glucocorticoid receptor* and *Leukocyte elastase*  
+- *`data/nuclear_receptor/`* – original ChEMBL31 data for *Glucocorticoid receptor*, used in preprocessing for Input and Recall Sets  
+- *`data/protease/`* – original ChEMBL31 data for *Leukocyte elastase*, used in preprocessing for Input and Recall Sets  
+- *`data/information_about_clusters/`* – statistics for 5 clusters across 2 different splits  
+- *`data/results/`* – results for 5 different generators (some with different settings), organized as follows:  s
+```text
+data/results/
+├── Glucocorticoid_receptor/
+├── Leukocyte_elastase/
+      ├── csk_scaffolds/
+      ├── murcko_scaffolds/
+          ├── dis/
+          ├── sim/
+              ├── Molpher/
+              ├── DrugEx_GT_epsilon_0.6/
+              ...
+```
 
 ## 🛠 Usage  
 
