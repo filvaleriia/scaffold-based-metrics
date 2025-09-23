@@ -4,7 +4,7 @@ data/results/*
 data/*
 
 .ipynb_checkpoints/
-
+*/.ipynb_checkpoints/
 src/__pycache__/*
 /__pycache__/*
 
