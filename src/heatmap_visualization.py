@@ -40,7 +40,6 @@ def preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor
     # Define path to data
 
     link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
-
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
     # Load data
@@ -612,7 +611,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
 
     # Figure size: wider figure depending on number of metrics + spacing
     fig_width = 1.7 * 4 * nmetrics + 2
-    fig_height = 6 * nrows
+    fig_height = 6 * nrows * 1.3
 
     fig = plt.figure(figsize=(fig_width, fig_height))
 
@@ -655,6 +654,20 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
                     vmin = heatmap_array.min()
                     vmax = heatmap_array.max()
 
+                    heatmap_flat = heatmap_array.flatten()
+                    max_idx = np.argmax(heatmap_flat)
+
+                    # Build annot_array with same shape as heatmap_array
+                    annot_array = []
+                    for i, val in enumerate(heatmap_flat):
+                        text = f"{val:.4f}" if not using_norm_values else f"{val:.3f}"
+                        if i == max_idx:
+                            text = r"$\bf{" + text + "}$"  # bold max
+                        annot_array.append(text)
+
+                    # Reshape to heatmap_array shape
+                    annot_array = np.array(annot_array).reshape(heatmap_array.shape)
+
                     # Show colorbar only on the last subplot of the group
                     show_colorbar = (sc_idx == 1 and split_idx == 1)
                     if show_colorbar:
@@ -666,23 +679,25 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
                     if using_norm_values:
                         sns.heatmap(
                             heatmap_array,
-                            annot=True,
+                            annot=annot_array,
+                            fmt="",
                             cmap=cmap_custom, ax=ax,
                             cbar=show_colorbar,
                             cbar_ax=cax,
                             cbar_kws={'label': metric} if show_colorbar else None,
-                            annot_kws={"size": 13, "color": "black"},
+                            annot_kws={"size": 15, "color": "black"},
                             vmin=vmin, vmax=vmax
                         )
                     else:
                         sns.heatmap(
                             heatmap_array,
-                            annot=True, fmt=".4f",
+                            annot=annot_array, 
+                            fmt="",
                             cmap=cmap_custom, ax=ax,
                             cbar=show_colorbar,
                             cbar_ax=cax,
                             cbar_kws={'label': metric} if show_colorbar else None,
-                            annot_kws={"size": 13, "color": "black"},
+                            annot_kws={"size": 14, "color": "black"},
                             vmin=vmin, vmax=vmax
                         )
                     ax.set_aspect("auto")
@@ -693,13 +708,13 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
 
                     # Y-axis only for the first metric and first scaffold (leftmost)
                     if met_idx == 0 and sc_idx == 0 and split_idx == 0:
-                        ax.set_ylabel(receptor.replace('_', ' '), fontsize=13)
+                        ax.set_ylabel(receptor.replace('_', ' '), fontsize=14)
                         ax.set_yticks(np.arange(len(generators)) + 0.5)
                         new_labels = [g.replace('_epsilon', '\n epsilon')
                                         .replace('_mut_r', '\n mut_r')
                                         .replace('addcarbon', 'AddCarbon')
                                       for g in generators]
-                        ax.set_yticklabels(new_labels, rotation=0, fontsize=13)
+                        ax.set_yticklabels(new_labels, rotation=0, fontsize=14)
                     else:
                         ax.set_ylabel("")
                         ax.set_yticks([])
@@ -729,7 +744,8 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
     plt.tight_layout(rect=[0, 0, 1, 0.99])
     if save_name:
         plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
-        plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=200, bbox_inches='tight')
+        plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
+        plt.savefig(f'img/heat_map/{save_name}.tiff', format="tiff", dpi=300, bbox_inches='tight')
     plt.show()
 
 
