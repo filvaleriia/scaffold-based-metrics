@@ -15,7 +15,7 @@ def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
     '''
     # Define path to data
 
-    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    link = f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
 
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
@@ -39,7 +39,7 @@ def preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor
     '''
     # Define path to data
 
-    link = f"data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    link = f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
     # Load data
