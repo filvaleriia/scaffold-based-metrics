@@ -6,16 +6,17 @@ from sklearn.preprocessing import MinMaxScaler
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
 from matplotlib.colors import ListedColormap
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+import math
+from matplotlib.gridspec import GridSpec
 
 
-
-def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
+def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, data_folder):
     '''
     Function for connection all data set with normalization
     '''
     # Define path to data
 
-    link = f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    link = f"{data_folder}data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
 
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
@@ -33,13 +34,13 @@ def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor):
 
 
 
-def preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor):
+def preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor, data_folder):
     '''
     Function for connection all data set without normalization
     '''
     # Define path to data
 
-    link = f"../data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
+    link = f"{data_folder}data/results/{receptor}/{type_scaffold}_scaffolds/{type_cluster}"
     link_mean = [f"{link}/{generator}/{generator}_mean_{type_scaffold}_{type_cluster}.csv" for generator in generators_name_list]
     
     # Load data
@@ -53,7 +54,7 @@ def preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor
 
 
 
-def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, title='', name_save='', cmap='viridis', annotate=True, using_norm_values = True):
+def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, title='', name_save='', cmap='viridis', annotate=True, using_norm_values = True, data_folder = '', save_folder = ''):
     ''' 
     Plots a single heatmap for the given data split.
     
@@ -67,9 +68,9 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
 
     # Extract relevant columns (TUPOR, SESY, ASER, ASR) for visualization
     if using_norm_values:
-        data = preprocesing(type_cluster, type_scaffold, generators_name_list, receptor)
+        data = preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, data_folder)
     else:
-        data = preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor)
+        data = preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor, data_folder)
 
     df = data[['TUPOR', 'SESY', 'ASER']]
     # Set the index of the dataframe to the 'name' attribute of the data
@@ -90,88 +91,123 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
     plt.yticks(ticks=np.arange(len(df.index)) + 0.5,labels=new_labels,fontsize=17)
     plt.tight_layout()
     # Save the plot as an SVG file
-
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
+    if save_folder:
+        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     # Display the heatmap
     plt.show()
 
 
 
-def plot_all_subsets(subset_dict, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, numering = ''):
+def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='viridis', annotate=True, numering='', save_folder = ''):
     '''
     Plots heatmaps for multiple subsets in a single figure.
-    
+
     Args:
-    - subset_dict (dict): Dictionary where keys are subset names (e.g., '', '_10k') 
-                           and values are corresponding DataFrames to be visualized.
-    - title (str): Title for the entire figure (default is empty).
-    - cmap (str): Color map for the heatmaps (default is 'viridis').
-    - annotate (bool): Whether to annotate the cells with their values (default is True).
+    - subset_dict (dict): Dictionary mapping subset names (e.g., '', '_10k')
+                        to DataFrames that will be visualized.
+    - title (str): Optional title for the entire figure.
+    - cmap (str): Colormap used for heatmaps (default: 'viridis').
+    - annotate (bool): Whether to annotate heatmap cells with their numeric values.
     '''
-    # Get the number of subsets in the dictionary
+
     num_subsets = len(subset_dict)
-
     num_gen = len(subset_dict[next(iter(subset_dict))])
-    # Create a subplot for each subset (1 row, num_subsets columns)
-    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 12, num_gen * 1.3))
-    
-    # If there is only one subset, axes will not be iterable, so convert it to a list
-    if num_subsets == 1:
-        axes = [axes]
-    
-    # Iterate over each axis (subplot) and the corresponding subset data
-    for ax, (subset_name, data) in zip(axes, subset_dict.items()):
-        # Extract the relevant columns for the heatmap (TUPOR, SESY, ASER, ACR)
-        df = data[['TUPOR', 'SESY', 'ASER']]
-        
-        # Set the index of the dataframe to the 'name' attribute of the data
-        df.index = data.name.tolist()  # Using names as index
-        
-        # Plot the heatmap for the current subset
-        sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax,  annot_kws={"size": 30})
 
-        
-        # If the subset name is empty, label it as 'base'
+    # Dynamically determine the number of columns and rows (max 5 columns)
+    max_cols = 5
+    cols = min(num_subsets, max_cols)
+    rows = math.ceil(num_subsets / cols)
+
+    # Adjust layout so the final row is not too sparse
+    if num_subsets > 1:
+        cols_last_row = num_subsets % cols
+        if cols_last_row != 0 and cols_last_row < math.ceil(cols / 2):
+            cols = math.ceil(num_subsets / 2)
+            rows = math.ceil(num_subsets / cols)
+
+    # Preserve original size of individual heatmaps
+    fig_width = cols * 12
+    fig_height = rows * num_gen * 1.3
+    fig = plt.figure(figsize=(fig_width, fig_height))
+    gs = GridSpec(rows, cols, figure=fig)
+
+    axes = []
+    for i in range(num_subsets):
+        row = i // cols
+        col = i % cols
+        ax = fig.add_subplot(gs[row, col])
+        axes.append(ax)
+
+    # Plot each heatmap
+    for ax, (subset_name, data) in zip(axes, subset_dict.items()):
+        df = data[['TUPOR', 'SESY', 'ASER']]
+        df.index = data.name.tolist()
+
+        sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax, annot_kws={"size": 30})
+
+        # Format subset name for display
         if subset_name == '':
             subset_name = 'Full OS'
         elif subset_name == '_62.5k':
             subset_name = '62,500'
         else:
             subset_name = subset_name.replace('_', '').replace('k', ',000')
-        
-        # Modify the y-axis labels for better readability by replacing certain substrings
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
-        new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
+
+        # Clean and format y-axis labels (generator names)
+        new_labels = [
+            label.get_text()
+            .replace('_epsilon', '\n epsilon')
+            .replace('_mut_r', '\n mut_r')
+            .replace('addcarbon', 'AddCarbon')
+            for label in ax.get_yticklabels()
+        ]
+
+        # Remove subset suffixes from generator names
+        new_labels = [
+            label.replace('_62.5k', '').replace('_125k', '')
+                .replace('_250k', '').replace('_500k', '')
+                .replace('_10k', '')
+            for label in new_labels
+        ]
+
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
         ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
 
-        
-        # Set the title for the current subplot to indicate the subset name
+        # Set subplot title
         if subset_name == 'Full OS':
-            ax.set_title(f"{subset_name}",  fontsize=35, wrap=True)
+            ax.set_title(f"{subset_name}", fontsize=35, wrap=True)
         else:
-            ax.set_title(f"{subset_name} subset",  fontsize=35, wrap=True)
+            ax.set_title(f"{subset_name} subset", fontsize=35, wrap=True)
 
-    fig.text(
-    0.005, 0.97, numering,
-    ha='left', va='top',
-    fontsize=40
-    )
-    
-    # Set the overall title for the figure
+    # Hide unused subplot slots
+    total_slots = rows * cols
+    for j in range(len(axes), total_slots):
+        row = j // cols
+        col = j % cols
+        ax_empty = fig.add_subplot(gs[row, col])
+        ax_empty.axis('off')
+
+    # Add numbering and global title
+    fig.text(0.005, 0.985, numering, ha='left', va='top', fontsize=40)
     fig.suptitle(f'{title}', fontsize=40)
-    
-    # Adjust layout to ensure titles and labels are well placed
+
     plt.tight_layout()
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
-    # Display the heatmap figure
+
+    if save_folder:
+        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     plt.show()
 
 
 
-def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True):
+def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', name_save = '', cmap='viridis', annotate=True, save_folder = ''):
     '''
     Plots heatmaps for different subsets in a 2x2 grid, with each subset visualized in a separate subplot.
     
@@ -216,94 +252,150 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
     plt.tight_layout()
 
 
-
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
+    if save_folder:
+        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     # Display the heatmap figure
     plt.show()
 
 
 
-def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', numering = ''):
-    """
-    Generates heatmaps comparing subsets of data against a baseline.
-    The heatmaps highlight the differences from the baseline for values greater than 0.1 or smaller than -0.1.
-
-    Args:
-        baseline_df_all (pd.DataFrame): The baseline DataFrame containing reference data.
-        data_dict (dict): A dictionary of DataFrames for different subsets (e.g., '_10k', '_100k', '_500k', base).
-        type_split (str): The type of data split (e.g., 'dis', 'sim').
-        scaf (str): The scaffold type (e.g., 'csk', 'murcko').
-
-    Returns:
-        None
-    """
+def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', numering = '', save_folder = ''):
+    '''
+    Plots heatmaps showing differences from the baseline for multiple subsets,
+    dynamically arranging subplots based on the number of subsets.
+    '''
 
     num_subsets = len(data_dict)
     num_gen = len(data_dict[next(iter(data_dict))])
-    # Create a subplot for each subset (1 row, num_subsets columns)
-    fig, axes = plt.subplots(1, num_subsets, figsize=(num_subsets * 12, num_gen * 1.3))
 
-    baseline_df = baseline_df_all[['TUPOR', 'SESY', 'ASER']]  
+    # Dynamically determine number of rows and columns (max 5 columns)
+    max_cols = 5
+    cols = min(num_subsets, max_cols)
+    rows = math.ceil(num_subsets / cols)
+
+    # Adjust layout so that the last row is not too sparse
+    if num_subsets > 1:
+        cols_last_row = num_subsets % cols
+        if cols_last_row != 0 and cols_last_row < math.ceil(cols / 2):
+            cols = math.ceil(num_subsets / 2)
+            rows = math.ceil(num_subsets / cols)
+
+    # Preserve original heatmap sizing
+    fig_width = cols * 12
+    fig_height = rows * num_gen * 1.3
+    fig = plt.figure(figsize=(fig_width, fig_height))
+    gs = GridSpec(rows, cols, figure=fig)
+
+    axes = []
+    for i in range(num_subsets):
+        row = i // cols
+        col = i % cols
+        ax = fig.add_subplot(gs[row, col])
+        axes.append(ax)
+
+    # Prepare baseline values
+    baseline_df = baseline_df_all[['TUPOR', 'SESY', 'ASER']]
     baseline_df.index = baseline_df_all.name.tolist()
 
-    for k, (subset, df) in enumerate(data_dict.items()):
+    # Plot differences
+    for ax, (subset, df) in zip(axes, data_dict.items()):
         normalized_df = df[['TUPOR', 'SESY', 'ASER']]
         normalized_df.index = df.name.tolist()
-
-        baseline_df = baseline_df.set_index(normalized_df.index)  # Ensure same order
-
-        ax = axes[k]
-
-        if subset == '':
-            diff_df = baseline_df  
-        else:
-            diff_df = normalized_df - baseline_df  # Compute difference without absolute value
-            mask = (diff_df.abs() <= 0.1)  # Mask values in the range [-0.1, 0.1]
-            diff_df[mask] = np.nan  # Hide values close to zero
         
-        sns.heatmap(diff_df, annot=True, cmap='coolwarm', cbar_kws={'label': 'Difference from Baseline'}, ax=ax, annot_kws={"size": 30})
+        # Align indexes with baseline
+        baseline_df = baseline_df.set_index(normalized_df.index)
+
+        # Compute differences; empty subset uses direct baseline values
+        if subset == '':
+            diff_df = baseline_df
+        else:
+            diff_df = normalized_df - baseline_df
+            # Values within ±0.1 are considered negligible and set to NaN
+            mask = (diff_df.abs() <= 0.1)
+            diff_df[mask] = np.nan
+
+        sns.heatmap(
+            diff_df,
+            annot=True,
+            cmap='coolwarm',
+            cbar_kws={'label': 'Difference from Baseline'},
+            ax=ax,
+            annot_kws={"size": 30}
+        )
+
+        # Resize colorbar label
         ax.figure.axes[-1].yaxis.label.set_size(20)
 
+        # Format subset name for title
         if subset == '':
-            subset = 'Full OS'
+            subset_name = 'Full OS'
         elif subset == '_62.5k':
-            subset = '62,500'
+            subset_name = '62,500'
         else:
-            subset = subset.replace('_', '').replace('k', ',000')
+            subset_name = subset.replace('_', '').replace('k', ',000')
 
-        if subset == 'Full OS':
-            ax.set_title(f"{subset}",  fontsize=35, wrap=True)
+        if subset_name == 'Full OS':
+            ax.set_title(f"{subset_name}", fontsize=35, wrap=True)
         else:
-            ax.set_title(f"{subset} subset",  fontsize=35, wrap=True)
+            ax.set_title(f"{subset_name} subset", fontsize=35, wrap=True)
 
-        new_labels = [label.get_text().replace('_epsilon', '\n epsilon').replace('_mut_r', '\n mut_r').replace('addcarbon', 'AddCarbon') for label in ax.get_yticklabels()]
-        new_labels = [label.replace('_62.5k', '').replace('_125k', '').replace('_250k', '').replace('_500k', '') for label in new_labels]
+        # Format Y-axis labels (generator names)
+        new_labels = [
+            label.get_text()
+            .replace('_epsilon', '\n epsilon')
+            .replace('_mut_r', '\n mut_r')
+            .replace('addcarbon', 'AddCarbon')
+            for label in ax.get_yticklabels()
+        ]
+
+        # Remove subset suffixes from generator names
+        new_labels = [
+            label.replace('_62.5k', '').replace('_125k', '')
+                .replace('_250k', '').replace('_500k', '')
+                .replace('_10k', '')
+            for label in new_labels
+        ]
+
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
         ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
         ax.set_facecolor('white')
 
+    # Hide unused subplot slots
+    total_slots = rows * cols
+    for j in range(len(axes), total_slots):
+        row = j // cols
+        col = j % cols
+        ax_empty = fig.add_subplot(gs[row, col])
+        ax_empty.axis('off')
+
+    # Format scaffold label
     if scaf == 'csk':
         scaf_str = 'CSK'
     else:
         scaf_str = scaf
-
-    fig.text(
-    0.005, 0.97, numering,
-    ha='left', va='top',
-    fontsize=40
-    )
-
+    
     #fig.suptitle(f'Heatmaps with Differences from Baseline by more than ±0.1 for {scaf_str} scaffolds and {type_split} split for {receptor.replace("_", " ")}', fontsize=40)
 
+    # Add numbering text
+    fig.text(0.005, 0.95, numering, ha='left', va='top', fontsize=40)
+
     plt.tight_layout(rect=[0, 0, 1, 0.95])
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
-    plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
+
+    if save_folder:
+        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{name_save}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
     plt.show()
 
 
 
-def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cmap="viridis", title=None, save_name="heamps",  using_norm_values=False):
+def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cmap="viridis", title=None, save_name="heamps",  using_norm_values=False, data_folder = '', save_folder = ''):
     """
     Create and save combined heatmap for given generators, receptors, scaffolds, and metrics.
 
@@ -338,9 +430,9 @@ def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cma
             for type_scaffold in scaffolds:
                 for type_cluster in splits:
                     if using_norm_values:
-                        df = preprocesing(type_cluster, type_scaffold, generators, receptor)
+                        df = preprocesing(type_cluster, type_scaffold, generators, receptor, data_folder)
                     else:
-                        df = preprocesing_org(type_cluster, type_scaffold, generators, receptor)
+                        df = preprocesing_org(type_cluster, type_scaffold, generators, receptor, data_folder)
                     for met in metrics:
                         value = df[df.name.str.startswith(gen)][met].iloc[0]
                         data.append([gen, receptor, type_scaffold, type_cluster, met, value])
@@ -402,8 +494,13 @@ def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cma
     ax.text(17, 11, "Leukocyte elastase", fontsize=17, color='black')
 
     plt.tight_layout()
-    plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
-    plt.savefig(f'img/heat_map/{save_name}.png', format="png")
+
+    if save_folder:
+        plt.savefig(f'{save_folder}/{save_name}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{save_name}.png', format="png")
+    else:
+        plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{save_name}.png', format="png")
     plt.show()
 
 
@@ -423,7 +520,7 @@ def make_cmap_to_white(base_hex_color):
 def plot_combined_heatmap_variable_cmaps(
         generators, receptors, scaffolds, splits,
         metrics=['TUPOR', 'SESY', 'ASER'], 
-        title=None, save_name=None, using_norm_values=False):
+        title=None, save_name=None, using_norm_values=False, data_folder='', save_folder = ''):
     """
     Plot combined heatmaps for multiple generators, receptors, scaffolds, and metrics.
     
@@ -452,9 +549,9 @@ def plot_combined_heatmap_variable_cmaps(
             for type_scaffold in scaffolds:
                 for type_cluster in splits:
                     if using_norm_values:
-                        df = preprocesing(type_cluster, type_scaffold, generators, receptor)
+                        df = preprocesing(type_cluster, type_scaffold, generators, receptor, data_folder)
                     else:
-                        df = preprocesing_org(type_cluster, type_scaffold, generators, receptor)
+                        df = preprocesing_org(type_cluster, type_scaffold, generators, receptor, data_folder)
                     for met in metrics:
                         value = df[df.name.str.startswith(gen)][met].iloc[0]
                         data.append([gen, receptor, type_scaffold, type_cluster, met, value])
@@ -548,8 +645,12 @@ def plot_combined_heatmap_variable_cmaps(
     # Adjust layout and save
     plt.tight_layout(rect=[0, 0, 1, 0.97])
     if save_name:
-        plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
-        plt.savefig(f'img/heat_map/{save_name}.png', format="png")
+        if save_folder:
+            plt.savefig(f'{save_folder}/{save_name}.svg', format="svg")
+            plt.savefig(f'{save_folder}/{save_name}.png', format="png")
+        else:
+            plt.savefig(f'img/heat_map/{save_name}.svg', format="svg")
+            plt.savefig(f'img/heat_map/{save_name}.png', format="png")
 
     plt.show()
 
@@ -558,7 +659,7 @@ def plot_combined_heatmap_variable_cmaps(
 def plot_combined_heatmap_with_single_column_for_each_metric(
         generators, receptors, scaffolds, splits,
         metrics=['TUPOR', 'SESY', 'ASER'], 
-        title=None, save_name=None, using_norm_values=False,
+        title=None, save_name=None, using_norm_values=False, data_folder='', save_folder = '',
         inter_metric_wspace=0.15,   # Larger spacing between metrics
         intra_metric_wspace=0.05    # Smaller spacing within a metric block
     ):
@@ -594,7 +695,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
                 for type_cluster in splits:
                     # Select preprocessed data, normalized or original
                     df = (preprocesing_org if not using_norm_values else preprocesing)(
-                        type_cluster, type_scaffold, generators, receptor
+                        type_cluster, type_scaffold, generators, receptor, data_folder
                     )
                     # Extract values for each metric
                     for met in metrics:
@@ -743,9 +844,14 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
     # Adjust layout and save the figure
     plt.tight_layout(rect=[0, 0, 1, 0.99])
     if save_name:
-        plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
-        plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
-        plt.savefig(f'img/heat_map/{save_name}.tiff', format="tiff", dpi=300, bbox_inches='tight')
+        if save_folder:
+            plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.png', format="png",dpi=300, bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.png', format="tiff",dpi=300, bbox_inches='tight')
+        else:
+            plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
+            plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
+            plt.savefig(f'img/heat_map/{save_name}.tiff', format="tiff", dpi=300, bbox_inches='tight')
     plt.show()
 
 
