@@ -1,10 +1,12 @@
+#!/bin/bash
+
 # Run metric calculation for a single generator
 python3 ../src/metrics.py \
     --type_cluster sim \
     --type_scaffold csk \
-    --generator Molpher_125k \
+    --generator Molpher_62.5k \
     --receptor Glucocorticoid_receptor \
-    --save_option True \
+    --data_folder ../../ \
     --ncpus 1
 
 

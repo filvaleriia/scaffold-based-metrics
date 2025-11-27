@@ -4,5 +4,6 @@ python3 ../src/metrics_own_data.py \
     --generator Molpher_125k \
     --recall_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cIS_Glucocorticoid_receptor_dis_0.csv \
     --output_set_path /home/filv/phd_projects/iga_2023/git_reccal/new/recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_1_one_column.csv \
+    --data_folder ../ \
     --ncpus 1
 

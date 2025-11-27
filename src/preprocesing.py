@@ -19,11 +19,12 @@ from rdkit.Chem import inchi
 
 
 class Preprocesing():
-    def __init__(self, receptor_name, save_options = True):
+    def __init__(self, receptor_name, save_options = True, data_folder = ''):
         self.active_compounds = pd.DataFrame()
         self.active_compounds_with_clusters = pd.DataFrame()
         self.receptor_name = receptor_name
         self.save_options = save_options
+        self.data_folder = data_folder
     
 
     def MakeScaffoldGeneric_fixed(self, mol):
@@ -67,7 +68,7 @@ class Preprocesing():
 
     def load(self,type_receptor, name):
         '''Load all data needed, add header and then convert canonical smiles to scaffolds csk and calculate Morgan fingerprint with r=3, then save new dataset and save to contructor self.active_compounds'''
-        dff = pd.read_csv(f"data/{type_receptor}/{name}",header=None)
+        dff = pd.read_csv(f"{self.data_folder}data/{type_receptor}/{name}",header=None)
         dff.columns =['molregno', 'stand_type', 
                                         'pchembl_value', 'stand_value',
                                         'canonical_smiles', 'stand_inchi',
@@ -119,9 +120,9 @@ class Preprocesing():
         self.active_compounds = dff.copy()
 
         if self.save_options == True:
-            if not os.path.exists(f"data/input_recall_sets/{self.receptor_name}/"):
-                os.makedirs(f"data/input_recall_sets/{self.receptor_name}/")
-            dff.to_csv(f'data/input_recall_sets/{self.receptor_name}/{self.receptor_name}.csv', index_label = False)
+            if not os.path.exists(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/"):
+                os.makedirs(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/")
+            dff.to_csv(f'{self.data_folder}data/input_recall_sets/{self.receptor_name}/{self.receptor_name}.csv', index_label = False)
         return dff
     
 
@@ -153,7 +154,7 @@ class Preprocesing():
 
         self.active_compounds_with_clusters = df.copy()
 
-        non_active_scaffold = pd.read_csv(f"data/input_recall_sets/{self.receptor_name}/df_not_in_new_active_sets_new.csv")
+        non_active_scaffold = pd.read_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/df_not_in_new_active_sets_new.csv")
         deleted_index = []
         for x in range(len(df)):
 
@@ -164,7 +165,7 @@ class Preprocesing():
             df = df.drop([r])
         df = df.reset_index(drop=True)
         if self.save_options == True:
-            df.to_csv(f'data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_split_to_clusters_using_KMedoids.csv', index_label = False)
+            df.to_csv(f'{self.data_folder}data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_split_to_clusters_using_KMedoids.csv', index_label = False)
 
         return df
     
@@ -357,7 +358,7 @@ class Preprocesing():
     def split_data_to_train_test_dis(self,data_target,data_clusters):
         '''The main function for create sets for dissimilarity type of project, using the previous function'''
         #data_target = self.duplicate_compounds(data_target)
-        data_target = pd.read_csv(f"data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_active_compounds.csv")
+        data_target = pd.read_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_active_compounds.csv")
 
         for x in ([[1,2,3,4],0],[[0,2,3,4],1],[[0,1,3,4],2],[[0,1,2,4],3],[[0,1,2,3],4]):
             name = []
@@ -386,23 +387,23 @@ class Preprocesing():
             if self.save_options == True:
                 print("Save options")
                 #Input Set Molpher
-                input_Molpher_train.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_dis_{x[1]}.csv", index=False)
+                input_Molpher_train.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_dis_{x[1]}.csv", index=False)
 
                 #Input Set other generators 
-                input_gener_train.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_dis_{x[1]}.csv", index=False,header=False)
-                input_gener_train_with_ID.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_dis_{x[1]}.csv", index=False)
-                input_gener_train_with_p_chembl.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv", index=False,header=False)
+                input_gener_train.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_dis_{x[1]}.csv", index=False,header=False)
+                input_gener_train_with_ID.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_dis_{x[1]}.csv", index=False)
+                input_gener_train_with_p_chembl.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv", index=False,header=False)
                 
                 #Recall Set
-                input_test_with_p_chembl.to_csv(f"data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv",  index=False,header=False)
-                input_test_with_ID.to_csv(f"data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_dis_{x[1]}.csv",  index=False)
-                input_test.to_csv(f"data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_dis_{x[1]}.csv",  index=False,header=False)
+                input_test_with_p_chembl.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_dis_{x[1]}.csv",  index=False,header=False)
+                input_test_with_ID.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_dis_{x[1]}.csv",  index=False)
+                input_test.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_dis_{x[1]}.csv",  index=False,header=False)
 
     
     def split_data_to_train_test_sim(self, data_target,data_clusters):
         '''The main function for create sets for similarity type of project, using the previous function'''
         #data_target = self.duplicate_compounds(data_target)
-        data_target = pd.read_csv(f"data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_active_compounds.csv")
+        data_target = pd.read_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/{self.receptor_name}_active_compounds.csv")
         #similarity:
         for x in ([[0,1,2,3,4],0],[[0,1,2,3,4],1],[[0,1,2,3,4],2],[[0,1,2,3,4],3],[[0,1,2,3,4],4]):
             '''Get the Chemble_ID for Molpher, other generators and tests set'''
@@ -432,14 +433,14 @@ class Preprocesing():
             if self.save_options == True:
                 print("Save options")
                 #Input Set Molpher
-                input_Molpher_train.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_sim_{x[1]}.csv", index=False)
+                input_Molpher_train.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_Molpher_{self.receptor_name}_sim_{x[1]}.csv", index=False)
 
                 #Input Set other generators
-                input_gener_train.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_sim_{x[1]}.csv", index=False,header=False)
-                input_gener_train_with_ID.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_sim_{x[1]}.csv", index=False)
-                input_gener_train_with_p_chembl.to_csv(f"data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv", index=False,header=False)
+                input_gener_train.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_sim_{x[1]}.csv", index=False,header=False)
+                input_gener_train_with_ID.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_ID_sim_{x[1]}.csv", index=False)
+                input_gener_train_with_p_chembl.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cIS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv", index=False,header=False)
                 
                 #Recall Set
-                input_test.to_csv(f"data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_sim_{x[1]}.csv",  index=False,header=False)
-                input_test_with_ID.to_csv(f"data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_sim_{x[1]}.csv",  index=False)
-                input_test_with_p_chembl.to_csv(f"data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv",  index=False,header=False)
+                input_test.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_sim_{x[1]}.csv",  index=False,header=False)
+                input_test_with_ID.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_ID_sim_{x[1]}.csv",  index=False)
+                input_test_with_p_chembl.to_csv(f"{self.data_folder}data/input_recall_sets/{self.receptor_name}/cRS_{self.receptor_name}_with_p_chembl_sim_{x[1]}.csv",  index=False,header=False)

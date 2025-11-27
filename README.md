@@ -184,7 +184,7 @@ Metrics were calculated for each OS using the RS. To avoid bias from outliers or
 
 Finally, we compared the average metric values across the two split strategies, the two targets, and the two scaffold definitions. For visualization, we prepared normalized heatmaps.
 
-![Project workflow](img/project_workflow_.png)
+![Project workflow](img/project_workflow.png)
 
 
 ## 📊 Results  
@@ -192,7 +192,7 @@ Finally, we compared the average metric values across the two split strategies, 
 Here we summarize the main outcomes of our study.  
 
 **Combined results in a single overview plot**  
-![Heatmaps](img/heat_map/all_res_metrics_per_column_paper.png)
+![Heatmaps](img/heat_map/all_res_metrics_per_column_paper.svg)
 
 Based on these results, the **best-performing generators** across receptors, scaffold types, and splits were **DrugEx Graph Transformer** (*ε = 0.6*), closely followed by **GB_GA** (*mutation rate = 50%*) and **DrugEx RNN** (*ε = 0.6*).  
 The weakest performance was observed for the **AddCarbon** generator.

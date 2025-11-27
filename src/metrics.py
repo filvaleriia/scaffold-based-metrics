@@ -33,13 +33,14 @@ def add_columns_same_like_input_function(df_generated, test_set):
 
 
 class Metrics:
-    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str,  num_cpus: int = 1):
+    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str, data_folder: str = '', num_cpus: int = 1):
         self.type_cluster = type_cluster
         self.type_scaffold = type_scaffold
         self.generator_name = generator_name
         
         self.receptor = receptor
         self.num_cpus = num_cpus
+        self.data_folder = data_folder
 
         self.number_of_calculation = None
         self.output_set = None
@@ -145,8 +146,8 @@ class Metrics:
         """
         Save the calculated metrics to files under 'data/results'.
         """
-        main_dir = Path(__file__).resolve().parents[1]
-        folder = f"{main_dir}/data/results/{self.receptor}/{self.type_scaffold}_scaffolds/{self.type_cluster}/{self.generator_name}"
+        main_dir = self.data_folder
+        folder = f"{main_dir}data/results/{self.receptor}/{self.type_scaffold}_scaffolds/{self.type_cluster}/{self.generator_name}"
         if not os.path.exists(folder):
             os.makedirs(folder)
         
@@ -162,8 +163,8 @@ class Metrics:
         combine them into one DataFrame, compute the mean of numeric columns,
         append the mean row to the DataFrame, and save the results.
         """
-        main_dir = Path(__file__).resolve().parents[1] 
-        base_path = f"{main_dir}/data/results/{self.receptor}/{self.type_scaffold}_scaffolds/{self.type_cluster}/{self.generator_name}/"
+        main_dir = self.data_folder 
+        base_path = f"{main_dir}data/results/{self.receptor}/{self.type_scaffold}_scaffolds/{self.type_cluster}/{self.generator_name}/"
 
         # Build file paths for each cluster number.
         file_paths = {x: f"{base_path}metrics_cluster_{x}_{self.type_cluster}_{self.generator_name}.csv" for x in numbers}
@@ -216,14 +217,14 @@ class Metrics:
         """
         Calculate all metrics and return a DataFrame with the results.
         """
-        main_dir = Path(__file__).resolve().parents[1] 
+        main_dir = self.data_folder 
         numbers_of_calcs = []
         for number in range(5):
             print("NUMBER: ", number)
 
             self.number_of_calculation = number
-            output_file_path = f"{main_dir}/data/output_sets/{self.receptor}/{self.generator_name}/cOS_{self.generator_name}_{self.type_cluster}_{self.number_of_calculation}_one_column.csv"
-            recall_file_path = f"{main_dir}/data/input_recall_sets/{self.receptor}/cRS_{self.receptor}_{self.type_cluster}_{self.number_of_calculation}.csv"
+            output_file_path = f"{main_dir}data/output_sets/{self.receptor}/{self.generator_name}/cOS_{self.generator_name}_{self.type_cluster}_{self.number_of_calculation}_one_column.csv"
+            recall_file_path = f"{main_dir}data/input_recall_sets/{self.receptor}/cRS_{self.receptor}_{self.type_cluster}_{self.number_of_calculation}.csv"
             if os.path.exists(output_file_path):
                 self.load(output_file_path, recall_file_path)
                 res = self.main_function_return(self.output_set, self.recall_set)
@@ -239,7 +240,7 @@ class Metrics:
                 print(f"Path for cluster {self.number_of_calculation} doesn't exists")
 
         result = self.average_value(numbers_of_calcs)
-        return result
+        return result.copy()[['name','type_cluster','scaffold', 'TUPOR', 'SESY', 'ASER']]
     
 
 def main():
@@ -249,14 +250,15 @@ def main():
     parser.add_argument('--type_scaffold', type=str, required=True, help='Type of scaffold')
     parser.add_argument('--generator', type=str, required=True, help='Generator name')
     parser.add_argument('--receptor', type=str, required=True, help='Receptor name')
-
+    
     # Optional arguments with default values
+    parser.add_argument('--data_folder', type=str, required=False, help='Data dir')
     parser.add_argument('--ncpus', type=bool, default=1, required=False, help='Number of CPUs to use for parallel processing')
 
     args = parser.parse_args()
     print(args)
     
-    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.ncpus)     
+    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.data_folder, args.ncpus)     
     result = mt.calculate_metrics()
 
 

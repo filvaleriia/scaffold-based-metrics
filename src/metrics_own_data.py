@@ -31,13 +31,14 @@ def add_columns_same_like_input_function(df_generated, test_set):
 
 
 class Metrics:
-    def __init__(self, type_scaffold: str, generator_name: str, recall_set_path : str, output_set_path: str , num_cpus: int = 1):
+    def __init__(self, type_scaffold: str, generator_name: str, recall_set_path : str, output_set_path: str, data_folder: str = '', num_cpus: int = 1):
         self.type_scaffold = type_scaffold
         self.generator_name = generator_name
 
         self.recall_set_path = recall_set_path
         self.output_set_path = output_set_path
         self.num_cpus = num_cpus
+        self.data_folder = data_folder
 
         self.output_set = None
         self.recall_set = None
@@ -141,7 +142,7 @@ class Metrics:
         """
         Save the calculated metrics to files under 'data/results'.
         """
-        main_dir = Path(__file__).resolve().parents[1]
+        main_dir = self.data_folder
         folder = f"{main_dir}/results/{self.type_scaffold}_scaffolds/{self.generator_name}"
         if not os.path.exists(folder):
             os.makedirs(folder)
@@ -185,10 +186,11 @@ def main():
     parser.add_argument('--output_set_path', type=str, required=True, help='Path to Output Set')
 
     # Optional arguments with default values
+    parser.add_argument('--data_folder', type=str, required=False, help='Data dir')
     parser.add_argument('--ncpus', type=int, default=1, required=False, help='Number of CPUs to use for parallel processing')
     args = parser.parse_args()
 
-    mt = Metrics(args.type_scaffold, args.generator_name, args.recall_set_path, args.output_set_path, args.ncpus)     
+    mt = Metrics(args.type_scaffold, args.generator_name, args.recall_set_path, args.output_set_path, args.data_folder, args.ncpus)     
     result = mt.calculate_metrics()
 
     print("RESULTS:")

@@ -32,7 +32,7 @@ def add_columns_same_like_input_function(df_generated, test_set):
 
 
 class Metrics:
-    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str, recall_set_path : str, output_set_path: str , num_cpus: int = 1):
+    def __init__(self, type_cluster: str, type_scaffold: str, generator_name: str, receptor: str, recall_set_path : str, output_set_path: str, data_folder: str = '', num_cpus: int = 1):
         self.type_cluster = type_cluster
         self.type_scaffold = type_scaffold
         self.generator_name = generator_name
@@ -41,6 +41,7 @@ class Metrics:
         self.recall_set_path = recall_set_path
         self.output_set_path = output_set_path
         self.num_cpus = num_cpus
+        self.data_folder = data_folder
 
         self.number_of_calculation = None
         self.output_set = None
@@ -145,7 +146,7 @@ class Metrics:
         """
         Save the calculated metrics to files under 'data/results'.
         """
-        main_dir = Path(__file__).resolve().parents[1]
+        main_dir = self.data_folder
         folder = f"{main_dir}/data/results/{self.receptor}/{self.type_scaffold}_scaffolds/{self.type_cluster}/{self.generator_name}"
         if not os.path.exists(folder):
             os.makedirs(folder)
@@ -163,7 +164,7 @@ class Metrics:
         append the mean row to the DataFrame, and save the results.
         """
 
-        main_dir = Path(__file__).resolve().parents[1]
+        main_dir = self.data_folder
         base_path = f"{main_dir}/data/results/{self.receptor}/{self.type_scaffold}_scaffolds/{self.type_cluster}/{self.generator_name}/"
 
         # Build file paths for each cluster number.
@@ -217,7 +218,7 @@ class Metrics:
         """
         Calculate all metrics and return a DataFrame with the results.
         """
-        main_dir = Path(__file__).resolve().parents[1] 
+        main_dir = self.data_folder 
         numbers_of_calcs = []
 
         output_file_path_define = self.output_set_path
@@ -260,12 +261,13 @@ def main():
     parser.add_argument('--recall_set_path', type=str, required=True, help='Path to Recall Set')
     parser.add_argument('--output_set_path', type=str, required=True, help='Path to Output Set')
     # Optional arguments with default values
+    parser.add_argument('--data_folder', type=str, required=False, help='Data dir')
     parser.add_argument('--ncpus', type=int, default=1, required=False, help='Number of CPUs to use for parallel processing')
 
     args = parser.parse_args()
     print(args)
 
-    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.recall_set_path, args.output_set_path, args.ncpus)     
+    mt = Metrics(args.type_cluster, args.type_scaffold, args.generator, args.receptor, args.recall_set_path, args.output_set_path, args.data_folder, args.ncpus)     
     result = mt.calculate_metrics()
 
     print("RESULTS:")
