@@ -23,7 +23,7 @@ reflects the structural diversity of the generated set. It is calculated as the 
 * SESY enables striking a balance between exploration and exploitation. A high SESY value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SESY value suggests a focus on exploiting similar scaffolds, refining specific chemical structures. Adjusting the generator parameters based on the SESY value enables fine-tuning the balance between exploring diverse molecular structures and exploiting specific scaffolds. 
 
 ### ▪ Absolute SEt Scaffold Recall (ASER): 
-indicates how effectively the generator explores the target region of chemical space. It is calculated as the ratio of the number of virtual compounds in the OS that contain an active scaffold (cAs<sub>OS</sub>) to the total number of compounds in the Output Set (c<sub>OS</sub>). The ASER metric starts at 0, indicating that no generated compounds in the output set (OS) contain an active scaffold. Higher ASER values reflect an increasing frequency of active scaffolds within the generated compounds. Importantly, the metric can exceed 1 because some compounds may contain multiple active scaffolds. In this sense, it is akin to the precision metric that is used to evaluate classification tasks in machine learning. 
+indicates how effectively the generator explores the target region of chemical space. It is calculated as the ratio of the number of active scaffolds in the OS (As<sub>OS</sub>) to the total number of compounds in the Output Set (c<sub>OS</sub>). The ASER metric starts at 0, indicating that no generated compounds in the output set (OS) contain an active scaffold. Higher ASER values reflect an increasing frequency of active scaffolds within the generated compounds. Importantly, the metric can exceed 1 because some compounds may contain multiple active scaffolds. In this sense, it is akin to the precision metric that is used to evaluate classification tasks in machine learning. 
 
    $$ASER = {{cAS_{OS}} \over c_{OS}}$$ 
 
@@ -114,6 +114,7 @@ type_scaffold = 'csk' #options: 'csk'|'murcko'
 generator = 'Molpher' #options: 'Molpher' | 'REINVENT' | 'DrugEx_GT_epsilon_0.1' | 'DrugEx_GT_epsilon_0.6' | 'DrugEx_RNN_epsilon_0.1' | 'DrugEx_RNN_epsilon_0.6' | 'GB_GA_mut_r_0.01' | 'GB_GA_mut_r_0.5' | 'GB_GA_log_p_mut_r_0.01' |'GB_GA_log_p_mut_r_0.5' | 'addcarbon'
 receptor = 'Glucocorticoid_receptor' #options: 'Glucocorticoid_receptor'|'Leukocyte_elastase'
 ncpus = 4
+data_folder = '' # Path to your data folder. No need to set this if your data is in the repository root (default is data_folder = '').
 
 mt = metrics.Metrics(type_cluster, type_scaffold, generator, receptor,  ncpus)
 result = mt.calculate_metrics()
@@ -121,7 +122,7 @@ result = mt.calculate_metrics()
 
 Example usage in bash (see also `run_calculation_metrics.sh`):
 ```bash
-python3 src/metrics.py --type_cluster dis --type_scaffold csk --generator Molpher --receptor Glucocorticoid_receptor  --num_cpu 3 
+python3 src/metrics.py --type_cluster dis --type_scaffold csk --generator Molpher --receptor Glucocorticoid_receptor --data_folder data_folder --num_cpu 3 
 
 ```
 
@@ -135,6 +136,7 @@ python3 src/metrics_define_path.py \
     --receptor Glucocorticoid_receptor \
     --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor \
     --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_125k \
+    --data_folder ../
     --ncpus 1
 ```
 
@@ -145,6 +147,7 @@ python3 src/metrics_own_data.py \
     --generator Molpher_125k \
     --recall_set_path /recall_metrics/data/input_recall_sets/Glucocorticoid_receptor/cRS_Glucocorticoid_receptor_dis_0.csv \
     --output_set_path /recall_metrics/data/output_sets/Glucocorticoid_receptor/Molpher_62.5k/cOS_Molpher_62.5k_dis_0_one_column.csv \
+    --data_folder ../
     --ncpus 1
 ```
 
@@ -188,8 +191,8 @@ Finally, we compared the average metric values across the two split strategies, 
 
 Here we summarize the main outcomes of our study.  
 
-**Combined normalized results in a single overview plot**  
-![Normalized heatmaps](img/heat_map/all_res_metrics_norm_per_column.png)
+**Combined results in a single overview plot**  
+![Heatmaps](img/heat_map/all_res_metrics_per_column_paper.png)
 
 Based on these results, the **best-performing generators** across receptors, scaffold types, and splits were **DrugEx Graph Transformer** (*ε = 0.6*), closely followed by **GB_GA** (*mutation rate = 50%*) and **DrugEx RNN** (*ε = 0.6*).  
 The weakest performance was observed for the **AddCarbon** generator.
