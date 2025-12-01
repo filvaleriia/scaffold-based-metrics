@@ -199,10 +199,14 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
 
     if save_folder:
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
-        plt.savefig(f'{save_folder}/{name_save}.png', format="png")
+        plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
+        plt.savefig(f'{save_folder}/{name_save}.tiff', format="tiff", dpi=300, bbox_inches="tight")
+
     else:
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
-        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.tiff', format="tiff", dpi=300, bbox_inches="tight")
+
     plt.show()
 
 
@@ -387,10 +391,13 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
 
     if save_folder:
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
-        plt.savefig(f'{save_folder}/{name_save}.png', format="png")
+        plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
+        plt.savefig(f'{save_folder}/{name_save}.tiff',format="tiff", dpi=300, bbox_inches="tight")
     else:
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
-        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.tiff',format="tiff", dpi=300, bbox_inches="tight")
+
     plt.show()
 
 
@@ -847,7 +854,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
         if save_folder:
             plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.png', format="png",dpi=300, bbox_inches='tight')
-            plt.savefig(f'{save_folder}/{save_name}.png', format="tiff",dpi=300, bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.tiff', format="tiff",dpi=300, bbox_inches='tight')
         else:
             plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
