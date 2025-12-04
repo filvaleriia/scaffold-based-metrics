@@ -216,11 +216,11 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
 
     # Save
     if save_folder:
-        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
         plt.savefig(f'{save_folder}/{name_save}.pdf', bbox_inches='tight')
     else:
-        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
 
     plt.show()
@@ -412,11 +412,11 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
 
     # Save
     if save_folder:
-        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
+        plt.savefig(f'{save_folder}/{name_save}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
         plt.savefig(f'{save_folder}/{name_save}.pdf', bbox_inches='tight') 
     else:
-        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
+        plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
 
     plt.show()
