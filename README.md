@@ -60,10 +60,10 @@ Or install the following packages manually:
 
 ## 📂 Data Requirements  
 
-All required data are available on **Zenodo**:  
+All required data are available on **Zenodo**:  10.5281/zenodo.17814428
 After download, place the entire `data/` folder into the root directory of this repository.  
 
-> ⚠️ The folder has a size of ~12.2 GB.  
+> ⚠️ The folder has a size of ~9 GB.  
 All scripts are configured to work with this folder automatically.  
 
 ### Folder structure  
