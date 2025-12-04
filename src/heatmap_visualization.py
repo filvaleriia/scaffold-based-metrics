@@ -102,34 +102,28 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
 
 
 
-def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='viridis', annotate=True, numering='', save_folder = ''):
+def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='viridis', annotate=True, numering='', save_folder=''):
     '''
-    Plots heatmaps for multiple subsets in a single figure.
-
-    Args:
-    - subset_dict (dict): Dictionary mapping subset names (e.g., '', '_10k')
-                        to DataFrames that will be visualized.
-    - title (str): Optional title for the entire figure.
-    - cmap (str): Colormap used for heatmaps (default: 'viridis').
-    - annotate (bool): Whether to annotate heatmap cells with their numeric values.
+    Plots heatmaps for multiple subsets in a single figure in paper style,
+    with proper spacing and colorbar handling as in plot_heatmaps_with_diff_from_baseline.
     '''
 
     num_subsets = len(subset_dict)
     num_gen = len(subset_dict[next(iter(subset_dict))])
 
-    # Dynamically determine the number of columns and rows (max 5 columns)
+    # Dynamically determine columns and rows
     max_cols = 5
     cols = min(num_subsets, max_cols)
     rows = math.ceil(num_subsets / cols)
 
-    # Adjust layout so the final row is not too sparse
+    # Adjust layout to avoid sparse last row
     if num_subsets > 1:
         cols_last_row = num_subsets % cols
         if cols_last_row != 0 and cols_last_row < math.ceil(cols / 2):
             cols = math.ceil(num_subsets / 2)
             rows = math.ceil(num_subsets / cols)
 
-    # Preserve original size of individual heatmaps
+    # Figure size in paper style
     fig_width = cols * 12
     fig_height = rows * num_gen * 1.3
     fig = plt.figure(figsize=(fig_width, fig_height))
@@ -147,17 +141,38 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
         df = data[['TUPOR', 'SESY', 'ASER']]
         df.index = data.name.tolist()
 
-        sns.heatmap(df, annot=annotate, cmap=cmap, ax=ax, annot_kws={"size": 30})
+        hm = sns.heatmap(
+            df,
+            annot=annotate,
+            cmap=cmap,
+            ax=ax,
+            annot_kws={"size": 30},  # paper style
+            cbar=False
+        )
 
-        # Format subset name for display
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes(
+            "right",
+            size="2.0%",
+            pad=0.15
+        )
+        cbar = plt.colorbar(hm.collections[0], cax=cax)
+        cbar.ax.tick_params(labelsize=15)
+        cbar.outline.set_visible(False)
+        ax.figure.axes[-1].yaxis.label.set_size(15)
+
+        # Format subset name
         if subset_name == '':
-            subset_name = 'Full OS'
+            subset_name_disp = 'Full OS'
         elif subset_name == '_62.5k':
-            subset_name = '62,500'
+            subset_name_disp = '62,500'
         else:
-            subset_name = subset_name.replace('_', '').replace('k', ',000')
+            subset_name_disp = subset_name.replace('_', '').replace('k', ',000')
 
-        # Clean and format y-axis labels (generator names)
+        ax.set_title(f"{subset_name_disp}" if subset_name_disp == 'Full OS' else f"{subset_name_disp} subset",
+                     fontsize=35, wrap=True, pad=12)
+
+        # Format y-axis labels
         new_labels = [
             label.get_text()
             .replace('_epsilon', '\n epsilon')
@@ -165,23 +180,16 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
             .replace('addcarbon', 'AddCarbon')
             for label in ax.get_yticklabels()
         ]
-
-        # Remove subset suffixes from generator names
         new_labels = [
             label.replace('_62.5k', '').replace('_125k', '')
-                .replace('_250k', '').replace('_500k', '')
-                .replace('_10k', '')
+                 .replace('_250k', '').replace('_500k', '')
+                 .replace('_10k', '')
             for label in new_labels
         ]
-
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
         ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
-
-        # Set subplot title
-        if subset_name == 'Full OS':
-            ax.set_title(f"{subset_name}", fontsize=35, wrap=True)
-        else:
-            ax.set_title(f"{subset_name} subset", fontsize=35, wrap=True)
+        ax.tick_params(axis='y', pad=12)
+        ax.set_facecolor('white')
 
     # Hide unused subplot slots
     total_slots = rows * cols
@@ -191,23 +199,33 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
         ax_empty = fig.add_subplot(gs[row, col])
         ax_empty.axis('off')
 
-    # Add numbering and global title
-    fig.text(0.005, 0.985, numering, ha='left', va='top', fontsize=40)
-    fig.suptitle(f'{title}', fontsize=40)
+    # Posun druhého řádku pro větší vertikální mezeru
+    if rows == 2:
+        for i, ax in enumerate(axes):
+            if i >= cols:  # druhý řádek
+                pos = ax.get_position()
+                ax.set_position([pos.x0, pos.y0 + 0.03, pos.width + 0.01, pos.height])
 
-    plt.tight_layout()
 
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+    # Numbering and global title
+    fig.text(0.005, 0.95, numering, ha='left', va='top', fontsize=40)
+    if title:
+        fig.suptitle(title, fontsize=40)
+
+    # Save
     if save_folder:
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
         plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
-        plt.savefig(f'{save_folder}/{name_save}.tiff', format="tiff", dpi=300, bbox_inches="tight")
-
+        plt.savefig(f'{save_folder}/{name_save}.pdf', bbox_inches='tight')
     else:
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
-        plt.savefig(f'img/heat_map/{receptor}/{name_save}.tiff', format="tiff", dpi=300, bbox_inches="tight")
 
     plt.show()
+
+
 
 
 
@@ -267,12 +285,11 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
 
 
 
-def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', numering = '', save_folder = ''):
+def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split, scaf, receptor='', name_save='', numering='', save_folder=''):
     '''
     Plots heatmaps showing differences from the baseline for multiple subsets,
     dynamically arranging subplots based on the number of subsets.
     '''
-
     num_subsets = len(data_dict)
     num_gen = len(data_dict[next(iter(data_dict))])
 
@@ -288,7 +305,7 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
             cols = math.ceil(num_subsets / 2)
             rows = math.ceil(num_subsets / cols)
 
-    # Preserve original heatmap sizing
+    # Figure size in paper style
     fig_width = cols * 12
     fig_height = rows * num_gen * 1.3
     fig = plt.figure(figsize=(fig_width, fig_height))
@@ -318,21 +335,28 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
             diff_df = baseline_df
         else:
             diff_df = normalized_df - baseline_df
-            # Values within ±0.1 are considered negligible and set to NaN
             mask = (diff_df.abs() <= 0.1)
             diff_df[mask] = np.nan
 
-        sns.heatmap(
+        hm = sns.heatmap(
             diff_df,
             annot=True,
             cmap='coolwarm',
-            cbar_kws={'label': 'Difference from Baseline'},
+            cbar=False,
             ax=ax,
-            annot_kws={"size": 30}
+            annot_kws={"size": 30}  # paper style
         )
 
-        # Resize colorbar label
-        ax.figure.axes[-1].yaxis.label.set_size(20)
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes(
+            "right",
+            size="2.0%",
+            pad=0.15
+        )
+        cbar = plt.colorbar(hm.collections[0], cax=cax)
+        cbar.ax.tick_params(labelsize=15)
+        cbar.outline.set_visible(False)
+        ax.figure.axes[-1].yaxis.label.set_size(15)
 
         # Format subset name for title
         if subset == '':
@@ -342,12 +366,10 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         else:
             subset_name = subset.replace('_', '').replace('k', ',000')
 
-        if subset_name == 'Full OS':
-            ax.set_title(f"{subset_name}", fontsize=35, wrap=True)
-        else:
-            ax.set_title(f"{subset_name} subset", fontsize=35, wrap=True)
+        title_text = f"{subset_name}" if subset_name == 'Full OS' else f"{subset_name} subset"
+        ax.set_title(title_text, fontsize=35, wrap=True, pad=12)
 
-        # Format Y-axis labels (generator names)
+        # Format Y-axis labels
         new_labels = [
             label.get_text()
             .replace('_epsilon', '\n epsilon')
@@ -355,17 +377,15 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
             .replace('addcarbon', 'AddCarbon')
             for label in ax.get_yticklabels()
         ]
-
-        # Remove subset suffixes from generator names
         new_labels = [
             label.replace('_62.5k', '').replace('_125k', '')
                 .replace('_250k', '').replace('_500k', '')
                 .replace('_10k', '')
             for label in new_labels
         ]
-
         ax.set_yticklabels(new_labels, rotation=0, ha="right", fontsize=30)
-        ax.set_xticklabels(ax.get_xticklabels(), ha="center", fontsize=30)
+        ax.tick_params(axis='y', pad=12)
+        ax.set_xticklabels(ax.get_xticklabels(), ha="center",  fontsize=30)
         ax.set_facecolor('white')
 
     # Hide unused subplot slots
@@ -376,29 +396,31 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         ax_empty = fig.add_subplot(gs[row, col])
         ax_empty.axis('off')
 
-    # Format scaffold label
-    if scaf == 'csk':
-        scaf_str = 'CSK'
-    else:
-        scaf_str = scaf
-    
-    #fig.suptitle(f'Heatmaps with Differences from Baseline by more than ±0.1 for {scaf_str} scaffolds and {type_split} split for {receptor.replace("_", " ")}', fontsize=40)
+
+    if rows == 2:
+        for i, ax in enumerate(axes):
+            if i >= cols: 
+                pos = ax.get_position()
+                ax.set_position([pos.x0, pos.y0 + 0.03, pos.width + 0.01, pos.height])
 
     # Add numbering text
     fig.text(0.005, 0.95, numering, ha='left', va='top', fontsize=40)
 
+    # Format scaffold label
+    scaf_str = 'CSK' if scaf == 'csk' else scaf
     plt.tight_layout(rect=[0, 0, 1, 0.95])
 
+    # Save
     if save_folder:
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
         plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
-        plt.savefig(f'{save_folder}/{name_save}.tiff',format="tiff", dpi=300, bbox_inches="tight")
+        plt.savefig(f'{save_folder}/{name_save}.pdf', bbox_inches='tight') 
     else:
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.svg', format="svg")
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
-        plt.savefig(f'img/heat_map/{receptor}/{name_save}.tiff',format="tiff", dpi=300, bbox_inches="tight")
 
     plt.show()
+
 
 
 
@@ -854,11 +876,250 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
         if save_folder:
             plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.png', format="png",dpi=300, bbox_inches='tight')
-            plt.savefig(f'{save_folder}/{save_name}.tiff', format="tiff",dpi=300, bbox_inches='tight')
         else:
             plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
-            plt.savefig(f'img/heat_map/{save_name}.tiff', format="tiff", dpi=300, bbox_inches='tight')
     plt.show()
 
 
+
+def plot_combined_heatmap_with_single_column_for_each_metric_rotated(
+        generators, receptors, scaffolds, splits,
+        metrics=['TUPOR', 'SESY', 'ASER'], 
+        title=None, save_name=None, using_norm_values=False,
+        data_folder='', save_folder='',
+        inter_metric_wspace=0.15,
+        intra_metric_wspace=0.05
+    ):
+
+    # Base colors for each metric
+    metric_base_colors = {
+        'TUPOR': "#e97b32",
+        'SESY': "#97C2F0",
+        'ASER': "#71ad48"
+    }
+
+    # --- Build a DataFrame with all values ---
+    data = []
+    for gen in generators:
+        for receptor in receptors:
+            for type_scaffold in scaffolds:
+                for type_cluster in splits:
+
+                    df = (preprocesing_org if not using_norm_values else preprocesing)(
+                        type_cluster,
+                        type_scaffold,
+                        generators,
+                        receptor,
+                        data_folder
+                    )
+
+                    for met in metrics:
+                        value = df[df.name.str.startswith(gen)][met].iloc[0]
+                        data.append([
+                            gen,
+                            receptor,
+                            type_scaffold,
+                            type_cluster,
+                            met,
+                            value
+                        ])
+
+    df = pd.DataFrame(
+        data,
+        columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value']
+    )
+
+    # -----------------------------------------
+    # ROTATED LAYOUT
+    # -----------------------------------------
+
+    nrows = len(metrics)      # rows = metrics
+    ncols = len(receptors)   # cols = receptors
+
+    fig_width = 1.7 * 4 * ncols + 2
+    fig_height = 6 * nrows * 1.3
+
+    fig = plt.figure(figsize=(fig_width, fig_height))
+
+    outer_gs = fig.add_gridspec(
+        nrows=nrows,
+        ncols=ncols,
+        wspace=inter_metric_wspace,
+        hspace=0.1
+    )
+
+    # MAIN LOOP
+    for met_idx, metric in enumerate(metrics):
+
+        metric_df = df[df['Metric'] == metric].copy()
+        cmap_custom = make_cmap_to_white(metric_base_colors[metric])
+
+        for rec_idx, receptor in enumerate(receptors):
+
+            inner = outer_gs[met_idx, rec_idx].subgridspec(
+                nrows=1,
+                ncols=4,
+                wspace=intra_metric_wspace,
+                hspace=0.0
+            )
+
+            group_axes = []
+
+            for sc_idx, scaffold_type in enumerate(["csk", "murcko"]):
+
+                block_df = metric_df[
+                    (metric_df['Receptor'] == receptor) &
+                    (metric_df['Scaffold'] == scaffold_type)
+                ]
+
+                for split_idx, split in enumerate(["dis", "sim"]):
+
+                    col = sc_idx * 2 + split_idx
+                    ax = fig.add_subplot(inner[0, col])
+                    group_axes.append(ax)
+
+                    sub_df = block_df[block_df['Split'] == split].copy()
+                    sub_df = sub_df.set_index('Generator').reindex(generators)
+
+                    heatmap_array = sub_df['Value'].to_numpy().reshape(-1, 1)
+
+                    vmin = heatmap_array.min()
+                    vmax = heatmap_array.max()
+
+                    heatmap_flat = heatmap_array.flatten()
+                    max_idx = np.argmax(heatmap_flat)
+
+                    annot_array = []
+                    for i, val in enumerate(heatmap_flat):
+                        txt = f"{val:.4f}" if not using_norm_values else f"{val:.3f}"
+                        if i == max_idx:
+                            txt = r"$\bf{" + txt + "}$"
+                        annot_array.append(txt)
+
+                    annot_array = np.array(annot_array).reshape(heatmap_array.shape)
+
+                    show_colorbar = (sc_idx == 1 and split_idx == 1)
+
+                    if show_colorbar:
+                        divider = make_axes_locatable(ax)
+                        cax = divider.append_axes(
+                            "right",
+                            size="5%",
+                            pad=0.05
+                        )
+                    else:
+                        cax = None
+
+                    sns.heatmap(
+                        heatmap_array,
+                        annot=annot_array,
+                        fmt="",
+                        cmap=cmap_custom,
+                        ax=ax,
+                        cbar=show_colorbar,
+                        cbar_ax=cax,
+                        annot_kws={
+                            "size": 16,
+                            "color": "black"
+                        },
+                        vmin=vmin,
+                        vmax=vmax
+                    )
+
+                    ax.set_aspect("auto")
+
+                    # X-axis = split labels
+                    ax.set_xticks([0.5])
+                    ax.set_xticklabels([split], rotation=0, ha="center", fontsize=14)
+
+                    # -----------------------------------------
+                    # Y LABELS  (GENS only in first column)
+                    # -----------------------------------------
+                    if rec_idx == 0 and sc_idx == 0 and split_idx == 0:
+                        new_labels = [
+                            g.replace('_epsilon', '\n epsilon')
+                             .replace('_mut_r', '\n mut_r')
+                             .replace('addcarbon', 'AddCarbon')
+                            for g in generators
+                        ]
+
+                        ax.set_yticks(np.arange(len(generators)) + 0.5)
+                        ax.set_yticklabels(new_labels, rotation=0, fontsize=15)
+                        ax.set_ylabel(metric, fontsize=16, fontweight="bold", labelpad=8)
+
+                    else:
+                        ax.set_yticks([])
+                        ax.set_ylabel("")
+
+            # -----------------------------------------
+            # TOP TITLE = RECEPTOR
+            # -----------------------------------------
+            if met_idx == 0:
+
+                p0 = group_axes[0].get_position()
+                p1 = group_axes[-1].get_position()
+
+                x_mid = (p0.x0 + p1.x1) / 2
+                y_top = p0.y1 + 0.018
+
+                fig.text(
+                    x_mid,
+                    y_top,
+                    receptor.replace('_', ' '),
+                    ha="center",
+                    va="bottom",
+                    fontsize=16,
+                    fontweight="bold"
+                )
+
+                # CSK = axes 0,1
+                p0 = group_axes[0].get_position()
+                p1 = group_axes[1].get_position()
+
+                x_mid = (p0.x0 + p1.x1) / 2
+                y_top = p0.y1 + 0.004
+
+                fig.text(
+                    x_mid,
+                    y_top,
+                    "CSK",
+                    ha="center",
+                    va="bottom",
+                    fontsize=14
+                )
+
+                # MURCKO = axes 2,3
+                p2 = group_axes[2].get_position()
+                p3 = group_axes[3].get_position()
+
+                x_mid = (p2.x0 + p3.x1) / 2
+                y_top = p2.y1 + 0.004
+
+                fig.text(
+                    x_mid,
+                    y_top,
+                    "MURCKO",
+                    ha="center",
+                    va="bottom",
+                    fontsize=14
+                )
+
+    # -----------------------------------------
+    # FINAL TOUCHES
+    # -----------------------------------------
+    if title:
+        fig.suptitle(title, fontsize=14, y=0.995)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.99])
+
+    if save_name:
+        if save_folder:
+            plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.pdf', bbox_inches='tight') 
+        else:
+            plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
+            plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
+
+    plt.show()
