@@ -34,7 +34,10 @@ reflects the structural diversity of the generated set. It is calculated as the 
 ### ▪ Absolute SEt Scaffold Recall (ASER): 
 indicates how effectively the generator explores the target region of chemical space. It is calculated as the ratio of the number of active scaffolds in the OS (As<sub>OS</sub>) to the total number of compounds in the Output Set (c<sub>OS</sub>). The ASER metric starts at 0, indicating that no generated compounds in the output set (OS) contain an active scaffold. Higher ASER values reflect an increasing frequency of active scaffolds within the generated compounds. Importantly, the metric can exceed 1 because some compounds may contain multiple active scaffolds. In this sense, it is akin to the precision metric that is used to evaluate classification tasks in machine learning. 
 
-   $$ASER = {{cAS_{OS}} \over c_{OS}}$$ 
+   $$
+   ASER = \frac{|\text{Active scaffolds in the OS}|}
+              {|\text c_{OS}|}
+   $$
 
 * A higher ASER value means the generator is better at making molecules similar to those known to be biologically active. This suggests that the generator is exploring the right chemical space for drug discovery — beyond what it was originally trained on. 
  
