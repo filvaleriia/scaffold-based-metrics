@@ -1,26 +1,35 @@
 # 📊 Scaffold-based Metrics for Molecular Generators
 
  
-**Purpose**: This repository provides an implementation of recall-based metrics — **TUPOR**, **SESY** and **ASER** — for evaluating molecular generators. These metrics help assess the diversity, novelty, and structural relevance of generated compounds.
+**Purpose**: This repository provides an implementation of recall-based metrics — **RS**, **SED** and **ASER** — for evaluating molecular generators. These metrics help assess the diversity, novelty, and structural relevance of generated compounds.
 
 
 ## 🚀 Features  
 
 Implementation of three key recall metrics:  
 
-### ▪ TrUe POsitive Recall all (TUPOR): 
-quantifies the ability of the generator to produce molecules containing scaffolds that occur in biologically active compounds. It is calculated as the ratio of the number of unique active scaffolds in the Output Set (OS) (UAs<sub>OS</sub>) to the number of unique active scaffolds in the Recall Set (RS)  (UAS<sub>RS</sub>). TUPOR value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique active scaffolds from RS were found in the OS).
+### ▪ TrUe POsitive Recall all (RS): 
+quantifies the ability of the generator to produce molecules containing scaffolds that occur in biologically active compounds. It is calculated as the ratio of the number of unique active scaffolds in the Output Set (OS) (UAs<sub>OS</sub>) to the number of unique active scaffolds in the Recall Set (RS)  (UAS<sub>RS</sub>). RS value ranges between 0 (no unique active scaffolds from RS were found in the OS) and 1 (all unique active scaffolds from RS were found in the OS).
 
-   $$TUPOR = {{UAs_{OS}} \over UAs_{RS}}$$ 
+   $$
+   RS = \frac{|\text{Unique Active scaffolds in the OS}|}
+              {|\text{Unique Active scaffolds in the RS}|}
+   $$
+
    
-* The TUPOR metric is a key measure that quantifies the ability of a molecular generator to reproduce biologically active scaffolds. As such, TUPOR is analogous to the recall metric used to evaluate classification tasks in machine learning. TUPOR is effective for a generate-then-select methodology. Selecting the bioactive compounds out of a large set of generated molecules is hard, but if they are not generated at all, this is impossible.
+* The RS metric is a key measure that quantifies the ability of a molecular generator to reproduce biologically active scaffolds. As such, RS is analogous to the recall metric used to evaluate classification tasks in machine learning. RS is effective for a generate-then-select methodology. Selecting the bioactive compounds out of a large set of generated molecules is hard, but if they are not generated at all, this is impossible.
 
-### ▪ SEt Scaffold Yield (SESY): 
+### ▪ SEt Scaffold Yield (SED): 
 reflects the structural diversity of the generated set. It is calculated as the percentage of unique scaffolds (Us<sub>OS</sub>) in the Output Set relative to the total number of compounds in the Output Set (c<sub>OS</sub>). A value of 1 indicates that every scaffold in the OS is unique, while 0 means no valid scaffolds were generated. 
 
-   $$SESY = {{Us_{OS}} \over c_{OS}}$$ 
 
-* SESY enables striking a balance between exploration and exploitation. A high SESY value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SESY value suggests a focus on exploiting similar scaffolds, refining specific chemical structures. Adjusting the generator parameters based on the SESY value enables fine-tuning the balance between exploring diverse molecular structures and exploiting specific scaffolds. 
+   $$
+   SED = \frac{|\text{Unique scaffolds in the OS}|}
+              {|\text c_{OS}|}
+   $$
+
+
+* SED enables striking a balance between exploration and exploitation. A high SED value indicates that the generator explores diverse regions of chemical space by discovering novel scaffolds, which is essential for expanding the chemical space. On the other hand, a low SED value suggests a focus on exploiting similar scaffolds, refining specific chemical structures. Adjusting the generator parameters based on the SED value enables fine-tuning the balance between exploring diverse molecular structures and exploiting specific scaffolds. 
 
 ### ▪ Absolute SEt Scaffold Recall (ASER): 
 indicates how effectively the generator explores the target region of chemical space. It is calculated as the ratio of the number of active scaffolds in the OS (As<sub>OS</sub>) to the total number of compounds in the Output Set (c<sub>OS</sub>). The ASER metric starts at 0, indicating that no generated compounds in the output set (OS) contain an active scaffold. Higher ASER values reflect an increasing frequency of active scaffolds within the generated compounds. Importantly, the metric can exceed 1 because some compounds may contain multiple active scaffolds. In this sense, it is akin to the precision metric that is used to evaluate classification tasks in machine learning. 

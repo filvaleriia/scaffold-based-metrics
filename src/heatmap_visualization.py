@@ -8,6 +8,7 @@ from matplotlib.colors import ListedColormap
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import math
 from matplotlib.gridspec import GridSpec
+import os
 
 
 def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, data_folder):
@@ -66,13 +67,13 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
     - using_norm_values: whether to use normalized values
     '''
 
-    # Extract relevant columns (TUPOR, SESY, ASER, ASR) for visualization
+    # Extract relevant columns (RS, SED, ASER, ASR) for visualization
     if using_norm_values:
         data = preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, data_folder)
     else:
         data = preprocesing_org(type_cluster, type_scaffold, generators_name_list, receptor, data_folder)
 
-    df = data[['TUPOR', 'SESY', 'ASER']]
+    df = data[['RS', 'SED', 'ASER']]
     # Set the index of the dataframe to the 'name' attribute of the data
     df.index = data.name.tolist()
 
@@ -92,6 +93,7 @@ def plot_heatmap(type_cluster, type_scaffold, generators_name_list, receptor, ti
     plt.tight_layout()
     # Save the plot as an SVG file
     if save_folder:
+        os.makedirs(save_folder, exist_ok=True)
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
         plt.savefig(f'{save_folder}/{name_save}.png', format="png")
     else:
@@ -138,7 +140,7 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
 
     # Plot each heatmap
     for ax, (subset_name, data) in zip(axes, subset_dict.items()):
-        df = data[['TUPOR', 'SESY', 'ASER']]
+        df = data[['RS', 'SED', 'ASER']]
         df.index = data.name.tolist()
 
         hm = sns.heatmap(
@@ -216,6 +218,7 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
 
     # Save
     if save_folder:
+        os.makedirs(save_folder, exist_ok=True)
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
         plt.savefig(f'{save_folder}/{name_save}.pdf', bbox_inches='tight')
@@ -224,8 +227,6 @@ def plot_all_subsets(subset_dict, title='', receptor='', name_save='', cmap='vir
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
 
     plt.show()
-
-
 
 
 
@@ -246,8 +247,8 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
    
     # Iterate through the subset dictionary to plot each subset
     for axses, data in subset_dict.items():
-        # Extract the relevant columns (TUPOR, SESY, ASER, ACR) for the heatmap
-        df = data[['TUPOR', 'SESY', 'ASER']]
+        # Extract the relevant columns (RS, SED, ASER, ACR) for the heatmap
+        df = data[['RS', 'SED', 'ASER']]
         
         # Set the index of the dataframe to the 'name' attribute of the data
         df.index = data.name.tolist()  # Using names as index
@@ -275,6 +276,7 @@ def plot_heatmap_base(subset_dict, subset_dict_data, title='', receptor = '', na
 
 
     if save_folder:
+        os.makedirs(save_folder, exist_ok=True)
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg")
         plt.savefig(f'{save_folder}/{name_save}.png', format="png")
     else:
@@ -319,12 +321,12 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         axes.append(ax)
 
     # Prepare baseline values
-    baseline_df = baseline_df_all[['TUPOR', 'SESY', 'ASER']]
+    baseline_df = baseline_df_all[['RS', 'SED', 'ASER']]
     baseline_df.index = baseline_df_all.name.tolist()
 
     # Plot differences
     for ax, (subset, df) in zip(axes, data_dict.items()):
-        normalized_df = df[['TUPOR', 'SESY', 'ASER']]
+        normalized_df = df[['RS', 'SED', 'ASER']]
         normalized_df.index = df.name.tolist()
         
         # Align indexes with baseline
@@ -412,6 +414,7 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
 
     # Save
     if save_folder:
+        os.makedirs(save_folder, exist_ok=True)
         plt.savefig(f'{save_folder}/{name_save}.svg', format="svg", bbox_inches='tight')
         plt.savefig(f'{save_folder}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
         plt.savefig(f'{save_folder}/{name_save}.pdf', bbox_inches='tight') 
@@ -420,7 +423,6 @@ def plot_heatmaps_with_diff_from_baseline(baseline_df_all, data_dict, type_split
         plt.savefig(f'img/heat_map/{receptor}/{name_save}.png', format="png", dpi=300, bbox_inches="tight")
 
     plt.show()
-
 
 
 
@@ -525,6 +527,7 @@ def plot_combined_heatmap(generators, receptors, scaffolds, splits, metrics, cma
     plt.tight_layout()
 
     if save_folder:
+        os.makedirs(save_folder, exist_ok=True)
         plt.savefig(f'{save_folder}/{save_name}.svg', format="svg")
         plt.savefig(f'{save_folder}/{save_name}.png', format="png")
     else:
@@ -548,7 +551,7 @@ def make_cmap_to_white(base_hex_color):
 
 def plot_combined_heatmap_variable_cmaps(
         generators, receptors, scaffolds, splits,
-        metrics=['TUPOR', 'SESY', 'ASER'], 
+        metrics=['RS', 'SED', 'ASER'], 
         title=None, save_name=None, using_norm_values=False, data_folder='', save_folder = ''):
     """
     Plot combined heatmaps for multiple generators, receptors, scaffolds, and metrics.
@@ -566,8 +569,8 @@ def plot_combined_heatmap_variable_cmaps(
     
     # Define base colors for each metric
     metric_base_colors = {
-        'TUPOR': "#e97b32",
-        'SESY': "#97C2F0",  
+        'RS': "#e97b32",
+        'SED': "#97C2F0",  
         'ASER': "#71ad48"
     }
 
@@ -675,6 +678,7 @@ def plot_combined_heatmap_variable_cmaps(
     plt.tight_layout(rect=[0, 0, 1, 0.97])
     if save_name:
         if save_folder:
+            os.makedirs(save_folder, exist_ok=True)
             plt.savefig(f'{save_folder}/{save_name}.svg', format="svg")
             plt.savefig(f'{save_folder}/{save_name}.png', format="png")
         else:
@@ -687,7 +691,7 @@ def plot_combined_heatmap_variable_cmaps(
 
 def plot_combined_heatmap_with_single_column_for_each_metric(
         generators, receptors, scaffolds, splits,
-        metrics=['TUPOR', 'SESY', 'ASER'], 
+        metrics=['RS', 'SED', 'ASER'], 
         title=None, save_name=None, using_norm_values=False, data_folder='', save_folder = '',
         inter_metric_wspace=0.15,   # Larger spacing between metrics
         intra_metric_wspace=0.05    # Smaller spacing within a metric block
@@ -711,8 +715,8 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
 
     # Base colors for each metric
     metric_base_colors = {
-        'TUPOR': "#e97b32",
-        'SESY': "#97C2F0",
+        'RS': "#e97b32",
+        'SED': "#97C2F0",
         'ASER': "#71ad48"
     }
 
@@ -874,6 +878,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
     plt.tight_layout(rect=[0, 0, 1, 0.99])
     if save_name:
         if save_folder:
+            os.makedirs(save_folder, exist_ok=True)
             plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.png', format="png",dpi=300, bbox_inches='tight')
         else:
@@ -885,7 +890,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric(
 
 def plot_combined_heatmap_with_single_column_for_each_metric_rotated(
         generators, receptors, scaffolds, splits,
-        metrics=['TUPOR', 'SESY', 'ASER'], 
+        metrics=['RS', 'SED', 'ASER'], 
         title=None, save_name=None, using_norm_values=False,
         data_folder='', save_folder='',
         inter_metric_wspace=0.15,
@@ -894,8 +899,8 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated(
 
     # Base colors for each metric
     metric_base_colors = {
-        'TUPOR': "#e97b32",
-        'SESY': "#97C2F0",
+        'RS': "#e97b32",
+        'SED': "#97C2F0",
         'ASER': "#71ad48"
     }
 
@@ -992,7 +997,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated(
 
                     annot_array = []
                     for i, val in enumerate(heatmap_flat):
-                        txt = f"{val:.4f}" if not using_norm_values else f"{val:.3f}"
+                        txt = f"{val:.3f}" if not using_norm_values else f"{val:.3f}"
                         if i == max_idx:
                             txt = r"$\bf{" + txt + "}$"
                         annot_array.append(txt)
@@ -1115,6 +1120,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated(
 
     if save_name:
         if save_folder:
+            os.makedirs(save_folder, exist_ok=True)
             plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.pdf', bbox_inches='tight') 
