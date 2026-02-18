@@ -1,5 +1,5 @@
 """
-This script calculates key metrics (TUPOR, SESY, ASER) for molecular scaffold analysis.
+This script calculates key metrics (RS, SED, ASER) for molecular scaffold analysis.
 """
 import os
 import pandas as pd
@@ -126,16 +126,16 @@ class Metrics:
         UASr = len(self.count_metrics)
 
         try:
-            tupor = UASo / UASr
-            tupor_text = f"{UASo}/{UASr}"
+            RS = UASo / UASr
+            RS_text = f"{UASo}/{UASr}"
         except Exception:
-            tupor = 0
-            tupor_text = f"0/{len(df)}"
+            RS = 0
+            RS_text = f"0/{len(df)}"
 
-        SESY = USo / SSo if SSo > 0 else 0
+        SED = USo / SSo if SSo > 0 else 0
         ASER = cASo / SSo if SSo > 0 else 0
 
-        return  SSo, tupor_text, tupor, SESY, ASER
+        return  SSo, RS_text, RS, SED, ASER
 
 
     def save_function(self):
@@ -163,7 +163,7 @@ class Metrics:
         if os.path.exists(output_file_path):
             self.load(output_file_path, recall_file_path)
             res = self.main_function_return(self.output_set, self.recall_set)
-            results = pd.DataFrame(columns=['SSo', 'TUPOR_', 'TUPOR', 'SESY', 'ASER'])
+            results = pd.DataFrame(columns=['SSo', 'RS_', 'RS', 'SED', 'ASER'])
             results.loc[len(results)] = res
             results.insert(0, 'name', f"{self.generator_name}")
             results.insert(2, 'scaffold', self.type_scaffold)
