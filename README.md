@@ -72,7 +72,7 @@ Or install the following packages manually:
 
 ## 📂 Data Requirements  
 
-All required data are available on **Zenodo**: [10.5281/zenodo.17814428](https://doi.org/10.5281/zenodo.17814428)  
+All required data are available on **Zenodo**: [10.5281/zenodo.18678356](https://doi.org/10.5281/zenodo.18678356)  
 After download, place the entire `data/` folder into the root directory of this repository.  
 
 > ⚠️ The folder has a size of ~9 GB.  
