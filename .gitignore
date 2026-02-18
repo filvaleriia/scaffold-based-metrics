@@ -12,3 +12,9 @@ src/__pycache__/heatmap_visualization.cpython-39.pyc
 
 data/results_phram_fp/
 
+# numpy arrays
+*.npy
+*.npz
+
+
+results_bootstrap_ci/
