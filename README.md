@@ -198,13 +198,56 @@ Finally, we compared the average metric values across the two split strategies, 
 
 ![Project workflow](img/project_workflow.png)
 
+---
+
+## 📏 Metrics Interpretation Thresholds
+
+To facilitate interpretation of differences between generators, we defined effect-size thresholds for each metric and scaffold type.  
+These thresholds categorize the absolute difference Δ between generators into four qualitative levels:
+
+- **Trivial (≤ 25%)**
+- **Small (25–50%)**
+- **Moderate (50–75%)**
+- **Large (> 75%)**
+
+Thresholds were derived from bootstrap-based pairwise comparisons of generator performance.
+
+### Threshold values
+
+| Metric | Scaffold | Trivial Δ | Small Δ | Moderate Δ | Large Δ |
+|--------|----------|-----------|---------|-------------|---------|
+| RS | CSK | Δ ≤ 0.072 | 0.072 < Δ ≤ 0.189 | 0.189 < Δ ≤ 0.332 | Δ > 0.332 |
+| RS | Murcko | Δ ≤ 0.044 | 0.044 < Δ ≤ 0.136 | 0.136 < Δ ≤ 0.212 | Δ > 0.212 |
+| SED | CSK | Δ ≤ 0.045 | 0.045 < Δ ≤ 0.090 | 0.090 < Δ ≤ 0.159 | Δ > 0.159 |
+| SED | Murcko | Δ ≤ 0.076 | 0.076 < Δ ≤ 0.175 | 0.175 < Δ ≤ 0.299 | Δ > 0.299 |
+| ASER | CSK | Δ ≤ 0.004 | 0.004 < Δ ≤ 0.011 | 0.011 < Δ ≤ 0.018 | Δ > 0.018 |
+| ASER | Murcko | Δ ≤ 0.001 | 0.001 < Δ ≤ 0.004 | 0.004 < Δ ≤ 0.007 | Δ > 0.007 |
+
+These thresholds allow quantitative comparison of generators beyond raw metric values.
+
+---
+
+
 
 ## 📊 Results  
 
 Here we summarize the main outcomes of our study.  
 
 **Combined results in a single overview plot**  
-![Heatmaps](img/heat_map/all_res_metrics_per_column_paper.svg)
+![Heatmaps](img/heat_map/all_res_with_thresholds.svg)
 
-Based on these results, the **best-performing generators** across receptors, scaffold types, and splits were **DrugEx Graph Transformer** (*ε = 0.6*), closely followed by **GB_GA** (*mutation rate = 50%*) and **DrugEx RNN** (*ε = 0.6*).  
-The weakest performance was observed for the **AddCarbon** generator.
+The heatmaps summarize the performance of all generators across two receptors, two scaffold definitions (**CSK** and **Murcko**), and two data splits (**dissimilarity** and **similarity**). Each column represents one experimental setting.
+
+Colors indicate the magnitude of performance differences relative to the best generator in that column, categorized using metric-specific interpretation thresholds (**Trivial, Small, Moderate, Large**). This enables comparison across metrics with different scales.
+
+**Within each column:**
+
+- **Bold values** mark the best-performing generator  
+- Color intensity reflects how far other generators are from the best result  
+- ASER values are reported in units of ×10⁻²  
+
+Overall, the **DrugEx Graph Transformer (ε = 0.6)** achieved the strongest performance across most settings, followed by **GB_GA (mutation rate = 50%)** and **DrugEx RNN (ε = 0.6)**.  
+The **AddCarbon** baseline consistently showed the weakest results.
+
+Similarity splits generally produced higher scores than dissimilarity splits, reflecting the greater structural overlap between Input and Recall Sets.
+

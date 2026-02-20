@@ -117,44 +117,70 @@ def export_article_excel_table(
     type_scaffold: str,
     subset: str = "",
     type_cluster: str | None = None,
-):
+    ):
     """
     Creates an Excel table suitable for a paper:
-    - rounded to 3 decimals
-    - maximum value in each metric column is bold (within each block)
-    - formatted header, borders, alignment
-    - supports two blocks per sheet (Split = dis/sim). If Split missing, uses type_cluster.
+
+    Formatting rules:
+      - RS, SED: 2 decimals (Excel format 0.00)
+      - ASER: displayed in units of ×10^-2 (i.e., ASER_scaled = ASER * 100),
+              3 decimals (Excel format 0.000)
+      - Column header for ASER is "ASER · 10^-2"
+      - Maximum value in each metric column is bold within each block (Split dis/sim)
+      - Header styling, borders, alignment
+      - Supports two blocks per sheet (Split = dis/sim). If Split missing, uses type_cluster.
     """
 
     # --- Safety: ensure folder exists
     out_path = Path(out_xlsx)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # --- Ensure expected columns exist
+    # --- Work on a copy
     df = df.copy()
 
+    # Ensure expected columns exist
     if "Scaffold" not in df.columns:
         df["Scaffold"] = type_scaffold
 
     if "Split" not in df.columns:
-        # if your per-generator mean files are already per cluster, pass type_cluster here
         df["Split"] = type_cluster if type_cluster is not None else ""
-    
+
     if "name" in df.columns and "Name" not in df.columns:
         df = df.rename(columns={"name": "Name"})
 
+    # Prettify generator names
     df["Name"] = df["Name"].apply(prettify_generator_name)
+    
+    df["Scaffold"] = df["Scaffold"].astype(str).str.upper()
 
-    # Keep and order columns (adjust if you have more metrics)
+
+    # Keep and order columns
     wanted_cols = ["Name", "RS", "SED", "ASER", "Scaffold", "Split"]
     existing_cols = [c for c in wanted_cols if c in df.columns]
     df = df[existing_cols]
 
     metric_cols = [c for c in ["RS", "SED", "ASER"] if c in df.columns]
 
-    # Round numeric metrics to 3 decimals (display in Excel will be set too)
-    for c in metric_cols:
-        df[c] = pd.to_numeric(df[c], errors="coerce").round(3)
+    # ---- Metric-specific numeric formatting ----
+    # RS/SED: 2 decimals
+    for c in ["RS", "SED"]:
+        if c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors="coerce").round(2)
+
+    # ASER: scale to units of ×10^-2 (multiply by 100) and round to 3 decimals
+    if "ASER" in df.columns:
+        df["ASER"] = pd.to_numeric(df["ASER"], errors="coerce") * 100.0
+        df["ASER"] = df["ASER"].round(3)
+
+    # Header labels for Excel (paper-friendly)
+    header_labels = {
+        "Name": "Name",
+        "RS": "RS",
+        "SED": "SED",
+        "ASER": "ASER · 10⁻²",   # unit shown in header; values are scaled
+        "Scaffold": "Scaffold",
+        "Split": "Split",
+    }
 
     # --- Workbook / sheet
     wb = Workbook()
@@ -167,18 +193,19 @@ def export_article_excel_table(
     header_font = Font(bold=True)
     title_font = Font(bold=True, size=12)
     bold_font = Font(bold=True)
+
     center = Alignment(horizontal="center", vertical="center", wrap_text=True)
     left = Alignment(horizontal="left", vertical="center", wrap_text=True)
 
     thin = Side(style="thin", color="000000")
     border = Border(left=thin, right=thin, top=thin, bottom=thin)
 
-    # Helper to write a block (one split = one mini-table)
+    # Helper: write one block (one split)
     def write_block(start_row: int, block_title: str, block_df: pd.DataFrame) -> int:
         r = start_row
+        ncols = len(existing_cols)
 
         # Title row merged across columns
-        ncols = len(existing_cols)
         ws.merge_cells(start_row=r, start_column=1, end_row=r, end_column=ncols)
         cell = ws.cell(row=r, column=1, value=block_title)
         cell.font = title_font
@@ -187,85 +214,90 @@ def export_article_excel_table(
 
         # Header row
         for j, col in enumerate(existing_cols, start=1):
-            c = ws.cell(row=r, column=j, value=col)
+            label = header_labels.get(col, col)
+            c = ws.cell(row=r, column=j, value=label)
             c.font = header_font
             c.fill = header_fill
             c.alignment = center
             c.border = border
         r += 1
 
-        # Data rows
-        # Determine maxima per metric within this block (ignore NaN)
+        # Maxima per metric within this block
         maxima = {}
         for mc in metric_cols:
             if mc in block_df.columns:
                 maxima[mc] = block_df[mc].max(skipna=True)
 
+        # Data rows
         for _, row in block_df.iterrows():
             for j, col in enumerate(existing_cols, start=1):
                 val = row[col]
-
                 cell = ws.cell(row=r, column=j, value=val)
 
-                # alignment
-                #if col == "Name":
-                #    cell.alignment = left
-                #else:
+                # Alignment
                 cell.alignment = center
 
-                # borders
+                # Borders
                 cell.border = border
 
-                # numeric formatting
+                # Numeric formatting + bold maxima
                 if col in metric_cols:
-                    cell.number_format = "0.000"
 
-                    # bold maxima (handle ties)
+                    cell.number_format = "0.00"
+
+                    # Bold maxima (handle ties)
                     try:
                         if pd.notna(val) and pd.notna(maxima.get(col)) and float(val) == float(maxima[col]):
                             cell.font = bold_font
                     except Exception:
                         pass
+
             r += 1
 
-        # blank line after block
+        # Blank line after block
         return r + 1
 
-    # --- Sort and write blocks for Split
-    # keep a stable order: dis then sim then anything else
+    # --- Split order: dis then sim then anything else
     split_order = ["dis", "sim"]
-    splits = [s for s in split_order if s in df["Split"].astype(str).unique().tolist()]
-    splits += [s for s in df["Split"].astype(str).unique().tolist() if s not in splits]
+    unique_splits = df["Split"].astype(str).unique().tolist()
+    splits = [s for s in split_order if s in unique_splits]
+    splits += [s for s in unique_splits if s not in splits]
 
+    if type_scaffold == 'csk':
+        type_scaffold_str = 'CSK'
+    elif type_scaffold == 'murcko':
+        type_scaffold_str = 'MURCKO'
+    else:
+        type_scaffold_str = type_scaffold
+
+    # Caption
     current_row = 1
-    caption = f"Receptor: {receptor} | Scaffold: {type_scaffold}{(' | ' + subset) if subset else ''}"
+    caption = f"Receptor: {receptor} | Scaffold: {type_scaffold_str}{(' | ' + subset) if subset else ''}"
     ws.merge_cells(start_row=current_row, start_column=1, end_row=current_row, end_column=len(existing_cols))
     cap_cell = ws.cell(row=current_row, column=1, value=caption)
     cap_cell.font = Font(bold=True, size=13)
     cap_cell.alignment = left
     current_row += 2
 
+    # Write blocks
     for sp in splits:
         block_df = df[df["Split"].astype(str) == str(sp)].copy()
-
-
         block_title = f"Split: {sp}" if sp else "Results"
         current_row = write_block(current_row, block_title, block_df)
 
-    # --- Column widths
-    # A decent default; tweak as you like
+    # Column widths
     col_widths = {
         "Name": 22,
         "RS": 10,
         "SED": 10,
-        "ASER": 10,
+        "ASER": 12,      # a bit wider because header includes ·10^-2
         "Scaffold": 10,
         "Split": 8,
     }
     for j, col in enumerate(existing_cols, start=1):
         ws.column_dimensions[get_column_letter(j)].width = col_widths.get(col, 12)
 
-    # Freeze panes below the caption (keeps header visible)
+    # Freeze panes below caption + header area
     ws.freeze_panes = "A4"
 
     wb.save(out_xlsx)

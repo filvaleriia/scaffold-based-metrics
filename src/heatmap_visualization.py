@@ -4,11 +4,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
-from matplotlib.colors import ListedColormap
+from matplotlib.colors import ListedColormap, BoundaryNorm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import math
 from matplotlib.gridspec import GridSpec
+from matplotlib.patches import Rectangle
 import os
+import re
+from decimal import Decimal, ROUND_HALF_UP
 
 
 def preprocesing(type_cluster, type_scaffold, generators_name_list, receptor, data_folder):
@@ -1124,6 +1127,325 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated(
             plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
             plt.savefig(f'{save_folder}/{save_name}.pdf', bbox_inches='tight') 
+        else:
+            plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
+            plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
+
+    plt.show()
+
+
+#================================================
+def load_effect_thresholds_csv(csv_path: str) -> dict:
+    """
+    Reads effect_size_thresholds.csv and returns:
+      {("RS","csk"):(t1,t2,t3), ("RS","murcko"):(...), ...}
+
+    Expected columns:
+      Metric, Scaffold,
+      Trivial Δ (≤25%), Small Δ (25–50%), Moderate Δ (50–75%), Large Δ (>75%)
+    """
+    df = pd.read_csv(csv_path)
+
+    def norm_scaffold(s: str) -> str:
+        s = str(s).strip().lower()
+        if "csk" in s:
+            return "csk"
+        if "murcko" in s:
+            return "murcko"
+        return s
+
+    def last_number(text: str) -> float:
+        nums = re.findall(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?", str(text))
+        if not nums:
+            raise ValueError(f"Cannot parse number from: {text}")
+        return float(nums[-1])
+
+    out = {}
+    for _, r in df.iterrows():
+        metric = str(r["Metric"]).strip().upper()
+        scaffold = norm_scaffold(r["Scaffold"])
+        t1 = last_number(r["Trivial Δ (≤25%)"])
+        t2 = last_number(r["Small Δ (25–50%)"])
+        t3 = last_number(r["Moderate Δ (50–75%)"])
+        out[(metric, scaffold)] = (t1, t2, t3)
+
+    return out
+
+
+def _mix_with_white(hex_color: str, amount: float) -> tuple:
+    """
+    amount in [0,1]:
+      0 -> original color
+      1 -> white
+    """
+    r, g, b = to_rgb(hex_color)
+    return (r + (1 - r) * amount,
+            g + (1 - g) * amount,
+            b + (1 - b) * amount)
+
+
+def colormap_for_metric_bins(base_hex: str):
+    """
+    Returns (ListedColormap, BoundaryNorm) for 4 bins:
+      0 Trivial  -> very light tint
+      1 Small    -> light tint
+      2 Moderate -> medium tint
+      3 Large    -> base-ish / darker (strongest)
+    """
+    # můžete upravit, jak moc je to "světlé"
+    colors = [
+        _mix_with_white(base_hex, 0.9),  # Trivial (almost white)
+        _mix_with_white(base_hex, 0.6),  # Small
+        _mix_with_white(base_hex, 0.38),  # Moderate
+        _mix_with_white(base_hex, 0.10),  # Large (close to base)
+    ]
+    cmap = ListedColormap(colors)
+    norm = BoundaryNorm([-0.5, 0.5, 1.5, 2.5, 3.5], cmap.N)
+    return cmap, norm
+
+
+def _bin_delta(delta_abs: float, t1: float, t2: float, t3: float) -> int:
+    # 0=Trivial, 1=Small, 2=Moderate, 3=Large
+    if delta_abs <= t1:
+        return 0
+    if delta_abs <= t2:
+        return 1
+    if delta_abs <= t3:
+        return 2
+    return 3
+
+
+def round_excel(x, ndigits):
+    q = Decimal(10) ** -ndigits
+    return float(Decimal(str(x)).quantize(q, rounding=ROUND_HALF_UP))
+
+
+def format_value_for_metric(x, metric):
+
+    metric = metric.upper()
+
+    if metric in ("RS", "SED"):
+        val = round_excel(float(x), 2)
+        return f"{val:.2f}"
+
+    if metric == "ASER":
+        mant = float(x) * 100.0
+        mant = round_excel(mant, 2)
+        return f"{mant:.2f}"
+
+    return str(x)
+
+
+def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
+        generators, receptors, scaffolds, splits,
+        metrics=['RS', 'SED', 'ASER'],
+        title=None, save_name=None,
+        data_folder='', save_folder='',
+        inter_metric_wspace=0.15,
+        intra_metric_wspace=0.05,
+        effect_thresholds_csv="effect_size_thresholds.csv",
+        annotate_values=True,
+    ):
+    """
+    Same layout as plot_combined_heatmap_with_single_column_for_each_metric_rotated(),
+    but cell COLORS are discrete bins based on effect-size intervals:
+
+      Δ = |best_in_column - value|   (best = max; assumes higher is better)
+      bin 0..3 = Trivial/Small/Moderate/Large using thresholds from CSV.
+
+    The cell TEXT annotations can remain the original metric values.
+    """
+
+    thresholds = load_effect_thresholds_csv(effect_thresholds_csv)
+
+    # Discrete colormap for bins
+
+    metric_base_colors = {
+    'RS': "#e97b32",
+    'SED': "#97C2F0",
+    'ASER': "#71ad48"
+    }
+
+    # --- Build a DataFrame with all values (same as original) ---
+    data = []
+    for gen in generators:
+        for receptor in receptors:
+            for type_scaffold in scaffolds:
+                for type_cluster in splits:
+
+                    df = (preprocesing_org)(
+                        type_cluster,
+                        type_scaffold,
+                        generators,
+                        receptor,
+                        data_folder
+                    )
+
+                    for met in metrics:
+                        value = df[df.name.str.startswith(gen)][met].iloc[0]
+                        data.append([gen, receptor, type_scaffold, type_cluster, met, value])
+
+    df = pd.DataFrame(data, columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value'])
+
+    # -----------------------------------------
+    # ROTATED LAYOUT (same as original)
+    # -----------------------------------------
+    nrows = len(metrics)      # rows = metrics
+    ncols = len(receptors)    # cols = receptors
+
+    fig_width = 1.7 * 4 * ncols + 2
+    fig_height = 6 * nrows * 1.3
+    fig = plt.figure(figsize=(fig_width, fig_height))
+
+    outer_gs = fig.add_gridspec(
+        nrows=nrows,
+        ncols=ncols,
+        wspace=inter_metric_wspace,
+        hspace=0.1
+    )
+
+    for met_idx, metric in enumerate(metrics):
+        metric_df = df[df['Metric'] == metric].copy()
+        base_hex = metric_base_colors.get(metric.upper(), "#999999")
+        cmap_bins, norm_bins = colormap_for_metric_bins(base_hex)
+
+        for rec_idx, receptor in enumerate(receptors):
+
+            inner = outer_gs[met_idx, rec_idx].subgridspec(
+                nrows=1,
+                ncols=4,
+                wspace=intra_metric_wspace,
+                hspace=0.0
+            )
+
+            group_axes = []
+
+            for sc_idx, scaffold_type in enumerate(["csk", "murcko"]):
+
+                block_df = metric_df[
+                    (metric_df['Receptor'] == receptor) &
+                    (metric_df['Scaffold'] == scaffold_type)
+                ]
+
+                for split_idx, split in enumerate(["dis", "sim"]):
+
+                    col = sc_idx * 2 + split_idx
+                    ax = fig.add_subplot(inner[0, col])
+                    group_axes.append(ax)
+
+                    sub_df = block_df[block_df['Split'] == split].copy()
+                    sub_df = sub_df.set_index('Generator').reindex(generators)
+
+                    values = sub_df['Value'].to_numpy().reshape(-1, 1)
+                    # --- highlight best cell with black border ---
+                    best_idx = int(np.argmax(values.flatten()))
+                    # --- compute bins from |best - value| ---
+                    best = float(np.nanmax(values))
+                    deltas = np.abs(values - best)
+
+                    t1, t2, t3 = thresholds[(metric.upper(), scaffold_type.lower())]
+                    bins = np.vectorize(lambda d: _bin_delta(float(d), t1, t2, t3))(deltas).astype(int)
+
+                    annot_array = None
+                    if annotate_values:
+                        flat_vals = values.flatten()
+                        max_idx = int(np.nanargmax(flat_vals))
+                        worst_idx = int(np.nanargmin(flat_vals))
+
+                        annot_list = []
+                        for i, val in enumerate(flat_vals):
+                            txt_core = format_value_for_metric(val, metric)
+
+                            if i == max_idx:
+                                txt = r"$\bf{" + txt_core + "}$"
+                            else:
+                                txt = f"${txt_core}$"
+ 
+                            annot_list.append(txt)
+
+                        annot_array = np.array(annot_list).reshape(values.shape)
+
+                    show_colorbar = (sc_idx == 1 and split_idx == 1)
+                    if show_colorbar:
+                        divider = make_axes_locatable(ax)
+                        cax = divider.append_axes("right", size="5%", pad=0.05)
+                    else:
+                        cax = None
+
+                    hm = sns.heatmap(
+                        bins,
+                        annot=annot_array,
+                        fmt="",
+                        cmap=cmap_bins,
+                        norm=norm_bins,
+                        ax=ax,
+                        cbar=show_colorbar,
+                        cbar_ax=cax,
+                        annot_kws={"size": 16, "color": "black"},
+                    )
+
+                    # colorbar labels
+                    if show_colorbar:
+                        cbar = hm.collections[0].colorbar
+                        cbar.set_ticks([0, 1, 2, 3])
+                        cbar.set_ticklabels(["Trivial", "Small", "Moderate", "Large"])
+
+                    ax.set_aspect("auto")
+
+                    ax.set_xticks([0.5])
+                    ax.set_xticklabels([split], rotation=0, ha="center", fontsize=14)
+
+                    # Y labels only on first block (same rule as original)
+                    if rec_idx == 0 and sc_idx == 0 and split_idx == 0:
+                        new_labels = [
+                            g.replace('_epsilon', '\n epsilon')
+                             .replace('_mut_r', '\n mut_r')
+                             .replace('addcarbon', 'AddCarbon')
+                            for g in generators
+                        ]
+                        ax.set_yticks(np.arange(len(generators)) + 0.5)
+                        ax.set_yticklabels(new_labels, rotation=0, fontsize=15)
+                        if metric == 'ASER':
+                            metric_text = "ASER · 10⁻²"
+                        else:
+                            metric_text = metric
+                        ax.set_ylabel(metric_text, fontsize=16, fontweight="bold", labelpad=8)
+                    else:
+                        ax.set_yticks([])
+                        ax.set_ylabel("")
+
+            # Titles at top row (same as original)
+            if met_idx == 0:
+                p0 = group_axes[0].get_position()
+                p1 = group_axes[-1].get_position()
+                x_mid = (p0.x0 + p1.x1) / 2
+                y_top = p0.y1 + 0.018
+                fig.text(x_mid, y_top, receptor.replace('_', ' '),
+                         ha="center", va="bottom", fontsize=16, fontweight="bold")
+
+                p0 = group_axes[0].get_position()
+                p1 = group_axes[1].get_position()
+                x_mid = (p0.x0 + p1.x1) / 2
+                y_top = p0.y1 + 0.004
+                fig.text(x_mid, y_top, "CSK", ha="center", va="bottom", fontsize=14)
+
+                p2 = group_axes[2].get_position()
+                p3 = group_axes[3].get_position()
+                x_mid = (p2.x0 + p3.x1) / 2
+                y_top = p2.y1 + 0.004
+                fig.text(x_mid, y_top, "MURCKO", ha="center", va="bottom", fontsize=14)
+
+    if title:
+        fig.suptitle(title, fontsize=14, y=0.995)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.99])
+
+    if save_name:
+        if save_folder:
+            os.makedirs(save_folder, exist_ok=True)
+            plt.savefig(f'{save_folder}/{save_name}.svg', format="svg", bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
+            plt.savefig(f'{save_folder}/{save_name}.pdf', bbox_inches='tight')
         else:
             plt.savefig(f'img/heat_map/{save_name}.svg', format="svg", bbox_inches='tight')
             plt.savefig(f'img/heat_map/{save_name}.png', format="png", dpi=300, bbox_inches='tight')
