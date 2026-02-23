@@ -1220,7 +1220,7 @@ def round_excel(x, ndigits):
     return float(Decimal(str(x)).quantize(q, rounding=ROUND_HALF_UP))
 
 
-def format_value_for_metric(x, metric):
+def format_value_for_metric(x, metric, using_norm_values):
 
     metric = metric.upper()
 
@@ -1229,17 +1229,20 @@ def format_value_for_metric(x, metric):
         return f"{val:.2f}"
 
     if metric == "ASER":
-        mant = float(x) * 100.0
-        mant = round_excel(mant, 2)
+        if using_norm_values:
+            mant = round_excel(float(x), 2)
+        else:
+            mant = float(x) * 100.0
+            mant = round_excel(mant, 2)
         return f"{mant:.2f}"
 
-    return str(x)
+    return f"{x:.2f}"
 
 
 def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
         generators, receptors, scaffolds, splits,
         metrics=['RS', 'SED', 'ASER'],
-        title=None, save_name=None,
+        title=None, save_name=None, using_norm_values=False,
         data_folder='', save_folder='',
         inter_metric_wspace=0.15,
         intra_metric_wspace=0.05,
@@ -1273,7 +1276,8 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
             for type_scaffold in scaffolds:
                 for type_cluster in splits:
 
-                    df = (preprocesing_org)(
+                    # REAL (for binning)
+                    df_real = (preprocesing_org)(
                         type_cluster,
                         type_scaffold,
                         generators,
@@ -1281,11 +1285,31 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
                         data_folder
                     )
 
-                    for met in metrics:
-                        value = df[df.name.str.startswith(gen)][met].iloc[0]
-                        data.append([gen, receptor, type_scaffold, type_cluster, met, value])
+                    # NORMALIZED (for display, only if requested)
+                    df_norm = None
+                    if using_norm_values:
+                        df_norm = (preprocesing)(
+                            type_cluster,
+                            type_scaffold,
+                            generators,
+                            receptor,
+                            data_folder
+                        )
 
-    df = pd.DataFrame(data, columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value'])
+                    for met in metrics:
+                        value_real = df_real[df_real.name.str.startswith(gen)][met].iloc[0]
+                        if using_norm_values:
+                            value_norm = df_norm[df_norm.name.str.startswith(gen)][met].iloc[0]
+                        else:
+                            value_norm = np.nan
+
+                        data.append([gen, receptor, type_scaffold, type_cluster, met, value_real, value_norm])
+
+
+    df = pd.DataFrame(
+        data,
+        columns=['Generator', 'Receptor', 'Scaffold', 'Split', 'Metric', 'Value_real', 'Value_norm']
+    )
 
     # -----------------------------------------
     # ROTATED LAYOUT (same as original)
@@ -1336,25 +1360,31 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
                     sub_df = block_df[block_df['Split'] == split].copy()
                     sub_df = sub_df.set_index('Generator').reindex(generators)
 
-                    values = sub_df['Value'].to_numpy().reshape(-1, 1)
-                    # --- highlight best cell with black border ---
-                    best_idx = int(np.argmax(values.flatten()))
-                    # --- compute bins from |best - value| ---
-                    best = float(np.nanmax(values))
-                    deltas = np.abs(values - best)
+                    # --- REAL values for binning ---
+                    values_real = sub_df['Value_real'].to_numpy().reshape(-1, 1)
+
+                    # --- DISPLAY values (real or normalized) for annotations ---
+                    if using_norm_values:
+                        values_show = sub_df['Value_norm'].to_numpy().reshape(-1, 1)
+                    else:
+                        values_show = values_real
+
+                     # --- compute bins from |best_real - value_real| ---
+                    best_real = float(np.nanmax(values_real))
+                    deltas = np.abs(values_real - best_real)
 
                     t1, t2, t3 = thresholds[(metric.upper(), scaffold_type.lower())]
                     bins = np.vectorize(lambda d: _bin_delta(float(d), t1, t2, t3))(deltas).astype(int)
 
                     annot_array = None
                     if annotate_values:
-                        flat_vals = values.flatten()
+                        flat_vals = values_show.flatten()
                         max_idx = int(np.nanargmax(flat_vals))
                         worst_idx = int(np.nanargmin(flat_vals))
 
                         annot_list = []
                         for i, val in enumerate(flat_vals):
-                            txt_core = format_value_for_metric(val, metric)
+                            txt_core = format_value_for_metric(val, metric, using_norm_values)
 
                             if i == max_idx:
                                 txt = r"$\bf{" + txt_core + "}$"
@@ -1363,7 +1393,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
  
                             annot_list.append(txt)
 
-                        annot_array = np.array(annot_list).reshape(values.shape)
+                        annot_array = np.array(annot_list).reshape(values_show.shape)
 
                     show_colorbar = (sc_idx == 1 and split_idx == 1)
                     if show_colorbar:
@@ -1405,7 +1435,7 @@ def plot_combined_heatmap_with_single_column_for_each_metric_rotated_binned(
                         ]
                         ax.set_yticks(np.arange(len(generators)) + 0.5)
                         ax.set_yticklabels(new_labels, rotation=0, fontsize=15)
-                        if metric == 'ASER':
+                        if metric == 'ASER' and not using_norm_values:
                             metric_text = "ASER · 10⁻²"
                         else:
                             metric_text = metric
